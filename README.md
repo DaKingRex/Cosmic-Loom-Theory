@@ -117,7 +117,7 @@ viz.render(interactive=True, show_trajectories=True)
 - ✅ Q metric: energy-independent spatial coherence
 - ✅ Coherence density (ρ_coh) and source dynamics
 - ✅ Presets: Healthy, Pathology, Healing scenarios
-- 🔄 C_bio consciousness observable refinement
+- ✅ C_bio consciousness observable (Q² × integrated activity)
 - 🔄 Biological substrate models
 
 ### Phase 2: Pathology & Healing

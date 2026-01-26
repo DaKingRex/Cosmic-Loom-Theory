@@ -30,7 +30,7 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 - [x] Absorbing boundary conditions (Mur ABC)
 - [x] Presets: Healthy (phase-locked), Pathology (incoherent), Healing (re-coupling)
 - [x] Perturbation effects on coherence (high-frequency noise disruption)
-- [ ] C_bio consciousness observable calculation refinement
+- [x] C_bio consciousness observable: C_bio = Q² × ∫|ρ_coh|·|∂L/∂t| dV
 - [ ] 3D Loomfield extension
 
 ---

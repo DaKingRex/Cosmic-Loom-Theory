@@ -296,22 +296,54 @@ class LoomfieldSimulator:
     def get_consciousness_metric(self) -> float:
         """
         Calculate C_bio from CLT v1.1 Section 7.6:
-        C_bio = ∫ ρ_coh * Λ dV
+        C_bio = ∫ ρ_coh · Λ dV
 
-        This measures how well source activity (ρ_coh) couples to
-        field dynamics (Λ). High C_bio = sources are effectively
-        driving coherent field activity.
+        Where Λ (Section 7.2) captures "rate of Loomfield reconfiguration".
+
+        KEY CLT INSIGHT (Section 7.6):
+        "High local activity without integration does not yield robust conscious
+        experience, nor does static coherence without active dynamics."
+
+        This means C_bio requires BOTH:
+        1. COHERENCE (Q): Field must be organized, not chaotic
+        2. DYNAMICS (|∂L/∂t|): Field must be actively changing, not static
+
+        Implementation: C_bio = Q × ∫|ρ_coh|·|∂L/∂t| dV
+
+        C_bio is HIGH when: Coherent, organized field is actively oscillating
+        C_bio is LOW when:
+        - Field is CHAOTIC (Q low) even if active → no integration
+        - Field is STATIC (∂L/∂t ≈ 0) even if coherent → no dynamics
+        - No sources (ρ_coh ≈ 0) → nothing to integrate
         """
-        # Approximate Λ as field gradient magnitude (flow indicator)
-        grad_x = np.gradient(self.L, self.dx, axis=1)
-        grad_y = np.gradient(self.L, self.dx, axis=0)
-        lambda_field = np.sqrt(grad_x**2 + grad_y**2)
+        # Get global coherence - measures INTEGRATION across the field
+        Q = self.get_total_coherence()
 
-        # Only count where sources and flow are co-located and in-phase
-        # Use absolute values to measure coupling magnitude
-        coupling = np.abs(self.rho_coh) * lambda_field
+        # If no coherence, no consciousness - regardless of activity level
+        if Q < 0.01:
+            return 0.0
 
-        return np.sum(coupling) * self.dx**2
+        # TEMPORAL DYNAMICS: |∂L/∂t| - rate of field change
+        # Static fields have no consciousness even if coherent
+        dL_dt = (self.L - self.L_prev) / self.dt
+        temporal_activity = np.abs(dL_dt)
+
+        # Local coupling: source activity × field dynamics
+        # Only count where sources are actively driving the field
+        local_coupling = np.abs(self.rho_coh) * temporal_activity
+
+        # Integrate over volume
+        raw_activity = np.sum(local_coupling) * self.dx**2
+
+        # C_bio = Q² × raw_activity
+        # Using Q² strongly penalizes low coherence:
+        # - Coherent (Q=1.8): multiplier = 3.24
+        # - Incoherent (Q=0.7): multiplier = 0.49
+        # This ensures that chaotic high-activity states have LOW C_bio
+        # even if they have more total motion than coherent states
+        C_bio = (Q ** 2) * raw_activity
+
+        return C_bio
 
     def get_field_energy(self) -> float:
         """Get total field energy (for comparison with coherence)."""
@@ -434,21 +466,20 @@ class LoomfieldVisualizer:
         theory_text = (
             "COSMIC LOOM THEORY v1.1\n"
             "━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-            "WAVE VISUALIZATION:\n"
-            "• Gold/white: Positive phase\n"
-            "• Blue: Negative phase\n"
-            "• Dark: Zero/neutral\n"
-            "• Rings: Source locations\n\n"
             "Q = SPATIAL COHERENCE:\n"
-            "• Measures COORDINATION\n"
             "• Phase-locked → HIGH Q\n"
-            "• Chaotic/noisy → LOW Q\n"
-            "• Perturbations DISRUPT Q\n\n"
+            "• Chaotic/noisy → LOW Q\n\n"
+            "C_bio = CONSCIOUSNESS:\n"
+            "• Requires BOTH:\n"
+            "  - Coherence (Q high)\n"
+            "  - Active dynamics\n"
+            "• Static field → C_bio ≈ 0\n"
+            "• Chaos → C_bio low\n\n"
             "━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-            "INTERACTIONS:\n"
-            "• Click: Add wave source\n"
-            "• Perturb: Add chaos\n"
-            "• Watch interference!"
+            "COLORS:\n"
+            "• Gold: Positive phase\n"
+            "• Blue: Negative phase\n"
+            "• Rings: Source locations"
         )
         self.fig.text(0.72, 0.92, theory_text, fontsize=9,
                      color='#b0b0b0', family='monospace',
@@ -728,16 +759,24 @@ class LoomfieldVisualizer:
         else:
             q_status = "(LOW - fragmented)"
 
+        # Color-code C_bio based on consciousness level
+        # C_bio = Q² × activity, so typical range depends on Q and source count
+        if c_bio > 5.0:
+            c_status = "(conscious)"
+        elif c_bio > 1.0:
+            c_status = "(partial)"
+        else:
+            c_status = "(minimal)"
+
         metrics_str = (
             f"METRICS\n"
             f"━━━━━━━━━━━━━━━━━━━\n"
             f"Time: {self.sim.time:.2f}\n\n"
-            f"Q (spatial coherence):\n"
+            f"Q (coherence):\n"
             f"  {Q:.3f} {q_status}\n\n"
-            f"Field Energy:\n"
-            f"  {energy:.3f}\n\n"
-            f"C_bio (coupling):\n"
-            f"  {c_bio:.4f}\n\n"
+            f"C_bio (consciousness):\n"
+            f"  {c_bio:.3f} {c_status}\n\n"
+            f"Energy: {energy:.3f}\n"
             f"Sources: {len(self.sim.sources)}\n"
             f"v_L={self.sim.v_L:.1f}  κ_L={self.sim.kappa_L:.2f}"
         )
