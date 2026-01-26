@@ -24,23 +24,21 @@ The Loomfield (L) is not a new fundamental force but an effective description of
 ## Repository Structure
 ```
 Cosmic-Loom-Theory/
+├── docs/                  # Documentation
+│   └── theory/           # Core CLT theoretical documents (v1.1, v2.0, LoomSense specs)
 ├── simulations/           # CLT physics simulations
-│   ├── quantum/          # Quantum coherence in biological systems
-│   ├── field_dynamics/   # Loomfield propagation and dynamics
+│   ├── quantum/          # Biological quantum coherence
+│   ├── field_dynamics/   # Loomfield wave equation solvers
 │   └── emergence/        # Coherence regime transitions
 ├── visualizations/        # Interactive physics visualizations
 │   ├── plots/            # Static scientific plots
-│   └── interactive/      # Interactive demos (éR phase space, etc.)
+│   └── interactive/      # éR phase space, Loomfield waves
 ├── analysis/              # Data analysis tools
-│   ├── metrics/          # Coherence metrics and observables
+│   ├── metrics/          # Q, C_bio, éR calculations
 │   └── statistics/       # Statistical frameworks
-├── models/                # Mathematical model implementations
-├── data/                  # Experimental and simulation data
-│   ├── raw/              # Raw datasets
-│   └── processed/        # Processed/analyzed data
-├── notebooks/             # Research notebooks and tutorials
+├── models/                # Biological substrate models
 ├── tests/                 # Validation and unit tests
-└── docs/                  # Theory documentation and roadmaps
+└── output/                # Generated visualizations
 ```
 
 ## Getting Started
@@ -70,10 +68,40 @@ Cosmic-Loom-Theory/
 
 ## Current Tools
 
-### Energy Resistance (éR) Visualizer
-Interactive visualization of the viable energetic window where biological coherence can exist. Demonstrates how systems transition between chaos, viability, and rigidity regimes.
+### Loomfield Wave Simulator
+The centerpiece visualization implementing the CLT wave equation:
+
+**∇²L − (1/v²ₗ)(∂²L/∂t²) = κₗ · ρ_coh**
+
+Watch consciousness as propagating waves of coherence. Features:
+- Real-time wave propagation with absorbing boundaries
+- Phase-locked sources create high Q (coherence)
+- Incoherent sources create low Q (chaos)
+- Perturbations fragment coherence (Q drops)
+- Presets: Healthy, Pathology, Healing dynamics
 
 **Usage:**
+```bash
+python run_loomfield_demo.py
+```
+
+Or in Python:
+```python
+from visualizations.interactive import LoomfieldVisualizer
+
+viz = LoomfieldVisualizer(grid_size=200)
+viz.run()
+```
+
+### Energy Resistance (éR) Visualizer
+Interactive visualization of the viable energetic window (éR = EP/f²) where biological coherence exists. Demonstrates chaos ↔ viable ↔ rigidity regime transitions.
+
+**Usage:**
+```bash
+python run_energy_resistance_demo.py
+```
+
+Or in Python:
 ```python
 from visualizations.interactive import EnergyResistanceVisualizer
 
@@ -81,26 +109,27 @@ viz = EnergyResistanceVisualizer()
 viz.render(interactive=True, show_trajectories=True)
 ```
 
-See `notebooks/01_energy_resistance_intro.ipynb` for a detailed walkthrough.
-
 ## Research Phases
 
-### Phase 1: Core Physics (Current)
-- ✅ Energy Resistance principle visualization
-- 🔄 Loomfield wave equation implementation
-- 🔄 Coherence density calculations
+### Phase 1: Core CLT Physics (Current)
+- ✅ Energy Resistance principle visualization (éR = EP/f²)
+- ✅ Loomfield wave equation implementation
+- ✅ Q metric: energy-independent spatial coherence
+- ✅ Coherence density (ρ_coh) and source dynamics
+- ✅ Presets: Healthy, Pathology, Healing scenarios
+- 🔄 C_bio consciousness observable refinement
 - 🔄 Biological substrate models
 
-### Phase 2: Integration & Testing
-- Pathology as boundary collapse simulations
+### Phase 2: Pathology & Healing
+- Regime boundary collapse simulations
 - Healing as re-coupling dynamics
 - Multi-scale coherence modeling
-- Connection to LoomSense experimental platform
+- LoomSense experimental integration
 
-### Phase 3: Expansion
-- Extension to artificial systems
-- Collective consciousness regimes
-- Planetary-scale dynamics
+### Phase 3: Extensions
+- Artificial system coherence (CLT Machines/AI)
+- Collective consciousness regimes (CLT v2.0)
+- Planetary-scale dynamics (CLT v2.0)
 - Empirical validation frameworks
 
 ## The LoomSense Connection
@@ -109,12 +138,19 @@ This computational work directly supports the **LoomSense** platform - a coheren
 
 ## Theoretical Foundation
 
-CLT v1.1 is grounded in:
-- Bioelectric field research (Levin lab and others)
-- Biophoton studies (Murugan lab and others)
+The complete theoretical framework is documented in `docs/theory/`:
+- **CLT v1.1**: Human biological consciousness (the core framework)
+- **CLT v2.0**: Planetary-scale extensions
+- **Introducing CLT**: Overview and motivation
+- **Machines & AI**: Artificial system coherence analysis
+- **LoomSense specs**: Experimental measurement platform (v1-v3)
+
+CLT v1.1 synthesizes:
+- Bioelectric field research (Levin lab)
+- Biophoton studies (Murugan lab)
 - Cytoskeletal quantum biology (Penrose-Hameroff extended)
 - Integrated Information Theory (IIT)
-- Energy landscape approaches to biological organization (Picard lab and others)
+- Energy landscape approaches (Picard lab)
 
 Unlike purely philosophical or quantum-mystical approaches, CLT maintains compatibility with established physics while proposing testable mechanisms for consciousness emergence.
 

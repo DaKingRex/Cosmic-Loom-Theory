@@ -1,5 +1,15 @@
 # Cosmic Loom Theory - Visualizations Module
-"""Data visualization and rendering tools for CLT research."""
+"""
+Visualization tools for CLT physics and coherence dynamics.
+
+Interactive visualizers:
+- Energy Resistance (éR) phase space
+- Loomfield wave propagation
+- Coherence regime transitions
+- Biological substrate dynamics
+
+Static plotting utilities for publication-quality figures.
+"""
 
 from . import interactive
 from . import plots

@@ -2,8 +2,14 @@
 """
 Run the Energy Resistance (éR) Phase Space Visualizer.
 
-This is a convenience script to launch the interactive visualization
-without needing to navigate the module structure.
+A core teaching tool for Cosmic Loom Theory showing the relationship
+between Energy Present (EP), frequency (f), and Energy Resistance:
+
+    éR = EP / f²
+
+Living systems operate in a "viable window" where éR is neither
+too low (chaos/decoherence) nor too high (rigidity/frozen dynamics).
+This is where biological coherence - and consciousness - can exist.
 
 Usage:
     python run_energy_resistance_demo.py
