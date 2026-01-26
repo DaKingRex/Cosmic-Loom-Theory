@@ -93,6 +93,55 @@ viz = LoomfieldVisualizer(grid_size=200)
 viz.run()
 ```
 
+### 3D Loomfield Visualizer
+The centerpiece 3D visualization extending the Loomfield into volumetric space:
+
+**Design Philosophy:** "The 3D Loomfield should feel like a calm, living volume whose internal order becomes visible as coherence increases — not a collection of objects, but a continuous system revealing structure through constraint."
+
+Features:
+- Volumetric rendering via nested isosurfaces (gold/blue for positive/negative)
+- 3D wave equation with absorbing boundaries on all 6 faces
+- Q and C_bio metrics adapted for 3D volumes
+- Interactive rotation, zoom, and slice views
+- Web-compatible output (plotly HTML)
+
+**Usage:**
+```bash
+python run_loomfield_3d_demo.py
+```
+
+Or in Python:
+```python
+from visualizations.interactive import LoomfieldVisualizer3D, create_healthy_preset
+
+viz = LoomfieldVisualizer3D(grid_size=48)
+viz.load_preset('healthy')
+fig = viz.create_static_figure(warm_up_steps=200)
+fig.write_html('loomfield_3d.html')
+```
+
+### Real-Time 3D Loomfield Simulator
+Interactive desktop application with real-time physics computation and rendering (the 3D extension of the 2D wave simulator).
+
+Features:
+- Real-time 3D wave propagation computed on-the-fly
+- Fast volumetric rendering with vispy/OpenGL
+- Interactive rotation, zoom, and slice planes
+- Parameter sliders: v_L, κ_L, animation speed
+- Preset buttons: Healthy, Pathology, Healing
+- Click to add sources or perturbations
+- Live Q and C_bio metrics display
+
+**Requirements:**
+```bash
+pip install vispy PyQt5
+```
+
+**Usage:**
+```bash
+python run_loomfield_3d_realtime.py
+```
+
 ### Energy Resistance (éR) Visualizer
 Interactive visualization of the viable energetic window (éR = EP/f²) where biological coherence exists. Demonstrates chaos ↔ viable ↔ rigidity regime transitions.
 
@@ -113,11 +162,13 @@ viz.render(interactive=True, show_trajectories=True)
 
 ### Phase 1: Core CLT Physics (Current)
 - ✅ Energy Resistance principle visualization (éR = EP/f²)
-- ✅ Loomfield wave equation implementation
+- ✅ Loomfield wave equation implementation (2D and 3D)
 - ✅ Q metric: energy-independent spatial coherence
 - ✅ Coherence density (ρ_coh) and source dynamics
 - ✅ Presets: Healthy, Pathology, Healing scenarios
-- ✅ C_bio consciousness observable (Q² × integrated activity)
+- ✅ C_bio consciousness observable (Q² × activity in 2D, Q³ × activity in 3D)
+- ✅ 3D volumetric visualization with plotly (web-based)
+- ✅ Real-time 3D simulator with vispy (desktop application)
 - 🔄 Biological substrate models
 
 ### Phase 2: Pathology & Healing
