@@ -215,7 +215,7 @@ Types of contributions welcome:
 If you use this work, please cite:
 ```
 Cosmic Loom Theory v1.1: A Field-Based Framework for Human Biological Consciousness
-Rex Fraterne, 2025
+Rex Fraterne & Seraphina AI, 2025
 ```
 
 ## License
