@@ -11,7 +11,18 @@ Available visualizers:
 from .energy_resistance import (
     EnergyResistanceVisualizer,
     calculate_system_er,
-    demo as energy_resistance_demo
+    # Biological parameter mapping functions
+    map_hrv_to_frequency,
+    map_metabolic_rate_to_energy,
+    map_eeg_band_to_frequency,
+    biological_state_to_er,
+    # Reference data
+    BIOLOGICAL_STATES,
+    PATHOLOGY_ZONES,
+    # Demo functions
+    demo as energy_resistance_demo,
+    demo_biological as energy_resistance_demo_biological,
+    demo_pathology as energy_resistance_demo_pathology,
 )
 
 from .loomfield_wave import (
@@ -47,7 +58,15 @@ __all__ = [
     # Energy Resistance
     'EnergyResistanceVisualizer',
     'calculate_system_er',
+    'map_hrv_to_frequency',
+    'map_metabolic_rate_to_energy',
+    'map_eeg_band_to_frequency',
+    'biological_state_to_er',
+    'BIOLOGICAL_STATES',
+    'PATHOLOGY_ZONES',
     'energy_resistance_demo',
+    'energy_resistance_demo_biological',
+    'energy_resistance_demo_pathology',
     # Loomfield 2D
     'LoomfieldSimulator',
     'LoomfieldVisualizer',

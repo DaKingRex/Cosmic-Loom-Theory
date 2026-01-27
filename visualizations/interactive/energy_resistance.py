@@ -12,15 +12,248 @@ specific energetic regime - a "viable window" between chaos and rigidity.
 - Too low éR: System collapses into chaos/decoherence
 - Too high éR: System becomes rigid, unable to respond adaptively
 - Viable window: The "Goldilocks zone" where biological coherence thrives
+
+Enhanced Features (v1.2):
+- Biological Parameter Mapping: Maps abstract éR to physiological measurements
+- Pathology Signatures: Shows where mental health conditions appear in éR space
+- Clinical Trajectories: Decompensation and recovery paths
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider, Button, RadioButtons
-from matplotlib.patches import Polygon
+from matplotlib.widgets import Slider, Button, RadioButtons, CheckButtons
+from matplotlib.patches import Polygon, Ellipse, FancyBboxPatch
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patches as mpatches
-from typing import Tuple, List, Optional
+from typing import Tuple, List, Optional, Dict
+
+
+# =============================================================================
+# BIOLOGICAL PARAMETER MAPPING
+# =============================================================================
+
+# Biological state reference points (EP, frequency, label, color)
+# These map physiological states to the abstract éR phase space
+BIOLOGICAL_STATES = {
+    'resting_awake': {
+        'ep': 2.5, 'freq': 1.2,
+        'label': 'Resting Awake',
+        'color': '#00ff88',
+        'description': 'Alert but relaxed, EEG alpha (8-12 Hz)',
+        'metabolic_rate': 70,  # kcal/hr (basal)
+        'hrv_ms': 50,  # RMSSD in milliseconds
+    },
+    'deep_sleep': {
+        'ep': 1.8, 'freq': 0.6,
+        'label': 'Deep Sleep (N3)',
+        'color': '#4299e1',
+        'description': 'Delta waves (0.5-4 Hz), low metabolism',
+        'metabolic_rate': 55,
+        'hrv_ms': 80,
+    },
+    'rem_sleep': {
+        'ep': 2.2, 'freq': 1.8,
+        'label': 'REM Sleep',
+        'color': '#9f7aea',
+        'description': 'Dream state, mixed frequencies, paralysis',
+        'metabolic_rate': 65,
+        'hrv_ms': 40,
+    },
+    'focused_attention': {
+        'ep': 3.5, 'freq': 2.0,
+        'label': 'Focused Attention',
+        'color': '#f6ad55',
+        'description': 'Beta waves (12-30 Hz), active cognition',
+        'metabolic_rate': 85,
+        'hrv_ms': 35,
+    },
+    'exercise': {
+        'ep': 7.0, 'freq': 3.2,
+        'label': 'Exercise',
+        'color': '#fc8181',
+        'description': 'High metabolism, elevated HR, sympathetic',
+        'metabolic_rate': 400,
+        'hrv_ms': 20,
+    },
+    'meditation': {
+        'ep': 2.0, 'freq': 0.8,
+        'label': 'Deep Meditation',
+        'color': '#68d391',
+        'description': 'Theta/alpha, coherent, parasympathetic',
+        'metabolic_rate': 60,
+        'hrv_ms': 90,
+    },
+    'flow_state': {
+        'ep': 4.0, 'freq': 1.5,
+        'label': 'Flow State',
+        'color': '#ffd700',
+        'description': 'Optimal performance, effortless focus',
+        'metabolic_rate': 100,
+        'hrv_ms': 55,
+    },
+}
+
+# Pathology zones in éR space
+# Each pathology has a center, spread, and clinical characteristics
+PATHOLOGY_ZONES = {
+    'depression': {
+        'ep_center': 1.2, 'freq_center': 0.5,
+        'ep_spread': 0.6, 'freq_spread': 0.3,
+        'label': 'Depression',
+        'color': '#4a5568',
+        'description': 'Low energy, slowed dynamics, toward rigidity',
+        'regime': 'rigidity',
+    },
+    'anxiety': {
+        'ep_center': 2.5, 'freq_center': 3.5,
+        'label': 'Anxiety',
+        'ep_spread': 0.8, 'freq_spread': 0.6,
+        'color': '#f56565',
+        'description': 'Normal energy, hyperactive frequency, chaos boundary',
+        'regime': 'chaos',
+    },
+    'mania': {
+        'ep_center': 6.0, 'freq_center': 4.0,
+        'ep_spread': 1.5, 'freq_spread': 0.8,
+        'label': 'Mania',
+        'color': '#ed64a6',
+        'description': 'Excessive energy, chaotic dynamics',
+        'regime': 'chaos',
+    },
+    'seizure': {
+        'ep_center': 8.5, 'freq_center': 1.0,
+        'ep_spread': 1.0, 'freq_spread': 0.4,
+        'label': 'Seizure',
+        'color': '#e53e3e',
+        'description': 'Very high energy, hyper-synchronized, extreme rigidity',
+        'regime': 'rigidity',
+    },
+    'dissociation': {
+        'ep_center': 1.5, 'freq_center': 2.5,
+        'ep_spread': 0.5, 'freq_spread': 0.8,
+        'label': 'Dissociation',
+        'color': '#a0aec0',
+        'description': 'Low energy with fragmented dynamics, boundary state',
+        'regime': 'boundary',
+    },
+    'adhd': {
+        'ep_center': 3.0, 'freq_center': 3.0,
+        'ep_spread': 1.2, 'freq_spread': 1.0,
+        'label': 'ADHD',
+        'color': '#f6ad55',
+        'description': 'Unstable, oscillating near chaos boundary',
+        'regime': 'chaos',
+    },
+    'ptsd': {
+        'ep_center': 4.5, 'freq_center': 3.8,
+        'ep_spread': 1.0, 'freq_spread': 0.6,
+        'label': 'PTSD',
+        'color': '#805ad5',
+        'description': 'Hyperarousal, threat detection hyperactive',
+        'regime': 'chaos',
+    },
+}
+
+
+def map_hrv_to_frequency(hrv_ms: float) -> float:
+    """
+    Map Heart Rate Variability (RMSSD in ms) to éR frequency parameter.
+
+    Higher HRV generally indicates more parasympathetic activity and
+    lower effective frequency in the coherence space.
+
+    Args:
+        hrv_ms: RMSSD heart rate variability in milliseconds
+
+    Returns:
+        Estimated frequency parameter for éR calculation
+
+    Note:
+        This is a theoretical mapping. Empirical calibration with
+        LoomSense data will refine these relationships.
+    """
+    # Inverse relationship: high HRV -> low frequency (calm, coherent)
+    # Typical range: HRV 10-100ms -> freq 0.5-4.0
+    # Using logarithmic mapping for physiological realism
+    hrv_clamped = np.clip(hrv_ms, 10, 150)
+    freq = 4.5 - 1.5 * np.log10(hrv_clamped / 10)
+    return np.clip(freq, 0.3, 4.5)
+
+
+def map_metabolic_rate_to_energy(kcal_per_hour: float) -> float:
+    """
+    Map metabolic rate (kcal/hour) to éR Energy Present parameter.
+
+    Higher metabolic activity corresponds to more energy present
+    in the biological coherence field.
+
+    Args:
+        kcal_per_hour: Metabolic rate in kilocalories per hour
+
+    Returns:
+        Estimated EP parameter for éR calculation
+
+    Note:
+        This is a theoretical mapping. Actual values will depend on
+        body mass, activity type, and other factors.
+    """
+    # Linear-ish mapping with saturation
+    # Basal: ~60 kcal/hr -> EP ~2.0
+    # Heavy exercise: ~800 kcal/hr -> EP ~9.0
+    kcal_clamped = np.clip(kcal_per_hour, 40, 1000)
+    ep = 1.5 + (kcal_clamped - 40) * (8.0 / 960)
+    return np.clip(ep, 0.5, 10.0)
+
+
+def map_eeg_band_to_frequency(band: str, power_ratio: float = 1.0) -> float:
+    """
+    Map EEG frequency band to éR frequency parameter.
+
+    Args:
+        band: EEG band name ('delta', 'theta', 'alpha', 'beta', 'gamma')
+        power_ratio: Relative power in this band (0-1, affects weighting)
+
+    Returns:
+        Estimated frequency parameter
+    """
+    band_frequencies = {
+        'delta': 0.5,    # 0.5-4 Hz - deep sleep
+        'theta': 0.8,    # 4-8 Hz - drowsy, meditation
+        'alpha': 1.2,    # 8-12 Hz - relaxed awake
+        'beta': 2.5,     # 12-30 Hz - active, alert
+        'gamma': 4.0,    # 30-100 Hz - high cognition
+    }
+    base_freq = band_frequencies.get(band.lower(), 1.5)
+    return base_freq * (0.5 + 0.5 * power_ratio)
+
+
+def biological_state_to_er(state_name: str) -> Dict:
+    """
+    Get the éR parameters for a named biological state.
+
+    Args:
+        state_name: Name of state (e.g., 'resting_awake', 'deep_sleep')
+
+    Returns:
+        Dictionary with EP, frequency, éR, and description
+    """
+    if state_name not in BIOLOGICAL_STATES:
+        raise ValueError(f"Unknown biological state: {state_name}. "
+                        f"Available: {list(BIOLOGICAL_STATES.keys())}")
+
+    state = BIOLOGICAL_STATES[state_name]
+    er = state['ep'] / (state['freq'] ** 2)
+
+    return {
+        'state': state_name,
+        'energy_present': state['ep'],
+        'frequency': state['freq'],
+        'energy_resistance': er,
+        'label': state['label'],
+        'description': state['description'],
+        'metabolic_rate': state.get('metabolic_rate'),
+        'hrv_ms': state.get('hrv_ms'),
+    }
 
 
 class EnergyResistanceVisualizer:
@@ -30,6 +263,11 @@ class EnergyResistanceVisualizer:
     Displays the relationship between Energy Present (EP), frequency (f),
     and Energy Resistance (éR), highlighting the viable window for
     biological coherence.
+
+    Enhanced Features:
+    - Biological Mode: Maps axes to physiological parameters
+    - Pathology Zones: Shows where mental health conditions appear
+    - Clinical Trajectories: Decompensation and recovery paths
     """
 
     # Default viable window boundaries (éR units)
@@ -71,6 +309,11 @@ class EnergyResistanceVisualizer:
         # Create custom colormap
         self.cmap = self._create_colormap()
 
+        # Display mode flags
+        self.biological_mode = False
+        self.show_pathology = False
+        self.show_biological_states = False
+
         # Initialize plot elements (will be set in setup)
         self.fig = None
         self.ax_main = None
@@ -78,6 +321,9 @@ class EnergyResistanceVisualizer:
         self.im = None
         self.viable_patch = None
         self.trajectory_lines = []
+        self.pathology_patches = []
+        self.state_markers = []
+        self.state_annotations = []
 
     def _create_colormap(self) -> LinearSegmentedColormap:
         """Create custom colormap for éR visualization."""
@@ -186,6 +432,131 @@ class EnergyResistanceVisualizer:
         freq_recovery = 2.5 - 1.0 * t
         self.add_trajectory(ep_recovery, freq_recovery,
                            "Recovery Path", '#FFD93D')
+
+    def add_clinical_trajectories(self):
+        """Add clinically-relevant trajectories showing decompensation and recovery."""
+
+        # 1. Depression onset: gradual energy and frequency decline
+        t = np.linspace(0, 1, 60)
+        ep_depression = 3.0 - 1.8 * t + 0.3 * np.sin(6 * t)  # Declining with tremor
+        freq_depression = 1.5 - 1.0 * t + 0.2 * np.sin(8 * t)
+        self.add_trajectory(ep_depression, freq_depression,
+                           "Depression Onset", '#4a5568')
+
+        # 2. Anxiety escalation: frequency increases while energy fluctuates
+        t = np.linspace(0, 1, 60)
+        ep_anxiety = 2.5 + 0.8 * np.sin(10 * t)  # Fluctuating energy
+        freq_anxiety = 1.5 + 2.0 * t  # Rising frequency
+        self.add_trajectory(ep_anxiety, freq_anxiety,
+                           "Anxiety Escalation", '#f56565')
+
+        # 3. Manic episode: energy and frequency spike together
+        t = np.linspace(0, 1, 50)
+        ep_mania = 2.5 + 4.0 * t * (1 + 0.2 * np.sin(15 * t))
+        freq_mania = 1.5 + 2.5 * t
+        self.add_trajectory(ep_mania, freq_mania,
+                           "Manic Episode", '#ed64a6')
+
+        # 4. Panic attack: rapid spike then crash
+        t = np.linspace(0, 1, 80)
+        attack_peak = 0.3
+        ep_panic = 2.5 + 3.0 * np.exp(-((t - attack_peak) / 0.15)**2)
+        freq_panic = 1.5 + 2.5 * np.exp(-((t - attack_peak) / 0.12)**2)
+        self.add_trajectory(ep_panic, freq_panic,
+                           "Panic Attack", '#e53e3e')
+
+        # 5. Therapeutic recovery: gradual return to viable window
+        t = np.linspace(0, 1, 80)
+        # Starting from anxiety region, spiraling back to center
+        ep_therapy = 2.5 + 1.0 * np.exp(-3 * t) * np.cos(8 * t)
+        freq_therapy = 3.5 - 2.0 * t + 0.5 * np.exp(-2 * t) * np.sin(6 * t)
+        self.add_trajectory(ep_therapy, freq_therapy,
+                           "Therapeutic Recovery", '#48bb78')
+
+        # 6. Meditation deepening: controlled descent into coherent state
+        t = np.linspace(0, 1, 50)
+        ep_meditation = 2.5 - 0.5 * t
+        freq_meditation = 1.2 - 0.4 * t
+        self.add_trajectory(ep_meditation, freq_meditation,
+                           "Meditation Deepening", '#68d391')
+
+    def _draw_biological_states(self):
+        """Draw markers for reference biological states."""
+        for state_name, state in BIOLOGICAL_STATES.items():
+            ep, freq = state['ep'], state['freq']
+
+            # Skip if outside visible range
+            if not (self.ep_range[0] <= ep <= self.ep_range[1] and
+                    self.freq_range[0] <= freq <= self.freq_range[1]):
+                continue
+
+            # Draw marker
+            marker = self.ax_main.scatter(
+                ep, freq, s=150, c=state['color'],
+                marker='*', edgecolors='white', linewidths=1.5,
+                zorder=10, alpha=0.9
+            )
+            self.state_markers.append(marker)
+
+            # Add label
+            offset = (0.2, 0.1) if freq < 3 else (0.2, -0.2)
+            ann = self.ax_main.annotate(
+                state['label'],
+                xy=(ep, freq),
+                xytext=(ep + offset[0], freq + offset[1]),
+                fontsize=8, color=state['color'],
+                fontweight='bold',
+                bbox=dict(boxstyle='round,pad=0.2', facecolor='#1a1a2e',
+                         edgecolor=state['color'], alpha=0.8),
+                arrowprops=dict(arrowstyle='->', color=state['color'],
+                               connectionstyle='arc3,rad=0.1'),
+                zorder=11
+            )
+            self.state_annotations.append(ann)
+
+    def _draw_pathology_zones(self):
+        """Draw elliptical zones for pathology regions."""
+        for path_name, pathology in PATHOLOGY_ZONES.items():
+            ep_c, freq_c = pathology['ep_center'], pathology['freq_center']
+            ep_s, freq_s = pathology['ep_spread'], pathology['freq_spread']
+
+            # Skip if center is outside visible range
+            if not (self.ep_range[0] <= ep_c <= self.ep_range[1] and
+                    self.freq_range[0] <= freq_c <= self.freq_range[1]):
+                continue
+
+            # Draw ellipse for pathology zone
+            ellipse = Ellipse(
+                (ep_c, freq_c),
+                width=ep_s * 2, height=freq_s * 2,
+                facecolor=pathology['color'], alpha=0.25,
+                edgecolor=pathology['color'], linewidth=2,
+                linestyle='--', zorder=3
+            )
+            self.ax_main.add_patch(ellipse)
+            self.pathology_patches.append(ellipse)
+
+            # Add label at center
+            self.ax_main.text(
+                ep_c, freq_c, pathology['label'],
+                fontsize=9, fontweight='bold',
+                color=pathology['color'], ha='center', va='center',
+                alpha=0.9, zorder=4
+            )
+
+    def _clear_overlays(self):
+        """Clear biological state markers and pathology zones."""
+        for marker in self.state_markers:
+            marker.remove()
+        self.state_markers = []
+
+        for ann in self.state_annotations:
+            ann.remove()
+        self.state_annotations = []
+
+        for patch in self.pathology_patches:
+            patch.remove()
+        self.pathology_patches = []
 
     def setup_plot(self, figsize: Tuple[int, int] = (14, 10)):
         """Set up the matplotlib figure and axes."""
@@ -308,31 +679,55 @@ class EnergyResistanceVisualizer:
 
     def _add_labels_and_legend(self):
         """Add axis labels, title, and legend."""
-        self.ax_main.set_xlabel('Energy Present (EP)', fontsize=14,
+        if self.biological_mode:
+            # Biological mode labels
+            xlabel = 'Energy Present (EP)\n← Lower Metabolism | Higher Metabolism →'
+            ylabel = 'Frequency (f)\n← Slower Rhythms | Faster Rhythms →'
+            title = 'Energy Resistance Phase Space\nBiological Mapping Mode'
+        else:
+            # Abstract mode labels
+            xlabel = 'Energy Present (EP)'
+            ylabel = 'Frequency (f)'
+            title = 'Energy Resistance Phase Space\néR = EP / f²'
+
+        self.ax_main.set_xlabel(xlabel, fontsize=12,
                                color='#e2e8f0', labelpad=10)
-        self.ax_main.set_ylabel('Frequency (f)', fontsize=14,
+        self.ax_main.set_ylabel(ylabel, fontsize=12,
                                color='#e2e8f0', labelpad=10)
-        self.ax_main.set_title('Energy Resistance Phase Space\néR = EP / f²',
-                              fontsize=18, fontweight='bold',
-                              color='#f7fafc', pad=20)
+        self.ax_main.set_title(title, fontsize=16, fontweight='bold',
+                              color='#f7fafc', pad=15)
 
         # Add legend
-        legend = self.ax_main.legend(loc='upper right', fontsize=9,
+        legend = self.ax_main.legend(loc='upper right', fontsize=8,
                                     facecolor='#2d3748', edgecolor='#4a5568',
                                     labelcolor='#e2e8f0')
 
-        # Add equation box
-        eq_text = (
-            "Energy Resistance Principle\n"
-            "━━━━━━━━━━━━━━━━━━━━━\n"
-            "éR = EP / f²\n\n"
-            f"Viable Window:\n"
-            f"  {self.er_min} < éR < {self.er_max}\n\n"
-            "• Low éR → Chaos\n"
-            "• High éR → Rigidity\n"
-            "• Middle → Life thrives"
-        )
-        self.fig.text(0.88, 0.65, eq_text, fontsize=10,
+        # Add equation box - content depends on mode
+        if self.biological_mode:
+            eq_text = (
+                "Biological Mapping\n"
+                "━━━━━━━━━━━━━━━━━\n"
+                "EP ↔ Metabolic Rate\n"
+                "  (ATP, O₂, HR)\n\n"
+                "f ↔ Neural Rhythms\n"
+                "  (EEG, HRV, Circadian)\n\n"
+                "éR = EP / f²\n\n"
+                "★ = Reference States\n"
+                "⬭ = Pathology Zones"
+            )
+        else:
+            eq_text = (
+                "Energy Resistance\n"
+                "━━━━━━━━━━━━━━━━━\n"
+                "éR = EP / f²\n\n"
+                f"Viable Window:\n"
+                f"  {self.er_min} < éR < {self.er_max}\n\n"
+                "• Low éR → Chaos\n"
+                "• High éR → Rigidity\n"
+                "• Middle → Life"
+            )
+
+        self.fig.text(0.88, 0.60, eq_text, fontsize=9,
                      color='#e2e8f0', family='monospace',
                      bbox=dict(boxstyle='round', facecolor='#2d3748',
                               edgecolor='#4a5568', alpha=0.9),
@@ -342,54 +737,117 @@ class EnergyResistanceVisualizer:
         """Set up interactive sliders and buttons."""
 
         # Slider for éR minimum (chaos threshold)
-        ax_er_min = self.fig.add_axes([0.15, 0.12, 0.35, 0.03])
+        ax_er_min = self.fig.add_axes([0.1, 0.14, 0.30, 0.025])
         self.slider_er_min = Slider(
-            ax_er_min, 'Chaos Threshold (éR min)', 0.1, 2.0,
+            ax_er_min, 'Chaos (éR min)', 0.1, 2.0,
             valinit=self.er_min, valstep=0.1,
             color='#9f7aea'
         )
         ax_er_min.set_facecolor('#2d3748')
 
         # Slider for éR maximum (rigidity threshold)
-        ax_er_max = self.fig.add_axes([0.15, 0.07, 0.35, 0.03])
+        ax_er_max = self.fig.add_axes([0.1, 0.10, 0.30, 0.025])
         self.slider_er_max = Slider(
-            ax_er_max, 'Rigidity Threshold (éR max)', 2.0, 15.0,
+            ax_er_max, 'Rigid (éR max)', 2.0, 15.0,
             valinit=self.er_max, valstep=0.5,
             color='#4299e1'
         )
         ax_er_max.set_facecolor('#2d3748')
 
+        # Toggle checkboxes for biological mode and pathology
+        ax_toggles = self.fig.add_axes([0.45, 0.06, 0.15, 0.10])
+        ax_toggles.set_facecolor('#2d3748')
+        self.check_buttons = CheckButtons(
+            ax_toggles,
+            ['Biological Mode', 'Show Pathology', 'Show States'],
+            [self.biological_mode, self.show_pathology, self.show_biological_states]
+        )
+        # Style the checkboxes
+        for text in self.check_buttons.labels:
+            text.set_color('#e2e8f0')
+            text.set_fontsize(9)
+
         # Reset button
-        ax_reset = self.fig.add_axes([0.6, 0.07, 0.1, 0.04])
+        ax_reset = self.fig.add_axes([0.63, 0.07, 0.08, 0.035])
         self.button_reset = Button(ax_reset, 'Reset',
                                    color='#4a5568', hovercolor='#718096')
+
+        # Clinical trajectories button
+        ax_clinical = self.fig.add_axes([0.63, 0.115, 0.08, 0.035])
+        self.button_clinical = Button(ax_clinical, 'Clinical',
+                                      color='#553c9a', hovercolor='#6b46c1')
 
         # Connect callbacks
         self.slider_er_min.on_changed(self._update_boundaries)
         self.slider_er_max.on_changed(self._update_boundaries)
         self.button_reset.on_clicked(self._reset_parameters)
+        self.button_clinical.on_clicked(self._toggle_clinical_trajectories)
+        self.check_buttons.on_clicked(self._toggle_mode)
 
     def _update_boundaries(self, val):
         """Callback to update viable window when sliders change."""
         self.er_min = self.slider_er_min.val
         self.er_max = self.slider_er_max.val
-
-        # Redraw the plot
-        self.ax_main.clear()
-        self._draw_phase_space()
-        self._draw_viable_window()
-        self._draw_trajectories()
-        self._add_labels_and_legend()
-        self.fig.canvas.draw_idle()
+        self._redraw_plot()
 
     def _reset_parameters(self, event):
         """Reset sliders to default values."""
         self.slider_er_min.set_val(self.DEFAULT_ER_MIN)
         self.slider_er_max.set_val(self.DEFAULT_ER_MAX)
 
+    def _toggle_mode(self, label):
+        """Handle checkbox toggles for display modes."""
+        if label == 'Biological Mode':
+            self.biological_mode = not self.biological_mode
+        elif label == 'Show Pathology':
+            self.show_pathology = not self.show_pathology
+        elif label == 'Show States':
+            self.show_biological_states = not self.show_biological_states
+
+        # Redraw
+        self._redraw_plot()
+
+    def _toggle_clinical_trajectories(self, event):
+        """Toggle clinical trajectories on/off."""
+        # Check if clinical trajectories are already added
+        clinical_labels = {'Depression Onset', 'Anxiety Escalation', 'Manic Episode',
+                          'Panic Attack', 'Therapeutic Recovery', 'Meditation Deepening'}
+
+        existing_labels = {t['label'] for t in self.trajectories}
+
+        if clinical_labels & existing_labels:
+            # Remove clinical trajectories
+            self.trajectories = [t for t in self.trajectories
+                                if t['label'] not in clinical_labels]
+        else:
+            # Add clinical trajectories
+            self.add_clinical_trajectories()
+
+        self._redraw_plot()
+
+    def _redraw_plot(self):
+        """Redraw the entire plot with current settings."""
+        self.ax_main.clear()
+        self._clear_overlays()
+        self._draw_phase_space()
+        self._draw_viable_window()
+
+        if self.show_pathology:
+            self._draw_pathology_zones()
+
+        if self.show_biological_states:
+            self._draw_biological_states()
+
+        self._draw_trajectories()
+        self._add_labels_and_legend()
+        self.fig.canvas.draw_idle()
+
     def render(self,
                interactive: bool = True,
                show_trajectories: bool = True,
+               show_biological_states: bool = False,
+               show_pathology: bool = False,
+               biological_mode: bool = False,
                save_path: Optional[str] = None):
         """
         Render the complete visualization.
@@ -397,11 +855,25 @@ class EnergyResistanceVisualizer:
         Args:
             interactive: Whether to show interactive controls
             show_trajectories: Whether to display example trajectories
+            show_biological_states: Whether to show biological reference states
+            show_pathology: Whether to show pathology zones
+            biological_mode: Whether to use biological axis labels
             save_path: If provided, save figure to this path
         """
+        # Set display modes
+        self.biological_mode = biological_mode
+        self.show_biological_states = show_biological_states
+        self.show_pathology = show_pathology
+
         self.setup_plot()
         self._draw_phase_space()
         self._draw_viable_window()
+
+        if show_pathology:
+            self._draw_pathology_zones()
+
+        if show_biological_states:
+            self._draw_biological_states()
 
         if show_trajectories:
             if not self.trajectories:
@@ -459,21 +931,117 @@ def calculate_system_er(energy_present: float, frequency: float) -> dict:
 
 def demo():
     """Run a demonstration of the Energy Resistance visualizer."""
-    print("=" * 60)
-    print("  Cosmic Loom Theory: Energy Resistance Visualizer")
-    print("=" * 60)
+    print("=" * 70)
+    print("  Cosmic Loom Theory: Energy Resistance Visualizer (v1.2)")
+    print("=" * 70)
     print("\nThe Energy Resistance Principle: éR = EP / f²")
     print("\nThis visualization shows the phase space where:")
     print("  • Purple regions: Low éR (chaos/decoherence)")
     print("  • Green regions: Viable window (biological coherence)")
     print("  • Blue regions: High éR (rigidity)")
+    print("\nNEW FEATURES:")
+    print("  ☐ Biological Mode - Map axes to physiological parameters")
+    print("  ☐ Show Pathology - Display mental health condition zones")
+    print("  ☐ Show States - Display biological reference states")
+    print("  [Clinical] - Toggle clinical decompensation/recovery paths")
     print("\nUse the sliders to adjust the viable window boundaries.")
-    print("=" * 60)
+    print("=" * 70)
 
     # Create and show the visualizer
     visualizer = EnergyResistanceVisualizer()
     visualizer.render(interactive=True, show_trajectories=True)
 
 
+def demo_biological():
+    """
+    Run a demonstration focused on biological and clinical applications.
+
+    Shows the éR phase space with:
+    - Biological reference states (sleep, meditation, exercise, etc.)
+    - Pathology zones (depression, anxiety, mania, etc.)
+    - Clinical trajectories (decompensation and recovery paths)
+    """
+    print("=" * 70)
+    print("  Cosmic Loom Theory: Biological & Clinical Mode")
+    print("=" * 70)
+    print("\nThis view maps abstract éR parameters to physiology:")
+    print("\n  ENERGY PRESENT (EP) ↔ Metabolic Indicators")
+    print("    • ATP production, oxygen consumption")
+    print("    • Heart rate, metabolic rate")
+    print("    • Autonomic activation level")
+    print("\n  FREQUENCY (f) ↔ Neural/Physiological Rhythms")
+    print("    • EEG frequency bands (delta to gamma)")
+    print("    • Heart rate variability (HRV)")
+    print("    • Circadian rhythms")
+    print("\n  REFERENCE STATES (★):")
+    for name, state in BIOLOGICAL_STATES.items():
+        er = state['ep'] / (state['freq'] ** 2)
+        print(f"    • {state['label']}: éR = {er:.2f}")
+    print("\n  PATHOLOGY ZONES (dashed ellipses):")
+    for name, path in PATHOLOGY_ZONES.items():
+        print(f"    • {path['label']}: {path['description']}")
+    print("=" * 70)
+
+    # Create visualizer with biological features enabled
+    visualizer = EnergyResistanceVisualizer()
+    visualizer.add_clinical_trajectories()
+    visualizer.render(
+        interactive=True,
+        show_trajectories=True,
+        show_biological_states=True,
+        show_pathology=True,
+        biological_mode=True
+    )
+
+
+def demo_pathology():
+    """
+    Run a demonstration focused specifically on pathology signatures.
+
+    Shows how different mental health conditions map to éR space
+    and the trajectories of decompensation and recovery.
+    """
+    print("=" * 70)
+    print("  Cosmic Loom Theory: Pathology Signatures in éR Space")
+    print("=" * 70)
+    print("\nMental health conditions as energetic regimes:")
+    print("\n  CHAOS BOUNDARY CONDITIONS (low éR):")
+    print("    • Anxiety: High frequency, normal energy")
+    print("    • Mania: High frequency AND high energy")
+    print("    • ADHD: Unstable, oscillating near boundary")
+    print("    • PTSD: Hyperarousal, threat detection overdrive")
+    print("\n  RIGIDITY BOUNDARY CONDITIONS (high éR):")
+    print("    • Depression: Low frequency AND low energy")
+    print("    • Seizure: Very high energy, hyper-synchronized")
+    print("\n  BOUNDARY/FRAGMENTED STATES:")
+    print("    • Dissociation: Low energy, fragmented dynamics")
+    print("\n  CLINICAL TRAJECTORIES:")
+    print("    • Depression Onset: Gradual decline toward rigidity")
+    print("    • Anxiety Escalation: Frequency increases into chaos")
+    print("    • Panic Attack: Rapid spike then crash")
+    print("    • Therapeutic Recovery: Spiral back to viable window")
+    print("=" * 70)
+
+    visualizer = EnergyResistanceVisualizer()
+    visualizer.trajectories = []  # Clear default trajectories
+    visualizer.add_clinical_trajectories()
+    visualizer.render(
+        interactive=True,
+        show_trajectories=True,
+        show_biological_states=False,
+        show_pathology=True,
+        biological_mode=True
+    )
+
+
 if __name__ == "__main__":
-    demo()
+    import sys
+    if len(sys.argv) > 1:
+        if sys.argv[1] == '--bio':
+            demo_biological()
+        elif sys.argv[1] == '--pathology':
+            demo_pathology()
+        else:
+            demo()
+    else:
+        demo()
