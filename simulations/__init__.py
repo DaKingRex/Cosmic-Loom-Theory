@@ -13,6 +13,7 @@ Submodules:
   - bioelectric: Single-layer ion channel networks
   - bioelectric_multilayer: Multi-layer tissue coupling
   - morphogenetic: Pattern memory and regeneration
+  - biophoton: Ultra-weak photon emission, metabolic coherence
 - emergence: Coherence emergence from substrate interactions
 - quantum: Quantum coherence effects (microtubules, etc.)
 """
@@ -66,6 +67,28 @@ from .field_dynamics import (
     morphogenetic_regeneration_demo,
     morphogenetic_repattern_demo,
     morphogenetic_cancer_demo,
+
+    # === Biophoton emission ===
+    BiophotonSimulator,
+    BiophotonVisualizer,
+    EmissionMode,
+    TissueState,
+    WAVELENGTH_MIN,
+    WAVELENGTH_MAX,
+    WAVELENGTH_PEAK,
+    EMISSION_RATE_BASELINE,
+    ATP_BASELINE,
+    ROS_BASELINE,
+    create_healthy_tissue,
+    create_stressed_tissue,
+    create_coherent_emission,
+    create_meditation_state,
+    create_inflammation_model,
+    biophoton_demo,
+    biophoton_stressed_demo,
+    biophoton_coherent_demo,
+    biophoton_meditation_demo,
+    biophoton_comparison_demo,
 )
 
 __all__ = [
@@ -116,4 +139,26 @@ __all__ = [
     'morphogenetic_regeneration_demo',
     'morphogenetic_repattern_demo',
     'morphogenetic_cancer_demo',
+
+    # === Biophoton emission ===
+    'BiophotonSimulator',
+    'BiophotonVisualizer',
+    'EmissionMode',
+    'TissueState',
+    'WAVELENGTH_MIN',
+    'WAVELENGTH_MAX',
+    'WAVELENGTH_PEAK',
+    'EMISSION_RATE_BASELINE',
+    'ATP_BASELINE',
+    'ROS_BASELINE',
+    'create_healthy_tissue',
+    'create_stressed_tissue',
+    'create_coherent_emission',
+    'create_meditation_state',
+    'create_inflammation_model',
+    'biophoton_demo',
+    'biophoton_stressed_demo',
+    'biophoton_coherent_demo',
+    'biophoton_meditation_demo',
+    'biophoton_comparison_demo',
 ]

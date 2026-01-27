@@ -22,10 +22,18 @@ generate and maintain coherent patterns in living systems:
    - Regeneration after injury
    - Repatterning capabilities (Levin-style)
 
+4. **Biophoton Emission** (CLT v1.1 §4.2)
+   - Ultra-weak photon emission from mitochondria
+   - Emission statistics (Poissonian, coherent, squeezed, chaotic)
+   - Spatial and temporal coherence metrics
+   - Metabolic state coupling (ATP, ROS)
+   - LoomSense-compatible output
+
 Available modules:
 - bioelectric: Single-layer ion channel networks, gap junctions
 - bioelectric_multilayer: Multi-layer tissue coupling
 - morphogenetic: Pattern memory, regeneration, morphogenesis
+- biophoton: Ultra-weak photon emission, metabolic coherence
 """
 
 # Single-layer bioelectric simulation
@@ -103,6 +111,39 @@ from .morphogenetic import (
     demo_cancer as morphogenetic_cancer_demo,
 )
 
+# Biophoton emission simulation
+from .biophoton import (
+    # Core classes
+    BiophotonSimulator,
+    BiophotonVisualizer,
+
+    # Emission modes and states
+    EmissionMode,
+    TissueState,
+
+    # Physical constants
+    WAVELENGTH_MIN,
+    WAVELENGTH_MAX,
+    WAVELENGTH_PEAK,
+    EMISSION_RATE_BASELINE,
+    ATP_BASELINE,
+    ROS_BASELINE,
+
+    # Presets
+    create_healthy_tissue,
+    create_stressed_tissue,
+    create_coherent_emission,
+    create_meditation_state,
+    create_inflammation_model,
+
+    # Demos
+    demo as biophoton_demo,
+    demo_stressed as biophoton_stressed_demo,
+    demo_coherent as biophoton_coherent_demo,
+    demo_meditation as biophoton_meditation_demo,
+    demo_comparison as biophoton_comparison_demo,
+)
+
 __all__ = [
     # === Single-layer bioelectric ===
     'BioelectricSimulator',
@@ -151,4 +192,26 @@ __all__ = [
     'morphogenetic_regeneration_demo',
     'morphogenetic_repattern_demo',
     'morphogenetic_cancer_demo',
+
+    # === Biophoton emission ===
+    'BiophotonSimulator',
+    'BiophotonVisualizer',
+    'EmissionMode',
+    'TissueState',
+    'WAVELENGTH_MIN',
+    'WAVELENGTH_MAX',
+    'WAVELENGTH_PEAK',
+    'EMISSION_RATE_BASELINE',
+    'ATP_BASELINE',
+    'ROS_BASELINE',
+    'create_healthy_tissue',
+    'create_stressed_tissue',
+    'create_coherent_emission',
+    'create_meditation_state',
+    'create_inflammation_model',
+    'biophoton_demo',
+    'biophoton_stressed_demo',
+    'biophoton_coherent_demo',
+    'biophoton_meditation_demo',
+    'biophoton_comparison_demo',
 ]
