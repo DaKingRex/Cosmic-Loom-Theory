@@ -2,28 +2,45 @@
 
 This document outlines the development roadmap for the Cosmic Loom Theory computational research project. All work is grounded in the CLT v1.1 theoretical framework focusing on human biological consciousness as Loomfield coherence.
 
+## Progress Summary
+
+| Phase | Status | Description |
+|-------|--------|-------------|
+| **Phase 1** | ✅ Complete | Core CLT Physics - éR visualizer, 2D/3D Loomfield simulators, CI/CD, docs |
+| **Phase 2** | 🔄 Current | Biological Substrate Models |
+| **Phase 3** | ⏳ Planned | Pathology & Healing Dynamics |
+| **Phase 4** | ⏳ Planned | LoomSense Integration |
+| **Phase 5** | ⏳ Planned | Extensions & Scaling |
+| **Phase 6** | 🔄 Partial | Publication & Dissemination (docs infrastructure complete) |
+
+**Test Coverage**: 55 passing tests across éR calculations, 2D Loomfield, and 3D Loomfield modules.
+
 ---
 
-## Phase 1: Core CLT Physics (Current)
+## Phase 1: Core CLT Physics ✓ COMPLETE
 
 **Goal**: Implement the fundamental CLT equations and visualize core principles.
 
-### 1.1 Infrastructure Setup
+**Status**: Completed January 2026
+
+### 1.1 Infrastructure Setup ✓
 - [x] Initialize repository structure
 - [x] Set up Python package organization
 - [x] Define dependencies and requirements
 - [x] Organize theoretical documents in docs/theory/
-- [ ] Configure CI/CD pipeline
-- [ ] Set up Sphinx documentation
+- [x] Configure CI/CD pipeline (GitHub Actions: tests, linting, docs build)
+- [x] Set up Sphinx documentation (autodoc, tutorials, API reference)
 
-### 1.2 Energy Resistance Principle
+### 1.2 Energy Resistance Principle ✓
 - [x] **éR Phase Space Visualizer** - Interactive visualization of éR = EP/f²
 - [x] Viable window boundaries (chaos ↔ rigidity)
 - [x] System trajectory plotting
-- [ ] Biological parameter mapping (map éR to measurable quantities)
-- [ ] Pathology signatures in éR space
+- [x] Biological parameter mapping (HRV→freq, metabolic rate→EP, EEG bands)
+- [x] Pathology signatures in éR space (depression, anxiety, mania, seizure, dissociation, ADHD, PTSD)
+- [x] Clinical trajectories (decompensation and recovery paths)
+- [x] 7 biological reference states (resting, sleep stages, meditation, flow, exercise)
 
-### 1.3 Loomfield Wave Dynamics
+### 1.3 Loomfield Wave Dynamics ✓
 - [x] **Loomfield Wave Simulator** - 2D numerical solver for ∇²L − (1/v²ₗ)(∂²L/∂t²) = κₗ·ρ_coh
 - [x] Coherence density (ρ_coh) from oscillating sources
 - [x] Q metric: energy-independent spatial coherence measure
@@ -31,11 +48,15 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 - [x] Presets: Healthy (phase-locked), Pathology (incoherent), Healing (re-coupling)
 - [x] Perturbation effects on coherence (high-frequency noise disruption)
 - [x] C_bio consciousness observable: C_bio = Q² × ∫|ρ_coh|·|∂L/∂t| dV
-- [ ] 3D Loomfield extension
+- [x] **3D Loomfield Simulator** - Volumetric wave propagation
+- [x] 3D plotly visualizer (volumetric rendering, slice views, animations)
+- [x] Real-time 3D visualizer (vispy/OpenGL desktop application)
+- [x] 3D presets (healthy, pathology, healing scenarios)
+- [x] C_bio 3D: Q³ × volume integral formulation
 
 ---
 
-## Phase 2: Biological Substrate Models
+## Phase 2: Biological Substrate Models (Current)
 
 **Goal**: Implement CLT's four biological substrate mechanisms.
 
@@ -138,7 +159,8 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 **Goal**: Prepare research outputs and enable reproducibility.
 
 ### 6.1 Documentation
-- [ ] API documentation (Sphinx)
+- [x] API documentation (Sphinx autodoc configured)
+- [x] Documentation infrastructure (Sphinx, RTD theme, MathJax)
 - [ ] Tutorial notebooks for each major component
 - [ ] Theoretical background papers
 
