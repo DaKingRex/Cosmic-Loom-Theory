@@ -46,3 +46,7 @@ data/processed/*.json
 
 # Generated outputs
 *.log
+output/
+
+# Documentation build
+docs/_build/

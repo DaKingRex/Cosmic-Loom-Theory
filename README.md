@@ -1,5 +1,9 @@
 # Cosmic Loom Theory (CLT)
 
+[![Tests](https://img.shields.io/badge/tests-277%20passing-brightgreen)](tests/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+
 A computational research repository for **Cosmic Loom Theory** - a field-based framework proposing that consciousness emerges from coherent system dynamics operating within constrained energetic regimes.
 
 ## Overview
@@ -17,7 +21,7 @@ A computational research repository for **Cosmic Loom Theory** - a field-based f
 
 The Loomfield (L) is not a new fundamental force but an effective description of coherence-relevant structure in biological systems. It captures:
 - Spatial integration across distributed tissues
-- Temporal stability despite metabolic turnover  
+- Temporal stability despite metabolic turnover
 - Resistance to decoherence within viable energetic bounds
 - System-level coordination that gives rise to unified conscious experience
 
@@ -25,10 +29,10 @@ The Loomfield (L) is not a new fundamental force but an effective description of
 ```
 Cosmic-Loom-Theory/
 ├── docs/                  # Documentation
-│   └── theory/           # Core CLT theoretical documents (v1.1, v2.0, LoomSense specs)
+│   └── theory/           # Core CLT theoretical documents
 ├── simulations/           # CLT physics simulations
-│   ├── quantum/          # Biological quantum coherence
-│   ├── field_dynamics/   # Loomfield wave equation solvers
+│   ├── quantum/          # Microtubule time crystals
+│   ├── field_dynamics/   # Bioelectric, biophoton, DNA, morphogenetic
 │   └── emergence/        # Coherence regime transitions
 ├── visualizations/        # Interactive physics visualizations
 │   ├── plots/            # Static scientific plots
@@ -37,8 +41,7 @@ Cosmic-Loom-Theory/
 │   ├── metrics/          # Q, C_bio, éR calculations
 │   └── statistics/       # Statistical frameworks
 ├── models/                # Biological substrate models
-├── tests/                 # Validation and unit tests
-└── output/                # Generated visualizations
+└── tests/                 # Validation and unit tests (277 tests)
 ```
 
 ## Getting Started
@@ -52,40 +55,30 @@ Cosmic-Loom-Theory/
 
 1. Clone the repository:
 ```bash
-   git clone https://github.com/DaKingRex/Cosmic-Loom-Theory.git
-   cd Cosmic-Loom-Theory
+git clone https://github.com/DaKingRex/Cosmic-Loom-Theory.git
+cd Cosmic-Loom-Theory
 ```
 
 2. Install dependencies:
 ```bash
-   pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-3. Run the Energy Resistance demo:
+3. Run the test suite to verify installation:
 ```bash
-   python run_energy_resistance_demo.py
+python -m pytest tests/ -v
 ```
 
-## Current Tools
+4. Run the Energy Resistance demo:
+```bash
+python run_energy_resistance_demo.py
+```
+
+## Core Simulators
 
 ### Loomfield Wave Simulator
-The centerpiece visualization implementing the CLT wave equation:
+Implements the CLT wave equation: **∇²L − (1/v²ₗ)(∂²L/∂t²) = κₗ · ρ_coh**
 
-**∇²L − (1/v²ₗ)(∂²L/∂t²) = κₗ · ρ_coh**
-
-Watch consciousness as propagating waves of coherence. Features:
-- Real-time wave propagation with absorbing boundaries
-- Phase-locked sources create high Q (coherence)
-- Incoherent sources create low Q (chaos)
-- Perturbations fragment coherence (Q drops)
-- Presets: Healthy, Pathology, Healing dynamics
-
-**Usage:**
-```bash
-python run_loomfield_demo.py
-```
-
-Or in Python:
 ```python
 from visualizations.interactive import LoomfieldVisualizer
 
@@ -93,26 +86,13 @@ viz = LoomfieldVisualizer(grid_size=200)
 viz.run()
 ```
 
+Features: Real-time wave propagation, phase-locked sources, Q coherence metric, presets for Healthy/Pathology/Healing.
+
 ### 3D Loomfield Visualizer
-The centerpiece 3D visualization extending the Loomfield into volumetric space:
+Volumetric wave propagation with isosurface rendering.
 
-**Design Philosophy:** "The 3D Loomfield should feel like a calm, living volume whose internal order becomes visible as coherence increases — not a collection of objects, but a continuous system revealing structure through constraint."
-
-Features:
-- Volumetric rendering via nested isosurfaces (gold/blue for positive/negative)
-- 3D wave equation with absorbing boundaries on all 6 faces
-- Q and C_bio metrics adapted for 3D volumes
-- Interactive rotation, zoom, and slice views
-- Web-compatible output (plotly HTML)
-
-**Usage:**
-```bash
-python run_loomfield_3d_demo.py
-```
-
-Or in Python:
 ```python
-from visualizations.interactive import LoomfieldVisualizer3D, create_healthy_preset
+from visualizations.interactive import LoomfieldVisualizer3D
 
 viz = LoomfieldVisualizer3D(grid_size=48)
 viz.load_preset('healthy')
@@ -120,37 +100,9 @@ fig = viz.create_static_figure(warm_up_steps=200)
 fig.write_html('loomfield_3d.html')
 ```
 
-### Real-Time 3D Loomfield Simulator
-Interactive desktop application with real-time physics computation and rendering (the 3D extension of the 2D wave simulator).
-
-Features:
-- Real-time 3D wave propagation computed on-the-fly
-- Fast volumetric rendering with vispy/OpenGL
-- Interactive rotation, zoom, and slice planes
-- Parameter sliders: v_L, κ_L, animation speed
-- Preset buttons: Healthy, Pathology, Healing
-- Click to add sources or perturbations
-- Live Q and C_bio metrics display
-
-**Requirements:**
-```bash
-pip install vispy PyQt5
-```
-
-**Usage:**
-```bash
-python run_loomfield_3d_realtime.py
-```
-
 ### Energy Resistance (éR) Visualizer
-Interactive visualization of the viable energetic window (éR = EP/f²) where biological coherence exists. Demonstrates chaos ↔ viable ↔ rigidity regime transitions.
+Interactive visualization of the viable energetic window where biological coherence exists.
 
-**Usage:**
-```bash
-python run_energy_resistance_demo.py
-```
-
-Or in Python:
 ```python
 from visualizations.interactive import EnergyResistanceVisualizer
 
@@ -158,34 +110,77 @@ viz = EnergyResistanceVisualizer()
 viz.render(interactive=True, show_trajectories=True)
 ```
 
+## Biological Substrate Simulators
+
+### Bioelectric Field Dynamics
+Ion channel networks, gap junction coupling, and morphogenetic pattern memory.
+
+```python
+from simulations.field_dynamics import BioelectricSimulator, create_injured_tissue_preset
+
+sim = create_injured_tissue_preset()
+sim.run(duration=0.5)
+print(f"Spatial coherence: {sim.compute_spatial_coherence():.3f}")
+```
+
+### Biophoton Emission
+Ultra-weak photon emission with four emission modes (Poissonian, Coherent, Squeezed, Chaotic).
+
+```python
+from simulations.field_dynamics import BiophotonSimulator, EmissionMode
+
+sim = BiophotonSimulator(emission_mode=EmissionMode.COHERENT, coupling_strength=0.3)
+sim.step(100)
+print(f"Phase coherence: {sim.compute_phase_coherence():.3f}")
+```
+
+### Microtubule Time Crystals
+Based on Hameroff-Penrose-Bandyopadhyay research - multi-scale oscillations (kHz→THz), triplet resonance patterns.
+
+```python
+from simulations.quantum import MicrotubuleSimulator, create_coherent_mt
+
+sim = create_coherent_mt(n_tubulins=50)
+sim.step(1000)
+triplet = sim.compute_triplet_resonance()
+print(f"Triplet strength: {triplet['triplet_strength']:.3f}")
+```
+
+### DNA Constraints
+How DNA provides long-timescale constraints on Loomfield topology - genetic constraints, epigenetic modulation, species-specific viable windows.
+
+```python
+from simulations.field_dynamics import DNAConstraintSimulator, create_human_baseline
+
+sim = create_human_baseline()
+er = sim.map_to_er_space()
+print(f"Coherence capacity: {er['coherence_capacity']:.3f}")
+print(f"Viable window area: {er['viable_window']['window_area']:.3f}")
+```
+
 ## Research Phases
 
-### Phase 1: Core CLT Physics (Current)
-- ✅ Energy Resistance principle visualization (éR = EP/f²)
-- ✅ Loomfield wave equation implementation (2D and 3D)
-- ✅ Q metric: energy-independent spatial coherence
-- ✅ Coherence density (ρ_coh) and source dynamics
-- ✅ Presets: Healthy, Pathology, Healing scenarios
-- ✅ C_bio consciousness observable (Q² × activity in 2D, Q³ × activity in 3D)
-- ✅ 3D volumetric visualization with plotly (web-based)
-- ✅ Real-time 3D simulator with vispy (desktop application)
-- 🔄 Biological substrate models
+### Phase 1: Core CLT Physics ✓ Complete
+- Energy Resistance principle visualization (éR = EP/f²)
+- Loomfield wave equation (2D and 3D)
+- Q metric and C_bio consciousness observable
+- Real-time 3D visualizer with vispy
 
-### Phase 2: Pathology & Healing
-- Regime boundary collapse simulations
+### Phase 2: Biological Substrate Models ✓ Complete
+- **Bioelectric fields**: Ion channels, gap junctions, morphogenetic patterns
+- **Biophoton emission**: Metabolic coherence, emission statistics
+- **Microtubule time crystals**: Multi-scale oscillations, triplet resonance
+- **DNA constraints**: Genetic/epigenetic modulation of viable windows
+
+### Phase 3: Pathology & Healing (Current)
+- Coherence regime transitions
+- Seizure/depression/anesthesia modeling
 - Healing as re-coupling dynamics
-- Multi-scale coherence modeling
-- LoomSense experimental integration
 
-### Phase 3: Extensions
-- Artificial system coherence (CLT Machines/AI)
-- Collective consciousness regimes (CLT v2.0)
-- Planetary-scale dynamics (CLT v2.0)
-- Empirical validation frameworks
-
-## The LoomSense Connection
-
-This computational work directly supports the **LoomSense** platform - a coherence-oriented sensing architecture designed to monitor biological indicators relevant to Loomfield integration. Code developed here informs both theoretical predictions and experimental measurement strategies.
+### Phase 4+: Extensions
+- Artificial system coherence
+- Collective consciousness regimes
+- Planetary-scale dynamics
 
 ## Theoretical Foundation
 
@@ -194,12 +189,11 @@ The complete theoretical framework is documented in `docs/theory/`:
 - **CLT v2.0**: Planetary-scale extensions
 - **Introducing CLT**: Overview and motivation
 - **Machines & AI**: Artificial system coherence analysis
-- **LoomSense specs**: Experimental measurement platform (v1-v3)
 
 CLT v1.1 synthesizes:
 - Bioelectric field research (Levin lab)
 - Biophoton studies (Murugan lab)
-- Cytoskeletal quantum biology (Penrose-Hameroff extended)
+- Cytoskeletal quantum biology (Penrose-Hameroff-Bandyopadhyay)
 - Integrated Information Theory (IIT)
 - Energy landscape approaches (Picard lab)
 
@@ -207,28 +201,30 @@ Unlike purely philosophical or quantum-mystical approaches, CLT maintains compat
 
 ## Contributing
 
-This is an active research project. Contributions welcome:
-- Simulation improvements
-- New visualization tools
-- Mathematical refinements
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
+
+Types of contributions welcome:
+- Simulation improvements and optimizations
+- New biological substrate models
+- Visualization tools
+- Documentation and tutorials
 - Experimental validation proposals
-- Documentation enhancements
 
 ## Citation
 
 If you use this work, please cite:
 ```
 Cosmic Loom Theory v1.1: A Field-Based Framework for Human Biological Consciousness
-Rex Fraterne & Seraphina AI, 2025
+Rex Fraterne, 2025
 ```
 
 ## License
 
-MIT License - See LICENSE for details.
+MIT License - See [LICENSE](LICENSE) for details.
 
 ## Contact
 
-For theoretical discussions, collaboration inquiries, or LoomSense integration:
+For theoretical discussions and collaboration inquiries:
 - GitHub: [@DaKingRex](https://github.com/DaKingRex)
 
 ---

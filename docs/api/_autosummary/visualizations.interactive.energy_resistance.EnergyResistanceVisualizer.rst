@@ -14,6 +14,7 @@
    .. autosummary::
    
       ~EnergyResistanceVisualizer.__init__
+      ~EnergyResistanceVisualizer.add_clinical_trajectories
       ~EnergyResistanceVisualizer.add_example_trajectories
       ~EnergyResistanceVisualizer.add_trajectory
       ~EnergyResistanceVisualizer.calculate_er

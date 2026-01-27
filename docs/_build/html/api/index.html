@@ -175,7 +175,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-visualizations.interactive">visualizations.interactive</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.calculate_system_er"><code class="docutils literal notranslate"><span class="pre">calculate_system_er()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.map_hrv_to_frequency"><code class="docutils literal notranslate"><span class="pre">map_hrv_to_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.map_metabolic_rate_to_energy"><code class="docutils literal notranslate"><span class="pre">map_metabolic_rate_to_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.map_eeg_band_to_frequency"><code class="docutils literal notranslate"><span class="pre">map_eeg_band_to_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.biological_state_to_er"><code class="docutils literal notranslate"><span class="pre">biological_state_to_er()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.energy_resistance_demo"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.energy_resistance_demo_biological"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo_biological()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.energy_resistance_demo_pathology"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo_pathology()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.LoomfieldVisualizer"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#visualizations.interactive.loomfield_demo"><code class="docutils literal notranslate"><span class="pre">loomfield_demo()</span></code></a></li>
@@ -648,6 +654,10 @@ proper coloring (gold vs blue in CLT visualization).</p>
 <p>Displays the relationship between Energy Present (EP), frequency (f),
 and Energy Resistance (éR), highlighting the viable window for
 biological coherence.</p>
+<p>Enhanced Features:
+- Biological Mode: Maps axes to physiological parameters
+- Pathology Zones: Shows where mental health conditions appear
+- Clinical Trajectories: Decompensation and recovery paths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -736,6 +746,12 @@ biological coherence.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.add_clinical_trajectories">
+<span class="sig-name descname"><span class="pre">add_clinical_trajectories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.add_clinical_trajectories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.add_clinical_trajectories" title="Link to this definition"></a></dt>
+<dd><p>Add clinically-relevant trajectories showing decompensation and recovery.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.setup_plot">
 <span class="sig-name descname"><span class="pre">setup_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(14,</span> <span class="pre">10)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.setup_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.setup_plot" title="Link to this definition"></a></dt>
 <dd><p>Set up the matplotlib figure and axes.</p>
@@ -748,13 +764,16 @@ biological coherence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.render">
-<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_trajectories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.render" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_trajectories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_biological_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_pathology</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biological_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.render" title="Link to this definition"></a></dt>
 <dd><p>Render the complete visualization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>interactive</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to show interactive controls</p></li>
 <li><p><strong>show_trajectories</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to display example trajectories</p></li>
+<li><p><strong>show_biological_states</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to show biological reference states</p></li>
+<li><p><strong>show_pathology</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to show pathology zones</p></li>
+<li><p><strong>biological_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to use biological axis labels</p></li>
 <li><p><strong>save_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – If provided, save figure to this path</p></li>
 </ul>
 </dd>
@@ -916,6 +935,10 @@ creating organized traveling waves that converge.</p>
 <p>Displays the relationship between Energy Present (EP), frequency (f),
 and Energy Resistance (éR), highlighting the viable window for
 biological coherence.</p>
+<p>Enhanced Features:
+- Biological Mode: Maps axes to physiological parameters
+- Pathology Zones: Shows where mental health conditions appear
+- Clinical Trajectories: Decompensation and recovery paths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1004,6 +1027,12 @@ biological coherence.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="visualizations.interactive.EnergyResistanceVisualizer.add_clinical_trajectories">
+<span class="sig-name descname"><span class="pre">add_clinical_trajectories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.add_clinical_trajectories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.EnergyResistanceVisualizer.add_clinical_trajectories" title="Link to this definition"></a></dt>
+<dd><p>Add clinically-relevant trajectories showing decompensation and recovery.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="visualizations.interactive.EnergyResistanceVisualizer.setup_plot">
 <span class="sig-name descname"><span class="pre">setup_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(14,</span> <span class="pre">10)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.setup_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.EnergyResistanceVisualizer.setup_plot" title="Link to this definition"></a></dt>
 <dd><p>Set up the matplotlib figure and axes.</p>
@@ -1016,13 +1045,16 @@ biological coherence.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="visualizations.interactive.EnergyResistanceVisualizer.render">
-<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_trajectories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.EnergyResistanceVisualizer.render" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_trajectories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_biological_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_pathology</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biological_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#EnergyResistanceVisualizer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.EnergyResistanceVisualizer.render" title="Link to this definition"></a></dt>
 <dd><p>Render the complete visualization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>interactive</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to show interactive controls</p></li>
 <li><p><strong>show_trajectories</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to display example trajectories</p></li>
+<li><p><strong>show_biological_states</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to show biological reference states</p></li>
+<li><p><strong>show_pathology</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to show pathology zones</p></li>
+<li><p><strong>biological_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – Whether to use biological axis labels</p></li>
 <li><p><strong>save_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> | </em><em>None</em>) – If provided, save figure to this path</p></li>
 </ul>
 </dd>
@@ -1063,9 +1095,112 @@ biological coherence.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="visualizations.interactive.map_hrv_to_frequency">
+<span class="sig-prename descclassname"><span class="pre">visualizations.interactive.</span></span><span class="sig-name descname"><span class="pre">map_hrv_to_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hrv_ms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#map_hrv_to_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.map_hrv_to_frequency" title="Link to this definition"></a></dt>
+<dd><p>Map Heart Rate Variability (RMSSD in ms) to éR frequency parameter.</p>
+<p>Higher HRV generally indicates more parasympathetic activity and
+lower effective frequency in the coherence space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hrv_ms</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – RMSSD heart rate variability in milliseconds</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estimated frequency parameter for éR calculation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a theoretical mapping. Empirical calibration with
+LoomSense data will refine these relationships.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizations.interactive.map_metabolic_rate_to_energy">
+<span class="sig-prename descclassname"><span class="pre">visualizations.interactive.</span></span><span class="sig-name descname"><span class="pre">map_metabolic_rate_to_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kcal_per_hour</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#map_metabolic_rate_to_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.map_metabolic_rate_to_energy" title="Link to this definition"></a></dt>
+<dd><p>Map metabolic rate (kcal/hour) to éR Energy Present parameter.</p>
+<p>Higher metabolic activity corresponds to more energy present
+in the biological coherence field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kcal_per_hour</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Metabolic rate in kilocalories per hour</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estimated EP parameter for éR calculation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a theoretical mapping. Actual values will depend on
+body mass, activity type, and other factors.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizations.interactive.map_eeg_band_to_frequency">
+<span class="sig-prename descclassname"><span class="pre">visualizations.interactive.</span></span><span class="sig-name descname"><span class="pre">map_eeg_band_to_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">band</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#map_eeg_band_to_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.map_eeg_band_to_frequency" title="Link to this definition"></a></dt>
+<dd><p>Map EEG frequency band to éR frequency parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>band</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – EEG band name (‘delta’, ‘theta’, ‘alpha’, ‘beta’, ‘gamma’)</p></li>
+<li><p><strong>power_ratio</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Relative power in this band (0-1, affects weighting)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estimated frequency parameter</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizations.interactive.biological_state_to_er">
+<span class="sig-prename descclassname"><span class="pre">visualizations.interactive.</span></span><span class="sig-name descname"><span class="pre">biological_state_to_er</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/visualizations/interactive/energy_resistance.html#biological_state_to_er"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#visualizations.interactive.biological_state_to_er" title="Link to this definition"></a></dt>
+<dd><p>Get the éR parameters for a named biological state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Name of state (e.g., ‘resting_awake’, ‘deep_sleep’)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with EP, frequency, éR, and description</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><em>Dict</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="visualizations.interactive.energy_resistance_demo">
 <span class="sig-prename descclassname"><span class="pre">visualizations.interactive.</span></span><span class="sig-name descname"><span class="pre">energy_resistance_demo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizations.interactive.energy_resistance_demo" title="Link to this definition"></a></dt>
 <dd><p>Run a demonstration of the Energy Resistance visualizer.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizations.interactive.energy_resistance_demo_biological">
+<span class="sig-prename descclassname"><span class="pre">visualizations.interactive.</span></span><span class="sig-name descname"><span class="pre">energy_resistance_demo_biological</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizations.interactive.energy_resistance_demo_biological" title="Link to this definition"></a></dt>
+<dd><p>Run a demonstration focused on biological and clinical applications.</p>
+<p>Shows the éR phase space with:
+- Biological reference states (sleep, meditation, exercise, etc.)
+- Pathology zones (depression, anxiety, mania, etc.)
+- Clinical trajectories (decompensation and recovery paths)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="visualizations.interactive.energy_resistance_demo_pathology">
+<span class="sig-prename descclassname"><span class="pre">visualizations.interactive.</span></span><span class="sig-name descname"><span class="pre">energy_resistance_demo_pathology</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizations.interactive.energy_resistance_demo_pathology" title="Link to this definition"></a></dt>
+<dd><p>Run a demonstration focused specifically on pathology signatures.</p>
+<p>Shows how different mental health conditions map to éR space
+and the trajectories of decompensation and recovery.</p>
 </dd></dl>
 
 <dl class="py class">

@@ -172,7 +172,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#module-visualizations.interactive">visualizations.interactive</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.calculate_system_er"><code class="docutils literal notranslate"><span class="pre">calculate_system_er()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.map_hrv_to_frequency"><code class="docutils literal notranslate"><span class="pre">map_hrv_to_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.map_metabolic_rate_to_energy"><code class="docutils literal notranslate"><span class="pre">map_metabolic_rate_to_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.map_eeg_band_to_frequency"><code class="docutils literal notranslate"><span class="pre">map_eeg_band_to_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.biological_state_to_er"><code class="docutils literal notranslate"><span class="pre">biological_state_to_er()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance_demo"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance_demo_biological"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo_biological()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance_demo_pathology"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo_pathology()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldVisualizer"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_demo"><code class="docutils literal notranslate"><span class="pre">loomfield_demo()</span></code></a></li>
@@ -265,15 +271,260 @@
 <span class="sd">- Too low éR: System collapses into chaos/decoherence</span>
 <span class="sd">- Too high éR: System becomes rigid, unable to respond adaptively</span>
 <span class="sd">- Viable window: The &quot;Goldilocks zone&quot; where biological coherence thrives</span>
+
+<span class="sd">Enhanced Features (v1.2):</span>
+<span class="sd">- Biological Parameter Mapping: Maps abstract éR to physiological measurements</span>
+<span class="sd">- Pathology Signatures: Shows where mental health conditions appear in éR space</span>
+<span class="sd">- Clinical Trajectories: Decompensation and recovery paths</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">RadioButtons</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">RadioButtons</span><span class="p">,</span> <span class="n">CheckButtons</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span><span class="p">,</span> <span class="n">Ellipse</span><span class="p">,</span> <span class="n">FancyBboxPatch</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># BIOLOGICAL PARAMETER MAPPING</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="c1"># Biological state reference points (EP, frequency, label, color)</span>
+<span class="c1"># These map physiological states to the abstract éR phase space</span>
+<span class="n">BIOLOGICAL_STATES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;resting_awake&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Resting Awake&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#00ff88&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Alert but relaxed, EEG alpha (8-12 Hz)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>  <span class="c1"># kcal/hr (basal)</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  <span class="c1"># RMSSD in milliseconds</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;deep_sleep&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Deep Sleep (N3)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#4299e1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Delta waves (0.5-4 Hz), low metabolism&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;rem_sleep&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;REM Sleep&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#9f7aea&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Dream state, mixed frequencies, paralysis&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;focused_attention&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Focused Attention&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#f6ad55&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Beta waves (12-30 Hz), active cognition&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;exercise&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="mf">7.0</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Exercise&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#fc8181&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;High metabolism, elevated HR, sympathetic&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;meditation&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Deep Meditation&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#68d391&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Theta/alpha, coherent, parasympathetic&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;flow_state&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Flow State&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#ffd700&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Optimal performance, effortless focus&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Pathology zones in éR space</span>
+<span class="c1"># Each pathology has a center, spread, and clinical characteristics</span>
+<span class="n">PATHOLOGY_ZONES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;depression&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep_center&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s1">&#39;freq_center&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s1">&#39;ep_spread&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s1">&#39;freq_spread&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Depression&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#4a5568&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Low energy, slowed dynamics, toward rigidity&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="s1">&#39;rigidity&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;anxiety&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep_center&#39;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s1">&#39;freq_center&#39;</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Anxiety&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ep_spread&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;freq_spread&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#f56565&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Normal energy, hyperactive frequency, chaos boundary&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="s1">&#39;chaos&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;mania&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep_center&#39;</span><span class="p">:</span> <span class="mf">6.0</span><span class="p">,</span> <span class="s1">&#39;freq_center&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+        <span class="s1">&#39;ep_spread&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;freq_spread&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Mania&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#ed64a6&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Excessive energy, chaotic dynamics&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="s1">&#39;chaos&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;seizure&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep_center&#39;</span><span class="p">:</span> <span class="mf">8.5</span><span class="p">,</span> <span class="s1">&#39;freq_center&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s1">&#39;ep_spread&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;freq_spread&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Seizure&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#e53e3e&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Very high energy, hyper-synchronized, extreme rigidity&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="s1">&#39;rigidity&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;dissociation&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep_center&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;freq_center&#39;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span>
+        <span class="s1">&#39;ep_spread&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;freq_spread&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Dissociation&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#a0aec0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Low energy with fragmented dynamics, boundary state&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="s1">&#39;boundary&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;adhd&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep_center&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;freq_center&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="s1">&#39;ep_spread&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s1">&#39;freq_spread&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;ADHD&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#f6ad55&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Unstable, oscillating near chaos boundary&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="s1">&#39;chaos&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;ptsd&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ep_center&#39;</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">,</span> <span class="s1">&#39;freq_center&#39;</span><span class="p">:</span> <span class="mf">3.8</span><span class="p">,</span>
+        <span class="s1">&#39;ep_spread&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;freq_spread&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;PTSD&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#805ad5&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Hyperarousal, threat detection hyperactive&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="s1">&#39;chaos&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="map_hrv_to_frequency">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.map_hrv_to_frequency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_hrv_to_frequency</span><span class="p">(</span><span class="n">hrv_ms</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map Heart Rate Variability (RMSSD in ms) to éR frequency parameter.</span>
+
+<span class="sd">    Higher HRV generally indicates more parasympathetic activity and</span>
+<span class="sd">    lower effective frequency in the coherence space.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hrv_ms: RMSSD heart rate variability in milliseconds</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Estimated frequency parameter for éR calculation</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This is a theoretical mapping. Empirical calibration with</span>
+<span class="sd">        LoomSense data will refine these relationships.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Inverse relationship: high HRV -&gt; low frequency (calm, coherent)</span>
+    <span class="c1"># Typical range: HRV 10-100ms -&gt; freq 0.5-4.0</span>
+    <span class="c1"># Using logarithmic mapping for physiological realism</span>
+    <span class="n">hrv_clamped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">hrv_ms</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="mf">4.5</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">hrv_clamped</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="map_metabolic_rate_to_energy">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.map_metabolic_rate_to_energy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_metabolic_rate_to_energy</span><span class="p">(</span><span class="n">kcal_per_hour</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map metabolic rate (kcal/hour) to éR Energy Present parameter.</span>
+
+<span class="sd">    Higher metabolic activity corresponds to more energy present</span>
+<span class="sd">    in the biological coherence field.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kcal_per_hour: Metabolic rate in kilocalories per hour</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Estimated EP parameter for éR calculation</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This is a theoretical mapping. Actual values will depend on</span>
+<span class="sd">        body mass, activity type, and other factors.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Linear-ish mapping with saturation</span>
+    <span class="c1"># Basal: ~60 kcal/hr -&gt; EP ~2.0</span>
+    <span class="c1"># Heavy exercise: ~800 kcal/hr -&gt; EP ~9.0</span>
+    <span class="n">kcal_clamped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">kcal_per_hour</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ep</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">+</span> <span class="p">(</span><span class="n">kcal_clamped</span> <span class="o">-</span> <span class="mi">40</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">/</span> <span class="mi">960</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="map_eeg_band_to_frequency">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.map_eeg_band_to_frequency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_eeg_band_to_frequency</span><span class="p">(</span><span class="n">band</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">power_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map EEG frequency band to éR frequency parameter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        band: EEG band name (&#39;delta&#39;, &#39;theta&#39;, &#39;alpha&#39;, &#39;beta&#39;, &#39;gamma&#39;)</span>
+<span class="sd">        power_ratio: Relative power in this band (0-1, affects weighting)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Estimated frequency parameter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">band_frequencies</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;delta&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>    <span class="c1"># 0.5-4 Hz - deep sleep</span>
+        <span class="s1">&#39;theta&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>    <span class="c1"># 4-8 Hz - drowsy, meditation</span>
+        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span>    <span class="c1"># 8-12 Hz - relaxed awake</span>
+        <span class="s1">&#39;beta&#39;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span>     <span class="c1"># 12-30 Hz - active, alert</span>
+        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>    <span class="c1"># 30-100 Hz - high cognition</span>
+    <span class="p">}</span>
+    <span class="n">base_freq</span> <span class="o">=</span> <span class="n">band_frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="mf">1.5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">base_freq</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">power_ratio</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="biological_state_to_er">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.biological_state_to_er">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">biological_state_to_er</span><span class="p">(</span><span class="n">state_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the éR parameters for a named biological state.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state_name: Name of state (e.g., &#39;resting_awake&#39;, &#39;deep_sleep&#39;)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with EP, frequency, éR, and description</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">state_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">BIOLOGICAL_STATES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown biological state: </span><span class="si">{</span><span class="n">state_name</span><span class="si">}</span><span class="s2">. &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;Available: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">BIOLOGICAL_STATES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="n">BIOLOGICAL_STATES</span><span class="p">[</span><span class="n">state_name</span><span class="p">]</span>
+    <span class="n">er</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">state_name</span><span class="p">,</span>
+        <span class="s1">&#39;energy_present&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;energy_resistance&#39;</span><span class="p">:</span> <span class="n">er</span><span class="p">,</span>
+        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;metabolic_rate&#39;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metabolic_rate&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;hrv_ms&#39;</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hrv_ms&#39;</span><span class="p">),</span>
+    <span class="p">}</span></div>
+
 
 
 <div class="viewcode-block" id="EnergyResistanceVisualizer">
@@ -285,6 +536,11 @@
 <span class="sd">    Displays the relationship between Energy Present (EP), frequency (f),</span>
 <span class="sd">    and Energy Resistance (éR), highlighting the viable window for</span>
 <span class="sd">    biological coherence.</span>
+
+<span class="sd">    Enhanced Features:</span>
+<span class="sd">    - Biological Mode: Maps axes to physiological parameters</span>
+<span class="sd">    - Pathology Zones: Shows where mental health conditions appear</span>
+<span class="sd">    - Clinical Trajectories: Decompensation and recovery paths</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Default viable window boundaries (éR units)</span>
@@ -328,13 +584,21 @@
         <span class="c1"># Create custom colormap</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_colormap</span><span class="p">()</span>
 
+        <span class="c1"># Display mode flags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">biological_mode</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_pathology</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_biological_states</span> <span class="o">=</span> <span class="kc">False</span>
+
         <span class="c1"># Initialize plot elements (will be set in setup)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ax_colorbar</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">im</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">viable_patch</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">trajectory_lines</span> <span class="o">=</span> <span class="p">[]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trajectory_lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pathology_patches</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_markers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_annotations</span> <span class="o">=</span> <span class="p">[]</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_create_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LinearSegmentedColormap</span><span class="p">:</span>
@@ -453,6 +717,134 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_recovery</span><span class="p">,</span> <span class="n">freq_recovery</span><span class="p">,</span>
                            <span class="s2">&quot;Recovery Path&quot;</span><span class="p">,</span> <span class="s1">&#39;#FFD93D&#39;</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.add_clinical_trajectories">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.add_clinical_trajectories">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_clinical_trajectories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add clinically-relevant trajectories showing decompensation and recovery.&quot;&quot;&quot;</span>
+
+        <span class="c1"># 1. Depression onset: gradual energy and frequency decline</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="n">ep_depression</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">-</span> <span class="mf">1.8</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># Declining with tremor</span>
+        <span class="n">freq_depression</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_depression</span><span class="p">,</span> <span class="n">freq_depression</span><span class="p">,</span>
+                           <span class="s2">&quot;Depression Onset&quot;</span><span class="p">,</span> <span class="s1">&#39;#4a5568&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 2. Anxiety escalation: frequency increases while energy fluctuates</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="n">ep_anxiety</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># Fluctuating energy</span>
+        <span class="n">freq_anxiety</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">t</span>  <span class="c1"># Rising frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_anxiety</span><span class="p">,</span> <span class="n">freq_anxiety</span><span class="p">,</span>
+                           <span class="s2">&quot;Anxiety Escalation&quot;</span><span class="p">,</span> <span class="s1">&#39;#f56565&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 3. Manic episode: energy and frequency spike together</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">ep_mania</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">15</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
+        <span class="n">freq_mania</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_mania</span><span class="p">,</span> <span class="n">freq_mania</span><span class="p">,</span>
+                           <span class="s2">&quot;Manic Episode&quot;</span><span class="p">,</span> <span class="s1">&#39;#ed64a6&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 4. Panic attack: rapid spike then crash</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+        <span class="n">attack_peak</span> <span class="o">=</span> <span class="mf">0.3</span>
+        <span class="n">ep_panic</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">+</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">attack_peak</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.15</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">freq_panic</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">attack_peak</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.12</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_panic</span><span class="p">,</span> <span class="n">freq_panic</span><span class="p">,</span>
+                           <span class="s2">&quot;Panic Attack&quot;</span><span class="p">,</span> <span class="s1">&#39;#e53e3e&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 5. Therapeutic recovery: gradual return to viable window</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+        <span class="c1"># Starting from anxiety region, spiraling back to center</span>
+        <span class="n">ep_therapy</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">freq_therapy</span> <span class="o">=</span> <span class="mf">3.5</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_therapy</span><span class="p">,</span> <span class="n">freq_therapy</span><span class="p">,</span>
+                           <span class="s2">&quot;Therapeutic Recovery&quot;</span><span class="p">,</span> <span class="s1">&#39;#48bb78&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 6. Meditation deepening: controlled descent into coherent state</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">ep_meditation</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="n">freq_meditation</span> <span class="o">=</span> <span class="mf">1.2</span> <span class="o">-</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_meditation</span><span class="p">,</span> <span class="n">freq_meditation</span><span class="p">,</span>
+                           <span class="s2">&quot;Meditation Deepening&quot;</span><span class="p">,</span> <span class="s1">&#39;#68d391&#39;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_biological_states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw markers for reference biological states.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">state_name</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">BIOLOGICAL_STATES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">ep</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span>
+
+            <span class="c1"># Skip if outside visible range</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ep</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">freq</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Draw marker</span>
+            <span class="n">marker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                <span class="n">ep</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                <span class="n">zorder</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_markers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+
+            <span class="c1"># Add label</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="k">if</span> <span class="n">freq</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">)</span>
+            <span class="n">ann</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+                <span class="n">state</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">],</span>
+                <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="n">freq</span><span class="p">),</span>
+                <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">ep</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">freq</span> <span class="o">+</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span>
+                <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round,pad=0.2&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#1a1a2e&#39;</span><span class="p">,</span>
+                         <span class="n">edgecolor</span><span class="o">=</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">),</span>
+                <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span>
+                               <span class="n">connectionstyle</span><span class="o">=</span><span class="s1">&#39;arc3,rad=0.1&#39;</span><span class="p">),</span>
+                <span class="n">zorder</span><span class="o">=</span><span class="mi">11</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ann</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_pathology_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw elliptical zones for pathology regions.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">path_name</span><span class="p">,</span> <span class="n">pathology</span> <span class="ow">in</span> <span class="n">PATHOLOGY_ZONES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">ep_c</span><span class="p">,</span> <span class="n">freq_c</span> <span class="o">=</span> <span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;ep_center&#39;</span><span class="p">],</span> <span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;freq_center&#39;</span><span class="p">]</span>
+            <span class="n">ep_s</span><span class="p">,</span> <span class="n">freq_s</span> <span class="o">=</span> <span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;ep_spread&#39;</span><span class="p">],</span> <span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;freq_spread&#39;</span><span class="p">]</span>
+
+            <span class="c1"># Skip if center is outside visible range</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ep_c</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">freq_c</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Draw ellipse for pathology zone</span>
+            <span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">ep_c</span><span class="p">,</span> <span class="n">freq_c</span><span class="p">),</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">ep_s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">freq_s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">facecolor</span><span class="o">=</span><span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                <span class="n">edgecolor</span><span class="o">=</span><span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pathology_patches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+
+            <span class="c1"># Add label at center</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="n">ep_c</span><span class="p">,</span> <span class="n">freq_c</span><span class="p">,</span> <span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">],</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">pathology</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_clear_overlays</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear biological state markers and pathology zones.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_markers</span><span class="p">:</span>
+            <span class="n">marker</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_markers</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">ann</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_annotations</span><span class="p">:</span>
+            <span class="n">ann</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_annotations</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pathology_patches</span><span class="p">:</span>
+            <span class="n">patch</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pathology_patches</span> <span class="o">=</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="EnergyResistanceVisualizer.setup_plot">
 <a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.setup_plot">[docs]</a>
@@ -578,31 +970,55 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_add_labels_and_legend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add axis labels, title, and legend.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Energy Present (EP)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">biological_mode</span><span class="p">:</span>
+            <span class="c1"># Biological mode labels</span>
+            <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Energy Present (EP)</span><span class="se">\n</span><span class="s1">← Lower Metabolism | Higher Metabolism →&#39;</span>
+            <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Frequency (f)</span><span class="se">\n</span><span class="s1">← Slower Rhythms | Faster Rhythms →&#39;</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Energy Resistance Phase Space</span><span class="se">\n</span><span class="s1">Biological Mapping Mode&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Abstract mode labels</span>
+            <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Energy Present (EP)&#39;</span>
+            <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Frequency (f)&#39;</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Energy Resistance Phase Space</span><span class="se">\n</span><span class="s1">éR = EP / f²&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
                                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency (f)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
                                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Energy Resistance Phase Space</span><span class="se">\n</span><span class="s1">éR = EP / f²&#39;</span><span class="p">,</span>
-                              <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
-                              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#f7fafc&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#f7fafc&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 
         <span class="c1"># Add legend</span>
-        <span class="n">legend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
                                     <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#4a5568&#39;</span><span class="p">,</span>
                                     <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">)</span>
 
-        <span class="c1"># Add equation box</span>
-        <span class="n">eq_text</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;Energy Resistance Principle</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;━━━━━━━━━━━━━━━━━━━━━</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;éR = EP / f²</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Viable Window:</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_min</span><span class="si">}</span><span class="s2"> &lt; éR &lt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_max</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;• Low éR → Chaos</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;• High éR → Rigidity</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;• Middle → Life thrives&quot;</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">eq_text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="c1"># Add equation box - content depends on mode</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">biological_mode</span><span class="p">:</span>
+            <span class="n">eq_text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;Biological Mapping</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;━━━━━━━━━━━━━━━━━</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;EP ↔ Metabolic Rate</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;  (ATP, O₂, HR)</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;f ↔ Neural Rhythms</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;  (EEG, HRV, Circadian)</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;éR = EP / f²</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;★ = Reference States</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;⬭ = Pathology Zones&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">eq_text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;Energy Resistance</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;━━━━━━━━━━━━━━━━━</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;éR = EP / f²</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Viable Window:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_min</span><span class="si">}</span><span class="s2"> &lt; éR &lt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_max</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;• Low éR → Chaos</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;• High éR → Rigidity</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;• Middle → Life&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">,</span> <span class="n">eq_text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;monospace&#39;</span><span class="p">,</span>
                      <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">,</span>
                               <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#4a5568&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
@@ -612,56 +1028,119 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up interactive sliders and buttons.&quot;&quot;&quot;</span>
 
         <span class="c1"># Slider for éR minimum (chaos threshold)</span>
-        <span class="n">ax_er_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
+        <span class="n">ax_er_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
-            <span class="n">ax_er_min</span><span class="p">,</span> <span class="s1">&#39;Chaos Threshold (éR min)&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span>
+            <span class="n">ax_er_min</span><span class="p">,</span> <span class="s1">&#39;Chaos (éR min)&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span>
             <span class="n">valinit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">er_min</span><span class="p">,</span> <span class="n">valstep</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#9f7aea&#39;</span>
         <span class="p">)</span>
         <span class="n">ax_er_min</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">)</span>
 
         <span class="c1"># Slider for éR maximum (rigidity threshold)</span>
-        <span class="n">ax_er_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
+        <span class="n">ax_er_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
-            <span class="n">ax_er_max</span><span class="p">,</span> <span class="s1">&#39;Rigidity Threshold (éR max)&#39;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span>
+            <span class="n">ax_er_max</span><span class="p">,</span> <span class="s1">&#39;Rigid (éR max)&#39;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span>
             <span class="n">valinit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">er_max</span><span class="p">,</span> <span class="n">valstep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4299e1&#39;</span>
         <span class="p">)</span>
         <span class="n">ax_er_max</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">)</span>
 
+        <span class="c1"># Toggle checkboxes for biological mode and pathology</span>
+        <span class="n">ax_toggles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">])</span>
+        <span class="n">ax_toggles</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_buttons</span> <span class="o">=</span> <span class="n">CheckButtons</span><span class="p">(</span>
+            <span class="n">ax_toggles</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;Biological Mode&#39;</span><span class="p">,</span> <span class="s1">&#39;Show Pathology&#39;</span><span class="p">,</span> <span class="s1">&#39;Show States&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">biological_mode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_pathology</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_biological_states</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="c1"># Style the checkboxes</span>
+        <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_buttons</span><span class="o">.</span><span class="n">labels</span><span class="p">:</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">)</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+
         <span class="c1"># Reset button</span>
-        <span class="n">ax_reset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">])</span>
+        <span class="n">ax_reset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.63</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.035</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">button_reset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">ax_reset</span><span class="p">,</span> <span class="s1">&#39;Reset&#39;</span><span class="p">,</span>
                                    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4a5568&#39;</span><span class="p">,</span> <span class="n">hovercolor</span><span class="o">=</span><span class="s1">&#39;#718096&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Clinical trajectories button</span>
+        <span class="n">ax_clinical</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.63</span><span class="p">,</span> <span class="mf">0.115</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.035</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_clinical</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">ax_clinical</span><span class="p">,</span> <span class="s1">&#39;Clinical&#39;</span><span class="p">,</span>
+                                      <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#553c9a&#39;</span><span class="p">,</span> <span class="n">hovercolor</span><span class="o">=</span><span class="s1">&#39;#6b46c1&#39;</span><span class="p">)</span>
 
         <span class="c1"># Connect callbacks</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_boundaries</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_boundaries</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">button_reset</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reset_parameters</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_clinical</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_toggle_clinical_trajectories</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_buttons</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_toggle_mode</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_update_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Callback to update viable window when sliders change.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">er_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span><span class="o">.</span><span class="n">val</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">er_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span><span class="o">.</span><span class="n">val</span>
-
-        <span class="c1"># Redraw the plot</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_phase_space</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_viable_window</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_trajectories</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_labels_and_legend</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_redraw_plot</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset sliders to default values.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ER_MIN</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ER_MAX</span><span class="p">)</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">_toggle_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle checkbox toggles for display modes.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Biological Mode&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">biological_mode</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">biological_mode</span>
+        <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Show Pathology&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">show_pathology</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_pathology</span>
+        <span class="k">elif</span> <span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;Show States&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">show_biological_states</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_biological_states</span>
+
+        <span class="c1"># Redraw</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_redraw_plot</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_toggle_clinical_trajectories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Toggle clinical trajectories on/off.&quot;&quot;&quot;</span>
+        <span class="c1"># Check if clinical trajectories are already added</span>
+        <span class="n">clinical_labels</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Depression Onset&#39;</span><span class="p">,</span> <span class="s1">&#39;Anxiety Escalation&#39;</span><span class="p">,</span> <span class="s1">&#39;Manic Episode&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;Panic Attack&#39;</span><span class="p">,</span> <span class="s1">&#39;Therapeutic Recovery&#39;</span><span class="p">,</span> <span class="s1">&#39;Meditation Deepening&#39;</span><span class="p">}</span>
+
+        <span class="n">existing_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">clinical_labels</span> <span class="o">&amp;</span> <span class="n">existing_labels</span><span class="p">:</span>
+            <span class="c1"># Remove clinical trajectories</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span>
+                                <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">clinical_labels</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Add clinical trajectories</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_clinical_trajectories</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_redraw_plot</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_redraw_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Redraw the entire plot with current settings.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_overlays</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_phase_space</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_viable_window</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_pathology</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_pathology_zones</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_biological_states</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_biological_states</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_trajectories</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_labels_and_legend</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+
 <div class="viewcode-block" id="EnergyResistanceVisualizer.render">
 <a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.render">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                <span class="n">interactive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                <span class="n">show_trajectories</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+               <span class="n">show_biological_states</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+               <span class="n">show_pathology</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+               <span class="n">biological_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                <span class="n">save_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Render the complete visualization.</span>
@@ -669,11 +1148,25 @@
 <span class="sd">        Args:</span>
 <span class="sd">            interactive: Whether to show interactive controls</span>
 <span class="sd">            show_trajectories: Whether to display example trajectories</span>
+<span class="sd">            show_biological_states: Whether to show biological reference states</span>
+<span class="sd">            show_pathology: Whether to show pathology zones</span>
+<span class="sd">            biological_mode: Whether to use biological axis labels</span>
 <span class="sd">            save_path: If provided, save figure to this path</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Set display modes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">biological_mode</span> <span class="o">=</span> <span class="n">biological_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_biological_states</span> <span class="o">=</span> <span class="n">show_biological_states</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_pathology</span> <span class="o">=</span> <span class="n">show_pathology</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">setup_plot</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_draw_phase_space</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_draw_viable_window</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">show_pathology</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_pathology_zones</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">show_biological_states</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_biological_states</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">show_trajectories</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span><span class="p">:</span>
@@ -739,24 +1232,120 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">demo</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a demonstration of the Energy Resistance visualizer.&quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Cosmic Loom Theory: Energy Resistance Visualizer&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Cosmic Loom Theory: Energy Resistance Visualizer (v1.2)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The Energy Resistance Principle: éR = EP / f²&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This visualization shows the phase space where:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Purple regions: Low éR (chaos/decoherence)&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Green regions: Viable window (biological coherence)&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Blue regions: High éR (rigidity)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">NEW FEATURES:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ☐ Biological Mode - Map axes to physiological parameters&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ☐ Show Pathology - Display mental health condition zones&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ☐ Show States - Display biological reference states&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  [Clinical] - Toggle clinical decompensation/recovery paths&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Use the sliders to adjust the viable window boundaries.&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
 
     <span class="c1"># Create and show the visualizer</span>
     <span class="n">visualizer</span> <span class="o">=</span> <span class="n">EnergyResistanceVisualizer</span><span class="p">()</span>
     <span class="n">visualizer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_trajectories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">demo_biological</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a demonstration focused on biological and clinical applications.</span>
+
+<span class="sd">    Shows the éR phase space with:</span>
+<span class="sd">    - Biological reference states (sleep, meditation, exercise, etc.)</span>
+<span class="sd">    - Pathology zones (depression, anxiety, mania, etc.)</span>
+<span class="sd">    - Clinical trajectories (decompensation and recovery paths)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Cosmic Loom Theory: Biological &amp; Clinical Mode&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This view maps abstract éR parameters to physiology:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  ENERGY PRESENT (EP) ↔ Metabolic Indicators&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • ATP production, oxygen consumption&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Heart rate, metabolic rate&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Autonomic activation level&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  FREQUENCY (f) ↔ Neural/Physiological Rhythms&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • EEG frequency bands (delta to gamma)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Heart rate variability (HRV)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Circadian rhythms&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  REFERENCE STATES (★):&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">BIOLOGICAL_STATES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">er</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    • </span><span class="si">{</span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: éR = </span><span class="si">{</span><span class="n">er</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  PATHOLOGY ZONES (dashed ellipses):&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">PATHOLOGY_ZONES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    • </span><span class="si">{</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+
+    <span class="c1"># Create visualizer with biological features enabled</span>
+    <span class="n">visualizer</span> <span class="o">=</span> <span class="n">EnergyResistanceVisualizer</span><span class="p">()</span>
+    <span class="n">visualizer</span><span class="o">.</span><span class="n">add_clinical_trajectories</span><span class="p">()</span>
+    <span class="n">visualizer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+        <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_trajectories</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_biological_states</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_pathology</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">biological_mode</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">demo_pathology</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a demonstration focused specifically on pathology signatures.</span>
+
+<span class="sd">    Shows how different mental health conditions map to éR space</span>
+<span class="sd">    and the trajectories of decompensation and recovery.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Cosmic Loom Theory: Pathology Signatures in éR Space&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mental health conditions as energetic regimes:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  CHAOS BOUNDARY CONDITIONS (low éR):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Anxiety: High frequency, normal energy&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Mania: High frequency AND high energy&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • ADHD: Unstable, oscillating near boundary&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • PTSD: Hyperarousal, threat detection overdrive&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  RIGIDITY BOUNDARY CONDITIONS (high éR):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Depression: Low frequency AND low energy&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Seizure: Very high energy, hyper-synchronized&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  BOUNDARY/FRAGMENTED STATES:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Dissociation: Low energy, fragmented dynamics&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  CLINICAL TRAJECTORIES:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Depression Onset: Gradual decline toward rigidity&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Anxiety Escalation: Frequency increases into chaos&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Panic Attack: Rapid spike then crash&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    • Therapeutic Recovery: Spiral back to viable window&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+
+    <span class="n">visualizer</span> <span class="o">=</span> <span class="n">EnergyResistanceVisualizer</span><span class="p">()</span>
+    <span class="n">visualizer</span><span class="o">.</span><span class="n">trajectories</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Clear default trajectories</span>
+    <span class="n">visualizer</span><span class="o">.</span><span class="n">add_clinical_trajectories</span><span class="p">()</span>
+    <span class="n">visualizer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+        <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_trajectories</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_biological_states</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">show_pathology</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">biological_mode</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">demo</span><span class="p">()</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;--bio&#39;</span><span class="p">:</span>
+            <span class="n">demo_biological</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;--pathology&#39;</span><span class="p">:</span>
+            <span class="n">demo_pathology</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">demo</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">demo</span><span class="p">()</span>
 </pre></div>
 
            </div>

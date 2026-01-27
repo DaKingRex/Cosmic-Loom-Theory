@@ -83,7 +83,6 @@ The ``docs/theory/`` folder contains:
 - **CLT v2.0** - Planetary-scale extensions
 - **Introducing CLT** - Overview and motivation
 - **Machines & AI** - Artificial system coherence analysis
-- **LoomSense specs** - Experimental measurement platform (v1-v3)
 
 Connections to Other Theories
 -----------------------------

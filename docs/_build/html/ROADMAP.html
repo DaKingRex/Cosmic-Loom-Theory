@@ -173,7 +173,13 @@
 <li class="toctree-l3"><a class="reference internal" href="api/index.html#module-visualizations.interactive">visualizations.interactive</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.calculate_system_er"><code class="docutils literal notranslate"><span class="pre">calculate_system_er()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.map_hrv_to_frequency"><code class="docutils literal notranslate"><span class="pre">map_hrv_to_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.map_metabolic_rate_to_energy"><code class="docutils literal notranslate"><span class="pre">map_metabolic_rate_to_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.map_eeg_band_to_frequency"><code class="docutils literal notranslate"><span class="pre">map_eeg_band_to_frequency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.biological_state_to_er"><code class="docutils literal notranslate"><span class="pre">biological_state_to_er()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.energy_resistance_demo"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.energy_resistance_demo_biological"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo_biological()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.energy_resistance_demo_pathology"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo_pathology()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.LoomfieldVisualizer"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/index.html#visualizations.interactive.loomfield_demo"><code class="docutils literal notranslate"><span class="pre">loomfield_demo()</span></code></a></li>
@@ -254,33 +260,74 @@
   <section class="tex2jax_ignore mathjax_ignore" id="cosmic-loom-theory-project-roadmap">
 <h1>Cosmic Loom Theory - Project Roadmap<a class="headerlink" href="#cosmic-loom-theory-project-roadmap" title="Link to this heading"></a></h1>
 <p>This document outlines the development roadmap for the Cosmic Loom Theory computational research project. All work is grounded in the CLT v1.1 theoretical framework focusing on human biological consciousness as Loomfield coherence.</p>
+<section id="progress-summary">
+<h2>Progress Summary<a class="headerlink" href="#progress-summary" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Phase</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Phase 1</strong></p></td>
+<td><p>✅ Complete</p></td>
+<td><p>Core CLT Physics - éR visualizer, 2D/3D Loomfield simulators, CI/CD, docs</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Phase 2</strong></p></td>
+<td><p>✅ Complete</p></td>
+<td><p>Biological Substrate Models - bioelectric, biophoton, microtubule, DNA</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Phase 3</strong></p></td>
+<td><p>🔄 Current</p></td>
+<td><p>Pathology &amp; Healing Dynamics</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Phase 4</strong></p></td>
+<td><p>⏳ Planned</p></td>
+<td><p>LoomSense Integration</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Phase 5</strong></p></td>
+<td><p>⏳ Planned</p></td>
+<td><p>Extensions &amp; Scaling</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Phase 6</strong></p></td>
+<td><p>🔄 Partial</p></td>
+<td><p>Publication &amp; Dissemination (docs infrastructure complete)</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Test Coverage</strong>: 277 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, and DNA constraints.</p>
+</section>
 <hr class="docutils" />
-<section id="phase-1-core-clt-physics-current">
-<h2>Phase 1: Core CLT Physics (Current)<a class="headerlink" href="#phase-1-core-clt-physics-current" title="Link to this heading"></a></h2>
+<section id="phase-1-core-clt-physics-complete">
+<h2>Phase 1: Core CLT Physics ✓ COMPLETE<a class="headerlink" href="#phase-1-core-clt-physics-complete" title="Link to this heading"></a></h2>
 <p><strong>Goal</strong>: Implement the fundamental CLT equations and visualize core principles.</p>
+<p><strong>Status</strong>: Completed January 2026</p>
 <section id="infrastructure-setup">
-<h3>1.1 Infrastructure Setup<a class="headerlink" href="#infrastructure-setup" title="Link to this heading"></a></h3>
+<h3>1.1 Infrastructure Setup ✓<a class="headerlink" href="#infrastructure-setup" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>[x] Initialize repository structure</p></li>
 <li><p>[x] Set up Python package organization</p></li>
 <li><p>[x] Define dependencies and requirements</p></li>
 <li><p>[x] Organize theoretical documents in docs/theory/</p></li>
-<li><p>[ ] Configure CI/CD pipeline</p></li>
-<li><p>[ ] Set up Sphinx documentation</p></li>
+<li><p>[x] Configure CI/CD pipeline (GitHub Actions: tests, linting, docs build)</p></li>
+<li><p>[x] Set up Sphinx documentation (autodoc, tutorials, API reference)</p></li>
 </ul>
 </section>
 <section id="energy-resistance-principle">
-<h3>1.2 Energy Resistance Principle<a class="headerlink" href="#energy-resistance-principle" title="Link to this heading"></a></h3>
+<h3>1.2 Energy Resistance Principle ✓<a class="headerlink" href="#energy-resistance-principle" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>[x] <strong>éR Phase Space Visualizer</strong> - Interactive visualization of éR = EP/f²</p></li>
 <li><p>[x] Viable window boundaries (chaos ↔ rigidity)</p></li>
 <li><p>[x] System trajectory plotting</p></li>
-<li><p>[ ] Biological parameter mapping (map éR to measurable quantities)</p></li>
-<li><p>[ ] Pathology signatures in éR space</p></li>
+<li><p>[x] Biological parameter mapping (HRV→freq, metabolic rate→EP, EEG bands)</p></li>
+<li><p>[x] Pathology signatures in éR space (depression, anxiety, mania, seizure, dissociation, ADHD, PTSD)</p></li>
+<li><p>[x] Clinical trajectories (decompensation and recovery paths)</p></li>
+<li><p>[x] 7 biological reference states (resting, sleep stages, meditation, flow, exercise)</p></li>
 </ul>
 </section>
 <section id="loomfield-wave-dynamics">
-<h3>1.3 Loomfield Wave Dynamics<a class="headerlink" href="#loomfield-wave-dynamics" title="Link to this heading"></a></h3>
+<h3>1.3 Loomfield Wave Dynamics ✓<a class="headerlink" href="#loomfield-wave-dynamics" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>[x] <strong>Loomfield Wave Simulator</strong> - 2D numerical solver for ∇²L − (1/v²ₗ)(∂²L/∂t²) = κₗ·ρ_coh</p></li>
 <li><p>[x] Coherence density (ρ_coh) from oscillating sources</p></li>
@@ -289,53 +336,204 @@
 <li><p>[x] Presets: Healthy (phase-locked), Pathology (incoherent), Healing (re-coupling)</p></li>
 <li><p>[x] Perturbation effects on coherence (high-frequency noise disruption)</p></li>
 <li><p>[x] C_bio consciousness observable: C_bio = Q² × ∫|ρ_coh|·|∂L/∂t| dV</p></li>
-<li><p>[ ] 3D Loomfield extension</p></li>
+<li><p>[x] <strong>3D Loomfield Simulator</strong> - Volumetric wave propagation</p></li>
+<li><p>[x] 3D plotly visualizer (volumetric rendering, slice views, animations)</p></li>
+<li><p>[x] Real-time 3D visualizer (vispy/OpenGL desktop application)</p></li>
+<li><p>[x] 3D presets (healthy, pathology, healing scenarios)</p></li>
+<li><p>[x] C_bio 3D: Q³ × volume integral formulation</p></li>
 </ul>
 </section>
 </section>
 <hr class="docutils" />
-<section id="phase-2-biological-substrate-models">
-<h2>Phase 2: Biological Substrate Models<a class="headerlink" href="#phase-2-biological-substrate-models" title="Link to this heading"></a></h2>
+<section id="phase-2-biological-substrate-models-complete">
+<h2>Phase 2: Biological Substrate Models ✓ COMPLETE<a class="headerlink" href="#phase-2-biological-substrate-models-complete" title="Link to this heading"></a></h2>
 <p><strong>Goal</strong>: Implement CLT’s four biological substrate mechanisms.</p>
-<section id="bioelectric-field-dynamics">
-<h3>2.1 Bioelectric Field Dynamics<a class="headerlink" href="#bioelectric-field-dynamics" title="Link to this heading"></a></h3>
+<p><strong>Status</strong>: Completed January 2026</p>
+<section id="bioelectric-field-dynamics-complete">
+<h3>2.1 Bioelectric Field Dynamics ✓ COMPLETE<a class="headerlink" href="#bioelectric-field-dynamics-complete" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>[ ] Ion channel network models</p></li>
-<li><p>[ ] Bioelectric pattern formation (Levin-style)</p></li>
-<li><p>[ ] Cross-tissue coherence coupling</p></li>
-<li><p>[ ] Morphogenetic field simulations</p></li>
+<li><p>[x] <strong>Ion channel network models</strong> - Na+/K+ channels with HH-style gating</p></li>
+<li><p>[x] <strong>Gap junction network</strong> - 4-neighbor coupling with adjustable conductance</p></li>
+<li><p>[x] <strong>Bioelectric pattern formation</strong> - Voltage gradients, pattern memory</p></li>
+<li><p>[x] <strong>Injury/regeneration dynamics</strong> - Break and heal gap junctions</p></li>
+<li><p>[x] <strong>CLT coherence metrics</strong> - Spatial coherence, pattern energy, éR mapping</p></li>
+<li><p>[x] <strong>Interactive visualizer</strong> - Real-time simulation with click controls</p></li>
+<li><p>[x] <strong>Presets</strong> - Uniform, depolarized region, bioelectric pattern, injury, regeneration</p></li>
+<li><p>[x] <strong>Cross-tissue coherence coupling</strong> - Multi-layer tissue simulation (epithelial, neural, mesenchymal)</p>
+<ul>
+<li><p>Vertical coupling between layers with adjustable conductance</p></li>
+<li><p>Hierarchical coherence metrics (within-layer, between-layer, global)</p></li>
+<li><p>Through-injury mechanics affecting all layers</p></li>
+<li><p>Tissue-specific properties (excitability, gap conductance, resting potential)</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Morphogenetic field simulations</strong> - Levin-style bioelectric morphogenesis</p>
+<ul>
+<li><p>Target pattern memory (LEFT_RIGHT, RADIAL, STRIPE, HEAD_TAIL, etc.)</p></li>
+<li><p>Pattern attraction dynamics driving regeneration</p></li>
+<li><p>Injury, amputation, and regeneration mechanics</p></li>
+<li><p>Repatterning capability (change developmental fate)</p></li>
+<li><p>Pattern fidelity and regeneration progress metrics</p></li>
+<li><p>Cancer scenario (weak pattern attraction)</p></li>
+</ul>
+</li>
 </ul>
 </section>
-<section id="biophoton-emission-patterns">
-<h3>2.2 Biophoton Emission Patterns<a class="headerlink" href="#biophoton-emission-patterns" title="Link to this heading"></a></h3>
+<section id="biophoton-emission-patterns-complete">
+<h3>2.2 Biophoton Emission Patterns ✓ COMPLETE<a class="headerlink" href="#biophoton-emission-patterns-complete" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>[ ] Ultra-weak photon emission models</p></li>
-<li><p>[ ] Mitochondrial coherence signatures</p></li>
-<li><p>[ ] Oxidative stress → emission correlation</p></li>
-<li><p>[ ] Spatial coherence in biophoton fields</p></li>
+<li><p>[x] <strong>Ultra-weak photon emission models</strong> - Stochastic emission based on cellular state</p>
+<ul>
+<li><p>Emission rate proportional to metabolic activity</p></li>
+<li><p>UV-visible wavelength spectrum (200-800nm, peak ~500nm)</p></li>
+<li><p>Four emission statistics modes: Poissonian, Coherent, Squeezed, Chaotic</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Mitochondrial coherence signatures</strong> - Phase coupling between emitters</p>
+<ul>
+<li><p>Kuramoto-like phase dynamics</p></li>
+<li><p>Adjustable coupling strength</p></li>
+<li><p>Phase synchronization capability</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Oxidative stress → emission correlation</strong> - ROS increases emission</p>
+<ul>
+<li><p>ATP/ROS metabolic state tracking</p></li>
+<li><p>Stress-induced emission bursts</p></li>
+<li><p>Apoptosis emission signature</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Spatial coherence in biophoton fields</strong> - Coherence metrics</p>
+<ul>
+<li><p>Spatial coherence (neighbor correlation)</p></li>
+<li><p>Temporal coherence (autocorrelation)</p></li>
+<li><p>Phase coherence (Kuramoto order parameter)</p></li>
+<li><p>LoomSense-compatible output (photon counts, Fano factor, spectrum)</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Interactive visualizer</strong> - Real-time emission display</p>
+<ul>
+<li><p>Photon flash visualization</p></li>
+<li><p>Spectrum display</p></li>
+<li><p>Coherence bar charts</p></li>
+<li><p>éR phase space mapping</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Presets</strong> - Healthy, Stressed, Coherent, Meditation, Inflammation</p></li>
 </ul>
 </section>
-<section id="microtubule-cytoskeletal-coherence">
-<h3>2.3 Microtubule &amp; Cytoskeletal Coherence<a class="headerlink" href="#microtubule-cytoskeletal-coherence" title="Link to this heading"></a></h3>
+<section id="microtubule-cytoskeletal-coherence-complete">
+<h3>2.3 Microtubule &amp; Cytoskeletal Coherence ✓ COMPLETE<a class="headerlink" href="#microtubule-cytoskeletal-coherence-complete" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>[ ] Tubulin dipole oscillation models</p></li>
-<li><p>[ ] Intracellular signaling networks</p></li>
-<li><p>[ ] Quantum coherence timescales (Penrose-Hameroff extended)</p></li>
-<li><p>[ ] Cytoskeletal network topology effects</p></li>
+<li><p>[x] <strong>Microtubule time crystal model</strong> - Penrose-Hameroff-Bandyopadhyay framework</p>
+<ul>
+<li><p>13-protofilament cylindrical structure</p></li>
+<li><p>Tubulin dipole lattice with neighbor coupling</p></li>
+<li><p>86 aromatic rings per tubulin (quantum-relevant)</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Multi-scale oscillations</strong> - Fractal time crystal hierarchy</p>
+<ul>
+<li><p>C-termini oscillations (kHz)</p></li>
+<li><p>Lattice phonon modes (MHz)</p></li>
+<li><p>Internal water channel (GHz)</p></li>
+<li><p>Aromatic ring electrons (THz)</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Triplet resonance pattern</strong> - Golden ratio frequency structure</p>
+<ul>
+<li><p>“Triplet of triplets” spectral signature</p></li>
+<li><p>Self-similar scaling (φ, φ²)</p></li>
+<li><p>Fractal time crystal behavior</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Coherence dynamics</strong> - Kuramoto order parameter</p>
+<ul>
+<li><p>Thermal decoherence from temperature</p></li>
+<li><p>Coherence timescales at each frequency scale</p></li>
+<li><p>Phase synchronization across scales</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Floquet driving</strong> - External periodic driving</p>
+<ul>
+<li><p>ATP/mitochondrial energy input maintains coherence</p></li>
+<li><p>Time crystal sustained against decoherence</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Anesthesia model</strong> - Aromatic ring suppression</p>
+<ul>
+<li><p>Anesthetics bind to aromatic regions</p></li>
+<li><p>Suppresses THz oscillations</p></li>
+<li><p>Disrupts cross-scale coupling</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Interactive visualizer</strong> - Real-time microtubule display</p>
+<ul>
+<li><p>Dipole state heatmap (unrolled cylinder)</p></li>
+<li><p>Multi-scale coherence bars</p></li>
+<li><p>Frequency spectrum with triplet peaks</p></li>
+<li><p>éR phase space mapping</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Presets</strong> - Coherent, Thermal, Floquet-driven, Anesthetized, Cold</p></li>
 </ul>
 </section>
-<section id="dna-as-long-timescale-constraint">
-<h3>2.4 DNA as Long-Timescale Constraint<a class="headerlink" href="#dna-as-long-timescale-constraint" title="Link to this heading"></a></h3>
+<section id="dna-as-long-timescale-constraint-complete">
+<h3>2.4 DNA as Long-Timescale Constraint ✓ COMPLETE<a class="headerlink" href="#dna-as-long-timescale-constraint-complete" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>[ ] Genetic constraint on Loomfield topology</p></li>
-<li><p>[ ] Epigenetic modulation of coherence parameters</p></li>
-<li><p>[ ] Species-specific viable windows</p></li>
+<li><p>[x] <strong>Genetic constraint model</strong> - DNA scaffolds coherence parameter space</p>
+<ul>
+<li><p>14+ coherence-relevant genes (TUBA1A, SCN1A, MT-ND1, GJA1, etc.)</p></li>
+<li><p>Gene categories: Tubulin, Ion Channel, Mitochondrial, Gap Junction, Signaling, Metabolic</p></li>
+<li><p>Weighted importance per gene</p></li>
+<li><p>Maps to microtubule, bioelectric, and biophoton substrate parameters</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Epigenetic modulation</strong> - Environment shapes gene expression</p>
+<ul>
+<li><p>Methylation silencing (0-90% suppression)</p></li>
+<li><p>Environmental stress effects on mitochondrial/metabolic genes</p></li>
+<li><p>Global methylation control</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Species-specific viable windows</strong> - Complexity determines consciousness capacity</p>
+<ul>
+<li><p>7 complexity levels: Prokaryote → Human</p></li>
+<li><p>Larger viable window = greater coherence range</p></li>
+<li><p>Species-dependent éR bounds</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Developmental dynamics</strong> - Lifespan gene expression changes</p>
+<ul>
+<li><p>8 developmental stages: Embryonic → Elderly</p></li>
+<li><p>Stage-specific gene modifiers (e.g., high tubulin in embryonic, reduced mitochondrial in elderly)</p></li>
+<li><p>Automatic recomputation of coherence constraints</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Pi stack quantum coherence</strong> - DNA as quantum substrate</p>
+<ul>
+<li><p>Aromatic base pair (A-T, G-C) pi electron stacking</p></li>
+<li><p>Phase dynamics with neighbor coupling</p></li>
+<li><p>GC content affects stability (3 vs 2 H-bonds)</p></li>
+<li><p>Thermal decoherence model</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Interactive visualizer</strong> - Real-time DNA constraint display</p>
+<ul>
+<li><p>Pi stack phase visualization</p></li>
+<li><p>Gene expression bars with methylation coloring</p></li>
+<li><p>Viable window in éR phase space</p></li>
+<li><p>Substrate capacity bar charts</p></li>
+<li><p>Category expression summary</p></li>
+</ul>
+</li>
+<li><p>[x] <strong>Presets</strong> - Human baseline, High plasticity, Stressed/aging, Developmental series, Cross-species, Meditation epigenetics</p></li>
 </ul>
 </section>
 </section>
 <hr class="docutils" />
-<section id="phase-3-pathology-healing-dynamics">
-<h2>Phase 3: Pathology &amp; Healing Dynamics<a class="headerlink" href="#phase-3-pathology-healing-dynamics" title="Link to this heading"></a></h2>
+<section id="phase-3-pathology-healing-dynamics-current">
+<h2>Phase 3: Pathology &amp; Healing Dynamics (Current)<a class="headerlink" href="#phase-3-pathology-healing-dynamics-current" title="Link to this heading"></a></h2>
 <p><strong>Goal</strong>: Model CLT’s account of pathology as boundary collapse and healing as re-coupling.</p>
 <section id="coherence-regime-transitions">
 <h3>3.1 Coherence Regime Transitions<a class="headerlink" href="#coherence-regime-transitions" title="Link to this heading"></a></h3>
@@ -433,7 +631,8 @@
 <section id="documentation">
 <h3>6.1 Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>[ ] API documentation (Sphinx)</p></li>
+<li><p>[x] API documentation (Sphinx autodoc configured)</p></li>
+<li><p>[x] Documentation infrastructure (Sphinx, RTD theme, MathJax)</p></li>
 <li><p>[ ] Tutorial notebooks for each major component</p></li>
 <li><p>[ ] Theoretical background papers</p></li>
 </ul>
