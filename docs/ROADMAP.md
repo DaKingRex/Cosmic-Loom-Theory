@@ -13,7 +13,7 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 | **Phase 5** | ⏳ Planned | Extensions & Scaling |
 | **Phase 6** | 🔄 Partial | Publication & Dissemination (docs infrastructure complete) |
 
-**Test Coverage**: 55 passing tests across éR calculations, 2D Loomfield, and 3D Loomfield modules.
+**Test Coverage**: 143 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, and morphogenetic fields.
 
 ---
 
@@ -60,11 +60,26 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 
 **Goal**: Implement CLT's four biological substrate mechanisms.
 
-### 2.1 Bioelectric Field Dynamics
-- [ ] Ion channel network models
-- [ ] Bioelectric pattern formation (Levin-style)
-- [ ] Cross-tissue coherence coupling
-- [ ] Morphogenetic field simulations
+### 2.1 Bioelectric Field Dynamics ✓ COMPLETE
+- [x] **Ion channel network models** - Na+/K+ channels with HH-style gating
+- [x] **Gap junction network** - 4-neighbor coupling with adjustable conductance
+- [x] **Bioelectric pattern formation** - Voltage gradients, pattern memory
+- [x] **Injury/regeneration dynamics** - Break and heal gap junctions
+- [x] **CLT coherence metrics** - Spatial coherence, pattern energy, éR mapping
+- [x] **Interactive visualizer** - Real-time simulation with click controls
+- [x] **Presets** - Uniform, depolarized region, bioelectric pattern, injury, regeneration
+- [x] **Cross-tissue coherence coupling** - Multi-layer tissue simulation (epithelial, neural, mesenchymal)
+  - Vertical coupling between layers with adjustable conductance
+  - Hierarchical coherence metrics (within-layer, between-layer, global)
+  - Through-injury mechanics affecting all layers
+  - Tissue-specific properties (excitability, gap conductance, resting potential)
+- [x] **Morphogenetic field simulations** - Levin-style bioelectric morphogenesis
+  - Target pattern memory (LEFT_RIGHT, RADIAL, STRIPE, HEAD_TAIL, etc.)
+  - Pattern attraction dynamics driving regeneration
+  - Injury, amputation, and regeneration mechanics
+  - Repatterning capability (change developmental fate)
+  - Pattern fidelity and regeneration progress metrics
+  - Cancer scenario (weak pattern attraction)
 
 ### 2.2 Biophoton Emission Patterns
 - [ ] Ultra-weak photon emission models
