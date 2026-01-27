@@ -14,6 +14,7 @@ Submodules:
   - bioelectric_multilayer: Multi-layer tissue coupling
   - morphogenetic: Pattern memory and regeneration
   - biophoton: Ultra-weak photon emission, metabolic coherence
+  - dna_constraints: DNA genetic/epigenetic constraints
 - emergence: Coherence emergence from substrate interactions
 - quantum: Quantum coherence effects (microtubules, etc.)
 """
@@ -89,6 +90,30 @@ from .field_dynamics import (
     biophoton_coherent_demo,
     biophoton_meditation_demo,
     biophoton_comparison_demo,
+
+    # === DNA constraints ===
+    DNAConstraintSimulator,
+    DNAConstraintVisualizer,
+    Gene,
+    GeneCategory,
+    DevelopmentalStage,
+    SpeciesComplexity,
+    BasePair,
+    PI_STACK_SPACING_NM,
+    PI_STACK_COUPLING,
+    AROMATIC_RINGS_PER_BASE,
+    DEFAULT_GENES,
+    create_human_baseline,
+    create_high_plasticity,
+    create_stressed_aging,
+    create_developmental_series,
+    create_cross_species,
+    create_meditation_epigenetics,
+    dna_demo,
+    dna_development_demo,
+    dna_aging_demo,
+    dna_comparison_demo,
+    dna_species_demo,
 )
 
 __all__ = [
@@ -161,4 +186,28 @@ __all__ = [
     'biophoton_coherent_demo',
     'biophoton_meditation_demo',
     'biophoton_comparison_demo',
+
+    # === DNA constraints ===
+    'DNAConstraintSimulator',
+    'DNAConstraintVisualizer',
+    'Gene',
+    'GeneCategory',
+    'DevelopmentalStage',
+    'SpeciesComplexity',
+    'BasePair',
+    'PI_STACK_SPACING_NM',
+    'PI_STACK_COUPLING',
+    'AROMATIC_RINGS_PER_BASE',
+    'DEFAULT_GENES',
+    'create_human_baseline',
+    'create_high_plasticity',
+    'create_stressed_aging',
+    'create_developmental_series',
+    'create_cross_species',
+    'create_meditation_epigenetics',
+    'dna_demo',
+    'dna_development_demo',
+    'dna_aging_demo',
+    'dna_comparison_demo',
+    'dna_species_demo',
 ]

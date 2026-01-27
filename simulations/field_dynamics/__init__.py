@@ -29,11 +29,20 @@ generate and maintain coherent patterns in living systems:
    - Metabolic state coupling (ATP, ROS)
    - LoomSense-compatible output
 
+5. **DNA Constraints** (CLT v1.1 §4.3)
+   - Long-timescale constraints on Loomfield topology
+   - Genetic constraints on coherence parameters
+   - Epigenetic modulation (methylation, environmental factors)
+   - Species-specific viable windows in éR space
+   - Developmental dynamics across lifespan
+   - Pi stack quantum coherence in DNA helix
+
 Available modules:
 - bioelectric: Single-layer ion channel networks, gap junctions
 - bioelectric_multilayer: Multi-layer tissue coupling
 - morphogenetic: Pattern memory, regeneration, morphogenesis
 - biophoton: Ultra-weak photon emission, metabolic coherence
+- dna_constraints: DNA genetic/epigenetic constraints on coherence
 """
 
 # Single-layer bioelectric simulation
@@ -144,6 +153,41 @@ from .biophoton import (
     demo_comparison as biophoton_comparison_demo,
 )
 
+# DNA constraint simulation
+from .dna_constraints import (
+    # Core classes
+    DNAConstraintSimulator,
+    DNAConstraintVisualizer,
+
+    # Enums and dataclasses
+    Gene,
+    GeneCategory,
+    DevelopmentalStage,
+    SpeciesComplexity,
+    BasePair,
+
+    # Constants
+    PI_STACK_SPACING_NM,
+    PI_STACK_COUPLING,
+    AROMATIC_RINGS_PER_BASE,
+    DEFAULT_GENES,
+
+    # Presets
+    create_human_baseline,
+    create_high_plasticity,
+    create_stressed_aging,
+    create_developmental_series,
+    create_cross_species,
+    create_meditation_epigenetics,
+
+    # Demos
+    demo as dna_demo,
+    demo_development as dna_development_demo,
+    demo_aging as dna_aging_demo,
+    demo_comparison as dna_comparison_demo,
+    demo_species_comparison as dna_species_demo,
+)
+
 __all__ = [
     # === Single-layer bioelectric ===
     'BioelectricSimulator',
@@ -214,4 +258,28 @@ __all__ = [
     'biophoton_coherent_demo',
     'biophoton_meditation_demo',
     'biophoton_comparison_demo',
+
+    # === DNA constraints ===
+    'DNAConstraintSimulator',
+    'DNAConstraintVisualizer',
+    'Gene',
+    'GeneCategory',
+    'DevelopmentalStage',
+    'SpeciesComplexity',
+    'BasePair',
+    'PI_STACK_SPACING_NM',
+    'PI_STACK_COUPLING',
+    'AROMATIC_RINGS_PER_BASE',
+    'DEFAULT_GENES',
+    'create_human_baseline',
+    'create_high_plasticity',
+    'create_stressed_aging',
+    'create_developmental_series',
+    'create_cross_species',
+    'create_meditation_epigenetics',
+    'dna_demo',
+    'dna_development_demo',
+    'dna_aging_demo',
+    'dna_comparison_demo',
+    'dna_species_demo',
 ]

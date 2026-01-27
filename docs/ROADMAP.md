@@ -7,13 +7,13 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 | Phase | Status | Description |
 |-------|--------|-------------|
 | **Phase 1** | ✅ Complete | Core CLT Physics - éR visualizer, 2D/3D Loomfield simulators, CI/CD, docs |
-| **Phase 2** | 🔄 Current | Biological Substrate Models |
-| **Phase 3** | ⏳ Planned | Pathology & Healing Dynamics |
+| **Phase 2** | ✅ Complete | Biological Substrate Models - bioelectric, biophoton, microtubule, DNA |
+| **Phase 3** | 🔄 Current | Pathology & Healing Dynamics |
 | **Phase 4** | ⏳ Planned | LoomSense Integration |
 | **Phase 5** | ⏳ Planned | Extensions & Scaling |
 | **Phase 6** | 🔄 Partial | Publication & Dissemination (docs infrastructure complete) |
 
-**Test Coverage**: 222 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, and microtubule time crystals.
+**Test Coverage**: 277 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, and DNA constraints.
 
 ---
 
@@ -56,9 +56,11 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 
 ---
 
-## Phase 2: Biological Substrate Models (Current)
+## Phase 2: Biological Substrate Models ✓ COMPLETE
 
 **Goal**: Implement CLT's four biological substrate mechanisms.
+
+**Status**: Completed January 2026
 
 ### 2.1 Bioelectric Field Dynamics ✓ COMPLETE
 - [x] **Ion channel network models** - Na+/K+ channels with HH-style gating
@@ -138,14 +140,40 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
   - éR phase space mapping
 - [x] **Presets** - Coherent, Thermal, Floquet-driven, Anesthetized, Cold
 
-### 2.4 DNA as Long-Timescale Constraint
-- [ ] Genetic constraint on Loomfield topology
-- [ ] Epigenetic modulation of coherence parameters
-- [ ] Species-specific viable windows
+### 2.4 DNA as Long-Timescale Constraint ✓ COMPLETE
+- [x] **Genetic constraint model** - DNA scaffolds coherence parameter space
+  - 14+ coherence-relevant genes (TUBA1A, SCN1A, MT-ND1, GJA1, etc.)
+  - Gene categories: Tubulin, Ion Channel, Mitochondrial, Gap Junction, Signaling, Metabolic
+  - Weighted importance per gene
+  - Maps to microtubule, bioelectric, and biophoton substrate parameters
+- [x] **Epigenetic modulation** - Environment shapes gene expression
+  - Methylation silencing (0-90% suppression)
+  - Environmental stress effects on mitochondrial/metabolic genes
+  - Global methylation control
+- [x] **Species-specific viable windows** - Complexity determines consciousness capacity
+  - 7 complexity levels: Prokaryote → Human
+  - Larger viable window = greater coherence range
+  - Species-dependent éR bounds
+- [x] **Developmental dynamics** - Lifespan gene expression changes
+  - 8 developmental stages: Embryonic → Elderly
+  - Stage-specific gene modifiers (e.g., high tubulin in embryonic, reduced mitochondrial in elderly)
+  - Automatic recomputation of coherence constraints
+- [x] **Pi stack quantum coherence** - DNA as quantum substrate
+  - Aromatic base pair (A-T, G-C) pi electron stacking
+  - Phase dynamics with neighbor coupling
+  - GC content affects stability (3 vs 2 H-bonds)
+  - Thermal decoherence model
+- [x] **Interactive visualizer** - Real-time DNA constraint display
+  - Pi stack phase visualization
+  - Gene expression bars with methylation coloring
+  - Viable window in éR phase space
+  - Substrate capacity bar charts
+  - Category expression summary
+- [x] **Presets** - Human baseline, High plasticity, Stressed/aging, Developmental series, Cross-species, Meditation epigenetics
 
 ---
 
-## Phase 3: Pathology & Healing Dynamics
+## Phase 3: Pathology & Healing Dynamics (Current)
 
 **Goal**: Model CLT's account of pathology as boundary collapse and healing as re-coupling.
 
