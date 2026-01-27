@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>visualizations.interactive.energy_resistance &mdash; Cosmic Loom Theory Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=0c5202d4" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=56dcb7b8"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Cosmic Loom Theory
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#core-dependencies">Core Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#optional-dependencies">Optional Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#from-source-recommended">From Source (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#minimal-installation">Minimal Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#real-time-3d-visualizer">Real-Time 3D Visualizer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#verifying-installation">Verifying Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#energy-resistance-visualizer">Energy Resistance Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#d-loomfield-simulator">2D Loomfield Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#d-loomfield-visualizer">3D Loomfield Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#real-time-3d-simulator">Real-Time 3D Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#understanding-the-metrics">Understanding the Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#preset-scenarios">Preset Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../theory/index.html">Theoretical Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#core-framework-clt-v1-1">Core Framework: CLT v1.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../theory/index.html#the-loomfield">The Loomfield</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../theory/index.html#energy-resistance">Energy Resistance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../theory/index.html#consciousness-observable">Consciousness Observable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#biological-substrates">Biological Substrates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#related-theoretical-documents">Related Theoretical Documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#connections-to-other-theories">Connections to Other Theories</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/index.html#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/index.html#basic-simulation-tutorial">Basic Simulation Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/index.html#understanding-the-metrics">Understanding the Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/index.html#creating-custom-presets">Creating Custom Presets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/index.html#d-simulations">3D Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/index.html#perturbations-and-healing">Perturbations and Healing</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#simulators">Simulators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldSimulator.html">visualizations.interactive.loomfield_wave.LoomfieldSimulator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldSimulator.html#visualizations.interactive.loomfield_wave.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.html">visualizations.interactive.loomfield_3d.LoomfieldSimulator3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3D</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime.html">visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime.html#visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3DRealtime</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#visualizers">Visualizers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.html">visualizations.interactive.energy_resistance.EnergyResistanceVisualizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldVisualizer.html">visualizations.interactive.loomfield_wave.LoomfieldVisualizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldVisualizer.html#visualizations.interactive.loomfield_wave.LoomfieldVisualizer"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.html">visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer3D</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#core-classes">Core Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#loomfieldsimulator-2d">LoomfieldSimulator (2D)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_wave.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#loomfieldsimulator3d">LoomfieldSimulator3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3D</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#energyresistancevisualizer">EnergyResistanceVisualizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#utility-functions">Utility Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#energy-resistance">Energy Resistance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance.calculate_system_er"><code class="docutils literal notranslate"><span class="pre">calculate_system_er()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#d-visualization">3D Visualization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_volumetric_figure"><code class="docutils literal notranslate"><span class="pre">create_volumetric_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_slice_figure"><code class="docutils literal notranslate"><span class="pre">create_slice_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_animated_figure"><code class="docutils literal notranslate"><span class="pre">create_animated_figure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#preset-functions">Preset Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_healthy_preset"><code class="docutils literal notranslate"><span class="pre">create_healthy_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_pathology_preset"><code class="docutils literal notranslate"><span class="pre">create_pathology_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_healing_preset"><code class="docutils literal notranslate"><span class="pre">create_healing_preset()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#module-visualizations.interactive">visualizations.interactive</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.calculate_system_er"><code class="docutils literal notranslate"><span class="pre">calculate_system_er()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance_demo"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldVisualizer"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_demo"><code class="docutils literal notranslate"><span class="pre">loomfield_demo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldSimulator3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3D</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldVisualizer3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer3D</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_volumetric_figure"><code class="docutils literal notranslate"><span class="pre">create_volumetric_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_slice_figure"><code class="docutils literal notranslate"><span class="pre">create_slice_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_animated_figure"><code class="docutils literal notranslate"><span class="pre">create_animated_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_healthy_preset"><code class="docutils literal notranslate"><span class="pre">create_healthy_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_pathology_preset"><code class="docutils literal notranslate"><span class="pre">create_pathology_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_healing_preset"><code class="docutils literal notranslate"><span class="pre">create_healing_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d_demo"><code class="docutils literal notranslate"><span class="pre">loomfield_3d_demo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#building-documentation">Building Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#types-of-contributions">Types of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id1">[1.1.0] - 2025-01-26</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#fixed">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id2">[1.0.0] - 2025-01-25</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#id3">Added</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#planned">Planned</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#future">[1.2.0] - Future</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#id4">[2.0.0] - Future</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Cosmic Loom Theory</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">visualizations.interactive.energy_resistance</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for visualizations.interactive.energy_resistance</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Energy Resistance (éR) Phase Space Visualizer</span>
+
+<span class="sd">A core teaching tool for Cosmic Loom Theory that visualizes the relationship</span>
+<span class="sd">between Energy Present (EP), frequency (f), and Energy Resistance (éR).</span>
+
+<span class="sd">The fundamental equation: éR = EP / f²</span>
+
+<span class="sd">The Energy Resistance Principle states that living systems operate within a</span>
+<span class="sd">specific energetic regime - a &quot;viable window&quot; between chaos and rigidity.</span>
+
+<span class="sd">- Too low éR: System collapses into chaos/decoherence</span>
+<span class="sd">- Too high éR: System becomes rigid, unable to respond adaptively</span>
+<span class="sd">- Viable window: The &quot;Goldilocks zone&quot; where biological coherence thrives</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">RadioButtons</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EnergyResistanceVisualizer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interactive visualizer for the Energy Resistance phase space.</span>
+
+<span class="sd">    Displays the relationship between Energy Present (EP), frequency (f),</span>
+<span class="sd">    and Energy Resistance (éR), highlighting the viable window for</span>
+<span class="sd">    biological coherence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Default viable window boundaries (éR units)</span>
+    <span class="n">DEFAULT_ER_MIN</span> <span class="o">=</span> <span class="mf">0.5</span>   <span class="c1"># Below this: chaos/decoherence</span>
+    <span class="n">DEFAULT_ER_MAX</span> <span class="o">=</span> <span class="mf">5.0</span>   <span class="c1"># Above this: rigidity/frozen</span>
+
+    <span class="c1"># Custom colormap: chaos (purple) -&gt; viable (green) -&gt; rigid (blue)</span>
+    <span class="n">COLORMAP_COLORS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>    <span class="c1"># Deep purple - chaos</span>
+        <span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>    <span class="c1"># Purple - low éR</span>
+        <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span>    <span class="c1"># Green - viable zone center</span>
+        <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>    <span class="c1"># Cyan - high éR</span>
+        <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>    <span class="c1"># Deep blue - rigidity</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.__init__">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">ep_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span>
+                 <span class="n">freq_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span>
+                 <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the visualizer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ep_range: (min, max) range for Energy Present axis</span>
+<span class="sd">            freq_range: (min, max) range for frequency axis</span>
+<span class="sd">            resolution: Grid resolution for the phase space</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span> <span class="o">=</span> <span class="n">ep_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span> <span class="o">=</span> <span class="n">freq_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution</span>
+
+        <span class="c1"># Viable window boundaries</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">er_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ER_MIN</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">er_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ER_MAX</span>
+
+        <span class="c1"># Trajectories storage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Create custom colormap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_colormap</span><span class="p">()</span>
+
+        <span class="c1"># Initialize plot elements (will be set in setup)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_colorbar</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">im</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">viable_patch</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trajectory_lines</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LinearSegmentedColormap</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create custom colormap for éR visualization.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
+            <span class="s1">&#39;energy_resistance&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">COLORMAP_COLORS</span><span class="p">,</span>
+            <span class="n">N</span><span class="o">=</span><span class="mi">256</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.calculate_er">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.calculate_er">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_er</span><span class="p">(</span><span class="n">ep</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate Energy Resistance: éR = EP / f²</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ep: Energy Present values</span>
+<span class="sd">            freq: Frequency values</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Energy Resistance values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ep</span> <span class="o">/</span> <span class="p">(</span><span class="n">freq</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_phase_space</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the éR values across the phase space grid.&quot;&quot;&quot;</span>
+        <span class="n">ep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span><span class="p">)</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span><span class="p">)</span>
+
+        <span class="n">EP</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">ep</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+        <span class="n">ER</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_er</span><span class="p">(</span><span class="n">EP</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">EP</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">ER</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_viable_boundary_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                                                    <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the viable window boundary curves.</span>
+
+<span class="sd">        For éR = EP / f², the boundaries are:</span>
+<span class="sd">        - Lower: EP = éR_min * f²</span>
+<span class="sd">        - Upper: EP = éR_max * f²</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="n">ep_lower</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">er_min</span> <span class="o">*</span> <span class="n">freq</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">ep_upper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">er_max</span> <span class="o">*</span> <span class="n">freq</span><span class="o">**</span><span class="mi">2</span>
+
+        <span class="c1"># Clip to visible range</span>
+        <span class="n">mask_lower</span> <span class="o">=</span> <span class="n">ep_lower</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">mask_upper</span> <span class="o">=</span> <span class="n">ep_upper</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">freq</span><span class="p">[</span><span class="n">mask_lower</span><span class="p">],</span> <span class="n">ep_lower</span><span class="p">[</span><span class="n">mask_lower</span><span class="p">],</span>
+                <span class="n">freq</span><span class="p">[</span><span class="n">mask_upper</span><span class="p">],</span> <span class="n">ep_upper</span><span class="p">[</span><span class="n">mask_upper</span><span class="p">])</span>
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.add_trajectory">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.add_trajectory">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_trajectory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">ep_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                       <span class="n">freq_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                       <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;System&quot;</span><span class="p">,</span>
+                       <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+                       <span class="n">show_arrow</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a system trajectory to the visualization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ep_values: Array of EP values over time</span>
+<span class="sd">            freq_values: Array of frequency values over time</span>
+<span class="sd">            label: Label for the trajectory</span>
+<span class="sd">            color: Line color</span>
+<span class="sd">            show_arrow: Whether to show direction arrow</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;ep&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ep_values</span><span class="p">),</span>
+            <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">freq_values</span><span class="p">),</span>
+            <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+            <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
+            <span class="s1">&#39;show_arrow&#39;</span><span class="p">:</span> <span class="n">show_arrow</span>
+        <span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.add_example_trajectories">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.add_example_trajectories">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_example_trajectories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add example trajectories demonstrating different system behaviors.&quot;&quot;&quot;</span>
+
+        <span class="c1"># 1. Healthy oscillation within viable window</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">ep_healthy</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">freq_healthy</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="mf">1.3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_healthy</span><span class="p">,</span> <span class="n">freq_healthy</span><span class="p">,</span>
+                           <span class="s2">&quot;Healthy Oscillation&quot;</span><span class="p">,</span> <span class="s1">&#39;#00FF88&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 2. System falling into chaos (decreasing éR)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">ep_chaos</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="n">freq_chaos</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_chaos</span><span class="p">,</span> <span class="n">freq_chaos</span><span class="p">,</span>
+                           <span class="s2">&quot;Decoherence Path&quot;</span><span class="p">,</span> <span class="s1">&#39;#FF6B6B&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 3. System becoming rigid (increasing éR)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">ep_rigid</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="n">freq_rigid</span> <span class="o">=</span> <span class="mf">1.2</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_rigid</span><span class="p">,</span> <span class="n">freq_rigid</span><span class="p">,</span>
+                           <span class="s2">&quot;Rigidity Path&quot;</span><span class="p">,</span> <span class="s1">&#39;#6B9FFF&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 4. Recovery trajectory - from chaos back to viable</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">ep_recovery</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="n">freq_recovery</span> <span class="o">=</span> <span class="mf">2.5</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">ep_recovery</span><span class="p">,</span> <span class="n">freq_recovery</span><span class="p">,</span>
+                           <span class="s2">&quot;Recovery Path&quot;</span><span class="p">,</span> <span class="s1">&#39;#FFD93D&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.setup_plot">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.setup_plot">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up the matplotlib figure and axes.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Create figure with space for controls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#1a1a2e&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Main phase space plot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#16213e&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Colorbar axis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_colorbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.78</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">])</span>
+
+        <span class="c1"># Style the axes</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">spine</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;#4a5568&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="s1">&#39;#a0aec0&#39;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_phase_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw the main phase space visualization.&quot;&quot;&quot;</span>
+        <span class="n">EP</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">ER</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_phase_space</span><span class="p">()</span>
+
+        <span class="c1"># Normalize éR for color mapping (log scale for better visualization)</span>
+        <span class="n">er_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">ER</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">)</span>
+        <span class="n">er_normalized</span> <span class="o">=</span> <span class="p">(</span><span class="n">er_log</span> <span class="o">-</span> <span class="n">er_log</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">er_log</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">er_log</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+        <span class="c1"># Draw the phase space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">er_normalized</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+            <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmap</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add colorbar</span>
+        <span class="n">cbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">im</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax_colorbar</span><span class="p">)</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Energy Resistance (éR)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0aec0&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_tick_params</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0aec0&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">getp</span><span class="p">(</span><span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span> <span class="s1">&#39;yticklabels&#39;</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0aec0&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Custom colorbar ticks</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([</span><span class="s1">&#39;Chaos</span><span class="se">\n</span><span class="s1">(Low)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Viable</span><span class="se">\n</span><span class="s1">(Optimal)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Rigid</span><span class="se">\n</span><span class="s1">(High)&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_viable_window</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw the viable window boundaries.&quot;&quot;&quot;</span>
+        <span class="n">f_low</span><span class="p">,</span> <span class="n">ep_low</span><span class="p">,</span> <span class="n">f_high</span><span class="p">,</span> <span class="n">ep_high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_viable_boundary_coords</span><span class="p">()</span>
+
+        <span class="c1"># Draw boundary curves</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ep_low</span><span class="p">,</span> <span class="n">f_low</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00ff88&#39;</span><span class="p">,</span>
+                         <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;éR = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_min</span><span class="si">}</span><span class="s1"> (Chaos Threshold)&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ep_high</span><span class="p">,</span> <span class="n">f_high</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00ff88&#39;</span><span class="p">,</span>
+                         <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;éR = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_max</span><span class="si">}</span><span class="s1"> (Rigidity Threshold)&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Create shaded viable region</span>
+        <span class="c1"># Build polygon vertices</span>
+        <span class="n">ep_range_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">ep_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+
+        <span class="c1"># Upper boundary (lower éR = chaos threshold): f = sqrt(EP / éR_min)</span>
+        <span class="n">f_upper</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ep_range_vals</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">er_min</span><span class="p">)</span>
+        <span class="n">f_upper</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">f_upper</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Lower boundary (higher éR = rigidity threshold): f = sqrt(EP / éR_max)</span>
+        <span class="n">f_lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ep_range_vals</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">er_max</span><span class="p">)</span>
+        <span class="n">f_lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">f_lower</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Only shade where both boundaries are in range</span>
+        <span class="n">valid_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_upper</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">f_lower</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">valid_mask</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+                <span class="n">ep_range_vals</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">],</span>
+                <span class="n">f_lower</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">],</span>
+                <span class="n">f_upper</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">],</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00ff88&#39;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Viable Window&#39;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Add zone labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="s1">&#39;CHAOS</span><span class="se">\n</span><span class="s1">ZONE&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#9f7aea&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;RIGIDITY</span><span class="se">\n</span><span class="s1">ZONE&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4299e1&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;VIABLE</span><span class="se">\n</span><span class="s1">WINDOW&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00ff88&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_trajectories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw all system trajectories.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">traj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span><span class="p">:</span>
+            <span class="c1"># Plot trajectory line</span>
+            <span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">],</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trajectory_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="c1"># Add start and end markers</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                               <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                               <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                               <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                               <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+            <span class="c1"># Add direction arrow</span>
+            <span class="k">if</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;show_arrow&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">mid_idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">dx</span> <span class="o">=</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">dy</span> <span class="o">=</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dx</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dy</span><span class="o">*</span><span class="mf">0.1</span><span class="p">),</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;ep&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="p">],</span> <span class="n">traj</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">][</span><span class="n">mid_idx</span><span class="p">]),</span>
+                    <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">traj</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_add_labels_and_legend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add axis labels, title, and legend.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Energy Present (EP)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+                               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency (f)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+                               <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Energy Resistance Phase Space</span><span class="se">\n</span><span class="s1">éR = EP / f²&#39;</span><span class="p">,</span>
+                              <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+                              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#f7fafc&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Add legend</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+                                    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#4a5568&#39;</span><span class="p">,</span>
+                                    <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Add equation box</span>
+        <span class="n">eq_text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;Energy Resistance Principle</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;━━━━━━━━━━━━━━━━━━━━━</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;éR = EP / f²</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Viable Window:</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_min</span><span class="si">}</span><span class="s2"> &lt; éR &lt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">er_max</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;• Low éR → Chaos</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;• High éR → Rigidity</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;• Middle → Life thrives&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.88</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">eq_text</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e2e8f0&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;monospace&#39;</span><span class="p">,</span>
+                     <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">,</span>
+                              <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#4a5568&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
+                     <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_interactive_controls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up interactive sliders and buttons.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Slider for éR minimum (chaos threshold)</span>
+        <span class="n">ax_er_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
+            <span class="n">ax_er_min</span><span class="p">,</span> <span class="s1">&#39;Chaos Threshold (éR min)&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span>
+            <span class="n">valinit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">er_min</span><span class="p">,</span> <span class="n">valstep</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#9f7aea&#39;</span>
+        <span class="p">)</span>
+        <span class="n">ax_er_min</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Slider for éR maximum (rigidity threshold)</span>
+        <span class="n">ax_er_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
+            <span class="n">ax_er_max</span><span class="p">,</span> <span class="s1">&#39;Rigidity Threshold (éR max)&#39;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span>
+            <span class="n">valinit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">er_max</span><span class="p">,</span> <span class="n">valstep</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4299e1&#39;</span>
+        <span class="p">)</span>
+        <span class="n">ax_er_max</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;#2d3748&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Reset button</span>
+        <span class="n">ax_reset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_reset</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">ax_reset</span><span class="p">,</span> <span class="s1">&#39;Reset&#39;</span><span class="p">,</span>
+                                   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4a5568&#39;</span><span class="p">,</span> <span class="n">hovercolor</span><span class="o">=</span><span class="s1">&#39;#718096&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Connect callbacks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_boundaries</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_boundaries</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_reset</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reset_parameters</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Callback to update viable window when sliders change.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">er_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span><span class="o">.</span><span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">er_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span><span class="o">.</span><span class="n">val</span>
+
+        <span class="c1"># Redraw the plot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax_main</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_phase_space</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_viable_window</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_trajectories</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_labels_and_legend</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset sliders to default values.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_min</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ER_MIN</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slider_er_max</span><span class="o">.</span><span class="n">set_val</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ER_MAX</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.render">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+               <span class="n">interactive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+               <span class="n">show_trajectories</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+               <span class="n">save_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Render the complete visualization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            interactive: Whether to show interactive controls</span>
+<span class="sd">            show_trajectories: Whether to display example trajectories</span>
+<span class="sd">            save_path: If provided, save figure to this path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_plot</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_phase_space</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_viable_window</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">show_trajectories</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectories</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_example_trajectories</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_trajectories</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_labels_and_legend</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_setup_interactive_controls</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">get_facecolor</span><span class="p">(),</span>
+                           <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Figure saved to: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EnergyResistanceVisualizer.create_static_figure">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.create_static_figure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_static_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a static (non-interactive) version for publications.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_trajectories</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="n">save_path</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="calculate_system_er">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.energy_resistance.calculate_system_er">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_system_er</span><span class="p">(</span><span class="n">energy_present</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate éR for a given system state and determine its regime.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        energy_present: Current energy in the system</span>
+<span class="sd">        frequency: Fundamental frequency of the system</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary with éR value and regime classification</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">er</span> <span class="o">=</span> <span class="n">energy_present</span> <span class="o">/</span> <span class="p">(</span><span class="n">frequency</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">er</span> <span class="o">&lt;</span> <span class="n">EnergyResistanceVisualizer</span><span class="o">.</span><span class="n">DEFAULT_ER_MIN</span><span class="p">:</span>
+        <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;chaos&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;System at risk of decoherence - insufficient energy resistance&quot;</span>
+    <span class="k">elif</span> <span class="n">er</span> <span class="o">&gt;</span> <span class="n">EnergyResistanceVisualizer</span><span class="o">.</span><span class="n">DEFAULT_ER_MAX</span><span class="p">:</span>
+        <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;rigidity&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;System becoming rigid - excessive energy resistance&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">regime</span> <span class="o">=</span> <span class="s2">&quot;viable&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;System in viable window - optimal for coherent organization&quot;</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;energy_present&#39;</span><span class="p">:</span> <span class="n">energy_present</span><span class="p">,</span>
+        <span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="n">frequency</span><span class="p">,</span>
+        <span class="s1">&#39;energy_resistance&#39;</span><span class="p">:</span> <span class="n">er</span><span class="p">,</span>
+        <span class="s1">&#39;regime&#39;</span><span class="p">:</span> <span class="n">regime</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span>
+    <span class="p">}</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">demo</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a demonstration of the Energy Resistance visualizer.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Cosmic Loom Theory: Energy Resistance Visualizer&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The Energy Resistance Principle: éR = EP / f²&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This visualization shows the phase space where:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Purple regions: Low éR (chaos/decoherence)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Green regions: Viable window (biological coherence)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  • Blue regions: High éR (rigidity)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Use the sliders to adjust the viable window boundaries.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+    <span class="c1"># Create and show the visualizer</span>
+    <span class="n">visualizer</span> <span class="o">=</span> <span class="n">EnergyResistanceVisualizer</span><span class="p">()</span>
+    <span class="n">visualizer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_trajectories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">demo</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Rex Fraterne &amp; Seraphina AI.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

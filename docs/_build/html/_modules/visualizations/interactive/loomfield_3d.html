@@ -1,0 +1,1390 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>visualizations.interactive.loomfield_3d &mdash; Cosmic Loom Theory Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=0c5202d4" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=56dcb7b8"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Cosmic Loom Theory
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#core-dependencies">Core Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#optional-dependencies">Optional Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#from-source-recommended">From Source (Recommended)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#minimal-installation">Minimal Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../installation.html#real-time-3d-visualizer">Real-Time 3D Visualizer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#verifying-installation">Verifying Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#energy-resistance-visualizer">Energy Resistance Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#d-loomfield-simulator">2D Loomfield Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#d-loomfield-visualizer">3D Loomfield Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#real-time-3d-simulator">Real-Time 3D Simulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#understanding-the-metrics">Understanding the Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#preset-scenarios">Preset Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../theory/index.html">Theoretical Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#core-framework-clt-v1-1">Core Framework: CLT v1.1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../theory/index.html#the-loomfield">The Loomfield</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../theory/index.html#energy-resistance">Energy Resistance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../theory/index.html#consciousness-observable">Consciousness Observable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#biological-substrates">Biological Substrates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#related-theoretical-documents">Related Theoretical Documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../theory/index.html#connections-to-other-theories">Connections to Other Theories</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/index.html#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/index.html#basic-simulation-tutorial">Basic Simulation Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/index.html#understanding-the-metrics">Understanding the Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tutorials/index.html#creating-custom-presets">Creating Custom Presets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/index.html#d-simulations">3D Simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tutorials/index.html#perturbations-and-healing">Perturbations and Healing</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#simulators">Simulators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldSimulator.html">visualizations.interactive.loomfield_wave.LoomfieldSimulator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldSimulator.html#visualizations.interactive.loomfield_wave.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.html">visualizations.interactive.loomfield_3d.LoomfieldSimulator3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3D</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime.html">visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime.html#visualizations.interactive.loomfield_3d_realtime.LoomfieldSimulator3DRealtime"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3DRealtime</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#visualizers">Visualizers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.html">visualizations.interactive.energy_resistance.EnergyResistanceVisualizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.energy_resistance.EnergyResistanceVisualizer.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldVisualizer.html">visualizations.interactive.loomfield_wave.LoomfieldVisualizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_wave.LoomfieldVisualizer.html#visualizations.interactive.loomfield_wave.LoomfieldVisualizer"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.html">visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/_autosummary/visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer3D</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#core-classes">Core Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#loomfieldsimulator-2d">LoomfieldSimulator (2D)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_wave.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#loomfieldsimulator3d">LoomfieldSimulator3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3D</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#energyresistancevisualizer">EnergyResistanceVisualizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#utility-functions">Utility Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#energy-resistance">Energy Resistance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance.calculate_system_er"><code class="docutils literal notranslate"><span class="pre">calculate_system_er()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#d-visualization">3D Visualization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_volumetric_figure"><code class="docutils literal notranslate"><span class="pre">create_volumetric_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_slice_figure"><code class="docutils literal notranslate"><span class="pre">create_slice_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_animated_figure"><code class="docutils literal notranslate"><span class="pre">create_animated_figure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#preset-functions">Preset Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_healthy_preset"><code class="docutils literal notranslate"><span class="pre">create_healthy_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_pathology_preset"><code class="docutils literal notranslate"><span class="pre">create_pathology_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_healing_preset"><code class="docutils literal notranslate"><span class="pre">create_healing_preset()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#module-reference">Module Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/index.html#module-visualizations.interactive">visualizations.interactive</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.EnergyResistanceVisualizer"><code class="docutils literal notranslate"><span class="pre">EnergyResistanceVisualizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.calculate_system_er"><code class="docutils literal notranslate"><span class="pre">calculate_system_er()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.energy_resistance_demo"><code class="docutils literal notranslate"><span class="pre">energy_resistance_demo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldSimulator"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldVisualizer"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_demo"><code class="docutils literal notranslate"><span class="pre">loomfield_demo()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldSimulator3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldSimulator3D</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.LoomfieldVisualizer3D"><code class="docutils literal notranslate"><span class="pre">LoomfieldVisualizer3D</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_volumetric_figure"><code class="docutils literal notranslate"><span class="pre">create_volumetric_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_slice_figure"><code class="docutils literal notranslate"><span class="pre">create_slice_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_animated_figure"><code class="docutils literal notranslate"><span class="pre">create_animated_figure()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_healthy_preset"><code class="docutils literal notranslate"><span class="pre">create_healthy_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_pathology_preset"><code class="docutils literal notranslate"><span class="pre">create_pathology_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.create_healing_preset"><code class="docutils literal notranslate"><span class="pre">create_healing_preset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/index.html#visualizations.interactive.loomfield_3d_demo"><code class="docutils literal notranslate"><span class="pre">loomfield_3d_demo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing.html#building-documentation">Building Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#types-of-contributions">Types of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#pull-request-guidelines">Pull Request Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id1">[1.1.0] - 2025-01-26</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#added">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#fixed">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#id2">[1.0.0] - 2025-01-25</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#id3">Added</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#planned">Planned</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#future">[1.2.0] - Future</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../changelog.html#id4">[2.0.0] - Future</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Cosmic Loom Theory</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">visualizations.interactive.loomfield_3d</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for visualizations.interactive.loomfield_3d</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">3D Loomfield Wave Propagation Simulator</span>
+
+<span class="sd">The centerpiece visualization for Cosmic Loom Theory, extending the 2D</span>
+<span class="sd">Loomfield dynamics to three-dimensional space.</span>
+
+<span class="sd">Design Philosophy:</span>
+<span class="sd">    &quot;The 3D Loomfield should feel like a calm, living volume whose internal</span>
+<span class="sd">    order becomes visible as coherence increases — not a collection of objects,</span>
+<span class="sd">    but a continuous system revealing structure through constraint.&quot;</span>
+
+<span class="sd">Wave Equation (3D):</span>
+<span class="sd">    ∇²L - (1/v²ₗ)(∂²L/∂t²) = κₗ · ρ_coh</span>
+
+<span class="sd">Visual Principles:</span>
+<span class="sd">    - Continuity over objects (volumetric field, not particles)</span>
+<span class="sd">    - Gradient meaning (every visual encodes state)</span>
+<span class="sd">    - Stillness matters (high coherence = visually calm)</span>
+<span class="sd">    - Beauty from order, not effects</span>
+
+<span class="sd">Three Layers of Engagement:</span>
+<span class="sd">    Layer 1 - Passive viewer: Auto-rotating, minimal controls</span>
+<span class="sd">    Layer 2 - Presenter mode: Preset paths, one-click scenarios</span>
+<span class="sd">    Layer 3 - Explorer mode: Full controls, sliders, metrics</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_filter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LoomfieldSimulator3D</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    3D numerical solver for the Loomfield wave equation.</span>
+
+<span class="sd">    Uses finite difference method with absorbing boundary conditions</span>
+<span class="sd">    on all 6 faces to simulate wave propagation in 3D space.</span>
+
+<span class="sd">    The Loomfield L(r,t) is a continuous field - not particles or objects.</span>
+<span class="sd">    This simulator captures coherence dynamics in biological volumes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.__init__">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">grid_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
+                 <span class="n">domain_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+                 <span class="n">v_L</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">kappa_L</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+                 <span class="n">damping</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.002</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the 3D Loomfield simulator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            grid_size: Number of grid points per dimension (N×N×N)</span>
+<span class="sd">            domain_size: Physical size of the cubic domain</span>
+<span class="sd">            v_L: Loomfield propagation speed</span>
+<span class="sd">            kappa_L: Coupling constant for coherence density</span>
+<span class="sd">            damping: Dissipation rate (slightly higher in 3D for stability)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">grid_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L_domain</span> <span class="o">=</span> <span class="n">domain_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="n">domain_size</span> <span class="o">/</span> <span class="n">grid_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v_L</span> <span class="o">=</span> <span class="n">v_L</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kappa_L</span> <span class="o">=</span> <span class="n">kappa_L</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">damping</span> <span class="o">=</span> <span class="n">damping</span>
+
+        <span class="c1"># CFL condition for stability: dt &lt; dx / (v_L * sqrt(3))</span>
+        <span class="c1"># In 3D, factor is sqrt(3) ≈ 1.73 for the diagonal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v_L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+        <span class="c1"># Field arrays: current, previous, coherence density</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L_prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rho_coh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="c1"># Persistent sources</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Coordinate grids</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">domain_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">domain_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Time tracking</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Precompute for Laplacian (performance)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dx2_inv</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_laplacian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute 3D Laplacian using 7-point stencil finite differences.</span>
+
+<span class="sd">        ∇²L = (L[i+1] + L[i-1] + L[j+1] + L[j-1] + L[k+1] + L[k-1] - 6*L[i,j,k]) / dx²</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+
+        <span class="c1"># Interior points only (boundaries handled separately)</span>
+        <span class="n">lap</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">field</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">field</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>  <span class="c1"># x neighbors</span>
+            <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span>  <span class="c1"># y neighbors</span>
+            <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span>  <span class="c1"># z neighbors</span>
+            <span class="mi">6</span> <span class="o">*</span> <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dx2_inv</span>
+
+        <span class="k">return</span> <span class="n">lap</span>
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.add_source">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.add_source">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                   <span class="n">strength</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                   <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                   <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
+                   <span class="n">phase</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                   <span class="n">source_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;oscillating&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a coherence source at position (x, y, z).</span>
+
+<span class="sd">        In 3D, sources generate spherical waves that propagate outward.</span>
+<span class="sd">        Phase-locked sources create organized interference patterns.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="n">z</span><span class="p">,</span>
+            <span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="n">strength</span><span class="p">,</span>
+            <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">,</span>
+            <span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="n">frequency</span><span class="p">,</span>
+            <span class="s1">&#39;phase&#39;</span><span class="p">:</span> <span class="n">phase</span><span class="p">,</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">source_type</span><span class="p">,</span>
+            <span class="s1">&#39;birth_time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span>
+        <span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.clear_sources">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.clear_sources">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove all coherence sources.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rho_coh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.add_perturbation">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.add_perturbation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_perturbation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                         <span class="n">strength</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a spherical perturbation (disruption) to the field.</span>
+
+<span class="sd">        Injects high-frequency noise that fragments spatial coherence.</span>
+<span class="sd">        Uses minimal smoothing to preserve high-frequency content that</span>
+<span class="sd">        disrupts organized wave patterns.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dist_sq</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Y</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Z</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">envelope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dist_sq</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+        <span class="c1"># High-frequency noise - minimal smoothing to disrupt coherence</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">gaussian_filter</span><span class="p">(</span><span class="n">noise</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Less smoothing = more disruptive</span>
+
+        <span class="c1"># Scramble velocity field with uncorrelated noise</span>
+        <span class="n">velocity_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">velocity_noise</span> <span class="o">=</span> <span class="n">gaussian_filter</span><span class="p">(</span><span class="n">velocity_noise</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="c1"># Apply to field and velocity (momentum scrambling)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">+=</span> <span class="n">strength</span> <span class="o">*</span> <span class="n">envelope</span> <span class="o">*</span> <span class="n">noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L_prev</span> <span class="o">+=</span> <span class="n">strength</span> <span class="o">*</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">envelope</span> <span class="o">*</span> <span class="n">velocity_noise</span>  <span class="c1"># Stronger momentum disruption</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_coherence_density</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the coherence density field from all sources.</span>
+
+<span class="sd">        Sources oscillate between positive and negative (bipolar)</span>
+<span class="sd">        to generate propagating spherical waves.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rho_coh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+            <span class="n">dist_sq</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">-</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                       <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Y</span> <span class="o">-</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                       <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Z</span> <span class="o">-</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">spatial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dist_sq</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;oscillating&#39;</span><span class="p">:</span>
+                <span class="n">temporal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">+</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;phase&#39;</span><span class="p">])</span>
+                <span class="n">amplitude</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">temporal</span>
+            <span class="k">elif</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pulse&#39;</span><span class="p">:</span>
+                <span class="n">dt_birth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;birth_time&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">dt_birth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">temporal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">dt_birth</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dt_birth</span> <span class="o">/</span> <span class="mf">0.3</span><span class="p">)</span>
+                    <span class="n">amplitude</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">temporal</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">amplitude</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># static</span>
+                <span class="n">amplitude</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">rho_coh</span> <span class="o">+=</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">spatial</span>
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.step">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.step">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Advance the simulation by n_steps timesteps.</span>
+
+<span class="sd">        Implements the 3D wave equation with absorbing boundaries.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">c2dt2</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v_L</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">c_ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_L</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_coherence_density</span><span class="p">()</span>
+
+            <span class="c1"># Compute 3D Laplacian</span>
+            <span class="n">lap_L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_laplacian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+
+            <span class="c1"># Wave equation update</span>
+            <span class="n">L_new</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L_prev</span> <span class="o">+</span>
+                <span class="n">c2dt2</span> <span class="o">*</span> <span class="n">lap_L</span> <span class="o">-</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">damping</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L_prev</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Source injection (drives field velocity)</span>
+            <span class="n">L_new</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kappa_L</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">rho_coh</span>
+
+            <span class="c1"># Absorbing boundary conditions (Mur&#39;s first-order ABC)</span>
+            <span class="c1"># All 6 faces of the cube</span>
+            <span class="n">abc</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_ratio</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">c_ratio</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># X boundaries</span>
+            <span class="n">L_new</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">abc</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_new</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+            <span class="n">L_new</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">abc</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_new</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+
+            <span class="c1"># Y boundaries</span>
+            <span class="n">L_new</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">abc</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_new</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="n">L_new</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">abc</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_new</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+
+            <span class="c1"># Z boundaries</span>
+            <span class="n">L_new</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">abc</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_new</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">L_new</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">abc</span> <span class="o">*</span> <span class="p">(</span><span class="n">L_new</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="c1"># Update arrays</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">L_prev</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">L_new</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.get_total_coherence">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.get_total_coherence">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_total_coherence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate Q: spatial coherence metric (3D version).</span>
+
+<span class="sd">        Measures how organized/coordinated the field is across the volume.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total_energy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">total_energy</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="c1"># Roughness via Laplacian</span>
+        <span class="n">laplacian</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_laplacian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+        <span class="n">laplacian_energy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">laplacian</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">roughness</span> <span class="o">=</span> <span class="n">laplacian_energy</span> <span class="o">/</span> <span class="p">(</span><span class="n">total_energy</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+
+        <span class="c1"># Spatial correlation at distance</span>
+        <span class="n">shift</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">L_shifted_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">L_shifted_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">L_shifted_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">corr_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">*</span> <span class="n">L_shifted_x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">total_energy</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="n">corr_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">*</span> <span class="n">L_shifted_y</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">total_energy</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="n">corr_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">*</span> <span class="n">L_shifted_z</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">total_energy</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="n">correlation</span> <span class="o">=</span> <span class="p">(</span><span class="n">corr_x</span> <span class="o">+</span> <span class="n">corr_y</span> <span class="o">+</span> <span class="n">corr_z</span><span class="p">)</span> <span class="o">/</span> <span class="mf">3.0</span>
+
+        <span class="n">Q</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">correlation</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">roughness</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.get_consciousness_metric">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.get_consciousness_metric">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_consciousness_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate C_bio: consciousness observable (3D version).</span>
+
+<span class="sd">        C_bio = Q³ × ∫|ρ_coh|·|∂L/∂t| dV</span>
+
+<span class="sd">        Uses Q³ (stronger than 2D&#39;s Q²) because 3D chaotic dynamics</span>
+<span class="sd">        accumulate more activity volume. The cubic penalty ensures</span>
+<span class="sd">        consciousness requires strong coherence, not just activity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_total_coherence</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Q</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">dL_dt</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L_prev</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span>
+        <span class="n">temporal_activity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dL_dt</span><span class="p">)</span>
+        <span class="n">local_coupling</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rho_coh</span><span class="p">)</span> <span class="o">*</span> <span class="n">temporal_activity</span>
+        <span class="n">raw_activity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">local_coupling</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">Q</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">raw_activity</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.get_field_energy">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.get_field_energy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_field_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get total field energy.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.reset">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.reset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset simulation to initial state.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L_prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rho_coh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.get_slice">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.get_slice">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract a 2D slice through the 3D field.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            axis: &#39;x&#39;, &#39;y&#39;, or &#39;z&#39; - normal to the slice plane</span>
+<span class="sd">            position: Position along the axis (-domain/2 to +domain/2)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (slice_data, coord1, coord2) for plotting</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">position</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">L_domain</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">L_domain</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">L_domain</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">coords</span><span class="p">,</span> <span class="n">coords</span>
+        <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">,</span> <span class="p">:],</span> <span class="n">coords</span><span class="p">,</span> <span class="n">coords</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># z</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">idx</span><span class="p">],</span> <span class="n">coords</span><span class="p">,</span> <span class="n">coords</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldSimulator3D.get_isosurface_data">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldSimulator3D.get_isosurface_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_isosurface_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get data for isosurface rendering at given threshold.</span>
+
+<span class="sd">        Returns positive and negative surfaces separately for</span>
+<span class="sd">        proper coloring (gold vs blue in CLT visualization).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="n">threshold</span></div>
+</div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># PRESET CONFIGURATIONS</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="create_healthy_preset">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_healthy_preset">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_healthy_preset</span><span class="p">(</span><span class="n">sim</span><span class="p">:</span> <span class="n">LoomfieldSimulator3D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Healthy: Phase-locked sources creating coherent interference.</span>
+
+<span class="sd">    Central source + shell of synchronized satellites.</span>
+<span class="sd">    Should produce high Q, high C_bio, calm visual appearance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="n">base_freq</span> <span class="o">=</span> <span class="mf">1.2</span>
+
+    <span class="c1"># Central dominant source</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+                   <span class="n">frequency</span><span class="o">=</span><span class="n">base_freq</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1"># Octahedral shell of phase-locked sources</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">r</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">r</span><span class="p">)]:</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                       <span class="n">frequency</span><span class="o">=</span><span class="n">base_freq</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_pathology_preset">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_pathology_preset">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_pathology_preset</span><span class="p">(</span><span class="n">sim</span><span class="p">:</span> <span class="n">LoomfieldSimulator3D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pathology: Incoherent sources with different frequencies.</span>
+
+<span class="sd">    Scattered sources, no phase-locking, chaotic interference.</span>
+<span class="sd">    Should produce low Q, low C_bio, noisy visual appearance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="c1"># Scattered sources with different frequencies</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+    <span class="n">phases</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">phase</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">phases</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                       <span class="n">frequency</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_healing_preset">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_healing_preset">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_healing_preset</span><span class="p">(</span><span class="n">sim</span><span class="p">:</span> <span class="n">LoomfieldSimulator3D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Healing: Re-coupling toward coherence.</span>
+
+<span class="sd">    Sources with same frequency but phase gradients,</span>
+<span class="sd">    creating organized traveling waves that converge.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="n">base_freq</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># Central attractor</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="mf">1.8</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                   <span class="n">frequency</span><span class="o">=</span><span class="n">base_freq</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1"># Ring in xy-plane with phase gradient</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mf">3.0</span>
+    <span class="n">n_ring</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_ring</span><span class="p">):</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="n">n_ring</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">*</span> <span class="mf">0.5</span>  <span class="c1"># Phase gradient creates spiral convergence</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                       <span class="n">frequency</span><span class="o">=</span><span class="n">base_freq</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># VISUALIZATION (using plotly for web-compatible 3D)</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="create_volumetric_figure">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_volumetric_figure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_volumetric_figure</span><span class="p">(</span><span class="n">sim</span><span class="p">:</span> <span class="n">LoomfieldSimulator3D</span><span class="p">,</span>
+                              <span class="n">render_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;volume&#39;</span><span class="p">,</span>
+                              <span class="n">opacity_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a plotly figure with volumetric rendering of the Loomfield.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sim: The 3D Loomfield simulator</span>
+<span class="sd">        render_mode: &#39;volume&#39; (continuous 3D volume) or &#39;isosurface&#39; (nested shells)</span>
+<span class="sd">        opacity_scale: Overall opacity multiplier (0.0-1.0)</span>
+
+<span class="sd">    The field is visualized with a gold colorscale where:</span>
+<span class="sd">    - Brighter = higher field amplitude (more coherent)</span>
+<span class="sd">    - Darker = lower field amplitude</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;plotly required for 3D visualization. Install with: pip install plotly&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get field data</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">L</span>
+
+    <span class="c1"># Create flattened meshgrid coordinates (required by plotly)</span>
+    <span class="n">coords_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">sim</span><span class="o">.</span><span class="n">L_domain</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">L_domain</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">coords_1d</span><span class="p">,</span> <span class="n">coords_1d</span><span class="p">,</span> <span class="n">coords_1d</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Create figure</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+    <span class="n">L_flat</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">L_min</span><span class="p">,</span> <span class="n">L_max</span> <span class="o">=</span> <span class="n">L_flat</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">L_flat</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">L_absmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">L_min</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">L_max</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;volume&#39;</span> <span class="ow">and</span> <span class="n">L_absmax</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+        <span class="c1"># Normalize to [-1, 1] for consistent visualization</span>
+        <span class="n">L_norm</span> <span class="o">=</span> <span class="n">L_flat</span> <span class="o">/</span> <span class="n">L_absmax</span>
+
+        <span class="c1"># Volume trace with bipolar colorscale: blue (negative) -&gt; dark -&gt; gold (positive)</span>
+        <span class="c1"># Opacity ensures visibility at ALL field values (no disappearing regions)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">Y</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="n">z</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">L_norm</span><span class="p">,</span>
+            <span class="n">isomin</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">isomax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="n">opacity_scale</span><span class="p">,</span>
+            <span class="n">opacityscale</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>   <span class="c1"># Strong negative = very visible</span>
+                <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>  <span class="c1"># Moderate negative = visible</span>
+                <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>  <span class="c1"># Zero = still visible (base glow)</span>
+                <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>  <span class="c1"># Moderate positive = visible</span>
+                <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>   <span class="c1"># Strong positive = very visible</span>
+            <span class="p">],</span>
+            <span class="n">surface_count</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>  <span class="c1"># More surfaces = smoother volume</span>
+            <span class="c1"># Bipolar colorscale: blue -&gt; dark -&gt; gold</span>
+            <span class="n">colorscale</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;rgb(80,140,255)&#39;</span><span class="p">],</span>   <span class="c1"># Strong negative = bright blue</span>
+                <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="s1">&#39;rgb(40,70,150)&#39;</span><span class="p">],</span>   <span class="c1"># Weak negative = dim blue</span>
+                <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;rgb(30,30,40)&#39;</span><span class="p">],</span>     <span class="c1"># Zero = dark (but visible via opacity)</span>
+                <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="s1">&#39;rgb(180,130,50)&#39;</span><span class="p">],</span>  <span class="c1"># Weak positive = dim gold</span>
+                <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;rgb(255,220,100)&#39;</span><span class="p">],</span>  <span class="c1"># Strong positive = bright gold</span>
+            <span class="p">],</span>
+            <span class="n">showscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">colorbar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;L (normalized)&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">)),</span>
+                <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">),</span>
+                <span class="n">x</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="nb">len</span><span class="o">=</span><span class="mf">0.5</span>
+            <span class="p">),</span>
+            <span class="n">caps</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">y_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_show</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="p">))</span>
+
+    <span class="k">elif</span> <span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;isosurface&#39;</span> <span class="ow">and</span> <span class="n">L_absmax</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">:</span>
+        <span class="c1"># Isosurface mode - nested shells for both positive and negative regions</span>
+        <span class="c1"># Positive thresholds (gold)</span>
+        <span class="n">pos_thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">,</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">,</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">]</span>
+        <span class="n">pos_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rgb(120,90,30)&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb(180,140,50)&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb(220,180,70)&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb(255,220,100)&#39;</span><span class="p">]</span>
+        <span class="n">pos_opacities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">base_opacity</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pos_thresholds</span><span class="p">,</span> <span class="n">pos_colors</span><span class="p">,</span> <span class="n">pos_opacities</span><span class="p">):</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Isosurface</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">Y</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">L_flat</span><span class="p">,</span>
+                <span class="n">isomin</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+                <span class="n">isomax</span><span class="o">=</span><span class="n">L_absmax</span><span class="p">,</span>
+                <span class="n">opacity</span><span class="o">=</span><span class="n">opacity_scale</span> <span class="o">*</span> <span class="n">base_opacity</span><span class="p">,</span>
+                <span class="n">surface_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">colorscale</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">]],</span>
+                <span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">caps</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">y_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_show</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Positive </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">))</span>
+
+        <span class="c1"># Negative thresholds (blue)</span>
+        <span class="n">neg_thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">L_absmax</span><span class="p">]</span>
+        <span class="n">neg_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rgb(50,70,120)&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb(60,90,160)&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb(70,110,190)&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb(100,150,230)&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">base_opacity</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">neg_thresholds</span><span class="p">,</span> <span class="n">neg_colors</span><span class="p">,</span> <span class="n">pos_opacities</span><span class="p">):</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Isosurface</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">Y</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">L_flat</span><span class="p">,</span>
+                <span class="n">isomin</span><span class="o">=-</span><span class="n">L_absmax</span><span class="p">,</span>
+                <span class="n">isomax</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+                <span class="n">opacity</span><span class="o">=</span><span class="n">opacity_scale</span> <span class="o">*</span> <span class="n">base_opacity</span><span class="p">,</span>
+                <span class="n">surface_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">colorscale</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">]],</span>
+                <span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">caps</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">y_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_show</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Negative </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">))</span>
+
+    <span class="c1"># Add source markers (minimal particles - only for sources)</span>
+    <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">sim</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]],</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                       <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">)),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Source&#39;</span><span class="p">,</span>
+            <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">))</span>
+
+    <span class="c1"># Metrics annotation</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_total_coherence</span><span class="p">()</span>
+    <span class="n">C_bio</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_consciousness_metric</span><span class="p">()</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_field_energy</span><span class="p">()</span>
+
+    <span class="n">q_status</span> <span class="o">=</span> <span class="s2">&quot;HIGH&quot;</span> <span class="k">if</span> <span class="n">Q</span> <span class="o">&gt;</span> <span class="mf">1.5</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;moderate&quot;</span> <span class="k">if</span> <span class="n">Q</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s2">&quot;LOW&quot;</span><span class="p">)</span>
+    <span class="n">c_status</span> <span class="o">=</span> <span class="s2">&quot;conscious&quot;</span> <span class="k">if</span> <span class="n">C_bio</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;partial&quot;</span> <span class="k">if</span> <span class="n">C_bio</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;minimal&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Layout for calm, scientific appearance</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Loomfield 3D&lt;/b&gt;&lt;br&gt;&quot;</span>
+                 <span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;font-size:12px&#39;&gt;Q=</span><span class="si">{</span><span class="n">Q</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">q_status</span><span class="si">}</span><span class="s2">) | &quot;</span>
+                 <span class="sa">f</span><span class="s2">&quot;C_bio=</span><span class="si">{</span><span class="n">C_bio</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">c_status</span><span class="si">}</span><span class="s2">) | t=</span><span class="si">{</span><span class="n">sim</span><span class="o">.</span><span class="n">time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&lt;/span&gt;&quot;</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b0b0b0&#39;</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(10,10,20)&#39;</span><span class="p">,</span>
+            <span class="n">camera</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">eye</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">aspectmode</span><span class="o">=</span><span class="s1">&#39;cube&#39;</span>
+        <span class="p">),</span>
+        <span class="n">paper_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(10,10,20)&#39;</span><span class="p">,</span>
+        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(10,10,20)&#39;</span><span class="p">,</span>
+        <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="create_slice_figure">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_slice_figure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_slice_figure</span><span class="p">(</span><span class="n">sim</span><span class="p">:</span> <span class="n">LoomfieldSimulator3D</span><span class="p">,</span>
+                        <span class="n">axis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span>
+                        <span class="n">position</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a 2D slice through the 3D Loomfield.</span>
+
+<span class="sd">    Useful for examining interior structure without full volumetric rendering.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;plotly required. Install with: pip install plotly&quot;</span><span class="p">)</span>
+
+    <span class="n">slice_data</span><span class="p">,</span> <span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_slice</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+
+    <span class="c1"># CLT colorscale: blue (negative) -&gt; dark (zero) -&gt; gold (positive)</span>
+    <span class="n">colorscale</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;rgb(30,50,150)&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;rgb(40,60,120)&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;rgb(20,20,30)&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="s1">&#39;rgb(120,90,40)&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;rgb(255,200,80)&#39;</span><span class="p">]</span>
+    <span class="p">]</span>
+
+    <span class="n">vmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">slice_data</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">slice_data</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">coords1</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">coords2</span><span class="p">,</span>
+        <span class="n">colorscale</span><span class="o">=</span><span class="n">colorscale</span><span class="p">,</span>
+        <span class="n">zmin</span><span class="o">=-</span><span class="n">vmax</span><span class="p">,</span>
+        <span class="n">zmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span>
+        <span class="n">showscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">colorbar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">)),</span>
+            <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">))</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Loomfield Slice (</span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">position</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">axis</span><span class="o">==</span><span class="s1">&#39;x&#39;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;X&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                   <span class="n">scaleanchor</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">scaleratio</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">),</span>
+        <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Z&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">axis</span><span class="o">!=</span><span class="s1">&#39;z&#39;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">),</span>
+        <span class="n">paper_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(15,15,25)&#39;</span><span class="p">,</span>
+        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(15,15,25)&#39;</span><span class="p">,</span>
+        <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="create_animated_figure">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.create_animated_figure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_animated_figure</span><span class="p">(</span><span class="n">sim</span><span class="p">:</span> <span class="n">LoomfieldSimulator3D</span><span class="p">,</span>
+                           <span class="n">n_frames</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+                           <span class="n">steps_per_frame</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                           <span class="n">opacity_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an animated 3D figure showing wave propagation over time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sim: Simulator with sources already configured</span>
+<span class="sd">        n_frames: Number of animation frames</span>
+<span class="sd">        steps_per_frame: Simulation steps between frames</span>
+<span class="sd">        opacity_scale: Volume opacity</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Plotly figure with animation frames and play button</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;plotly required. Install with: pip install plotly&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create coordinate arrays</span>
+    <span class="n">coords_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">sim</span><span class="o">.</span><span class="n">L_domain</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">L_domain</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">coords_1d</span><span class="p">,</span> <span class="n">coords_1d</span><span class="p">,</span> <span class="n">coords_1d</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+    <span class="n">X_flat</span><span class="p">,</span> <span class="n">Y_flat</span><span class="p">,</span> <span class="n">Z_flat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">Y</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">Z</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="c1"># Collect frames by running simulation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Generating </span><span class="si">{</span><span class="n">n_frames</span><span class="si">}</span><span class="s2"> animation frames...&quot;</span><span class="p">)</span>
+    <span class="n">frames_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">metrics_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_frames</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps_per_frame</span><span class="p">)</span>
+
+        <span class="c1"># Store frame data</span>
+        <span class="n">frames_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">L</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="n">metrics_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;Q&#39;</span><span class="p">:</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_total_coherence</span><span class="p">(),</span>
+            <span class="s1">&#39;C_bio&#39;</span><span class="p">:</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_consciousness_metric</span><span class="p">(),</span>
+            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">sim</span><span class="o">.</span><span class="n">time</span>
+        <span class="p">})</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Frame </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_frames</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Use per-frame normalization so field is visible throughout</span>
+    <span class="c1"># This ensures the &quot;breathing&quot; shows as intensity variation, not on/off toggling</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize_frame</span><span class="p">(</span><span class="n">L_frame</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize frame values to [-1, 1] range for consistent visibility.&quot;&quot;&quot;</span>
+        <span class="n">L_flat</span> <span class="o">=</span> <span class="n">L_frame</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">L_absmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">L_flat</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">L_flat</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span> <span class="mf">0.01</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">L_flat</span> <span class="o">/</span> <span class="n">L_absmax</span><span class="p">,</span> <span class="n">L_absmax</span>
+
+    <span class="c1"># Opacity scale that ensures visibility at ALL values</span>
+    <span class="c1"># Zero values still have base visibility, peaks are brighter</span>
+    <span class="n">visibility_opacityscale</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>   <span class="c1"># Strong negative = very visible</span>
+        <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>  <span class="c1"># Moderate negative = visible</span>
+        <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>  <span class="c1"># Zero = still visible (base glow)</span>
+        <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>  <span class="c1"># Moderate positive = visible</span>
+        <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>   <span class="c1"># Strong positive = very visible</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Bipolar colorscale: blue -&gt; dark -&gt; gold</span>
+    <span class="n">bipolar_colorscale</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;rgb(80,140,255)&#39;</span><span class="p">],</span>   <span class="c1"># Strong negative = bright blue</span>
+        <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="s1">&#39;rgb(40,70,150)&#39;</span><span class="p">],</span>   <span class="c1"># Weak negative = dim blue</span>
+        <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;rgb(30,30,40)&#39;</span><span class="p">],</span>     <span class="c1"># Zero = dark (but still visible via opacity)</span>
+        <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="s1">&#39;rgb(180,130,50)&#39;</span><span class="p">],</span>  <span class="c1"># Weak positive = dim gold</span>
+        <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;rgb(255,220,100)&#39;</span><span class="p">],</span>  <span class="c1"># Strong positive = bright gold</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Create initial figure with first frame (normalized)</span>
+    <span class="n">L_norm_0</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">normalize_frame</span><span class="p">(</span><span class="n">frames_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">X_flat</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">Y_flat</span><span class="p">,</span>
+            <span class="n">z</span><span class="o">=</span><span class="n">Z_flat</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">L_norm_0</span><span class="p">,</span>
+            <span class="n">isomin</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">isomax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="n">opacity_scale</span><span class="p">,</span>
+            <span class="n">opacityscale</span><span class="o">=</span><span class="n">visibility_opacityscale</span><span class="p">,</span>
+            <span class="n">surface_count</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span>
+            <span class="n">colorscale</span><span class="o">=</span><span class="n">bipolar_colorscale</span><span class="p">,</span>
+            <span class="n">showscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">colorbar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">)),</span>
+                <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">),</span>
+                <span class="n">x</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="nb">len</span><span class="o">=</span><span class="mf">0.4</span>
+            <span class="p">),</span>
+            <span class="n">caps</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">y_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_show</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="p">)]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Add source markers</span>
+    <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">sim</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]],</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                       <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">)),</span>
+            <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">))</span>
+
+    <span class="c1"># Create animation frames with per-frame normalization</span>
+    <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">L_frame</span><span class="p">,</span> <span class="n">metrics</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">frames_data</span><span class="p">,</span> <span class="n">metrics_data</span><span class="p">)):</span>
+        <span class="c1"># Normalize this frame&#39;s values to [-1, 1]</span>
+        <span class="n">L_norm</span><span class="p">,</span> <span class="n">frame_absmax</span> <span class="o">=</span> <span class="n">normalize_frame</span><span class="p">(</span><span class="n">L_frame</span><span class="p">)</span>
+
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">X_flat</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">Y_flat</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">Z_flat</span><span class="p">,</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">L_norm</span><span class="p">,</span>
+                <span class="n">isomin</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
+                <span class="n">isomax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                <span class="n">opacity</span><span class="o">=</span><span class="n">opacity_scale</span><span class="p">,</span>
+                <span class="n">opacityscale</span><span class="o">=</span><span class="n">visibility_opacityscale</span><span class="p">,</span>
+                <span class="n">surface_count</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span>
+                <span class="n">colorscale</span><span class="o">=</span><span class="n">bipolar_colorscale</span><span class="p">,</span>
+                <span class="n">showscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">colorbar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">)),</span>
+                    <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a0a0a0&#39;</span><span class="p">),</span>
+                    <span class="n">x</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="nb">len</span><span class="o">=</span><span class="mf">0.4</span>
+                <span class="p">),</span>
+                <span class="n">caps</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">y_show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">z_show</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="p">)],</span>
+            <span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+            <span class="n">layout</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+                <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Loomfield 3D&lt;/b&gt;&lt;br&gt;&quot;</span>
+                         <span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;font-size:12px&#39;&gt;Q=</span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                         <span class="sa">f</span><span class="s2">&quot;C_bio=</span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;C_bio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> | t=</span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                         <span class="sa">f</span><span class="s2">&quot;max|L|=</span><span class="si">{</span><span class="n">frame_absmax</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&lt;/span&gt;&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">frames</span> <span class="o">=</span> <span class="n">frames</span>
+
+    <span class="c1"># Initial metrics for title</span>
+    <span class="n">m0</span> <span class="o">=</span> <span class="n">metrics_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">L0_absmax</span> <span class="o">=</span> <span class="n">normalize_frame</span><span class="p">(</span><span class="n">frames_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Layout with animation controls</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Loomfield 3D - Animated&lt;/b&gt;&lt;br&gt;&quot;</span>
+                 <span class="sa">f</span><span class="s2">&quot;&lt;span style=&#39;font-size:12px&#39;&gt;Q=</span><span class="si">{</span><span class="n">m0</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                 <span class="sa">f</span><span class="s2">&quot;C_bio=</span><span class="si">{</span><span class="n">m0</span><span class="p">[</span><span class="s1">&#39;C_bio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> | t=</span><span class="si">{</span><span class="n">m0</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                 <span class="sa">f</span><span class="s2">&quot;max|L|=</span><span class="si">{</span><span class="n">L0_absmax</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&lt;/span&gt;&quot;</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b0b0b0&#39;</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">showbackground</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">showticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(10,10,20)&#39;</span><span class="p">,</span>
+            <span class="n">camera</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">eye</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)),</span>
+            <span class="n">aspectmode</span><span class="o">=</span><span class="s1">&#39;cube&#39;</span>
+        <span class="p">),</span>
+        <span class="n">paper_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(10,10,20)&#39;</span><span class="p">,</span>
+        <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(10,10,20)&#39;</span><span class="p">,</span>
+        <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">80</span><span class="p">),</span>
+        <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">updatemenus</span><span class="o">=</span><span class="p">[</span>
+            <span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;buttons&quot;</span><span class="p">,</span>
+                <span class="n">showactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="n">xanchor</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+                <span class="n">buttons</span><span class="o">=</span><span class="p">[</span>
+                    <span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;▶ Play&quot;</span><span class="p">,</span>
+                        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+                        <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">{</span>
+                            <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="s2">&quot;redraw&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+                            <span class="s2">&quot;fromcurrent&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                            <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                        <span class="p">}]</span>
+                    <span class="p">),</span>
+                    <span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;⏸ Pause&quot;</span><span class="p">,</span>
+                        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+                        <span class="n">args</span><span class="o">=</span><span class="p">[[</span><span class="kc">None</span><span class="p">],</span> <span class="p">{</span>
+                            <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;redraw&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                            <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;immediate&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+                        <span class="p">}]</span>
+                    <span class="p">)</span>
+                <span class="p">],</span>
+                <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b0b0b0&#39;</span><span class="p">),</span>
+                <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;rgb(40,40,50)&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">sliders</span><span class="o">=</span><span class="p">[{</span>
+            <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;yanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;currentvalue&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;Frame: &quot;</span><span class="p">,</span>
+                <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#a0a0a0&quot;</span><span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+            <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span>
+            <span class="s2">&quot;len&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)],</span> <span class="p">{</span><span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;redraw&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+                                     <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;immediate&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}}],</span>
+                 <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+                 <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;animate&quot;</span><span class="p">}</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_frames</span><span class="p">)</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#a0a0a0&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;bgcolor&quot;</span><span class="p">:</span> <span class="s2">&quot;rgb(40,40,50)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;bordercolor&quot;</span><span class="p">:</span> <span class="s2">&quot;rgb(60,60,70)&quot;</span><span class="p">,</span>
+        <span class="p">}]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># INTERACTIVE APPLICATION</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="LoomfieldVisualizer3D">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LoomfieldVisualizer3D</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interactive 3D visualization of the Loomfield.</span>
+
+<span class="sd">    Provides three layers of engagement:</span>
+<span class="sd">    - Layer 1 (Passive): Auto-rotating, caption-friendly</span>
+<span class="sd">    - Layer 2 (Presenter): Preset paths, one-click scenarios</span>
+<span class="sd">    - Layer 3 (Explorer): Full controls, metrics, debug views</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LoomfieldVisualizer3D.__init__">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">48</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the 3D visualizer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            grid_size: Resolution (48 for smooth performance, 64 for detail)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sim</span> <span class="o">=</span> <span class="n">LoomfieldSimulator3D</span><span class="p">(</span><span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span> <span class="o">=</span> <span class="n">grid_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_preset</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldVisualizer3D.load_preset">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.load_preset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_preset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;healthy&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load a preset configuration.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">preset</span> <span class="o">==</span> <span class="s1">&#39;healthy&#39;</span><span class="p">:</span>
+            <span class="n">create_healthy_preset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_preset</span> <span class="o">=</span> <span class="s1">&#39;healthy&#39;</span>
+        <span class="k">elif</span> <span class="n">preset</span> <span class="o">==</span> <span class="s1">&#39;pathology&#39;</span><span class="p">:</span>
+            <span class="n">create_pathology_preset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_preset</span> <span class="o">=</span> <span class="s1">&#39;pathology&#39;</span>
+        <span class="k">elif</span> <span class="n">preset</span> <span class="o">==</span> <span class="s1">&#39;healing&#39;</span><span class="p">:</span>
+            <span class="n">create_healing_preset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_preset</span> <span class="o">=</span> <span class="s1">&#39;healing&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_preset</span> <span class="o">=</span> <span class="s1">&#39;empty&#39;</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldVisualizer3D.run_simulation">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.run_simulation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_simulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">steps_per_frame</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run simulation and return frames for animation.</span>
+
+<span class="sd">        Returns list of field snapshots for animation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">steps_per_frame</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Sample every 2nd step for performance</span>
+                <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;L&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">L</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                    <span class="s1">&#39;Q&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">get_total_coherence</span><span class="p">(),</span>
+                    <span class="s1">&#39;C_bio&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">get_consciousness_metric</span><span class="p">(),</span>
+                    <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">time</span>
+                <span class="p">})</span>
+        <span class="k">return</span> <span class="n">frames</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldVisualizer3D.create_static_figure">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.create_static_figure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_static_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">warm_up_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a static figure after warming up the simulation.</span>
+
+<span class="sd">        Good for screenshots and embedding.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">warm_up_steps</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">create_volumetric_figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldVisualizer3D.create_slice_view">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.create_slice_view">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_slice_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a 2D slice view.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">create_slice_figure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LoomfieldVisualizer3D.get_metrics">
+<a class="viewcode-back" href="../../../api/index.html#visualizations.interactive.loomfield_3d.LoomfieldVisualizer3D.get_metrics">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current metrics.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;Q&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">get_total_coherence</span><span class="p">(),</span>
+            <span class="s1">&#39;C_bio&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">get_consciousness_metric</span><span class="p">(),</span>
+            <span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">get_field_energy</span><span class="p">(),</span>
+            <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+            <span class="s1">&#39;sources&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># DEMO / ENTRY POINT</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">demo</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a demonstration of the 3D Loomfield visualizer.</span>
+
+<span class="sd">    Creates figures for each preset and displays them.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  COSMIC LOOM THEORY: 3D Loomfield Visualizer&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">The Loomfield L(r,t) extends into 3D space, creating spherical waves</span>
+<span class="s2">that propagate outward from coherence sources. This visualization shows</span>
+<span class="s2">the field as a calm, living volume - not particles, but continuous flow.</span>
+
+<span class="s2">Creating visualizations for each preset...</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: plotly required for 3D visualization.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Install with: pip install plotly&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Create visualizer</span>
+    <span class="n">viz</span> <span class="o">=</span> <span class="n">LoomfieldVisualizer3D</span><span class="p">(</span><span class="n">grid_size</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
+
+    <span class="c1"># Generate figures for each preset</span>
+    <span class="n">presets</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;healthy&#39;</span><span class="p">,</span> <span class="s1">&#39;pathology&#39;</span><span class="p">,</span> <span class="s1">&#39;healing&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">preset</span> <span class="ow">in</span> <span class="n">presets</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Generating </span><span class="si">{</span><span class="n">preset</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> preset...&quot;</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">load_preset</span><span class="p">(</span><span class="n">preset</span><span class="p">)</span>
+
+        <span class="c1"># Warm up simulation</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+
+        <span class="c1"># Get metrics</span>
+        <span class="n">metrics</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">get_metrics</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Q = </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Q&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  C_bio = </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;C_bio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Energy = </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create and save figure (volume mode for visibility)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">create_volumetric_figure</span><span class="p">(</span><span class="n">viz</span><span class="o">.</span><span class="n">sim</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s1">&#39;volume&#39;</span><span class="p">,</span> <span class="n">opacity_scale</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;output/loomfield_3d_</span><span class="si">{</span><span class="n">preset</span><span class="si">}</span><span class="s2">.html&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Saved: output/loomfield_3d_</span><span class="si">{</span><span class="n">preset</span><span class="si">}</span><span class="s2">.html&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Also create a slice view</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Generating slice view...&quot;</span><span class="p">)</span>
+    <span class="n">viz</span><span class="o">.</span><span class="n">load_preset</span><span class="p">(</span><span class="s1">&#39;healthy&#39;</span><span class="p">)</span>
+    <span class="n">viz</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+    <span class="n">fig_slice</span> <span class="o">=</span> <span class="n">create_slice_figure</span><span class="p">(</span><span class="n">viz</span><span class="o">.</span><span class="n">sim</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">fig_slice</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;output/loomfield_3d_slice.html&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Saved: output/loomfield_3d_slice.html&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create animated visualization (shows wave propagation)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Generating ANIMATED healthy visualization...&quot;</span><span class="p">)</span>
+    <span class="n">sim_anim</span> <span class="o">=</span> <span class="n">LoomfieldSimulator3D</span><span class="p">(</span><span class="n">grid_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># Smaller grid for animation performance</span>
+    <span class="n">create_healthy_preset</span><span class="p">(</span><span class="n">sim_anim</span><span class="p">)</span>
+    <span class="n">fig_anim</span> <span class="o">=</span> <span class="n">create_animated_figure</span><span class="p">(</span><span class="n">sim_anim</span><span class="p">,</span> <span class="n">n_frames</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">steps_per_frame</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">opacity_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">fig_anim</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">&quot;output/loomfield_3d_animated.html&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Saved: output/loomfield_3d_animated.html&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Open the HTML files in a browser to explore the 3D visualizations.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Files generated:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - loomfield_3d_healthy.html    (static volume)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - loomfield_3d_pathology.html  (static volume)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - loomfield_3d_healing.html    (static volume)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - loomfield_3d_slice.html      (2D slice view)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - loomfield_3d_animated.html   (animated with play button)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">demo</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Rex Fraterne &amp; Seraphina AI.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
