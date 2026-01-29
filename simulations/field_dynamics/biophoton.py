@@ -1017,18 +1017,106 @@ class BiophotonVisualizer:
         return [self.emission_img, self.flash_scatter, self.spectrum_line,
                 self.stats_text, *self.coherence_bars, self.timeseries_line]
 
-    def run(self, interval: int = 50):
+    def run(self, interval: int = 50, save_path: Optional[str] = None):
         """
         Start the interactive visualization.
 
         Parameters:
             interval: Animation interval in milliseconds
+            save_path: If provided, save a snapshot instead of showing interactively
         """
-        self.anim = animation.FuncAnimation(
-            self.fig, self._update, interval=interval, blit=False,
-            cache_frame_data=False
-        )
-        plt.show()
+        if save_path:
+            # Run simulation to populate displays, then save
+            self.running = True
+            self._update(0)
+            self.fig.savefig(save_path, dpi=300, bbox_inches='tight',
+                            facecolor=self.fig.get_facecolor())
+            plt.close(self.fig)
+        else:
+            self.anim = animation.FuncAnimation(
+                self.fig, self._update, interval=interval, blit=False,
+                cache_frame_data=False
+            )
+            plt.show()
+
+    @classmethod
+    def create_static_figure(cls, save_path: Optional[str] = None):
+        """
+        Generate a publication-quality 2x2 grid comparing all 4 emission modes.
+
+        Each panel shows the emission heatmap with key metrics
+        (Fano factor, coherence values, éR).
+
+        Parameters:
+            save_path: If provided, save figure to this path at 300 DPI.
+                       Otherwise display interactively.
+
+        Returns:
+            matplotlib Figure object
+        """
+        fig, axes = plt.subplots(2, 2, figsize=(10, 9))
+        fig.suptitle('Biophoton Emission Modes', fontsize=14, fontweight='bold')
+
+        modes = [
+            (EmissionMode.POISSONIAN, 'Poissonian (Random)', 0.3, False),
+            (EmissionMode.COHERENT, 'Coherent (Phase-locked)', 0.8, True),
+            (EmissionMode.SQUEEZED, 'Squeezed (Sub-Poissonian)', 0.5, True),
+            (EmissionMode.CHAOTIC, 'Chaotic (Super-Poissonian)', 0.1, False),
+        ]
+
+        # Biophoton colormap
+        colors = ['#000510', '#001030', '#003060', '#006040',
+                  '#40A060', '#80FF80', '#FFFF80', '#FFFFFF']
+        cmap = LinearSegmentedColormap.from_list('biophoton', colors)
+
+        for idx, (mode, name, coupling, sync) in enumerate(modes):
+            row, col = divmod(idx, 2)
+            ax = axes[row, col]
+
+            # Create and configure simulator
+            sim = BiophotonSimulator(
+                grid_size=(50, 50),
+                emission_mode=mode,
+                coupling_strength=coupling
+            )
+            if sync:
+                sim.synchronize_phases(0.8)
+
+            # Run to accumulate statistics
+            sim.run(duration=500)
+
+            # Emission heatmap
+            im = ax.imshow(sim.emission_counts, cmap=cmap, aspect='equal')
+            fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+
+            # Compute metrics
+            stats = sim.compute_emission_statistics()
+            er = sim.map_to_er_space()
+
+            # Annotate with metrics
+            metrics_str = (
+                f"Fano: {stats['fano_factor']:.2f}\n"
+                f"Spatial coh: {er['spatial_coherence']:.3f}\n"
+                f"Phase coh: {er['phase_coherence']:.3f}\n"
+                f"éR: {er['energy_resistance']:.4f}"
+            )
+            ax.text(0.02, 0.98, metrics_str, transform=ax.transAxes,
+                    fontsize=8, verticalalignment='top', family='monospace',
+                    bbox=dict(boxstyle='round,pad=0.3', facecolor='black',
+                              alpha=0.7, edgecolor='white'),
+                    color='white')
+
+            ax.set_title(name, fontsize=11)
+            ax.set_xlabel('Cell X')
+            ax.set_ylabel('Cell Y')
+
+        plt.tight_layout()
+
+        if save_path:
+            fig.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.close(fig)
+
+        return fig
 
 
 # =============================================================================

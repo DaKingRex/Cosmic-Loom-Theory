@@ -967,14 +967,129 @@ class DNAConstraintVisualizer:
 
         return []
 
-    def run(self, interval: int = 100):
-        """Start the interactive visualization."""
+    def run(self, interval: int = 100, save_path: Optional[str] = None):
+        """
+        Start the interactive visualization.
+
+        Parameters:
+            interval: Animation interval in milliseconds
+            save_path: If provided, save a snapshot instead of showing interactively
+        """
         self._update_plots()
-        self.anim = animation.FuncAnimation(
-            self.fig, self._update, interval=interval, blit=False,
-            cache_frame_data=False
-        )
-        plt.show()
+        if save_path:
+            self.fig.savefig(save_path, dpi=300, bbox_inches='tight',
+                            facecolor=self.fig.get_facecolor())
+            plt.close(self.fig)
+        else:
+            self.anim = animation.FuncAnimation(
+                self.fig, self._update, interval=interval, blit=False,
+                cache_frame_data=False
+            )
+            plt.show()
+
+    @classmethod
+    def create_static_figure(cls, save_path: Optional[str] = None):
+        """
+        Generate a publication-quality 2x2 grid comparing DNA constraint states.
+
+        Panels: Human baseline, High plasticity, Stressed/aging, Cross-species.
+        Each panel shows gene expression profile, viable window, and capacities.
+
+        Parameters:
+            save_path: If provided, save figure to this path at 300 DPI.
+                       Otherwise display interactively.
+
+        Returns:
+            matplotlib Figure object
+        """
+        fig = plt.figure(figsize=(12, 10))
+        fig.suptitle('DNA Constraints on Loomfield Coherence',
+                     fontsize=14, fontweight='bold')
+
+        # 2x2 grid, each cell has a top (viable window) and bottom (capacities) row
+        outer_gs = GridSpec(2, 2, figure=fig, hspace=0.45, wspace=0.35)
+
+        configs = [
+            ('Human Baseline', create_human_baseline),
+            ('High Plasticity', create_high_plasticity),
+            ('Stressed / Aging', create_stressed_aging),
+            ('Cross-Species (Invertebrate)',
+             lambda: DNAConstraintSimulator(
+                 species=SpeciesComplexity.INVERTEBRATE)),
+        ]
+
+        for idx, (name, create_fn) in enumerate(configs):
+            row, col = divmod(idx, 2)
+            inner_gs = outer_gs[row, col].subgridspec(2, 1, hspace=0.4)
+
+            sim = create_fn()
+            er = sim.map_to_er_space()
+            vw = sim.viable_window
+
+            # --- Top: Viable window in éR space ---
+            ax_top = fig.add_subplot(inner_gs[0])
+            ax_top.fill_between([0, 10], [0, 0], [1, 1],
+                                color='red', alpha=0.15, label='Chaos')
+            rect = plt.Rectangle(
+                (vw['freq_min'], vw['ep_min']),
+                vw['freq_max'] - vw['freq_min'],
+                vw['ep_max'] - vw['ep_min'],
+                facecolor='green', alpha=0.35, edgecolor='green', linewidth=2,
+                label='Viable'
+            )
+            ax_top.add_patch(rect)
+            ax_top.fill_between([0, 10], [9, 9], [10, 10],
+                                color='blue', alpha=0.15, label='Rigidity')
+            # éR contours
+            freq = np.linspace(0.5, 9.5, 40)
+            for er_val in [0.1, 1.0, 10.0]:
+                ep = er_val * freq ** 2
+                ax_top.plot(freq, ep, 'k--', alpha=0.2, linewidth=0.5)
+
+            ax_top.set_xlim(0, 10)
+            ax_top.set_ylim(0, 10)
+            ax_top.set_xlabel('Frequency', fontsize=8)
+            ax_top.set_ylabel('EP', fontsize=8)
+            ax_top.set_title(name, fontsize=11)
+            ax_top.tick_params(labelsize=7)
+
+            # Annotate with window area
+            ax_top.text(0.98, 0.02,
+                        f"Window area: {vw['window_area']:.2f}",
+                        transform=ax_top.transAxes, fontsize=8,
+                        ha='right', va='bottom', family='monospace',
+                        bbox=dict(boxstyle='round,pad=0.3', facecolor='white',
+                                  alpha=0.8, edgecolor='gray'))
+
+            # --- Bottom: Substrate capacities ---
+            ax_bot = fig.add_subplot(inner_gs[1])
+            substrates = ['Microtubule', 'Bioelectric', 'Biophoton', 'Overall']
+            capacities = [
+                sim.microtubule_capacity,
+                sim.bioelectric_capacity,
+                sim.biophoton_capacity,
+                sim.coherence_capacity,
+            ]
+            bar_colors = ['#DDDD44', '#44BB44', '#44BBBB', '#BB44BB']
+            bars = ax_bot.bar(substrates, capacities, color=bar_colors,
+                              edgecolor='gray', linewidth=0.5)
+            ax_bot.set_ylim(0, 1.3)
+            ax_bot.set_ylabel('Capacity', fontsize=8)
+            ax_bot.tick_params(axis='x', rotation=30, labelsize=8)
+            ax_bot.tick_params(axis='y', labelsize=7)
+
+            # Label bar values
+            for bar, cap in zip(bars, capacities):
+                ax_bot.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.02,
+                            f'{cap:.2f}', ha='center', va='bottom', fontsize=7)
+
+        plt.tight_layout()
+
+        if save_path:
+            fig.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.close(fig)
+
+        return fig
 
 
 # =============================================================================

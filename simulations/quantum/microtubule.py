@@ -998,13 +998,95 @@ class MicrotubuleVisualizer:
         return [self.mt_img, self.spectrum_line, self.coherence_line,
                 self.info_text, *self.coherence_bars]
 
-    def run(self, interval: int = 50):
-        """Start the interactive visualization."""
-        self.anim = animation.FuncAnimation(
-            self.fig, self._update, interval=interval, blit=False,
-            cache_frame_data=False
+    def run(self, interval: int = 50, save_path: Optional[str] = None):
+        """
+        Start the interactive visualization.
+
+        Parameters:
+            interval: Animation interval in milliseconds
+            save_path: If provided, save a snapshot instead of showing interactively
+        """
+        if save_path:
+            self.running = True
+            self._update(0)
+            self.fig.savefig(save_path, dpi=300, bbox_inches='tight',
+                            facecolor=self.fig.get_facecolor())
+            plt.close(self.fig)
+        else:
+            self.anim = animation.FuncAnimation(
+                self.fig, self._update, interval=interval, blit=False,
+                cache_frame_data=False
+            )
+            plt.show()
+
+    @classmethod
+    def create_static_figure(cls, save_path: Optional[str] = None):
+        """
+        Generate a publication-quality 2x2 grid comparing microtubule states.
+
+        Panels: Coherent, Thermal, Floquet-Driven, Anesthetized.
+        Each panel shows the dipole heatmap with coherence and éR metrics.
+
+        Parameters:
+            save_path: If provided, save figure to this path at 300 DPI.
+                       Otherwise display interactively.
+
+        Returns:
+            matplotlib Figure object
+        """
+        fig, axes = plt.subplots(2, 2, figsize=(10, 9))
+        fig.suptitle('Microtubule Time Crystal States', fontsize=14, fontweight='bold')
+
+        configs = [
+            ('Coherent (Body Temp)', create_coherent_mt),
+            ('Thermal Noise', create_thermal_mt),
+            ('Floquet Driven', create_floquet_driven_mt),
+            ('Anesthetized', create_anesthetized_mt),
+        ]
+
+        cmap = LinearSegmentedColormap.from_list(
+            'dipole', ['#0066CC', '#FFFFFF', '#CC6600']
         )
-        plt.show()
+
+        for idx, (name, create_fn) in enumerate(configs):
+            row, col = divmod(idx, 2)
+            ax = axes[row, col]
+
+            sim = create_fn(n_tubulins=60)
+            sim.run(duration=1e-7)  # 100 ns
+
+            # Dipole heatmap
+            im = ax.imshow(sim.dipoles, cmap=cmap, aspect='auto', vmin=-1, vmax=1)
+            fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04, label='Dipole')
+
+            # Compute metrics
+            coherences = sim.compute_all_coherences()
+            er = sim.map_to_er_space()
+
+            metrics_str = (
+                f"Mean coh: {coherences['mean']:.3f}\n"
+                f"Aromatic: {coherences['aromatic']:.3f}\n"
+                f"Lattice:  {coherences['lattice']:.3f}\n"
+                f"éR: {er['energy_resistance']:.4f}\n"
+                f"Dipole corr: {er['dipole_correlation']:.3f}"
+            )
+            ax.text(0.02, 0.98, metrics_str, transform=ax.transAxes,
+                    fontsize=8, verticalalignment='top', family='monospace',
+                    bbox=dict(boxstyle='round,pad=0.3', facecolor='white',
+                              alpha=0.8, edgecolor='gray'),
+                    color='black')
+
+            ax.set_title(name, fontsize=11)
+            ax.set_xlabel('Position along MT')
+            ax.set_ylabel('Protofilament')
+
+        plt.tight_layout()
+
+        if save_path:
+            fig.savefig(save_path, dpi=300, bbox_inches='tight')
+            plt.close(fig)
+
+        return fig
 
 
 # =============================================================================
