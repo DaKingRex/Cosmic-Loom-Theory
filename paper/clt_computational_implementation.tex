@@ -1833,6 +1833,56 @@ consciousness:
     measurement.
 \end{enumerate}
 
+\subsection{Parameter Sensitivity}
+\label{sec:sensitivity}
+
+A natural question for any computational framework with tunable parameters is
+how sensitive the qualitative conclusions are to specific parameter choices.
+We briefly characterize the sensitivity landscape for the most consequential
+parameters.
+
+The \'eR viable window boundaries ($\text{\'eR}_{\min}$,
+$\text{\'eR}_{\max}$) directly determine which biological states are
+classified as conscious-compatible.  Because the boundaries enter as
+parabolic contours ($\mathrm{EP} = \text{\'eR} \cdot f^2$), a $\pm 20\%$
+shift in $\text{\'eR}_{\min}$ (from $0.5$ to $0.4$ or $0.6$) displaces the
+chaos boundary by approximately $\pm 20\%$ in EP at fixed frequency---enough
+to reclassify borderline states (e.g., high-frequency anxiety) but not to
+disrupt the qualitative separation between healthy and clearly pathological
+regimes.  The viable window is thus moderately robust: the gross
+classification is stable, but boundary cases require empirical anchoring.
+
+The consciousness observable $C_{\mathrm{bio}}$ is most sensitive to the
+coherence metric $Q$ through the nonlinear exponent $n$ ($n = 2$ in 2D,
+$n = 3$ in 3D).  This is by design: the $Q^n$ prefactor enforces a sharp
+distinction between coherent and incoherent dynamics.  However, it also
+means that modest errors in $Q$ estimation (e.g., from noisy EEG spatial
+coherence) propagate nonlinearly into $C_{\mathrm{bio}}$.  Future work
+should quantify the measurement uncertainty in $Q$ from realistic
+experimental data and propagate it through to $C_{\mathrm{bio}}$ confidence
+intervals.
+
+The microtubule triplet resonance is robust to coupling constant variations
+of $\pm 30\%$ (the golden-ratio peak structure persists as long as
+cross-scale coupling remains nonzero), but is highly sensitive to the
+anesthesia suppression fraction: reducing aromatic suppression from $90\%$
+to $70\%$ partially preserves the triplet, suggesting a graded rather than
+binary consciousness transition under anesthesia---a testable prediction.
+
+For the bioelectric simulator, gap junction conductance $g_{\mathrm{gap}}$
+is the dominant parameter: halving it from the default $1.0$ to $0.5$
+mS/cm$^2$ reduces spatial coherence $Q_{\mathrm{bio}}$ by approximately
+$40\%$ and shifts the tissue toward the chaos boundary in \'eR space.  This
+sensitivity is biologically meaningful, as gap junction expression is known
+to vary across tissue types and developmental stages
+\citep{levin2014bioelectricity}.
+
+A systematic sensitivity analysis---varying each parameter class while
+holding others fixed, and computing the resulting shift in \'eR coordinates,
+$Q$, and $C_{\mathrm{bio}}$---is planned as a dedicated companion study.
+The open-source nature of the platform makes such analyses straightforward
+for any researcher to perform and extend.
+
 \subsection{Limitations}
 \label{sec:limitations}
 
@@ -1859,6 +1909,39 @@ Several important limitations should be noted:
     are currently set to physically plausible values based on literature
     estimates rather than fit to experimental data.  Systematic calibration
     against empirical measurements is a priority for future work.
+
+    Specific experimental pathways toward calibration can be identified for
+    each parameter class.  The viable window boundaries
+    ($\text{\'eR}_{\min} = 0.5$, $\text{\'eR}_{\max} = 5.0$) could be
+    constrained by correlating metabolic rate and heart rate variability
+    measurements with clinician-rated consciousness levels across sleep
+    stages, anesthesia depths, and pathological states, using the
+    biological parameter mappings already implemented in the \'eR
+    visualizer.  The Loomfield coupling constant $\kappa_L$ and damping
+    coefficient $\gamma$ could be informed by EEG spatial coherence
+    dynamics: $\kappa_L$ sets the rate at which substrate activity drives
+    field coherence (constrainable via event-related coherence onset
+    latencies), while $\gamma$ governs coherence decay after stimulus
+    offset (constrainable via post-stimulus desynchronization time
+    constants measured at $\sim$200--500\,ms in standard ERP paradigms).
+    Biophoton emission parameters---baseline rate $\dot{N}_0$, Fano
+    factor thresholds distinguishing emission modes, and Kuramoto coupling
+    strength $K$---are directly addressable by ultra-weak photon emission
+    studies such as Murugan and colleagues' ongoing work on neural
+    biophoton correlates \citep{murugan2024biophotons}, which could
+    provide empirical distributions of photon counts and emission
+    statistics from neural tissue under controlled conditions.
+    Microtubule coupling constants ($K_{\mathrm{lat}}$,
+    $K_{\mathrm{long}}$) and decoherence times could be refined against
+    Bandyopadhyay's resonance spectroscopy data
+    \citep{bandyopadhyay2013microtubule}, which provides multi-frequency
+    peak ratios and quality factors for isolated microtubules.  Finally,
+    substrate integration weights ($w_{\mathrm{bio}}$,
+    $w_{\mathrm{ph}}$, $w_{\mathrm{MT}}$ in
+    Eq.~\ref{eq:rho-composition}) could be estimated via multivariate
+    regression of simultaneously recorded bioelectric (EEG/MEG),
+    metabolic (fNIRS/PET), and behavioral measures of conscious state
+    against the platform's predicted $C_{\mathrm{bio}}$ values.
 
     \item \textbf{Spatial resolution.}  The 2D grids ($50 \times 50$ to
     $200 \times 200$) and 3D grids ($64^3$) are coarse compared to real
