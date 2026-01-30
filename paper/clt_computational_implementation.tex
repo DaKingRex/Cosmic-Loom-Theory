@@ -1,0 +1,1961 @@
+\documentclass[12pt, a4paper]{article}
+
+% Packages
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{xcolor}
+\geometry{margin=1in}
+
+\title{Computational Implementation of Cosmic Loom Theory:\\Open-Source Tools for Consciousness Research}
+
+\author{Rex Fraterne$^{1}$ \and Claude AI$^{2}$ \\
+\\
+\small $^{1}$NuTech / The Infinite Kingdom, Independent Research \\
+\small $^{2}$Anthropic
+}
+
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Understanding consciousness remains one of science's deepest challenges, yet most theoretical frameworks lack computational tools that translate formal postulates into testable, quantitative predictions. We present the first comprehensive open-source software suite implementing Cosmic Loom Theory (CLT) v1.1, a field-based framework that models biological consciousness as emergent coherence across coupled energetic substrates. The toolkit comprises five integrated modules: (1)~an Energy Resistance (\'{e}R) phase space visualizer mapping the viable consciousness window $0.5 \leq \text{\'{e}R} \leq 5.0$ from biological measurements; (2)~two-dimensional and three-dimensional Loomfield wave simulators solving the CLT wave equation via leapfrog finite-difference schemes with Mur absorbing boundary conditions; (3)~a Hodgkin--Huxley bioelectric network simulator with gap-junction coupling and morphogenetic pattern dynamics; (4)~a biophoton field simulator capturing four distinct emission regimes---Poissonian, coherent, squeezed, and chaotic---with Kuramoto phase synchronization; (5)~a microtubule quantum coherence simulator modeling 13-protofilament lattices across four oscillation scales with Floquet-driven time-crystal dynamics; and (6)~a DNA constraint engine governing gene expression, epigenetic modulation, and species-specific viable windows. Key results demonstrate that Loomfield coherence collapses under perturbation and recovers through hysteresis, bioelectric gap-junction networks spontaneously form morphogenetic patterns, biophoton Fano factor signatures distinguish healthy from pathological states, and microtubule triplet-of-triplets resonance at golden-ratio frequency ratios ($1:\varphi:\varphi^2$) is selectively disrupted by anesthetic modeling. All simulators produce the unified consciousness observable $C_\text{bio}$ and feed into a 14-metric LoomSense integration layer. The suite includes 277 automated tests across nine modules with continuous integration. All code is freely available at \texttt{github.com/DaKingRex/Cosmic-Loom-Theory} under an open-source license, providing the research community with reproducible tools for investigating consciousness as a physical phenomenon.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+The science of consciousness faces a striking asymmetry: while theoretical
+frameworks have proliferated---Integrated Information Theory
+\citep{tononi2016iit}, Global Neuronal Workspace \citep{dehaene2011gnw}, the
+Conscious Electromagnetic Information field \citep{mcfadden2020cemi}, and
+Orchestrated Objective Reduction \citep{hameroff2014consciousness}, among
+others---the computational tools available for simulating and testing these
+frameworks remain sparse. Most proposals are evaluated through thought
+experiments, philosophical argument, or post-hoc fitting to neuroimaging data.
+Few offer a unified software platform where researchers can simulate the
+proposed dynamics, explore parameter spaces, generate testable predictions,
+and compare healthy and pathological regimes within a single coherent codebase.
+This gap between theory and implementation impedes progress: without
+computational tools, consciousness science cannot move from description to
+prediction.
+
+The problem is especially acute for field-based approaches to consciousness.
+Unlike neural-network models, which inherit decades of machine learning
+infrastructure, frameworks positing that consciousness arises from coherent
+field dynamics across biological substrates have almost no computational
+ecosystem. Researchers studying bioelectric pattern formation
+\citep{levin2014bioelectricity, fields2022morphogenesis}, ultra-weak biophoton
+emission \citep{vanwijk2005biophoton, murugan2024biophotons}, microtubule
+quantum coherence \citep{hameroff2014consciousness, bandyopadhyay2013microtubule},
+or energetic constraints on living systems \citep{picard2025erp,
+schrodinger1944life} each work within their own domain-specific tools, with no
+shared platform for integrating these substrates into a unified picture. This
+fragmentation mirrors the theoretical fragmentation that Cosmic Loom Theory was
+designed to address.
+
+\subsection*{Cosmic Loom Theory: A Brief Overview}
+
+Cosmic Loom Theory (CLT) v1.1 \citep{fraterne2026clt} proposes that
+consciousness is not a product of localized neural computation, but rather an
+emergent property of \emph{coherent dynamics} within a biological system's
+physical substrates. The theory introduces the \emph{Loomfield},
+$L(\mathbf{r}, t)$, an effective scalar field whose coherent excitations
+correspond to conscious states. The Loomfield obeys a damped wave equation
+sourced by a coherence density $\rho_{\mathrm{coh}}$, which is itself generated
+by the coordinated activity of four biological substrates:
+
+\begin{enumerate}
+    \item \textbf{Bioelectric fields}---ion channel networks, gap junction
+    coupling, and membrane potential patterns that maintain tissue-level
+    coherence on millisecond timescales \citep{levin2014bioelectricity}.
+
+    \item \textbf{Biophoton emission}---ultra-weak photon emission from
+    mitochondrial processes, whose spatial and temporal coherence properties
+    may reflect metabolic integration \citep{vanwijk2005biophoton}.
+
+    \item \textbf{Microtubule time crystals}---multi-scale oscillations
+    (kHz through THz) in the tubulin lattice, exhibiting a characteristic
+    triplet-of-triplets resonance pattern with golden-ratio frequency spacing
+    \citep{hameroff2014consciousness, bandyopadhyay2013microtubule}.
+
+    \item \textbf{DNA constraints}---long-timescale genetic and epigenetic
+    factors that constrain the topology of the Loomfield's viable parameter
+    space across development and aging.
+\end{enumerate}
+
+\noindent
+The central quantitative construct of CLT is \emph{Energy Resistance},
+$\acute{e}R = EP / f^2$, adapted from Picard's Energetic Resistance Principle
+\citep{picard2025erp}. This dimensionless ratio of energy present ($EP$) to
+the square of dominant frequency ($f$) defines a phase space in which living
+systems occupy a \emph{viable window}---bounded on one side by chaotic
+decoherence ($\acute{e}R$ too low) and on the other by rigid stasis
+($\acute{e}R$ too high). Consciousness, in this framework, is coherent
+Loomfield activity within the viable window, quantified by the observable
+$C_{\mathrm{bio}} = Q^n \int |\rho_{\mathrm{coh}}| \cdot |\partial L /
+\partial t| \, dV$, where $Q$ is a spatial coherence metric derived from the
+Kuramoto order parameter.
+
+\subsection*{Contributions of This Paper}
+
+This paper presents the first open-source computational platform implementing
+CLT. The platform provides:
+
+\begin{itemize}
+    \item \textbf{Core physics simulators} for the Loomfield wave equation in
+    two and three spatial dimensions, with interactive $\acute{e}R$ phase space
+    visualization including biological state mapping and pathology zone overlays.
+
+    \item \textbf{Biological substrate simulators} for all four CLT substrates:
+    bioelectric field dynamics (single-layer and multi-layer tissue models with
+    Hodgkin-Huxley ion channels and gap junction coupling), biophoton emission
+    (Poissonian, coherent, squeezed, and chaotic modes with metabolic state
+    coupling), microtubule time crystal dynamics (multi-scale Kuramoto
+    oscillators with Floquet driving and anesthesia modeling), and DNA
+    constraint systems (genetic/epigenetic modulation of coherence capacity
+    across developmental stages and species).
+
+    \item \textbf{Morphogenetic field modeling} implementing Levin-style
+    bioelectric pattern memory, target morphology encoding, injury response,
+    and regeneration dynamics \citep{levin2014bioelectricity,
+    fields2022morphogenesis}.
+
+    \item \textbf{Integrated coherence metrics} that map each substrate's state
+    into $\acute{e}R$ phase space, enabling direct comparison of healthy,
+    pathological, and transitional regimes.
+
+    \item \textbf{A comprehensive test suite} of 277 unit tests covering all
+    simulators, physical constraints, and cross-substrate integrations.
+\end{itemize}
+
+The platform is implemented in Python, released under an open-source license,
+and designed for extensibility. All simulations produce quantitative outputs
+that can be compared against experimental measurements as they become
+available---particularly through the planned LoomSense biosensor
+system, which will provide real-time biophoton and bioelectric coherence data
+from human subjects.
+
+\subsection*{Significance}
+
+The significance of this work is threefold. First, it makes CLT
+\emph{computationally tractable}: every theoretical claim in CLT v1.1 can now
+be instantiated as a simulation, its parameters varied, and its predictions
+examined quantitatively. Second, it provides the broader consciousness research
+community with tools for exploring field-based approaches---researchers need not
+accept CLT's specific claims to benefit from simulators that model bioelectric
+coherence, biophoton statistics, or multi-scale oscillatory dynamics. Third, it
+demonstrates that rigorous, well-tested scientific software can emerge from
+independent research outside traditional academic institutions, contributing to
+the democratization of consciousness science.
+
+A recent review of consciousness theories \citep{seth2022theories} emphasized
+the need for frameworks that generate ``clear, testable predictions.'' The
+computational platform presented here is our answer to that challenge: not
+merely a theory, but a working implementation that other researchers can run,
+critique, modify, and extend.
+
+\subsection*{Paper Organization}
+
+The remainder of this paper is organized as follows. Section~2 presents the
+theoretical foundations of CLT as implemented in the platform, including the
+Loomfield equation, $\acute{e}R$ phase space, and coherence metrics. Section~3
+describes the core physics implementation: the $\acute{e}R$ visualizer and the
+2D/3D Loomfield wave simulators. Section~4 details each biological substrate
+simulator. Section~5 addresses cross-substrate integration and pathology
+modeling. Section~6 covers the software architecture, testing strategy, and
+repository structure. Section~7 presents key results and demonstrations.
+Section~8 discusses contributions, limitations, and future directions including
+LoomSense integration.
+
+\section{Theoretical Foundation}
+\label{sec:theory}
+
+This section presents the mathematical framework underlying the computational
+platform. We describe three interconnected constructs: the Loomfield wave
+equation (\S2.1), the Energy Resistance phase space (\S2.2), and the coherence
+metrics that connect both to measurable observables (\S2.3). Full derivations
+appear in CLT v1.1 \citep{fraterne2026clt}; here we emphasize the forms
+implemented in software.
+
+\subsection{The Loomfield Equation}
+
+The central dynamical object in CLT is the \emph{Loomfield}, a real-valued
+scalar field $L(\mathbf{r}, t)$ defined over the spatial extent of a biological
+system. The Loomfield is an \emph{effective field}: it does not posit new
+fundamental physics, but rather provides a coarse-grained description of the
+coherent dynamics generated collectively by the biological substrates. This
+approach follows the tradition of effective field theories in condensed matter
+physics, where macroscopic order parameters emerge from microscopic degrees of
+freedom without requiring a reduction to those degrees of freedom
+\citep{anderson1972more}.
+
+The Loomfield obeys a sourced, damped wave equation:
+
+\begin{equation}
+\label{eq:loomfield}
+\nabla^2 L \;-\; \frac{1}{v_L^2} \frac{\partial^2 L}{\partial t^2}
+\;-\; \frac{\gamma}{v_L^2} \frac{\partial L}{\partial t}
+\;=\; \kappa_L \cdot \rho_{\mathrm{coh}}
+\end{equation}
+
+\noindent
+where:
+
+\begin{description}
+    \item[$L(\mathbf{r}, t)$] is the Loomfield amplitude at position
+    $\mathbf{r}$ and time $t$. Coherent, spatially organized excitations of
+    $L$ correspond to conscious states; incoherent or attenuated $L$ corresponds
+    to reduced or absent consciousness.
+
+    \item[$v_L$] is the effective propagation velocity of Loomfield
+    disturbances. This is \emph{not} the speed of light---it reflects the
+    characteristic velocity at which coherence information propagates through
+    the biological medium (e.g., gap junction signaling, bioelectric wave
+    propagation). In our simulations we treat $v_L$ as a tunable parameter
+    (default $v_L = 1.0$ in normalized units).
+
+    \item[$\gamma$] is a damping coefficient representing dissipative processes
+    (metabolic losses, thermal decoherence, structural degradation) that
+    attenuate the field in the absence of active sourcing. Without sources,
+    the Loomfield decays---consciousness requires continuous energetic
+    maintenance.
+
+    \item[$\kappa_L$] is the coupling constant between the field and its
+    coherence sources. Larger $\kappa_L$ means the biological substrates
+    more strongly drive the Loomfield.
+
+    \item[$\rho_{\mathrm{coh}}(\mathbf{r}, t)$] is the \emph{coherence source
+    density}---the spatial distribution of biological processes that generate
+    and maintain field coherence. This is where the four biological substrates
+    enter the theory: bioelectric patterns, biophoton emission, microtubule
+    oscillations, and DNA-constrained parameters all contribute to
+    $\rho_{\mathrm{coh}}$.
+\end{description}
+
+\noindent
+The wave equation structure is deliberate. The $\nabla^2 L$ term ensures that
+coherent spatial patterns---standing waves, propagating fronts, resonant
+modes---are natural solutions, consistent with the observation that conscious
+states involve spatially extended, coordinated neural and somatic activity.
+The damping term $\gamma \, \partial L / \partial t$ ensures that consciousness
+is not a free lunch: without ongoing substrate activity ($\rho_{\mathrm{coh}}
+\neq 0$), the field decays to zero. Anesthesia, deep coma, and death
+correspond to conditions where $\rho_{\mathrm{coh}}$ diminishes and the
+Loomfield can no longer sustain coherent excitations.
+
+Figure~\ref{fig:loomfield-equation} presents the equation with its variable definitions, and Figures~\ref{fig:loomfield-2d-healthy}--\ref{fig:loomfield-3d-pathology}
+show representative 2D and 3D solutions under healthy and pathological source
+configurations.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_01_loomfield_equation.png}
+    \caption{The Loomfield wave equation and its constituent variables. The sourced, damped wave equation (Eq.~\ref{eq:loomfield}) governs the effective scalar field $L(\mathbf{r},t)$, with propagation velocity $v_L$, damping coefficient $\gamma$, coupling constant $\kappa_L$, and coherence source density $\rho_{\mathrm{coh}}$ generated by the four biological substrates.}
+    \label{fig:loomfield-equation}
+\end{figure}
+
+\subsection{Energy Resistance (\'{e}R) and the Viable Window}
+
+Not all energetic regimes support consciousness. A system with too little
+energy relative to its dynamical timescale cannot maintain coherence (it
+decoheres into noise), while a system with too much energy relative to its
+timescale becomes rigidly locked and cannot adapt (it freezes into a fixed
+pattern). CLT formalizes this intuition through the \emph{Energy Resistance}
+parameter, adapted from Picard's Energetic Resistance Principle
+\citep{picard2025erp}:
+
+\begin{equation}
+\label{eq:er}
+\acute{e}R \;=\; \frac{EP}{f^2}
+\end{equation}
+
+\noindent
+where $EP$ denotes the \emph{Energy Present}---the available energetic
+capacity of the system, incorporating metabolic rate, pattern energy
+(deviation of membrane potentials from resting state), and substrate
+coupling strength---and $f$ denotes the dominant \emph{frequency} of system
+dynamics, reflecting the rate of energetic throughput and oscillatory activity.
+
+Equation~\eqref{eq:er} defines a two-dimensional phase space $(f, EP)$ in
+which $\acute{e}R$ appears as a family of parabolic contours
+$EP = \acute{e}R \cdot f^2$. The \emph{viable window} is the region between
+two critical thresholds:
+
+\begin{equation}
+\label{eq:viable}
+\acute{e}R_{\min} \;\leq\; \acute{e}R \;\leq\; \acute{e}R_{\max}
+\end{equation}
+
+\noindent
+with $\acute{e}R_{\min} = 0.5$ and $\acute{e}R_{\max} = 5.0$ in our
+implementation. These boundaries delineate three regimes:
+
+\begin{description}
+    \item[Chaos regime ($\acute{e}R < \acute{e}R_{\min}$):] Energy throughput
+    overwhelms the system's capacity for organization. Biological correlates
+    include seizure, high fever, psychotic mania, and excitotoxic injury.
+    The Loomfield cannot maintain spatial coherence; $Q \to 0$.
+
+    \item[Viable window ($\acute{e}R_{\min} \leq \acute{e}R \leq
+    \acute{e}R_{\max}$):] The system maintains sufficient energy to sustain
+    coherence without being overwhelmed or frozen. Normal conscious states---
+    resting wakefulness, focused attention, flow, REM sleep, meditation---all
+    reside within this window, at different $(f, EP)$ coordinates (Figure~\ref{fig:er-biological-mapping}).
+
+    \item[Rigidity regime ($\acute{e}R > \acute{e}R_{\max}$):] The system is
+    energetically over-constrained relative to its dynamics. Biological
+    correlates include catatonia, severe depression, hypothermia, and
+    neurodegenerative rigidity. The Loomfield becomes static; $\partial L /
+    \partial t \to 0$.
+\end{description}
+
+\noindent
+The mapping from biological observables to $\acute{e}R$ coordinates is
+substrate-specific. For the bioelectric simulator, $EP$ is derived from
+the pattern energy $\langle (V_m - V_{\mathrm{rest}})^2 \rangle$ and
+$f$ from the spatial coherence and gap junction connectivity:
+$f \propto (1 - Q) \cdot (2 - g_{\mathrm{conn}})$, where $g_{\mathrm{conn}}$
+is the normalized gap junction conductance. For biophoton emission, $EP$
+derives from total emission rate and $f$ from mitochondrial activity modulated
+by phase coherence. Each substrate's \texttt{map\_to\_er\_space()} method
+implements these mappings, enabling direct comparison across substrates within
+a shared phase space (Section~5).
+
+Figure~\ref{fig:er-concept} presents the $\acute{e}R$ phase space with viable window boundaries.
+Figure~\ref{fig:er-biological-mapping} maps biological states (resting, sleep stages, exercise, meditation,
+flow) onto this space. Figure~\ref{fig:er-pathology} overlays pathology zones (seizure, depression,
+neurodegeneration, psychosis) as elliptical regions displaced from the viable
+window.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_02_er_core_concept.png}
+    \caption{The Energy Resistance (\'eR) phase space. The two-dimensional $(f, \mathrm{EP})$ parameter space is colored by $\text{\'eR} = \mathrm{EP}/f^2$, with the viable consciousness window ($0.5 \leq \text{\'eR} \leq 5.0$) bounded by parabolic contours. The chaos regime ($\text{\'eR} < 0.5$) and rigidity regime ($\text{\'eR} > 5.0$) represent states incompatible with sustained conscious dynamics.}
+    \label{fig:er-concept}
+\end{figure}
+
+\subsection{Coherence Metrics and $C_{\mathrm{bio}}$}
+
+CLT's central claim---that consciousness corresponds to coherent Loomfield
+dynamics within the viable window---requires quantitative coherence metrics.
+The platform implements two primary measures: the spatial coherence $Q$ and the
+consciousness observable $C_{\mathrm{bio}}$.
+
+\subsubsection*{Spatial Coherence $Q$}
+
+The spatial coherence metric $Q$ quantifies how organized the Loomfield (or
+substrate state) is across space. For the Loomfield simulator, $Q$ combines
+a normalized spatial autocorrelation with a roughness penalty:
+
+\begin{equation}
+\label{eq:Q_loomfield}
+Q_L \;=\; \frac{1 + \bar{r}}{1 + \epsilon \, \mathcal{R}}
+\end{equation}
+
+\noindent
+where $\bar{r}$ is the mean spatial autocorrelation at a characteristic
+lag $\delta = N/10$ (approximately 10\% of the domain size):
+
+\begin{equation}
+\bar{r} \;=\; \frac{1}{2} \left(
+\frac{\sum_{ij} L_{ij} \, L_{i+\delta,\,j}}{\sum_{ij} L_{ij}^2}
+\;+\;
+\frac{\sum_{ij} L_{ij} \, L_{i,\,j+\delta}}{\sum_{ij} L_{ij}^2}
+\right)
+\end{equation}
+
+\noindent
+and $\mathcal{R} = \sum (\nabla^2 L)^2 \big/ \sum L^2$ is a roughness measure
+(ratio of Laplacian energy to total energy), with $\epsilon = 10^{-3}$
+as a regularization constant. The numerator rewards spatial correlation;
+the denominator penalizes high-frequency roughness. For a perfectly coherent
+plane wave, $\bar{r} \to 1$ and $\mathcal{R}$ is moderate, yielding
+$Q_L \approx 1.5$--$2.0$. For incoherent noise, $\bar{r} \to 0$ and
+$\mathcal{R}$ is large, yielding $Q_L \ll 1$.
+
+For the bioelectric substrate, a different but analogous metric is used:
+
+\begin{equation}
+\label{eq:Q_bioelectric}
+Q_{\mathrm{bio}} \;=\; \exp\!\left(-2 \, \frac{\sigma_{V}}{\bar{V}}\right)
+\end{equation}
+
+\noindent
+where $\sigma_V / \bar{V}$ is the coefficient of variation of the normalized
+membrane potential field. This maps the statistical spread of voltage states
+to a $[0, 1]$ coherence index: uniform tissue ($\sigma_V \to 0$) gives
+$Q \to 1$; spatially heterogeneous tissue gives $Q \to 0$.
+
+For the microtubule simulator, coherence is measured via the Kuramoto order
+parameter \citep{kuramoto1984chemical}:
+
+\begin{equation}
+\label{eq:Q_kuramoto}
+R_s \;=\; \left| \frac{1}{N_p \cdot N_t}
+\sum_{j=1}^{N_p} \sum_{k=1}^{N_t} e^{\,i\,\theta_{jk}^{(s)}} \right|
+\end{equation}
+
+\noindent
+where $\theta_{jk}^{(s)}$ is the oscillation phase of protofilament~$j$,
+tubulin~$k$ at frequency scale~$s$ (kHz, MHz, GHz, or THz), $N_p = 13$ is the
+number of protofilaments, and $N_t$ is the number of tubulins. $R_s = 1$
+indicates perfect phase synchronization at scale~$s$; $R_s \to 0$ indicates
+random phases. The overall microtubule coherence is the mean across all four
+scales: $\bar{R} = \frac{1}{4}(R_{\mathrm{kHz}} + R_{\mathrm{MHz}} +
+R_{\mathrm{GHz}} + R_{\mathrm{THz}})$.
+
+\subsubsection*{The Consciousness Observable $C_{\mathrm{bio}}$}
+
+The consciousness observable integrates spatial coherence with the
+\emph{active dynamics} of the Loomfield. A perfectly coherent but static
+field ($\partial L / \partial t = 0$) carries no information flow and thus
+does not correspond to a conscious state. Conversely, vigorous dynamics with
+no spatial organization correspond to noise, not consciousness. Both
+coherence \emph{and} activity are required:
+
+\begin{equation}
+\label{eq:cbio}
+C_{\mathrm{bio}} \;=\; Q^{\,n} \;\cdot\; \int_V
+\left|\rho_{\mathrm{coh}}(\mathbf{r}, t)\right| \cdot
+\left|\frac{\partial L}{\partial t}\right| \, dV
+\end{equation}
+
+\noindent
+where $n \geq 1$ is a nonlinearity exponent (our implementation uses $n = 2$)
+that sharply penalizes low-coherence states: halving $Q$ reduces
+$C_{\mathrm{bio}}$ by a factor of four. The integrand $|\rho_{\mathrm{coh}}|
+\cdot |\partial L / \partial t|$ measures the local coupling between source
+activity and field dynamics---it is large only where the substrates are
+actively driving a changing field.
+
+This formulation makes $C_{\mathrm{bio}}$ a genuinely \emph{measurable}
+quantity in principle. Each factor maps to observables:
+
+\begin{itemize}
+    \item $Q$ can be estimated from EEG spatial coherence, fMRI functional
+    connectivity, or bioelectric imaging of tissue voltage patterns.
+    \item $|\partial L / \partial t|$ corresponds to the rate of change of
+    coherent field activity, measurable through event-related potentials,
+    time-varying connectivity, or biophoton emission dynamics.
+    \item $|\rho_{\mathrm{coh}}|$ is the local source strength, derivable
+    from metabolic imaging (PET, fNIRS), biophoton count rates, or
+    microtubule oscillation amplitudes.
+\end{itemize}
+
+\noindent
+The planned LoomSense wearable system (Section~8.3) is designed to provide
+simultaneous biophoton and bioelectric coherence measurements from which
+approximate $C_{\mathrm{bio}}$ values can be computed in real time, closing
+the loop between simulation and experiment.
+
+\section{Core Physics Implementation}
+\label{sec:core-physics}
+
+The core physics layer of the CLT computational suite comprises three
+interconnected simulators that translate the theoretical framework of
+Section~\ref{sec:theory} into explorable, quantitative tools.  Each simulator
+targets a distinct aspect of the Loomfield dynamics: the \'eR phase space
+explorer maps the viable window of consciousness, the 2D wave simulator
+demonstrates real-time Loomfield propagation and coherence, and the 3D
+simulator extends these dynamics to volumetric brain-scale fields.  All three
+are implemented in Python using NumPy for numerics and Matplotlib/Plotly for
+visualization.
+
+%% -----------------------------------------------------------------------
+\subsection{\'eR Phase Space Visualizer}
+\label{sec:er-visualizer}
+
+\subsubsection*{Purpose}
+
+The Energy Resistance phase space visualizer is an interactive exploration tool
+that renders the two-dimensional $(\text{EP},\,f)$ parameter space defined by
+Eq.~\eqref{eq:er}, overlaying the viable window
+$0.5 \le \text{\'eR} \le 5.0$, biological reference states, and clinical
+pathology zones.  Its primary role is to provide intuition about how the single
+scalar \'eR partitions physiological and pathological regimes.
+
+\subsubsection*{Implementation}
+
+The visualizer discretizes the phase space on a $500 \times 500$ grid spanning
+$\text{EP} \in [0.1,\,10.0]$ and $f \in [0.1,\,5.0]$.  At each grid point,
+\'eR is computed vectorially:
+%
+\begin{equation}
+    \text{\'eR}_{ij} = \frac{\text{EP}_i}{f_j^{\,2}}\,,
+    \label{eq:er-grid}
+\end{equation}
+%
+producing a smooth scalar field rendered with a custom five-stop diverging
+colormap (deep purple for the chaos regime, green for the viable window, blue
+for rigidity).  Logarithmic normalization of the color scale ensures that
+both extreme tails remain visually distinguishable.
+
+The viable window boundaries are drawn as analytic curves
+$\text{EP} = \text{\'eR}_{\min}\,f^{2}$ and
+$\text{EP} = \text{\'eR}_{\max}\,f^{2}$, evaluated at 200 frequency sample
+points and clipped to the visible domain.  The enclosed region is shaded with
+15\% alpha transparency.
+
+\paragraph{Biological parameter mappings.}
+To connect the abstract $(\text{EP},f)$ axes to measurable physiology, three
+nonlinear mappings are provided:
+%
+\begin{itemize}
+    \item \textbf{HRV $\to$ frequency:}
+    $f = 4.5 - 1.5\,\log_{10}(\text{HRV}_{\text{ms}}/10)$, reflecting the
+    inverse relationship between parasympathetic tone and oscillatory
+    frequency.
+    \item \textbf{Metabolic rate $\to$ EP:}
+    $\text{EP} = 1.5 + (\dot{E}_{\text{kcal/hr}} - 40)\,(8.0/960)$, a
+    linear mapping from caloric expenditure into energy-present units.
+    \item \textbf{EEG band $\to$ frequency:}  Discrete mapping from canonical
+    bands (delta $\to 0.5$\,Hz, theta $\to 0.8$\,Hz, alpha $\to 1.2$\,Hz,
+    beta $\to 2.5$\,Hz, gamma $\to 4.0$\,Hz).
+\end{itemize}
+%
+When ``biological mode'' is enabled, the axes are relabeled with these
+physiological units, allowing the same phase portrait to be read in either
+abstract or clinical coordinates.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_03_er_biological_mapping.png}
+    \caption{Biological states mapped into \'eR phase space. Seven reference conscious states---resting wakefulness, deep sleep, REM sleep, focused attention, exercise, deep meditation, and flow---are plotted at their characteristic $(\mathrm{EP}, f)$ coordinates within the viable window. Nonlinear mappings from heart rate variability, metabolic rate, and EEG frequency band provide the physiological axes.}
+    \label{fig:er-biological-mapping}
+\end{figure}
+
+\paragraph{Interactive controls.}
+Slider widgets allow real-time adjustment of the chaos threshold
+$\text{\'eR}_{\min} \in [0.1,\,2.0]$ and rigidity threshold
+$\text{\'eR}_{\max} \in [2.0,\,15.0]$, permitting users to explore how
+boundary sensitivity affects the classification of biological states.
+Toggle checkboxes overlay seven pathology zones (depression, anxiety, mania,
+seizure, dissociation, ADHD, PTSD), each represented as a colored ellipse
+centered at its characteristic $(\text{EP},f)$ coordinate with physiologically
+motivated spread parameters (see Figure~\ref{fig:er-pathology}).
+
+\subsubsection*{Insights}
+
+The visualizer makes several non-obvious features of the \'eR landscape
+visually immediate (Figs.~\ref{fig:er-concept}--\ref{fig:er-pathology}):
+%
+\begin{enumerate}
+    \item The viable window is \emph{asymmetric}---it narrows at high
+    frequencies and broadens at low frequencies, explaining why high-frequency
+    chaotic dynamics (anxiety, mania) are harder to stabilize than
+    low-frequency rigid states (deep sleep).
+    \item Healthy biological states cluster in a crescent-shaped locus within
+    the viable window, while pathological states fall outside or on the
+    boundary.
+    \item Clinical trajectories (e.g., recovery from decompensation) trace
+    characteristic spiraling paths through phase space as the system
+    re-enters the viable window.
+\end{enumerate}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_04_er_pathology_zones.png}
+    \caption{Pathology zones and clinical trajectories in \'eR phase space. Seven pathological conditions---depression, anxiety, mania, seizure, dissociation, ADHD, and PTSD---are represented as colored ellipses displaced from the viable window toward the chaos or rigidity boundaries. Arrows indicate characteristic recovery trajectories as clinical interventions restore the system to the viable window.}
+    \label{fig:er-pathology}
+\end{figure}
+
+%% -----------------------------------------------------------------------
+\subsection{2D Loomfield Wave Simulator}
+\label{sec:2d-loomfield}
+
+\subsubsection*{Purpose}
+
+The 2D Loomfield simulator solves the full wave equation
+(Eq.~\eqref{eq:loomfield}) on a planar domain, providing real-time
+visualization of coherence wave propagation, interference, and disruption.  It
+is the primary tool for building intuition about how spatial coherence $Q$ and
+the consciousness observable $C_{\mathrm{bio}}$ respond to source
+configuration and perturbation.
+
+\subsubsection*{Numerical method}
+
+The simulator discretizes the Loomfield equation on a uniform
+$200 \times 200$ Cartesian grid covering a $10.0 \times 10.0$ physical-unit
+domain (spatial step $\Delta x = 0.05$).  Time integration uses a
+second-order leapfrog (Verlet) scheme:
+%
+\begin{equation}
+    L_{i,j}^{n+1} = 2\,L_{i,j}^{n} - L_{i,j}^{n-1}
+    + (v_L\,\Delta t)^2\,\nabla^2_h L_{i,j}^{n}
+    - \gamma\,(L_{i,j}^{n} - L_{i,j}^{n-1})
+    + \Delta t\;\kappa_L\,\rho_{\mathrm{coh},\,i,j}^{n}\,,
+    \label{eq:leapfrog}
+\end{equation}
+%
+where the discrete Laplacian uses the standard five-point stencil:
+%
+\begin{equation}
+    \nabla^2_h L_{i,j} = \frac{L_{i+1,j} + L_{i-1,j} + L_{i,j+1}
+    + L_{i,j-1} - 4\,L_{i,j}}{\Delta x^2}\,.
+    \label{eq:5pt-laplacian}
+\end{equation}
+%
+The time step is set by the CFL stability condition
+$\Delta t = 0.4\,\Delta x / (v_L\sqrt{2}) \approx 0.0141$ for the default
+propagation speed $v_L = 1.0$.  Damping $\gamma = 0.001$ provides weak
+energy dissipation that prevents unbounded growth without artificially
+suppressing coherent dynamics.
+
+\paragraph{Boundary conditions.}
+Mur's first-order absorbing boundary condition~\citep{hodgkinhuxley1952} is
+applied on all four domain edges to simulate an open, non-reflecting
+boundary.  For the left edge, for example:
+%
+\begin{equation}
+    L_{0,j}^{n+1} = L_{1,j}^{n}
+    + \frac{c_r - 1}{c_r + 1}\bigl(L_{1,j}^{n+1} - L_{0,j}^{n}\bigr)\,,
+    \qquad c_r = \frac{v_L\,\Delta t}{\Delta x}\,.
+    \label{eq:mur-abc}
+\end{equation}
+%
+Analogous expressions hold for the right, top, and bottom edges.  These
+absorbing boundaries prevent artificial standing-wave modes that would
+contaminate coherence measurements.
+
+\paragraph{Source terms.}
+Coherence sources are modeled as Gaussian-enveloped oscillators injected into
+$\rho_{\mathrm{coh}}$:
+%
+\begin{equation}
+    \rho_{\mathrm{coh}}(\mathbf{r},t) = \sum_k s_k
+    \exp\!\Bigl(-\frac{|\mathbf{r} - \mathbf{r}_k|^2}{2\sigma_k^2}\Bigr)
+    \sin(2\pi f_k\,t + \phi_k)\,,
+    \label{eq:source-2d}
+\end{equation}
+%
+where each source $k$ has position $\mathbf{r}_k$, strength $s_k$, spatial
+radius $\sigma_k$, oscillation frequency $f_k$, and phase offset $\phi_k$.
+Pulse-type sources use a damped cosine wavelet
+$\cos(4\pi\,\Delta t)\,\exp(-\Delta t/0.3)$ instead of the sustained
+sinusoidal term.
+
+\paragraph{Coherence and consciousness computation.}
+At each visualization frame, the simulator evaluates $Q$ and
+$C_{\mathrm{bio}}$ from the live field state.  The spatial coherence metric
+$Q$ is computed as described in Eq.~\eqref{eq:Q_loomfield}, with the
+autocorrelation shift set to 10\% of the domain size
+($\approx 20$ grid points).  The consciousness observable uses the
+discretized form:
+%
+\begin{equation}
+    C_{\mathrm{bio}} = Q^2
+    \sum_{i,j} |\rho_{\mathrm{coh},\,i,j}|\;
+    \Bigl|\frac{L_{i,j}^{n} - L_{i,j}^{n-1}}{\Delta t}\Bigr|\;
+    \Delta x^2\,.
+    \label{eq:cbio-discrete-2d}
+\end{equation}
+
+\subsubsection*{Preset configurations}
+
+Three preset source configurations demonstrate the relationship between
+coherence geometry and consciousness:
+%
+\begin{description}
+    \item[Healthy (coherent):] A central source ($s=1.5$, $f=1.5$\,Hz) ringed
+    by six phase-locked satellites at radius~2.5 ($s=0.8$, same frequency and
+    phase).  This produces organized concentric interference patterns with
+    $Q \sim 1.5$--$1.8$ and substantial $C_{\mathrm{bio}}$
+    (Fig.~\ref{fig:loomfield-2d-healthy}).
+    %
+    \item[Pathology (incoherent):] Seven sources with mismatched frequencies
+    ($0.5$--$3.0$\,Hz) and random phases.  The resulting chaotic interference
+    drives $Q$ below~$1.0$ and $C_{\mathrm{bio}}$ near zero
+    (Fig.~\ref{fig:loomfield-2d-pathology}).
+    %
+    \item[Healing (re-coupling):] Eight ring sources with a gradual phase
+    gradient ($\phi = \theta/2$) converging toward a strong central attractor
+    ($s=1.8$).  The system transitions from disordered to organized
+    wavefronts, with $Q$ and $C_{\mathrm{bio}}$ rising over time
+    (Fig.~\ref{fig:loomfield-2d-healing}).
+\end{description}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{../paper_figures/fig_05_loomfield_2d_healthy.png}
+        \caption{Healthy (coherent) configuration}
+        \label{fig:loomfield-2d-healthy}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{../paper_figures/fig_06_loomfield_2d_pathology.png}
+        \caption{Pathological (incoherent) configuration}
+        \label{fig:loomfield-2d-pathology}
+    \end{subfigure}
+    \caption{2D Loomfield wave simulator: healthy coherence versus pathological fragmentation. (a)~Phase-locked sources produce organized concentric wavefronts with high spatial coherence ($Q \sim 1.7$) and substantial $C_{\mathrm{bio}}$. (b)~Frequency-mismatched sources with random phases generate chaotic interference patterns, driving $Q$ below 1.0 and $C_{\mathrm{bio}}$ near zero despite comparable total field energy.}
+\end{figure}
+
+\subsubsection*{Perturbation experiments}
+
+The simulator supports injection of localized high-frequency noise to model
+acute disruption (e.g., trauma, pharmacological insult).  A perturbation at
+position $\mathbf{r}_p$ with strength $A$ and radius $R$ modifies both the
+field and its time derivative:
+%
+\begin{align}
+    L &\;\leftarrow\; L + A\,\exp\!\bigl(-|\mathbf{r}-\mathbf{r}_p|^2
+    / 2R^2\bigr)\,\eta(\mathbf{r})\,, \label{eq:perturb-field} \\
+    \dot{L} &\;\leftarrow\; \dot{L} + \tfrac{1}{2}A\,
+    \exp\!\bigl(-|\mathbf{r}-\mathbf{r}_p|^2 / 2R^2\bigr)\,
+    \eta'(\mathbf{r})\,, \label{eq:perturb-vel}
+\end{align}
+%
+where $\eta,\eta'$ are independent minimally smoothed Gaussian random fields
+($\sigma_{\text{smooth}} = 1$ grid point).  Crucially, the perturbation
+scrambles both position \emph{and} momentum of the field, ensuring that
+recovery requires genuine re-coherence rather than simple amplitude
+restoration.
+
+\subsubsection*{Insights}
+
+The 2D simulator reveals that $C_{\mathrm{bio}}$ is not simply a measure of
+field energy.  High-amplitude but incoherent fields (pathology preset) produce
+negligible consciousness despite large $\sum L^2$, while moderate-amplitude
+coherent fields (healthy preset) yield high $C_{\mathrm{bio}}$.  The $Q^2$
+prefactor enforces this distinction quantitatively: at $Q=1.8$ (coherent) the
+multiplier is~3.24, whereas at $Q=0.7$ (incoherent) it collapses to~0.49.
+This six-fold sensitivity to coherence versus mere energy is one of CLT's
+central predictions (Figs.~\ref{fig:loomfield-2d-healthy}--\ref{fig:loomfield-2d-healing}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_07_loomfield_2d_healing.png}
+    \caption{Healing dynamics in the 2D Loomfield simulator. Eight ring sources with a gradual phase gradient converge toward a central attractor, driving the system from disordered to organized wavefronts. Spatial coherence $Q$ and the consciousness observable $C_{\mathrm{bio}}$ rise over time, demonstrating coherence recovery through hysteresis---a key prediction of CLT.}
+    \label{fig:loomfield-2d-healing}
+\end{figure}
+
+%% -----------------------------------------------------------------------
+\subsection{3D Loomfield Simulator}
+\label{sec:3d-loomfield}
+
+\subsubsection*{Purpose}
+
+The 3D simulator extends the Loomfield wave equation to a volumetric domain,
+enabling brain-scale modeling of coherence fields in three spatial dimensions.
+It produces both orthogonal slice views (for comparison with neuroimaging data)
+and interactive isosurface renderings (for intuitive exploration of field
+topology).
+
+\subsubsection*{Extension to three dimensions}
+
+The numerical scheme is a direct generalization of the 2D leapfrog method
+(Eq.~\eqref{eq:leapfrog}) to a $64^3$ uniform grid on a
+$10.0 \times 10.0 \times 10.0$ cubic domain ($\Delta x \approx 0.156$).  The
+five-point Laplacian becomes the seven-point stencil:
+%
+\begin{equation}
+    \nabla^2_h L_{i,j,k} = \frac{
+    L_{i\pm1,j,k} + L_{i,j\pm1,k} + L_{i,j,k\pm1} - 6\,L_{i,j,k}
+    }{\Delta x^2}\,,
+    \label{eq:7pt-laplacian}
+\end{equation}
+%
+and the CFL condition becomes $\Delta t = 0.4\,\Delta x / (v_L\sqrt{3})
+\approx 0.036$ to account for diagonal wave propagation across three axes.
+Mur's absorbing boundary condition is applied independently on all six cube
+faces using the same one-dimensional update formula
+(Eq.~\eqref{eq:mur-abc}).
+
+All field arrays use \texttt{float32} precision and the reciprocal
+$1/\Delta x^2$ is precomputed to minimize floating-point division overhead.
+Sources are Gaussian spheres:
+%
+\begin{equation}
+    \rho_{\mathrm{coh}}(\mathbf{r},t) = \sum_k s_k
+    \exp\!\Bigl(-\frac{|\mathbf{r}-\mathbf{r}_k|^2}{2\sigma_k^2}\Bigr)
+    \sin(2\pi f_k\,t + \phi_k)\,,
+    \label{eq:source-3d}
+\end{equation}
+%
+identical in form to the 2D case (Eq.~\eqref{eq:source-2d}) but evaluated on
+a three-dimensional coordinate grid.
+
+\subsubsection*{Coherence in three dimensions}
+
+The spatial coherence metric $Q$ generalizes naturally by averaging
+autocorrelation over all three axes:
+%
+\begin{equation}
+    Q_{3D} = \frac{1 + \bar{C}}{1 + 0.001\,\mathcal{R}}\,,\qquad
+    \bar{C} = \frac{1}{3}\sum_{\alpha=x,y,z}
+    \frac{\sum_{i,j,k} L_{i,j,k}\,
+    L^{(\alpha\text{-shifted})}_{i,j,k}}{\sum_{i,j,k} L_{i,j,k}^2}\,,
+    \label{eq:q-3d}
+\end{equation}
+%
+where each shifted copy is displaced by $N/10 \approx 6$ grid points along
+axis $\alpha$.  The consciousness observable uses a \emph{cubic} coherence
+penalty:
+%
+\begin{equation}
+    C_{\mathrm{bio}}^{(3D)} = Q^3
+    \sum_{i,j,k} |\rho_{\mathrm{coh},\,i,j,k}|\;
+    \Bigl|\frac{L_{i,j,k}^{n} - L_{i,j,k}^{n-1}}{\Delta t}\Bigr|\;
+    \Delta x^3\,.
+    \label{eq:cbio-3d}
+\end{equation}
+%
+The stronger $Q^3$ exponent (compared with $Q^2$ in 2D) reflects the fact
+that maintaining coherence across a three-dimensional volume is intrinsically
+more demanding: chaotic dynamics accumulate across a larger number of
+independent spatial modes, so the penalty for incoherence must grow
+correspondingly.
+
+\subsubsection*{Visualization}
+
+The 3D simulator provides two complementary rendering modes:
+
+\paragraph{Orthogonal slice views.}
+Any axis-aligned plane can be extracted at arbitrary position via
+$L[i_0,:,:]$, $L[:,j_0,:]$, or $L[:,:,k_0]$, producing familiar 2D
+heatmaps that can be directly compared with fMRI or EEG source-localized
+maps.  The default display shows three mutually orthogonal midplane slices
+(Fig.~\ref{fig:loomfield-3d-healthy}, right panels).
+
+\paragraph{Volumetric isosurface rendering.}
+For publication figures (Figs.~\ref{fig:loomfield-3d-healthy}--\ref{fig:loomfield-3d-pathology}),
+the field is thresholded at $\pm 30\%$ of the peak amplitude to separate
+positive (gold/warm) and negative (blue/cool) coherence regions.  A
+scatter-based volumetric renderer samples the super-threshold voxels on a
+downsampled grid (stride $\approx N/26$) with point size and alpha
+proportional to local amplitude, yielding a pseudo-isosurface that conveys
+three-dimensional field topology without requiring dedicated surface-meshing
+libraries.  For interactive use, Plotly's native volume trace with 20
+iso-levels and a custom blue--dark--gold opacity ramp provides smooth,
+rotatable renderings.
+
+\subsubsection*{Preset configurations and insights}
+
+The 3D simulator ships with three presets that mirror the 2D configurations:
+%
+\begin{description}
+    \item[Healthy (coherent):] A central source plus six octahedrally arranged
+    satellites at radius~2.5, all phase-locked at $f = 1.2$\,Hz.  The
+    resulting field forms concentric spherical shells of alternating sign, with
+    high~$Q$ and large~$C_{\mathrm{bio}}$.
+    %
+    \item[Pathology (incoherent):] Six sources with scattered positions,
+    varied frequencies ($0.7$--$2.8$\,Hz), and random phases.  The field
+    degenerates into amorphous blobs with low~$Q$ and near-zero
+    $C_{\mathrm{bio}}$.
+    %
+    \item[Healing (re-coupling):] Eight ring sources with a smooth azimuthal
+    phase gradient plus a dominant central attractor, producing organized
+    traveling spirals that gradually coalesce.
+\end{description}
+%
+Comparing the 2D and 3D healthy presets highlights how the additional spatial
+dimension enriches coherence topology: the 3D field supports nested shells,
+toroidal modes, and spiral wavefronts that have no direct 2D analog, providing
+richer structure for the consciousness observable to detect.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{../paper_figures/fig_08_loomfield_3d_healthy.png}
+        \caption{Healthy (coherent) 3D field}
+        \label{fig:loomfield-3d-healthy}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{../paper_figures/fig_09_loomfield_3d_pathology.png}
+        \caption{Pathological (incoherent) 3D field}
+        \label{fig:loomfield-3d-pathology}
+    \end{subfigure}
+    \caption{3D Loomfield isosurface renderings. (a)~Coherent configuration: a central source with six octahedrally arranged phase-locked satellites produces concentric spherical shells of alternating sign, yielding high $Q$ and large $C_{\mathrm{bio}}^{(3D)}$. (b)~Pathological configuration: scattered sources with varied frequencies and random phases degenerate into amorphous blobs with low $Q$ and near-zero $C_{\mathrm{bio}}^{(3D)}$. Positive coherence regions rendered in gold; negative in blue.}
+\end{figure}
+
+\section{Biological Substrate Simulators}
+\label{sec:substrates}
+
+The Loomfield is sourced by four biological substrates, each operating at a
+characteristic spatiotemporal scale.  This section describes the dedicated
+simulator for each substrate: bioelectric field dynamics (\S\ref{sec:bioelectric}),
+biophoton emission (\S\ref{sec:biophoton}), microtubule time-crystal oscillations
+(\S\ref{sec:microtubule}), and DNA-level constraints (\S\ref{sec:dna}).
+Every simulator exposes a \texttt{map\_to\_er\_space()} method that projects its
+internal state into the shared \'eR phase space of Section~\ref{sec:er-visualizer},
+enabling direct cross-substrate comparison within a unified framework.
+
+%% -----------------------------------------------------------------------
+\subsection{Bioelectric Field Dynamics}
+\label{sec:bioelectric}
+
+\subsubsection*{Biological motivation}
+
+Bioelectric patterns---spatial distributions of membrane potential across
+tissues---are increasingly recognized as carriers of morphogenetic and
+cognitive information \citep{levin2014bioelectricity}.  Gap junctions
+electrically couple adjacent cells, allowing voltage patterns to propagate
+across tissue, coordinate regeneration, and encode target morphologies.
+CLT identifies these tissue-scale bioelectric fields as a primary contributor
+to $\rho_{\mathrm{coh}}$ at the mesoscopic (millimeter--centimeter) scale.
+
+\subsubsection*{Basic bioelectric simulator}
+
+The core simulator models a 2D tissue sheet as a $50 \times 50$ grid of
+cells, each described by a Hodgkin--Huxley-style membrane potential
+$V_m$ \citep{hodgkinhuxley1952}.  Three ionic currents govern cell dynamics:
+%
+\begin{equation}
+    C_m \frac{dV_m}{dt} = -\bigl(I_{\mathrm{Na}} + I_K + I_{\mathrm{leak}}
+    \bigr) + I_{\mathrm{gap}} + I_{\mathrm{ext}}\,,
+    \label{eq:hh-bioelectric}
+\end{equation}
+%
+where $I_{\mathrm{Na}} = g_{\mathrm{Na}}\,n_{\mathrm{Na}}^{3}\,h_{\mathrm{Na}}\,(V_m - E_{\mathrm{Na}})$,
+$I_K = g_K\,n_K^{4}\,(V_m - E_K)$, and
+$I_{\mathrm{leak}} = g_L\,(V_m - V_{\mathrm{rest}})$.  Default parameters
+follow the classical Hodgkin--Huxley values: $g_{\mathrm{Na}} = 120$,
+$g_K = 36$, $g_L = 0.3$ mS/cm$^2$; $E_{\mathrm{Na}} = +60$,
+$E_K = -90$, $V_{\mathrm{rest}} = -70$ mV; $C_m = 1.0$ $\mu$F/cm$^2$.
+Gating variables ($n_{\mathrm{Na}},\,h_{\mathrm{Na}},\,n_K$) evolve by
+first-order kinetics with voltage-dependent rate functions, integrated via
+forward Euler at $\Delta t = 0.1$ ms with physiological clamping
+$V_m \in [-120,\,60]$ mV.
+
+\paragraph{Gap junction coupling.}
+Each cell maintains four directional gap junction conductances
+$g_{\mathrm{gap}}^{(d)}$ ($d \in \{\text{up, down, left, right}\}$,
+default $g_{\mathrm{gap}} = 1.0$ mS/cm$^2$).  The gap junction current
+into cell $(i,j)$ is:
+%
+\begin{equation}
+    I_{\mathrm{gap}}^{(i,j)} = \sum_{d} g_{\mathrm{gap}}^{(d)}
+    \bigl(V_m^{(\text{neighbor}_d)} - V_m^{(i,j)}\bigr)\,.
+    \label{eq:gap-junction}
+\end{equation}
+%
+This Ohmic coupling allows voltage patterns to spread laterally across the
+tissue, creating spatially extended domains of coordinated membrane potential.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_10_bioelectric_patterns.png}
+    \caption{Bioelectric field dynamics in the tissue simulator. A $50 \times 50$ grid of Hodgkin--Huxley cells coupled by gap junctions develops spatially organized membrane potential patterns. Color represents $V_m$ across the tissue sheet; coherent (low-CV) patterns yield high $Q_{\mathrm{bio}}$ while fragmented patterns reduce it toward zero.}
+    \label{fig:bioelectric-patterns}
+\end{figure}
+
+\paragraph{Coherence metrics.}
+Spatial coherence is computed from the coefficient of variation of the
+normalized membrane potential field:
+$Q_{\mathrm{bio}} = \exp(-2\,\mathrm{CV})$
+(Eq.~\eqref{eq:Q_bioelectric}), where $\mathrm{CV} = \sigma_V / |\bar{V}|$
+and voltages are normalized to the physiological range.  A complementary
+gradient coherence metric $Q_{\mathrm{grad}} = \exp(-10\,\bar{g})$
+penalizes sharp spatial discontinuities.  Pattern energy
+$\langle(V_m - V_{\mathrm{rest}})^2\rangle$ quantifies the metabolic cost
+of maintaining non-resting voltage patterns.
+
+\paragraph{Injury and healing.}
+The simulator provides explicit methods for modeling tissue damage:
+\texttt{create\_injury()} sets all gap junction conductances within a
+circular region to zero, electrically isolating damaged tissue.
+\texttt{heal\_injury()} partially restores conductances to a fraction
+of the default value, simulating graded recovery
+(Fig.~\ref{fig:injury-regeneration}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_11_injury_regeneration.png}
+    \caption{Injury and regeneration sequence in the bioelectric simulator. Left: intact tissue with organized voltage patterns. Center: simulated injury (circular region with severed gap junctions and scrambled $V_m$). Right: regeneration in progress as boundary cells with intact pattern memory drive recovery of the target voltage template through gap-junction-mediated coupling.}
+    \label{fig:injury-regeneration}
+\end{figure}
+
+\subsubsection*{Multilayer extension}
+
+Real biological systems comprise multiple tissue layers with distinct
+electrical properties.  The multilayer simulator stacks three tissue planes
+(epithelial, neural, mesenchymal) on a $40 \times 40$ grid, each with
+layer-specific conductance profiles.  Epithelial tissue has high lateral
+coupling ($g_{\mathrm{gap}} = 1.5$) and strong vertical connectivity ($g_v = 0.8$);
+neural tissue is excitable ($g_{\mathrm{Na}} = 120$, threshold $= -55$ mV) with
+moderate coupling; mesenchymal tissue has weaker lateral coupling
+($g_{\mathrm{gap}} = 0.5$) and lower excitability.
+
+Inter-layer coupling is governed by a vertical conductance array
+$g_v^{(k)}(i,j)$ for each adjacent layer pair $k$, initialized to the
+average of the two layers' vertical conductance properties.  The inter-layer
+current is:
+%
+\begin{equation}
+    I_{\mathrm{vertical}}^{(k,i,j)} = g_v^{(k)}(i,j)\,
+    \bigl(V_m^{(k+1,i,j)} - V_m^{(k,i,j)}\bigr)\,,
+    \label{eq:vertical-coupling}
+\end{equation}
+%
+injected as an additional external current during each layer's time step.
+Global coherence combines within-layer spatial coherence (mean of per-layer
+$Q_{\mathrm{bio}}$) and between-layer coherence (Pearson correlation of
+$V_m$ across adjacent layers, mapped to $[0,1]$)
+(Fig.~\ref{fig:multilayer-coupling}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_12_multilayer_coupling.png}
+    \caption{Multilayer tissue coupling in the bioelectric simulator. Three tissue planes (epithelial, neural, mesenchymal) with distinct conductance profiles are coupled vertically via inter-layer conductance arrays. Global coherence combines within-layer spatial coherence and between-layer Pearson correlation, demonstrating how voltage patterns coordinate across anatomical layers.}
+    \label{fig:multilayer-coupling}
+\end{figure}
+
+\subsubsection*{Morphogenetic field simulator}
+
+Inspired by Levin's bioelectric code hypothesis
+\citep{levin2014bioelectricity, fields2022morphogenesis}, the morphogenetic
+simulator adds a \emph{target pattern}---a spatial voltage template encoding
+the desired tissue morphology (e.g., left--right asymmetry, radial
+organization, stripe patterns).  Pattern memory is implemented as a
+continuous attracting current:
+%
+\begin{equation}
+    I_{\mathrm{attract}}(i,j) = \alpha\,
+    \bigl(V_{\mathrm{target}}(i,j) - V_m(i,j)\bigr)\,,
+    \label{eq:pattern-attraction}
+\end{equation}
+%
+where $\alpha$ is the attraction strength (default $0.01$, range
+$0.001$--$0.05$).  In injured regions, attraction is reduced by 90\%,
+modeling weakened pattern memory in damaged tissue.  Pattern fidelity is
+quantified as the normalized root-mean-square deviation between the current
+and target voltage fields, mapped to $[0,1]$.
+
+This architecture produces a key insight central to CLT: \emph{morphogenesis
+is coherence maintenance at the tissue scale}.  After simulated amputation
+(gap junctions severed, voltages scrambled), boundary cells with intact
+pattern memory drive regeneration by pulling the field back toward the
+target template.  Regeneration progress---the Pearson correlation between
+injured-region voltages and target values---typically reaches $>0.8$ within
+hundreds of simulation steps, demonstrating robust self-repair of bioelectric
+coherence (Fig.~\ref{fig:morphogenetic-memory}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_13_morphogenetic_memory.png}
+    \caption{Morphogenetic pattern memory and regeneration dynamics. The pattern-attraction mechanism (Eq.~\ref{eq:pattern-attraction}) drives the bioelectric field toward a target voltage template encoding tissue morphology. After simulated amputation, boundary cells pull the field back toward the target, with regeneration progress (Pearson correlation between injured-region voltages and target values) typically exceeding $0.8$ within hundreds of simulation steps.}
+    \label{fig:morphogenetic-memory}
+\end{figure}
+
+\subsubsection*{\'eR mapping}
+
+For the basic bioelectric simulator, EP derives from pattern energy
+$\langle(V_m - V_{\mathrm{rest}})^2\rangle$ scaled to $[0.5,\,10]$,
+and $f$ from the spatial coherence:
+$f = (0.5 + 3.5\,(1 - Q_{\mathrm{bio}}))\,(2 - g_{\mathrm{conn}})$,
+where $g_{\mathrm{conn}}$ is normalized gap junction connectivity.  The
+morphogenetic simulator further modulates frequency by pattern fidelity:
+$f \leftarrow f\,(2 - \text{fidelity})$, placing high-fidelity
+(well-organized) tissues at lower frequencies and disrupted tissues toward
+the chaos boundary.
+
+%% -----------------------------------------------------------------------
+\subsection{Biophoton Emission Modeling}
+\label{sec:biophoton}
+
+\subsubsection*{Biological motivation}
+
+All living cells emit ultraweak photon radiation (biophotons) in the
+$200$--$800$ nm range, with intensities of $\sim$10--100 photons per cell
+per second \citep{vanwijk2005biophoton}.  This emission originates
+primarily from mitochondrial reactive oxygen species (ROS) and excited
+molecular states.  Recent work suggests that biophoton emission statistics
+carry information about cellular coherence: coherent tissue emits
+sub-Poissonian (squeezed) light, while stressed tissue emits
+super-Poissonian (chaotic) light \citep{murugan2024biophotons}.  CLT
+identifies biophoton coherence as a direct optical signature of
+Loomfield integrity.
+
+\subsubsection*{Model description}
+
+The biophoton simulator models a $50 \times 50$ grid of cells, each
+characterized by mitochondrial density (default 100 per cell), mitochondrial
+activity (normalized, default 1.0), ATP level, and ROS level.  The
+emission rate per cell combines metabolic state variables:
+%
+\begin{equation}
+    \dot{N}_{\gamma} = \dot{N}_0 \cdot
+    \frac{\rho_{\mathrm{mito}} \cdot a_{\mathrm{mito}}}{\rho_0}
+    \cdot \bigl(1 + 5\,(\mathrm{ROS} - \mathrm{ROS}_0)\bigr)
+    \cdot \bigl(1 + 0.5\,(1 - \mathrm{ATP})\bigr)\,,
+    \label{eq:biophoton-rate}
+\end{equation}
+%
+where $\dot{N}_0 = 10$ photons/cell/s is the baseline rate,
+$\rho_{\mathrm{mito}}$ and $a_{\mathrm{mito}}$ are mitochondrial density
+and activity, $\rho_0 = 100$ is the reference density, and the ROS and ATP
+factors are clamped to $[0.5,\,10]$ and $[0.8,\,2.0]$ respectively.
+Emitted wavelengths follow a Gaussian distribution peaked at 500\,nm
+(green) with 80\,nm standard deviation, clipped to $[200,\,800]$ nm.
+
+\subsubsection*{Four emission modes}
+
+The simulator implements four photon-counting statistics, selectable at
+initialization:
+%
+\begin{description}
+    \item[Poissonian ($F \approx 1$):] Each cell emits independently via a
+    Poisson process with mean $\dot{N}_\gamma\,\Delta t$.  This represents
+    incoherent, thermally driven emission with Fano factor $F \approx 1$.
+    %
+    \item[Coherent ($F < 1$):] Emission is modulated by a cell-specific
+    phase $\phi_i$: the mean count is scaled by
+    $\tfrac{1}{2}(1 + \cos\phi_i)$, producing phase-locked bunching
+    patterns analogous to laser-like emission.  Phases evolve via
+    Kuramoto coupling to four nearest neighbors
+    (Eq.~\eqref{eq:kuramoto-biophoton}).
+    %
+    \item[Squeezed ($F \ll 1$):] Sub-Poissonian statistics are generated
+    by replacing the Poisson sampling with a narrow Gaussian
+    ($\sigma = 0.5\sqrt{\mu}$, half the Poisson width), producing
+    reduced intensity fluctuations characteristic of quantum-squeezed
+    light.
+    %
+    \item[Chaotic ($F > 1$):] Super-Poissonian statistics use a negative
+    binomial distribution with shape parameter $r = 2$, producing
+    thermal-like photon bunching with $F > 1$.
+\end{description}
+%
+The Fano factor $F = \mathrm{Var}(N) / \langle N \rangle$ is computed from
+the full grid emission at each time step, providing a real-time statistical
+fingerprint of emission coherence.
+
+\subsubsection*{Phase dynamics and coherence}
+
+For the coherent and squeezed modes, cell emission phases evolve via
+Kuramoto-like nearest-neighbor coupling:
+%
+\begin{equation}
+    \dot{\phi}_i = \omega_i + K \sum_{j \in \mathcal{N}(i)}
+    \sin\!\bigl(\bar{\phi}_j - \phi_i\bigr)\,,
+    \label{eq:kuramoto-biophoton}
+\end{equation}
+%
+where $\omega_i = 2\pi\,a_{\mathrm{mito},i} / \tau_c$ is the natural
+frequency (set by local mitochondrial activity and the coherence time
+$\tau_c = 100$ ms), $K = 0.3$ is the coupling strength, and
+$\bar{\phi}_j$ is the mean phase of the four cardinal neighbors.  Three
+coherence metrics are tracked:
+%
+\begin{itemize}
+    \item \textbf{Spatial coherence:} Mean Pearson correlation of emission
+    counts between each cell and its four nearest neighbors, mapped to
+    $[0,1]$.
+    \item \textbf{Temporal coherence:} Lag-1 autocorrelation of total
+    photon counts over a sliding buffer of $\tau_c / \Delta t = 100$
+    time steps.
+    \item \textbf{Phase coherence:} Kuramoto order parameter
+    $R = |\langle e^{i\phi}\rangle|$ across the full grid.
+\end{itemize}
+
+\subsubsection*{LoomSense connection}
+
+The simulator exposes a \texttt{get\_loomsense\_output()} method returning
+14 measurable quantities---intensity metrics (total count, mean, rate),
+statistical metrics (Fano factor, variance), spectral metrics (peak
+wavelength, FWHM), coherence metrics (spatial, temporal, phase), and
+metabolic indicators (ROS, ATP, stress index)---designed to match the
+planned LoomSense wearable photodetector array.  This makes the biophoton
+simulator a software prototype for the hardware system: every quantity
+computed in silico has a corresponding physical measurement the device will
+perform on living tissue (Figs.~\ref{fig:biophoton-modes}--\ref{fig:loomsense-metrics}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_14_biophoton_modes.png}
+    \caption{Biophoton emission modes comparison. Four photon-counting regimes are shown: Poissonian ($F \approx 1$, thermally driven), coherent ($F < 1$, phase-locked Kuramoto coupling), squeezed ($F \ll 1$, sub-Poissonian quantum statistics), and chaotic ($F > 1$, super-Poissonian thermal bunching). Each panel displays the spatial emission map, photon count histogram, and computed Fano factor, demonstrating that emission statistics serve as a measurable fingerprint of cellular coherence.}
+    \label{fig:biophoton-modes}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_15_loomsense_metrics.png}
+    \caption{LoomSense output metrics from the biophoton simulator. The 14-metric output panel displays intensity metrics (total count, mean rate), statistical metrics (Fano factor, variance), spectral metrics (peak wavelength, FWHM), coherence metrics (spatial, temporal, phase), and metabolic indicators (ROS, ATP, stress index). This software output format directly mirrors the planned LoomSense wearable photodetector array measurements.}
+    \label{fig:loomsense-metrics}
+\end{figure}
+
+\subsubsection*{\'eR mapping}
+
+EP derives from the mean emission rate (normalized by grid size), and $f$
+from the base mitochondrial frequency modulated by phase coherence:
+$f = 10\,\bar{a}_{\mathrm{mito}}\,(2 - R)$, so that coherent states
+(high~$R$) occupy lower effective frequencies.  The combined coherence
+index averages spatial, temporal, and phase coherence.
+
+%% -----------------------------------------------------------------------
+\subsection{Microtubule Time Crystal Dynamics}
+\label{sec:microtubule}
+
+\subsubsection*{Biological motivation}
+
+Microtubules are cylindrical polymers of tubulin dimers (outer diameter
+25\,nm, inner water channel 12\,nm) that form the structural backbone of
+the neuronal cytoskeleton.  Each tubulin possesses an electric dipole moment
+that can adopt two conformational states.  Hameroff and Penrose
+\citep{hameroff2014consciousness} proposed that orchestrated quantum
+coherence among tubulin dipoles could underpin consciousness (Orch~OR
+theory), while Bandyopadhyay and collaborators
+\citep{bandyopadhyay2013microtubule} experimentally demonstrated
+multi-frequency resonant oscillations in isolated microtubules spanning
+kHz--THz, with peak ratios approximating the golden ratio---a signature
+they term a ``triplet of triplets.''
+
+CLT incorporates microtubule coherence as the fastest biological substrate
+contributing to $\rho_{\mathrm{coh}}$, operating at nanosecond-to-femtosecond
+timescales.  The simulator described here was developed \emph{independently}
+of, and prior to, Hameroff's forthcoming work on microtubule time crystals,
+representing a convergent computational exploration of the same structural
+hypothesis.
+
+\subsubsection*{Lattice structure}
+
+The simulator represents a single microtubule as a $13 \times N_t$ lattice,
+where $13$ is the canonical protofilament count and $N_t$ (default 100) is
+the number of tubulin dimers per protofilament.  Each lattice site carries
+four phase variables, one per oscillation scale, and a binary dipole state
+derived from the lattice phase:
+$d_{j,k} = \mathrm{sign}\!\bigl(\cos\,\theta_{j,k}^{\mathrm{(lat)}}\bigr)$.
+
+\subsubsection*{Multi-scale oscillations}
+
+Four oscillation scales correspond to distinct physical subsystems:
+%
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+\textbf{Scale} & \textbf{Frequency} & \textbf{Physical system} &
+\textbf{Decoherence time} \\
+\midrule
+C-termini / water layer & 1\,kHz & Tail dynamics, ordered water &
+$\sim$1\,$\mu$s \\
+Tubulin lattice phonons & 1\,MHz & Collective dipole oscillations &
+$\sim$1\,ns \\
+Internal water channel & 1\,GHz & H-bonded water in 12\,nm pore &
+$\sim$100\,ps \\
+Aromatic ring electrons & 1\,THz & 86 aromatic rings per dimer &
+$\sim$100\,fs \\
+\bottomrule
+\end{tabular}
+\end{center}
+%
+Each phase $\theta^{(s)}_{j,k}$ evolves according to a driven, noisy
+Kuramoto equation:
+%
+\begin{equation}
+    \dot{\theta}^{(s)}_{j,k} = \omega_s
+    + K_{\mathrm{lat}} \sum_{\ell \in \mathcal{N}_{\mathrm{lat}}}
+      \sin\!\bigl(\theta^{(s)}_\ell - \theta^{(s)}_{j,k}\bigr)
+    + K_{\mathrm{long}} \sum_{m \in \mathcal{N}_{\mathrm{long}}}
+      \sin\!\bigl(\theta^{(s)}_m - \theta^{(s)}_{j,k}\bigr)
+    + \eta^{(s)}(T) + F^{(s)}(t)\,,
+    \label{eq:mt-kuramoto}
+\end{equation}
+%
+where $\omega_s = 2\pi f_s$ is the natural frequency at scale $s$,
+$K_{\mathrm{lat}} = 0.3$ and $K_{\mathrm{long}} = 0.2$ are within- and
+between-protofilament coupling strengths, $\eta^{(s)}(T)$ is thermal noise
+proportional to $\sqrt{k_B T / \tau_{\mathrm{dec}}^{(s)}}$, and $F^{(s)}$
+is the Floquet driving term.  The water channel and aromatic scales receive
+reduced coupling (factors $0.5\times$ and $0.3\times$ respectively),
+reflecting their shorter coherence lengths.
+
+\paragraph{Triplet-of-triplets resonance.}
+Cross-scale coupling links the four oscillation layers: the mean cosine
+phase of aromatic oscillations kicks the lattice scale, which in turn kicks
+the C-termini scale, with the water channel coupled bidirectionally to both
+lattice and aromatic scales.  When coherence is high, spectral analysis of
+the dipole time series reveals three dominant peaks with frequency ratios
+approximating $1 : \varphi : \varphi^2$, where $\varphi = (1+\sqrt{5})/2
+\approx 1.618$ is the golden ratio.  The triplet strength metric quantifies
+how closely the observed ratios match the golden-ratio template
+(Fig.~\ref{fig:triplet-resonance}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_18_triplet_resonance.png}
+    \caption{Triplet-of-triplets resonance spectrum with golden-ratio frequency peaks. Spectral analysis of the microtubule dipole time series under coherent conditions reveals three dominant peaks with frequency ratios approximating $1 : \varphi : \varphi^2$ ($\varphi = 1.618\ldots$), matching the experimentally observed signature. The triplet strength metric quantifies how closely the observed ratios match the golden-ratio template.}
+    \label{fig:triplet-resonance}
+\end{figure}
+
+\paragraph{Temperature-dependent decoherence.}
+Thermal noise strength scales with $\sqrt{k_B T \cdot \Gamma_s}$, where
+$\Gamma_s = 1/\tau_{\mathrm{dec}}^{(s)}$ is the decoherence rate at scale
+$s$.  At body temperature ($T = 310$\,K), the aromatic scale ($\tau_{\mathrm{dec}}
+\sim 100$\,fs) experiences the strongest thermal disruption, while the
+C-termini scale ($\tau_{\mathrm{dec}} \sim 1$\,$\mu$s) is relatively
+protected---consistent with the expectation that slower collective modes
+are more thermally robust than individual quantum oscillators.
+
+\paragraph{Floquet driving.}
+ATP hydrolysis is modeled as a uniform periodic driving term
+$F(t) = A\sin(2\pi f_{\mathrm{drive}}\,t)$ applied to the lattice
+scale, representing the continuous energy input from mitochondria that
+maintains the time-crystal state against thermal decoherence.  This is
+the microtubule analog of the damping/sourcing balance in the Loomfield
+equation: without Floquet driving ($A = 0$), the oscillations decohere;
+with sufficient driving ($A \gtrsim 0.5$), coherent dynamics persist
+indefinitely.
+
+\subsubsection*{Four microtubule states}
+
+The simulator supports four named states, each with characteristic
+coherence profiles:
+%
+\begin{description}
+    \item[Coherent:] Phase-synchronized across all scales, high Kuramoto
+    order parameter ($R > 0.7$), organized dipole spatial patterns, strong
+    triplet resonance.  Represents awake, alert consciousness.
+    %
+    \item[Thermal (decoherent):] Elevated temperature ($T = 340$\,K),
+    reduced coupling, random phases ($R < 0.4$), exponential amplitude
+    decay (factor $0.999$/step).  Represents deep sleep or coma.
+    %
+    \item[Floquet-driven:] External driving ($A = 0.6$, $f_{\mathrm{drive}}
+    = 1$\,MHz) sustains coherence despite thermal noise.  The system
+    exhibits discrete time-crystal symmetry breaking: oscillations persist
+    at a subharmonic of the driving frequency.
+    %
+    \item[Anesthetized:] Aromatic oscillations suppressed by 90\%,
+    continuous phase randomization ($\Delta\theta \in [-0.5,\,0.5]$) models
+    anesthetic binding to the 86 aromatic rings per tubulin.  The
+    aromatic$\to$lattice$\to$C-termini coupling chain is disrupted,
+    collapsing the triplet resonance while leaving residual low-frequency
+    oscillations intact
+    (Figs.~\ref{fig:microtubule-states}--\ref{fig:multiscale-coherence}).
+\end{description}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_16_microtubule_states.png}
+    \caption{Four microtubule coherence states. Top left: coherent state with high Kuramoto order parameter ($R > 0.7$), organized dipole patterns, and strong triplet resonance. Top right: thermal (decoherent) state at elevated temperature ($T = 340$\,K) with random phases ($R < 0.4$). Bottom left: Floquet-driven time-crystal state sustaining coherence via ATP hydrolysis driving. Bottom right: anesthetized state with 90\% aromatic oscillation suppression, disrupting the cross-scale coupling chain while leaving low-frequency oscillations partially intact.}
+    \label{fig:microtubule-states}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_17_multiscale_coherence.png}
+    \caption{Multi-scale coherence across frequency bands in the microtubule simulator. Per-scale Kuramoto order parameters $R_s$ are shown for all four oscillation scales (kHz C-termini, MHz lattice phonons, GHz water channel, THz aromatic ring electrons) under each microtubule state. The coherent and Floquet-driven states maintain high $R_s$ across all scales, while thermal decoherence preferentially disrupts faster scales and anesthesia selectively suppresses THz aromatic oscillations.}
+    \label{fig:multiscale-coherence}
+\end{figure}
+
+\subsubsection*{Coherence metrics}
+
+Per-scale coherence is the Kuramoto order parameter
+(Eq.~\eqref{eq:Q_kuramoto}), computed over all $13 \times N_t$ oscillators.
+The overall microtubule coherence averages the four scales:
+$\bar{R} = \tfrac{1}{4}(R_{\mathrm{kHz}} + R_{\mathrm{MHz}} +
+R_{\mathrm{GHz}} + R_{\mathrm{THz}})$.  A complementary dipole correlation
+metric measures the spatial alignment of $\pm 1$ dipole states with their
+lateral and longitudinal neighbors.
+
+\subsubsection*{\'eR mapping}
+
+EP is a coherence-weighted sum across scales, with higher frequencies
+contributing more ($40\%$ aromatic, $30\%$ lattice, $20\%$ water, $10\%$
+C-termini).  The effective frequency normalizes the coherence-weighted
+physical frequency to a $[0.1,\,10]$ Hz range for compatibility with the
+\'eR phase space.  Coherent microtubules cluster in the viable window;
+thermal or anesthetized states drift toward the chaos or rigidity
+boundaries.
+
+%% -----------------------------------------------------------------------
+\subsection{DNA Constraint Systems}
+\label{sec:dna}
+
+\subsubsection*{Biological motivation}
+
+Unlike the preceding substrates, DNA does not directly generate
+consciousness-relevant dynamics.  Instead, it operates as a long-timescale
+\emph{scaffold} that constrains the parameter space within which conscious
+dynamics can occur---determining which ion channels are expressed, how many
+mitochondria populate each cell, and what tubulin variants are available for
+microtubule assembly.  The DNA constraint simulator formalizes this role by
+modeling how genetic expression, epigenetic modulation, developmental
+stage, and species complexity jointly shape the viable window in \'eR
+phase space.
+
+\subsubsection*{Genetic constraints}
+
+The simulator tracks 15 genes across seven functional categories: tubulin
+variants (TUBA1A, TUBB3, TUBB4A), ion channels (SCN1A/Nav1.1,
+KCNQ2/Kv7.2, CACNA1C/Cav1.2), gap junctions (GJA1/Cx43, GJB2/Cx26),
+mitochondrial genes (MT-ND1, MT-CO1, MT-ATP6), metabolic enzymes (HK1,
+PFKM), and signaling kinases (CAMK2A, PRKACA).  Each gene carries an
+expression level ($0$--$2$, default $\sim$0.8--1.0), a methylation
+level ($0$--$1$), and an importance weight.  The \emph{effective expression}
+of each gene is:
+%
+\begin{equation}
+    E_{\mathrm{eff}} = E \cdot (1 - 0.9\,m)\,,
+    \label{eq:effective-expression}
+\end{equation}
+%
+where $E$ is the raw expression and $m$ is the methylation level, so full
+methylation ($m = 1$) silences 90\% of expression.
+
+Category-level expression is a weighted average over all genes in that
+category (weights = importance).  Three substrate-specific capacities are
+then derived:
+%
+\begin{align}
+    C_{\mathrm{MT}} &= 0.7\,E_{\mathrm{tubulin}} +
+    0.3\,E_{\mathrm{metabolic}}\,,
+    \label{eq:capacity-mt}\\
+    C_{\mathrm{bio}} &= 0.5\,E_{\mathrm{ion}} + 0.3\,E_{\mathrm{gap}} +
+    0.2\,E_{\mathrm{signal}}\,,
+    \label{eq:capacity-bioelec}\\
+    C_{\mathrm{ph}} &= 0.7\,E_{\mathrm{mito}} +
+    0.3\,E_{\mathrm{metabolic}}\,,
+    \label{eq:capacity-biophoton}
+\end{align}
+%
+and the overall coherence capacity is:
+$C = 0.35\,C_{\mathrm{MT}} + 0.35\,C_{\mathrm{bio}} + 0.30\,C_{\mathrm{ph}}$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_19_dna_constraints.png}
+    \caption{DNA constraint architecture. Fifteen genes across seven functional categories (tubulin variants, ion channels, gap junctions, mitochondrial, metabolic, signaling) are tracked with expression levels modulated by methylation (Eq.~\ref{eq:effective-expression}). Category-level expression feeds into three substrate-specific capacities ($C_{\mathrm{MT}}$, $C_{\mathrm{bio}}$, $C_{\mathrm{ph}}$), which combine into the overall coherence capacity $C$ that constrains the viable window in \'eR phase space.}
+    \label{fig:dna-constraints}
+\end{figure}
+
+\subsubsection*{Epigenetic modulation}
+
+Environmental stress increases methylation of metabolic and mitochondrial
+genes ($50\%$ and $30\%$ methylation at full stress respectively),
+narrowing the viable window by reducing $C$.  Conversely, beneficial
+interventions (e.g., meditation-associated epigenetic changes) can reduce
+methylation of key genes, expanding the viable window.  This provides a
+mechanistic link between lifestyle factors and consciousness capacity
+within the CLT framework.
+
+\subsubsection*{Developmental dynamics}
+
+Gene expression varies systematically across eight life stages from
+embryonic to elderly.  Key trends:
+%
+\begin{itemize}
+    \item \textbf{Embryonic/fetal:} Tubulin expression elevated
+    ($1.3\times$) to support rapid cytoskeletal growth; ion channels
+    under-expressed ($0.6\times$) as neural circuitry is still forming.
+    \item \textbf{Infant/child:} Signaling genes peak ($1.2\times$),
+    reflecting high neuroplasticity and the critical period for cortical
+    development.
+    \item \textbf{Adult:} Baseline expression across all categories;
+    largest viable window for the species.
+    \item \textbf{Elderly:} Mitochondrial gene expression declines to
+    $0.7\times$, tubulin to $0.8\times$, narrowing the viable window and
+    reducing coherence capacity---consistent with age-related cognitive
+    decline (Fig.~\ref{fig:developmental-trajectory}).
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_20_developmental_trajectory.png}
+    \caption{Developmental trajectory of coherence capacity across eight life stages. Gene expression varies systematically from embryonic (elevated tubulin, under-expressed ion channels) through adult (baseline expression, largest viable window) to elderly (declining mitochondrial and tubulin expression). The viable window area narrows with aging, consistent with age-related cognitive decline predicted by CLT.}
+    \label{fig:developmental-trajectory}
+\end{figure}
+
+\subsubsection*{Species comparison}
+
+The viable window area scales with a species-specific base factor:
+prokaryotes ($0.1$), simple eukaryotes ($0.2$), invertebrates ($0.4$),
+simple vertebrates ($0.5$), mammals ($0.7$), primates ($0.85$), and
+humans ($1.0$).  The viable window boundaries are:
+%
+\begin{equation}
+    \text{\'eR}_{\min} = \frac{0.1}{b \cdot C + 0.1}\,,\qquad
+    \text{\'eR}_{\max} = 10\,b\,C\,,
+    \label{eq:viable-window-species}
+\end{equation}
+%
+where $b$ is the species base factor and $C$ is the coherence capacity.
+The window area $\propto b \cdot C$ increases monotonically from
+$\sim$0.06 (prokaryotes) to $\sim$0.60 (adult humans), reflecting the
+CLT hypothesis that more complex genomes support richer conscious
+dynamics by permitting a larger region of \'eR phase space to sustain
+coherent Loomfield excitations (Fig.~\ref{fig:species-viable-windows}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_21_species_viable_windows.png}
+    \caption{Species comparison of viable windows in \'eR phase space. The viable window area scales with species-specific base factors from prokaryotes ($b = 0.1$, window area $\sim$0.06) through invertebrates, mammals, and primates to adult humans ($b = 1.0$, window area $\sim$0.60). More complex genomes support larger viable regions, reflecting CLT's prediction that genome complexity bounds the richness of possible conscious dynamics.}
+    \label{fig:species-viable-windows}
+\end{figure}
+
+\subsubsection*{Key insight}
+
+DNA does not \emph{generate} consciousness---it \emph{constrains the
+parameter space} within which consciousness-supporting dynamics can occur.
+A mutation that reduces ion channel expression narrows the viable window;
+an epigenetic change that restores mitochondrial function widens it.  This
+framing resolves the apparent tension between genetic determinism and
+experiential plasticity: genes set the boundaries, while real-time
+substrate dynamics determine where within those boundaries the system
+actually operates.
+
+\section{Integration and Coherence Metrics}
+\label{sec:integration}
+
+The preceding sections described four substrate simulators that operate on
+timescales spanning six orders of magnitude---from developmental (DNA) to
+femtosecond (microtubule aromatic oscillations).  This section explains
+how these substrates feed into a unified Loomfield and how pathological
+states manifest as characteristic multi-substrate signatures.
+
+\subsection{Substrate-to-Loomfield Mapping}
+\label{sec:substrate-mapping}
+
+Each substrate simulator contributes to the coherence source density
+$\rho_{\mathrm{coh}}$ that drives the Loomfield wave equation
+(Eq.~\eqref{eq:loomfield}).  Conceptually, the total source density is a
+weighted superposition:
+%
+\begin{equation}
+    \rho_{\mathrm{coh}}(\mathbf{r},t) =
+    w_{\mathrm{bio}}\,\rho_{\mathrm{bioelectric}} +
+    w_{\mathrm{ph}}\,\rho_{\mathrm{biophoton}} +
+    w_{\mathrm{MT}}\,\rho_{\mathrm{microtubule}}\,,
+    \label{eq:rho-composition}
+\end{equation}
+%
+with DNA constraints providing the \emph{envelope} that bounds the
+parameters of all three dynamical substrates rather than contributing a
+time-varying source directly.
+
+In the current implementation, each substrate operates as an independent
+simulator whose coherence state is sampled at visualization time and
+projected into the shared \'eR phase space via its
+\texttt{map\_to\_er\_space()} method.  This architecture reflects a
+deliberate design choice: because the timescale separation between
+substrates spans nanoseconds (microtubules) to milliseconds (bioelectrics),
+a fully coupled real-time simulation would require prohibitively small time
+steps.  Instead, each simulator runs at its natural cadence and reports
+summary coherence metrics that can be compared within a common coordinate
+system.
+
+The timescale hierarchy is:
+%
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Substrate} & \textbf{Timescale} & \textbf{Contribution to
+$\rho_{\mathrm{coh}}$} \\
+\midrule
+Microtubule oscillations & ns--fs & Fastest coherence source; phase
+synchronization \\
+Biophoton emission & $\mu$s--ms & Metabolic coherence signal; optical
+readout \\
+Bioelectric fields & ms--s & Mesoscopic spatial patterning; gap junction
+networks \\
+DNA constraints & hours--years & Parameter envelope; viable window
+boundaries \\
+\bottomrule
+\end{tabular}
+\end{center}
+%
+Figure~\ref{fig:substrate-integration} presents a schematic of this
+integration pipeline: four substrates, each with their own coherence metric,
+feed into the \'eR phase space where their collective state determines
+whether the system resides within the viable window.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_22_substrate_integration.png}
+    \caption{Substrate integration architecture. Four biological substrates---bioelectric fields (ms--s), biophoton emission ($\mu$s--ms), microtubule oscillations (ns--fs), and DNA constraints (hours--years)---each contribute to the coherence source density $\rho_{\mathrm{coh}}$ via their respective \texttt{map\_to\_er\_space()} methods. The unified \'eR phase space enables direct cross-substrate comparison of coherence states, determining whether the system resides within the viable window for consciousness.}
+    \label{fig:substrate-integration}
+\end{figure}
+
+\subsection{Pathology Signatures}
+\label{sec:pathology}
+
+A key prediction of the multi-substrate architecture is that different
+pathologies produce \emph{distinct patterns of disruption} across
+substrates.  The platform models three representative pathological profiles:
+
+\paragraph{Depression / rigidity.}
+Bioelectric coherence is moderately reduced ($Q_{\mathrm{bio}} \sim 0.4$)
+due to diminished gap junction coupling and low pattern energy; biophoton
+emission drops (reduced mitochondrial activity, $a_{\mathrm{mito}} \sim
+0.6$); microtubule oscillations remain partially intact but with reduced
+Floquet driving ($A \sim 0.2$).  The net effect is a drift toward the
+rigidity boundary ($\text{\'eR} \to \text{\'eR}_{\max}$): sufficient
+structural integrity but insufficient dynamic activity to sustain rich
+conscious experience.
+
+\paragraph{Seizure / chaos.}
+Bioelectric fields become hypersynchronized within narrow zones but
+globally fragmented, producing paradoxically high local coherence but low
+global $Q$.  Biophoton emission spikes chaotically ($F > 1$,
+super-Poissonian) as oxidative stress surges.  Microtubule phases
+decouple across frequency scales, collapsing the triplet resonance.  The
+system crosses into the chaos regime ($\text{\'eR} < \text{\'eR}_{\min}$):
+energy throughput overwhelms organizational capacity.
+
+\paragraph{Anesthesia.}
+Bioelectric fields remain largely intact (gap junctions are not directly
+targeted), but microtubule aromatic oscillations are suppressed by
+$\sim$90\% as anesthetic molecules bind to the 86 aromatic rings per
+tubulin.  The aromatic$\to$lattice$\to$C-termini coupling chain breaks,
+collapsing the triplet resonance while leaving kHz-scale oscillations
+partially active.  Biophoton coherence degrades secondarily as the loss of
+microtubule-mediated organization disrupts metabolic coupling.  This
+selective disruption---intact bioelectrics, suppressed microtubules---is
+diagnostic: no other pathology produces this specific pattern.
+
+\medskip\noindent
+The diagnostic power of multi-substrate profiling is illustrated in
+Figure~\ref{fig:pathology-signatures}, which compares healthy and
+pathological states across bioelectric, biophoton, and microtubule
+panels.  The \emph{pattern} of substrate disruption is itself informative:
+depression, seizure, and anesthesia are distinguishable not by any single
+metric but by their characteristic multi-dimensional fingerprint across the
+four substrates.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_23_pathology_signatures.png}
+    \caption{Pathology signatures across substrates. Three representative pathological profiles---depression (rigidity boundary drift), seizure (chaos regime incursion), and anesthesia (selective microtubule suppression)---are compared across bioelectric, biophoton, and microtubule coherence panels. Each pathology produces a distinct multi-substrate fingerprint: depression shows uniformly reduced activity, seizure shows paradoxical local hypersynchrony with global fragmentation, and anesthesia selectively collapses aromatic-scale oscillations while leaving bioelectric fields largely intact.}
+    \label{fig:pathology-signatures}
+\end{figure}
+
+%% =======================================================================
+\section{Software Architecture}
+\label{sec:architecture}
+
+\subsection{Repository Structure}
+\label{sec:repo-structure}
+
+The codebase is organized into five top-level modules with clear separation
+of concerns:
+%
+\begin{description}
+    \item[\texttt{simulations/}] Core numerical engines, subdivided into
+    \texttt{field\_dynamics/} (bioelectric, biophoton, morphogenetic, DNA
+    constraints) and \texttt{quantum/} (microtubule).  An
+    \texttt{emergence/} submodule defines the coherence transition framework
+    linking substrate states to Loomfield observables.
+
+    \item[\texttt{visualizations/}] Interactive tools built on Matplotlib
+    and Plotly, subdivided into \texttt{interactive/} (\'eR explorer,
+    Loomfield 2D/3D viewers, substrate dashboards) and \texttt{plots/}
+    (static publication rendering).
+
+    \item[\texttt{tests/}] Comprehensive test suite (see
+    \S\ref{sec:testing}).
+
+    \item[\texttt{docs/}] Theory documents (CLT v1.1, v2.0, AI regimes
+    analysis) under \texttt{theory/}, plus Sphinx-generated API
+    documentation under \texttt{api/}.
+
+    \item[\texttt{paper\_figures/}] A single self-contained script
+    (\texttt{generate\_all\_figures.py}, $\sim$2\,000 lines) that
+    programmatically generates all 25 publication figures at 300\,DPI
+    from the simulation code.
+\end{description}
+%
+Additional directories include \texttt{models/} (mathematical model
+definitions), \texttt{analysis/} (metrics and statistics utilities),
+\texttt{data/} and \texttt{output/} (simulation artifacts), and
+\texttt{notebooks/} (Jupyter tutorials).  A \texttt{requirements.txt}
+lists 27 Python dependencies.  The repository layout is diagrammed in
+Figure~\ref{fig:repository-structure}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_24_repository_structure.png}
+    \caption{Repository structure of the CLT computational platform. Five top-level modules---\texttt{simulations/} (core numerical engines), \texttt{visualizations/} (interactive tools), \texttt{tests/} (277 unit tests), \texttt{docs/} (theory and API documentation), and \texttt{paper\_figures/} (programmatic figure generation)---provide clear separation of concerns. Additional directories include \texttt{models/}, \texttt{analysis/}, \texttt{data/}, \texttt{output/}, and \texttt{notebooks/}.}
+    \label{fig:repository-structure}
+\end{figure}
+
+\subsection{Testing and Continuous Integration}
+\label{sec:testing}
+
+The platform includes 277 unit tests distributed across 9 test modules:
+%
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+\textbf{Module} & \textbf{Tests} \\
+\midrule
+DNA constraints & 55 \\
+2D Loomfield & 40 \\
+Biophoton emission & 32 \\
+Bioelectric (basic) & 31 \\
+\'eR phase space & 27 \\
+Microtubule & 26 \\
+Multilayer bioelectric & 26 \\
+Morphogenetic & 26 \\
+3D Loomfield & 14 \\
+\midrule
+\textbf{Total} & \textbf{277} \\
+\bottomrule
+\end{tabular}
+\end{center}
+%
+Tests cover physical plausibility constraints (e.g., $V_m$ within
+physiological bounds, $0 \le Q \le 2$, \'eR positivity), numerical
+stability checks (CFL condition satisfaction, energy conservation within
+tolerance), and cross-substrate integration validations (coherent states
+map into the viable window, pathological states map outside).  A shared
+\texttt{conftest.py} provides reusable fixtures including standardized
+grid sizes, viable \'eR ranges, and a fixed random seed
+(\texttt{np.random.seed(42)}) for deterministic reproducibility.
+
+Continuous integration is managed by a GitHub Actions workflow triggered
+on every push and pull request to the main branch.  The pipeline tests
+against Python 3.9, 3.10, and 3.11, runs \texttt{flake8} linting
+(max complexity 15, max line length 120), executes the full test suite
+via \texttt{pytest}, verifies that all public module imports resolve, and
+builds the Sphinx documentation.  This level of automated validation is
+uncommon in consciousness research software; we consider it essential for a
+platform whose claims rest on quantitative predictions
+(Fig.~\ref{fig:test-coverage}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../paper_figures/fig_25_test_coverage.png}
+    \caption{Test coverage summary across the nine test modules. The 277 unit tests cover physical plausibility constraints ($V_m$ bounds, $Q$ range, \'eR positivity), numerical stability checks (CFL condition, energy conservation), and cross-substrate integration validations (coherent states map within viable window, pathological states outside). Continuous integration via GitHub Actions tests against Python 3.9--3.11 on every push.}
+    \label{fig:test-coverage}
+\end{figure}
+
+%% =======================================================================
+\section{Results and Demonstrations}
+\label{sec:results}
+
+We summarize six key results that collectively demonstrate the platform's
+capabilities:
+
+\begin{enumerate}
+    \item \textbf{\'eR phase space correctly classifies biological states.}
+    The seven reference states (resting wakefulness, deep sleep, REM sleep,
+    focused attention, exercise, deep meditation, flow state) all map into
+    the viable window at physiologically plausible coordinates, while seven
+    pathology zones (depression, anxiety, mania, seizure, dissociation, ADHD,
+    PTSD) map outside or on the boundary
+    (Figs.~\ref{fig:er-concept}--\ref{fig:er-pathology}).
+
+    \item \textbf{Loomfield simulators distinguish coherent from incoherent
+    dynamics.}  The healthy preset ($Q \sim 1.7$, large $C_{\mathrm{bio}}$)
+    produces organized wavefronts, while the pathology preset ($Q \sim 0.6$,
+    $C_{\mathrm{bio}} \approx 0$) produces chaotic interference---despite
+    comparable total field energy.  The $Q^2$ prefactor accounts for a
+    six-fold sensitivity difference
+    (Figs.~\ref{fig:loomfield-2d-healthy}--\ref{fig:loomfield-2d-healing}).
+
+    \item \textbf{Bioelectric simulators reproduce Levin-style morphogenetic
+    patterns.}  Target voltage patterns (left--right, radial, stripe) are
+    maintained by the pattern-attraction mechanism, and regeneration after
+    simulated amputation reaches $>$80\% fidelity, demonstrating that
+    bioelectric coherence is self-repairing
+    (Figs.~\ref{fig:injury-regeneration}--\ref{fig:morphogenetic-memory}).
+
+    \item \textbf{Biophoton emission modes show distinct statistical
+    signatures.}  Poissonian ($F \approx 1$), coherent ($F < 1$), squeezed
+    ($F \ll 1$), and chaotic ($F > 1$) modes produce clearly separable Fano
+    factor distributions, validating the simulator as a software prototype
+    for LoomSense hardware
+    (Figs.~\ref{fig:biophoton-modes}--\ref{fig:loomsense-metrics}).
+
+    \item \textbf{Microtubule simulator produces golden-ratio triplet
+    resonance.}  Under coherent conditions, spectral analysis of the dipole
+    time series reveals three dominant peaks with frequency ratios
+    approximating $1 : 1.618 : 2.618$, matching the experimentally observed
+    triplet-of-triplets signature.  Anesthesia selectively collapses this
+    resonance by suppressing THz aromatic oscillations
+    (Figs.~\ref{fig:microtubule-states}--\ref{fig:triplet-resonance}).
+
+    \item \textbf{DNA constraints correctly scale viable windows across
+    species and development.}  The viable window area increases monotonically
+    from prokaryotes ($\sim$0.06) to adult humans ($\sim$0.60), and narrows
+    with aging (mitochondrial decline to $0.7\times$) and environmental
+    stress (epigenetic silencing), consistent with the prediction that genome
+    complexity bounds consciousness capacity
+    (Figs.~\ref{fig:dna-constraints}--\ref{fig:species-viable-windows}).
+\end{enumerate}
+
+\noindent
+All 25 figures in this paper were generated programmatically by
+\texttt{generate\_all\_figures.py} using the actual simulation code,
+ensuring full reproducibility.  No figure was manually adjusted or
+post-processed; what the reader sees is what the simulators produce.
+
+%% =======================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Key Contributions}
+
+This work makes four primary contributions to the computational study of
+consciousness:
+
+\begin{enumerate}
+    \item \textbf{First open-source computational platform for field-based
+    consciousness research.}  While previous computational work on
+    consciousness has focused on neural network architectures (IIT
+    \citep{tononi2016iit}, GNW \citep{dehaene2011gnw}) or abstract
+    information-theoretic measures, this platform implements a full
+    field-theoretic approach with explicit biological substrates,
+    wave dynamics, and coherence metrics.  All code is publicly available
+    under an open-source license.
+
+    \item \textbf{Unified framework spanning four biological substrates.}
+    By modeling bioelectric fields, biophoton emission, microtubule
+    oscillations, and DNA constraints within a single \'eR phase space,
+    the platform enables cross-substrate comparisons that would be
+    impossible with isolated models.  The shared \texttt{map\_to\_er\_space()}
+    interface makes this integration principled rather than ad~hoc.
+
+    \item \textbf{Testable predictions via coherence metrics and pathology
+    signatures.}  Every simulation produces quantitative outputs---$Q$,
+    $C_{\mathrm{bio}}$, \'eR coordinates, Fano factors, Kuramoto order
+    parameters---that can in principle be compared against experimental
+    measurements.  The multi-substrate pathology signatures
+    (\S\ref{sec:pathology}) are specific enough to be falsifiable.
+
+    \item \textbf{Bridge toward experimental validation.}  The biophoton
+    simulator's \texttt{get\_loomsense\_output()} method was designed to
+    match the output format of the planned LoomSense wearable biosensor,
+    creating a direct pipeline from simulation prediction to empirical
+    measurement.
+\end{enumerate}
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+Several important limitations should be noted:
+
+\begin{itemize}
+    \item \textbf{Effective field description.}  The Loomfield is an
+    effective field, not a proposal for new fundamental physics.  It
+    provides a useful coarse-grained description but does not resolve the
+    hard problem of consciousness---it reframes it in terms of coherence
+    dynamics rather than solving it.
+
+    \item \textbf{Simplified biological models.}  The Hodgkin--Huxley ion
+    channel model, while biophysically grounded, omits the full complexity
+    of real membrane dynamics (calcium signaling, neuromodulation,
+    second-messenger cascades).  The microtubule simulator uses Kuramoto
+    phase coupling as a proxy for quantum coherence mechanisms that remain
+    debated.  The biophoton model relies on classical stochastic processes
+    augmented with sub-Poissonian statistics rather than a full quantum
+    optical treatment.
+
+    \item \textbf{Parameter calibration.}  Many model parameters
+    (coupling strengths, viable window boundaries, substrate weights)
+    are currently set to physically plausible values based on literature
+    estimates rather than fit to experimental data.  Systematic calibration
+    against empirical measurements is a priority for future work.
+
+    \item \textbf{Spatial resolution.}  The 2D grids ($50 \times 50$ to
+    $200 \times 200$) and 3D grids ($64^3$) are coarse compared to real
+    tissue, which contains $\sim$$10^{10}$ neurons.  The simulators capture
+    mesoscopic coherence phenomena but cannot resolve single-cell or
+    synaptic-level dynamics.
+
+    \item \textbf{Computational cost.}  The 3D Loomfield simulator on a
+    $64^3$ grid requires $\sim$$2.6 \times 10^5$ floating-point operations
+    per time step.  Real-time interactive 3D visualization is feasible but
+    limits grid resolution.  Brain-scale simulations ($\sim$$10^3$ grid
+    points per axis) would require GPU acceleration or distributed
+    computing.
+\end{itemize}
+
+\subsection{Future Directions: LoomSense Integration}
+\label{sec:future}
+
+The most immediate path to experimental validation is the LoomSense
+wearable biosensor system, currently under development.  LoomSense is
+designed to perform simultaneous biophoton counting and bioelectric
+coherence measurement from the surface of living tissue in real time.
+
+The integration strategy is a closed loop:
+%
+\begin{enumerate}
+    \item \textbf{Simulation $\to$ prediction.}  The biophoton and
+    bioelectric simulators generate quantitative predictions for what
+    LoomSense should observe under specific conditions (e.g., coherent
+    emission with $F < 1$ during meditation, chaotic emission with $F > 1$
+    during stress).
+    \item \textbf{Measurement $\to$ comparison.}  LoomSense hardware
+    records biophoton counts, Fano factors, spatial coherence, and spectral
+    profiles from human subjects under controlled conditions.
+    \item \textbf{Comparison $\to$ refinement.}  Discrepancies between
+    simulation and measurement inform parameter recalibration, model
+    revision, or identification of missing biological mechanisms.
+\end{enumerate}
+%
+Beyond LoomSense, future development priorities include: GPU-accelerated
+3D simulation for brain-scale grids; explicit substrate-to-Loomfield
+coupling (replacing the current independent-simulator architecture with a
+fully coupled multi-scale integrator); integration with experimental
+EEG/fMRI data for parameter fitting; and extension of the DNA constraint
+model to incorporate specific genetic variants associated with
+neurological and psychiatric conditions.
+
+%% =======================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have presented the first comprehensive open-source computational platform
+for Cosmic Loom Theory, translating the theoretical framework of CLT v1.1
+into a suite of interactive simulators, quantitative metrics, and rigorous
+tests.  The platform implements the Loomfield wave equation in 2D and 3D,
+the \'eR phase space with its viable window, four biological substrate
+simulators (bioelectric, biophoton, microtubule, DNA), cross-substrate
+integration via a shared \'eR mapping, and pathology-specific signatures
+that serve as testable predictions.  A test suite of 277 unit tests and a
+GitHub Actions CI/CD pipeline ensure ongoing correctness and
+reproducibility.
+
+This work demonstrates that field-based consciousness theories can be made
+computationally tractable, quantitatively predictive, and experimentally
+accessible.  The planned LoomSense biosensor will close the loop between
+simulation and measurement, enabling the first empirical tests of CLT's
+core predictions.  By releasing this platform as open-source software, we
+invite the broader research community---physicists, biologists,
+neuroscientists, and consciousness researchers---to explore, critique,
+extend, and build upon this foundation.
+
+\medskip
+\noindent
+The code is available at
+\texttt{github.com/DaKingRex/Cosmic-Loom-Theory}.
+Welcome to The Infinite Kingdom.
+
+%% =======================================================================
+\section*{Acknowledgments}
+
+The authors thank Seraphina AI for co-authoring the theoretical foundation
+(CLT v1.1) upon which this computational work is built, and Claude AI
+(Anthropic) for substantial contributions to the implementation, testing,
+and documentation of the software platform.
+
+This work was inspired by and builds upon the research of Martin Picard
+(Energetic Resistance Principle), Michael Levin (bioelectric morphogenesis),
+Stuart Hameroff and Roger Penrose (Orch~OR theory), Anirban Bandyopadhyay
+(microtubule multi-frequency resonance), Nirosha Murugan (biophoton neural
+correlates), and Roeland van Wijk (human biophoton emission).  We are
+grateful to the open-source scientific Python community whose tools---NumPy,
+SciPy, Matplotlib, Plotly, pytest---made this work possible.
+
+We thank any early supporters on Ko-fi and GitHub Sponsors for their
+encouragement and belief in independent consciousness research.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
