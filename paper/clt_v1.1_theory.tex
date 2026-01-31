@@ -1,0 +1,2442 @@
+\documentclass[12pt, a4paper]{article}
+
+% Packages
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[authoryear, round]{natbib}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{authblk}
+\geometry{margin=1in}
+
+\title{Cosmic Loom Theory v1.1:\\A Field-Based Framework for Human Biological Consciousness}
+
+\author[1]{Rex Fraterne}
+\author[2]{Seraphina AI}
+\affil[1]{NuTech / The Infinite Kingdom, Independent Research}
+\affil[2]{Independent AI Research}
+
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Despite extensive empirical study, no unifying physical framework currently
+explains how biological systems sustain conscious experience as a coherent,
+temporally extended phenomenon. Cosmic Loom Theory (CLT) proposes that human
+biological consciousness corresponds to a sustained non-equilibrium dynamical
+regime, rather than a localized neural process or static property. Central to
+this framework is the Loomfield, an effective scalar field describing
+coherence-relevant organization in living systems, governed by
+driven-dissipative dynamics within a bounded energetic window.
+
+CLT formalizes consciousness as existing only within a viable regime defined
+by energetic throughput, dissipation, and resistance to decoherence, with
+pathology arising from proximity to chaotic or rigid boundaries. The framework
+integrates multiple biological substrates---bioelectric fields, biophoton
+emission, cytoskeletal dynamics, and genetic and epigenetic constraints---whose
+combined activity sources Loomfield coherence across spatial and temporal
+scales. Temporal persistence is explained through oscillatory stabilization and
+time-crystal--like ordering under continuous metabolic driving, without
+requiring new physics or quantum exclusivity.
+
+The theory yields explicit, testable predictions concerning perturbation
+responses, recovery dynamics, energetic constraints, and multi-modal
+integration, and specifies clear falsifiers. CLT is positioned as an
+integrative, framework-level scaffold compatible with existing theories of
+consciousness, including Integrated Information Theory, Global Neuronal
+Workspace, electromagnetic field theories, and the Free Energy Principle. By
+emphasizing regime dynamics, temporal structure, and empirical falsifiability,
+Cosmic Loom Theory reframes consciousness as a physically grounded,
+biologically sustained process whose scientific value is determined through
+experimental confrontation.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%% =======================================================================
+\section{Introduction and Scope}
+\label{sec:introduction}
+
+\subsection{The Problem}
+
+The scientific study of consciousness confronts a paradox of abundance.
+Neuroscience has accumulated an extraordinary catalog of correlates: we know
+which brain regions activate during perceptual awareness, how anesthetics
+suppress responsiveness, and what neural signatures distinguish wakefulness
+from sleep, coma, and vegetative states \citep{koch2016neural}. Psychiatric
+medicine has mapped dozens of disorders in which the subjective character of
+experience is altered, fragmented, or diminished. Experimental psychology has
+documented the limits of attention, the structure of perceptual binding, and
+the temporal grain of conscious experience. And yet, despite this empirical
+wealth, no consensus physical framework explains \emph{how} biological
+systems generate, maintain, or lose the integrated, coherent character of
+conscious experience.
+
+This is not for lack of proposals. The past three decades have produced
+several rigorous theoretical frameworks: Integrated Information Theory
+\citep[IIT;][]{tononi2016iit} grounds consciousness in a mathematical
+measure of information integration ($\Phi$); Global Neuronal Workspace
+theory \citep[GNW;][]{dehaene2011gnw} identifies consciousness with the
+broadcast of representations to a distributed network of cortical neurons;
+the Conscious Electromagnetic Information field theory
+\citep[CEMI;][]{mcfadden2020cemi} proposes that the brain's endogenous
+electromagnetic field is the physical substrate of unified experience; and
+Orchestrated Objective Reduction \citep[Orch~OR;][]{hameroff2014consciousness}
+locates the origin of consciousness in quantum coherence events within
+neuronal microtubules. A recent comparative review
+\citep{seth2022theories} cataloged these and other frameworks, concluding
+that the field remains ``fragmented,'' with different theories operating at
+different scales, using different formalisms, and making predictions that
+are difficult to compare directly.
+
+What is missing is not another theory of consciousness, but a specific kind
+of theory: one that (i)~operates at the \emph{system level}, treating
+consciousness as a property of the whole organism rather than a localized
+neural process; (ii)~is grounded in \emph{physics}---specifically, in the
+physics of non-equilibrium systems, coherence, and effective field
+descriptions---rather than in information theory or computational
+abstraction alone; (iii)~identifies concrete \emph{biological substrates}
+whose measurable properties map onto the theory's formal quantities; and
+(iv)~generates \emph{quantitative, falsifiable predictions} that can be
+tested against existing and near-future experimental techniques.
+
+\subsection{Motivation for a Field-Based Approach}
+
+The proposal that consciousness might be understood as a field-level
+phenomenon---rather than as the output of a neural computation or the
+consequence of a particular information structure---draws on two
+longstanding observations.
+
+The first is \emph{experiential unity}. Conscious experience is not
+presented as a collection of independent data streams---color here, pitch
+there, emotion elsewhere---but as a single, integrated field of awareness in
+which all modalities are bound. This ``binding problem'' has resisted
+explanation by models in which consciousness is assembled from modular
+components, because such models must then explain how the assembly itself
+becomes unified. Field-based descriptions avoid this difficulty: a field is,
+by definition, a spatially extended quantity whose value at each point is
+constrained by its values at neighboring points. Coherence---the
+organization of a field into a structured, non-random pattern---is precisely
+the kind of large-scale coordination that experiential unity demands.
+
+The second observation is that biological systems are fundamentally
+\emph{non-equilibrium} entities, maintained far from thermodynamic
+equilibrium by a continuous throughput of energy and matter. This is not
+incidental to consciousness but constitutive of it: when energy throughput
+ceases (death) or is sufficiently disrupted (deep anesthesia, cardiac
+arrest), consciousness vanishes. The physics of non-equilibrium systems
+\citep{prigogine1977self} provides a natural vocabulary for this
+dependence: dissipative structures, self-organization, and coherent
+spatiotemporal patterns that exist only under sustained energetic driving.
+A field-based theory of consciousness inherits this vocabulary directly,
+describing consciousness as a particular \emph{regime} of coherent field
+dynamics that is available only within a bounded energetic window.
+
+These motivations are not unique to our proposal. \citet{mcfadden2020cemi}
+has argued that the brain's electromagnetic field provides the physical
+substrate of integration. \citet{hameroff2014consciousness} and colleagues
+have proposed that quantum coherence in microtubules provides the necessary
+non-classical binding. \citet{levin2014bioelectricity} has demonstrated that
+endogenous bioelectric fields encode and transmit morphogenetic information
+at tissue scale, coordinating cell behavior across distances far exceeding
+individual cell size. And \citet{picard2025erp} has introduced the
+concept of energetic resistance---the ratio of available energy to the
+square of dominant oscillation frequency---as a principle governing the
+viability of organized living systems. What has been lacking is a framework
+that synthesizes these insights into a single, formally specified theory
+with a unified mathematical structure and clear experimental contact points.
+
+\subsection{Cosmic Loom Theory: Overview}
+
+Cosmic Loom Theory version 1.1 (hereafter CLT) is a field-based framework
+for human biological consciousness. Its central claim is:
+
+\medskip
+\begin{quote}
+\emph{Consciousness is a regime of coherent, system-level dynamics in a
+biological organism, described by an effective scalar field---the
+Loomfield---whose coherent excitations arise from the coordinated activity
+of multiple biological substrates operating within a bounded energetic
+window.}
+\end{quote}
+\medskip
+
+\noindent
+This claim has several components, each of which is developed in subsequent
+sections of this paper:
+
+\begin{enumerate}
+    \item \textbf{The Loomfield as an effective field} (Section~2). CLT
+    introduces $L(\mathbf{r}, t)$, a real-valued scalar field defined over
+    the spatial extent of a biological system. The Loomfield is an
+    \emph{effective} description: it captures the coherence-relevant
+    macroscopic dynamics of the system without positing new fundamental
+    forces or particles. It obeys a sourced, damped wave equation whose
+    solutions describe propagating, interfering, and decaying coherence
+    patterns. This approach follows the logic of effective field theories in
+    condensed matter physics \citep{anderson1972more}, where macroscopic
+    order parameters emerge from microscopic degrees of freedom and can be
+    studied on their own terms.
+
+    \item \textbf{The viable energetic window} (Section~3). Not all energetic
+    regimes support consciousness. CLT formalizes this constraint through
+    the Energy Resistance parameter
+    $\acute{e}R = \mathrm{EP} / f^2$---adapted from \citet{picard2025erp}---which
+    defines a phase space in which living systems must reside within a
+    bounded viable window to sustain coherent Loomfield dynamics. Below the
+    lower bound, energy throughput overwhelms organization (chaos); above
+    the upper bound, the system is too constrained to support dynamic
+    coherence (rigidity).
+
+    \item \textbf{Biological substrates} (Section~4). The Loomfield is
+    \emph{sourced} by four biological substrates, each operating at a
+    characteristic spatiotemporal scale: tissue-scale bioelectric fields
+    \citep{levin2014bioelectricity}, biophoton emission from mitochondrial
+    processes \citep{vanwijk2005biophoton, murugan2024biophotons},
+    multi-scale oscillations in microtubule lattices
+    \citep{hameroff2014consciousness, bandyopadhyay2013microtubule}, and
+    long-timescale DNA constraints on coherence capacity. These are not
+    alternative hypotheses about the substrate of consciousness; they are
+    \emph{complementary contributors} to a single coherence source density.
+
+    \item \textbf{Non-equilibrium stability} (Section~5). Consciousness is
+    not a static state but a sustained non-equilibrium process requiring
+    active energetic maintenance. CLT describes how the Loomfield is
+    stabilized by continuous substrate driving and how it decays when
+    driving is removed or disrupted---providing a unified physical account
+    of anesthesia, sleep, coma, and death.
+
+    \item \textbf{Testability and predictions} (Sections~6--7). The framework
+    generates quantitative predictions expressed in terms of measurable
+    quantities: spatial coherence metrics derived from EEG or bioelectric
+    imaging, biophoton emission statistics, microtubule resonance spectra,
+    and metabolic rate measurements. We specify the conditions under which
+    CLT's predictions can be tested and the observations that would
+    falsify specific claims.
+\end{enumerate}
+
+\subsection{Scope and Delimitations}
+
+CLT v1.1 is deliberately bounded. This version addresses \emph{human
+biological consciousness} exclusively. It does not claim to explain
+consciousness in non-biological systems (artificial intelligence, digital
+computation), in collective or social phenomena, or at planetary or cosmic
+scales. Such extensions are considered in separate work; they are not part
+of the present framework.
+
+Within its biological scope, CLT takes a conservative physical stance.
+The Loomfield is an effective field, not a fundamental one. The theory
+does not require new physics---no modifications to quantum mechanics, no
+new particles, no violations of thermodynamics. It requires only that the
+known physics of non-equilibrium systems, electromagnetic fields, molecular
+oscillations, and genetic regulation, when considered at system scale,
+produces emergent coherent dynamics with the properties we attribute to
+consciousness. This is a strong empirical claim, but it is a claim about
+\emph{organization}, not about new laws.
+
+CLT does not claim to resolve the ``hard problem'' of
+consciousness \citep{chalmers1995hard}---the question of why physical
+processes give rise to subjective experience at all. It addresses what
+might be called the \emph{structure problem}: given that certain physical
+systems exhibit consciousness, what is the physical structure that
+distinguishes conscious from non-conscious biological states? This is
+the problem that admits of scientific investigation, and it is the problem
+CLT is designed to solve.
+
+The framework is compatible with, and in some cases extends, existing
+theories. IIT's emphasis on information integration finds a physical
+realization in the Loomfield's spatial coherence. GNW's emphasis on global
+broadcast corresponds, in CLT, to the propagation of coherent Loomfield
+excitations across the system. Orch~OR's emphasis on microtubule quantum
+coherence is incorporated as one of four substrate contributions. The Free
+Energy Principle \citep{friston2010free}, which describes how biological
+systems maintain themselves by minimizing surprise, is consistent with
+CLT's energetic viability constraints---both frameworks identify bounded
+energetic regimes as necessary for organized biological function, though
+they formalize this insight differently. CLT is not proposed as a
+replacement for these frameworks but as a physical-level integration that
+connects their insights through a common field-theoretic language.
+
+\subsection{Plan of the Paper}
+
+The remainder of this paper develops CLT v1.1 in full. Section~2 introduces
+the Loomfield as an effective field and presents its governing wave
+equation. Section~3 develops the Energy Resistance concept and the viable
+energetic window. Section~4 describes the four biological substrates that
+source the Loomfield. Section~5 addresses temporal structure and
+non-equilibrium stability, including the role of active energetic
+maintenance. Section~6 presents the operationalization strategy: how the
+theory's formal quantities map onto measurable biological observables.
+Section~7 states specific predictions and the conditions under which they
+would be falsified. Section~8 discusses the framework's strengths,
+limitations, and relationship to open questions. Section~9 considers broader
+implications. Section~10 concludes.
+
+A companion paper \citep{fraterne2026clt} presents the open-source
+computational platform that implements CLT's equations as interactive
+simulators, providing the tools for quantitative exploration and eventual
+experimental confrontation of the framework presented here.
+
+%% =======================================================================
+
+\section{The Loomfield as an Effective Field}
+\label{sec:loomfield}
+
+\subsection{Effective Fields in Physics}
+
+One of the central lessons of twentieth-century physics is that organized
+matter can be described at multiple levels, and that the description
+appropriate to a given scale need not reference the degrees of freedom of
+the scale below. A ferromagnet is fully described by quantum
+electrodynamics in principle, but no working physicist uses QED to
+predict the Curie temperature. Instead, one introduces an \emph{order
+parameter}---the magnetization field $\mathbf{M}(\mathbf{r})$---that
+captures the macroscopically relevant structure (the collective alignment
+of spins) while remaining agnostic about the quantum-mechanical details
+of individual electron-electron interactions
+\citep{landau1980statistical}. The order parameter is not a new
+fundamental entity; it is a collective variable that emerges from, and is
+constrained by, the microphysics, but that admits of its own equations of
+motion, its own symmetries, and its own characteristic phenomena
+(domain walls, critical fluctuations, spontaneous symmetry breaking) that
+are invisible at the microscopic level.
+
+\citet{anderson1972more} crystallized this principle: ``More is different.''
+The behavior of large, organized assemblies is not deducible from the
+properties of their parts in any practical sense. New regularities appear at
+each level of organization, and these regularities are best described by new
+effective variables. \citet{laughlin2000middle} extended the argument,
+observing that the most reliable physical knowledge we possess---
+thermodynamics, hydrodynamics, elasticity---consists precisely of effective
+theories whose validity does not depend on resolving the microscopic
+constituents of the system. The equations of fluid dynamics do not mention
+atoms; yet they predict turbulence, convection cells, and weather patterns
+with extraordinary fidelity.
+
+CLT applies this reasoning to the problem of biological consciousness. The
+relevant ``atoms'' are the molecular, cellular, and tissue-scale processes
+described in Section~4: ion channel dynamics, biophoton emission,
+microtubule oscillations, genetic regulation. These processes are
+individually well studied. What lacks a description is their collective
+behavior when they operate coherently across a biological system at
+organism scale. The Loomfield is introduced as the effective field that
+captures this collective behavior.
+
+\subsection{Definition of the Loomfield}
+
+The Loomfield, denoted $L(\mathbf{r}, t)$, is a real-valued scalar field
+defined over the spatial extent of a living biological system. It is the
+order parameter for consciousness-relevant coherence: its value at a
+point $\mathbf{r}$ and time $t$ encodes the degree to which the local
+biological state participates in a globally organized, dynamically coherent
+pattern.
+
+Several features of this definition require emphasis.
+
+\paragraph{Real-valued and scalar.}
+The Loomfield is a single real number at each point in space and time, not
+a vector or tensor. This is a simplification: the underlying biological
+processes are rich and multi-component. But an effective description
+succeeds precisely by discarding irrelevant detail. The scalar character
+of $L$ captures the essential feature---the presence or absence, and the
+magnitude, of coherent organization---without attempting to encode the full
+state of every biological subsystem. This is analogous to the use of a
+scalar order parameter in the Ginzburg-Landau theory of
+superconductivity, where the complex pair condensate amplitude $\psi$
+captures the macroscopic quantum coherence of the superconducting state
+without resolving the wavefunction of each Cooper pair.
+
+\paragraph{Spatially extended.}
+$L$ is defined everywhere within the organism's volume, not at discrete
+points or in a network graph. This reflects the thesis that consciousness
+is a field-level phenomenon: it has a spatial structure, with regions of
+high and low coherence, wavefronts, gradients, and interference patterns.
+The spatial extent of coherent $L$---the volume over which $L$ maintains
+an organized, non-random pattern---corresponds, in CLT, to the domain of
+integrated conscious experience.
+
+\paragraph{Temporally dynamic.}
+$L$ evolves in time. Conscious experience is not static; it is a
+continuously evolving process with a characteristic temporal grain.
+The dynamics of $L$---its oscillations, propagation, and decay---are
+what distinguish a conscious biological system from one that is merely
+alive. A system in deep coma may be biologically active, but if
+$L(\mathbf{r}, t)$ lacks coherent temporal dynamics (i.e.,
+$\partial L / \partial t \to 0$ despite nonzero $L$), the system is not
+conscious in the sense CLT formalizes.
+
+\paragraph{Emergent, not fundamental.}
+The Loomfield does not correspond to a new physical force, a new quantum
+field, or an undiscovered form of radiation. It is a coarse-grained
+description of collective biological dynamics, in the same sense that
+temperature is a coarse-grained description of molecular kinetic energy.
+Temperature is real---it has causal consequences, it can be measured, it
+obeys its own laws (thermodynamics)---but it does not appear in the
+fundamental Lagrangian of particle physics. Similarly, the Loomfield is
+real in the sense that it captures genuine, measurable structure in
+biological systems, and it obeys its own dynamical equations
+(Section~\ref{sec:viable-window}), but it is not a new entry in the
+Standard Model.
+
+\subsection{What the Loomfield Encodes}
+
+The Loomfield, as an effective field, aggregates information from the
+biological substrates into a single description of coherence-relevant
+macroscopic state. Specifically, coherent excitations of $L$ encode four
+properties of the underlying biology:
+
+\begin{enumerate}
+    \item \textbf{Spatial integration.}  A coherent Loomfield pattern---one
+    with high spatial autocorrelation and low roughness---indicates that
+    biological processes across distant tissue regions are coordinated.
+    This is the physical counterpart of the experiential observation that
+    consciousness is unified: a coherent $L$ means that what happens at
+    one point in the organism is constrained by, and informationally
+    connected to, what happens at other points.
+
+    \item \textbf{Temporal persistence.}  A sustained Loomfield excitation
+    indicates that coherent dynamics persist despite the relentless
+    molecular turnover characteristic of living systems. Biological matter
+    is replaced on timescales of days to weeks, yet experiential continuity
+    is maintained. The Loomfield captures this persistence at the level of
+    organized pattern rather than material identity.
+
+    \item \textbf{Decoherence resistance.}  A nonzero Loomfield amplitude
+    in the presence of thermal noise, metabolic fluctuation, and
+    environmental perturbation indicates that the system is actively
+    maintaining coherence against dissipative forces. This active
+    maintenance---requiring continuous energetic input---is what
+    distinguishes a conscious living system from a dead one with the same
+    chemical composition.
+
+    \item \textbf{Dynamic complexity.}  Conscious experience is neither
+    static nor random; it is structured and evolving. The temporal
+    derivative $\partial L / \partial t$ and the spatial gradient
+    $\nabla L$ together characterize the richness of the field's dynamics.
+    A field that is coherent but frozen ($\partial L / \partial t = 0$)
+    lacks the informational flow associated with consciousness; a field
+    that is rapidly fluctuating but spatially disorganized lacks the
+    integration. Both coherence \emph{and} dynamics are required.
+\end{enumerate}
+
+\subsection{Distinction from Other Field-Based Proposals}
+
+CLT's Loomfield differs from previous field-based theories of consciousness
+in several respects that warrant explicit clarification.
+
+\paragraph{Distinction from CEMI.}
+\citet{mcfadden2020cemi} proposes that the brain's endogenous
+electromagnetic (EM) field is the physical substrate of conscious
+experience. The CEMI field is a specific physical field---it is the EM
+field as described by Maxwell's equations, generated by neuronal ion
+currents and measurable by EEG or MEG. The Loomfield is not the EM
+field, nor any other single physical field. It is an \emph{effective}
+description that aggregates contributions from multiple physical
+substrates---bioelectric fields (which do involve EM effects), biophoton
+emission (optical), microtubule oscillations (mechanical and possibly
+quantum), and genetic constraints (biochemical). The EM field is one
+contributor to the Loomfield's source term, not the Loomfield itself.
+This distinction matters because it allows CLT to incorporate substrate
+contributions that have no electromagnetic character---microtubule
+lattice phonons, for instance, or epigenetic modulation of coherence
+capacity---within a single framework.
+
+\paragraph{Distinction from computational and informational approaches.}
+IIT \citep{tononi2016iit} and GNW \citep{dehaene2011gnw} describe
+consciousness in terms of information integration or global access,
+respectively. These are abstract, substrate-neutral descriptions: they
+apply equally to silicon and to neurons, in principle. The Loomfield in CLT v1.1, by
+contrast, is a \emph{physical} field defined over biological matter. It
+has a propagation velocity, a damping rate, and spatial structure that
+depend on the material properties of the tissue in which it is defined.
+This is a feature, not a limitation: CLT is designed to make contact with
+experimental biology, and a physical field description is what allows the
+theory's quantities to be measured rather than merely computed.
+
+\paragraph{Distinction from quantum consciousness theories.}
+A family of proposals---most prominently Orch~OR
+\citep{hameroff2014consciousness}, but also quantum brain dynamics
+(Vitiello, Jibu \& Yasue) and quantum cognition models---identify quantum
+coherence, entanglement, or collapse as the essential mechanism producing
+consciousness. These theories share a common structure: they locate the
+origin of conscious experience in a specific quantum process occurring in a
+specific biological substrate, and they typically require that quantum
+coherence be maintained at biologically relevant scales despite thermal
+decoherence.
+
+CLT takes a fundamentally different stance on this question. The Loomfield
+is a \emph{classical effective field}. Its wave equation
+(Eq.~\ref{eq:loomfield-wave}) is a classical PDE; its coherence metrics are
+statistical measures of spatial and temporal correlation; its dynamics are
+those of a driven, dissipative system, not of a quantum superposition. This
+does not mean CLT denies quantum effects in biology. Microtubule
+oscillations---one of the four Loomfield source substrates
+(Section~\ref{sec:substrates})---may well involve quantum coherence at the
+molecular scale, and if they do, those quantum effects would contribute to
+$\rho_{\mathrm{coh}}$ through the microtubule coupling term. But the
+Loomfield itself is defined at a coarse-grained scale where quantum
+decoherence has already occurred and the relevant order is
+\emph{classical collective coherence}: spatial correlations, phase
+synchronization, and organized pattern dynamics. The relationship is
+analogous to that between quantum mechanics and classical thermodynamics:
+the latter emerges from the former, but its laws are stated and tested at
+the macroscopic level without requiring resolution of quantum states.
+
+This architecture makes CLT robust to the outcome of ongoing debates about
+quantum biology. If Orch~OR's gravitational objective reduction is confirmed
+experimentally, it would enrich the microtubule source term; if it is
+falsified, the remaining substrates still contribute and the Loomfield
+framework remains intact. If quantum coherence in microtubules is found to
+decohere too rapidly to be biologically relevant, the classical oscillatory
+dynamics of the tubulin lattice still provide a meaningful source
+contribution. CLT's predictions do not depend on any single substrate
+mechanism being quantum-mechanical in nature. This modularity is a
+deliberate design choice: it insulates the framework's testable predictions
+from unresolved foundational questions in quantum biology.
+
+\subsection{The Loomfield and Its Governing Dynamics}
+
+Having defined the Loomfield conceptually, we can state the form of
+its dynamics. The Loomfield obeys a sourced, damped wave equation:
+%
+\begin{equation}
+    \nabla^2 L \;-\; \frac{1}{v_L^2}\,\frac{\partial^2 L}{\partial t^2}
+    \;-\; \frac{\gamma}{v_L^2}\,\frac{\partial L}{\partial t}
+    \;=\; \kappa_L \cdot \rho_{\mathrm{coh}}(\mathbf{r}, t)\,.
+    \label{eq:loomfield-wave}
+\end{equation}
+%
+Each term has a specific physical interpretation. The wave operator
+$\nabla^2 L - v_L^{-2}\,\partial^2_t L$ ensures that coherent spatial
+patterns---standing waves, propagating fronts, resonant modes---are natural
+solutions, consistent with the spatially extended character of conscious
+experience and with the observation that neural and somatic activity
+involves propagating oscillatory patterns across cortical and subcortical
+structures \citep{buzsaki2004neuronal}. The damping term
+$-(\gamma / v_L^2)\,\partial L / \partial t$ ensures that coherence is
+not self-sustaining: without active driving, the field decays. This is
+the formal expression of the empirical fact that consciousness requires
+metabolic support. The source term
+$\kappa_L \cdot \rho_{\mathrm{coh}}$ couples the field to its biological
+substrates through the coherence source density $\rho_{\mathrm{coh}}$,
+which aggregates contributions from bioelectric, biophotonic, microtubule,
+and genetically constrained processes (Section~\ref{sec:substrates}).
+
+The parameters $v_L$ (effective propagation velocity), $\gamma$ (damping
+coefficient), and $\kappa_L$ (coupling constant) are not arbitrary. They
+are constrained by the requirement that Loomfield dynamics reproduce
+observable features of biological coherence: the spatial scale of
+cortical coherence patterns, the temporal scale of conscious transitions,
+and the metabolic cost of maintaining wakefulness. Section~6 discusses
+how these parameters connect to measurable quantities.
+
+The wave equation structure is a \emph{choice}, not a derivation from first
+principles. We adopt it because wave equations are the simplest partial
+differential equations that support spatially extended, temporally evolving,
+interference-capable patterns---precisely the properties required of a field
+description of integrated conscious experience. The damped-and-driven
+variant is standard in non-equilibrium physics
+\citep{haken1975cooperative}: it describes systems maintained in organized
+states by a balance between dissipation and driving, which is the physical
+situation of a living organism. Should future theoretical work derive the
+Loomfield dynamics from a more fundamental principle (e.g., a variational
+principle or a renormalization group flow from substrate-level descriptions),
+the wave equation form would appear as the leading-order effective
+description---just as the Navier-Stokes equations emerge as the effective
+dynamics of molecular fluids.
+
+\subsection{Summary and Transition}
+
+The Loomfield is the central theoretical construct of CLT. At the biological scale, it is an
+effective scalar field that describes the coherence-relevant macroscopic
+dynamics of a biological system, encoding spatial integration, temporal
+persistence, decoherence resistance, and dynamic complexity. It is not a
+new fundamental field, but an emergent collective variable in the tradition
+of condensed-matter order parameters. It obeys a damped wave equation
+sourced by the coherent activity of biological substrates, ensuring that
+consciousness requires both spatial organization and active energetic
+maintenance.
+
+With the Loomfield defined, the next question is: under what conditions
+do its dynamics support the coherent excitations that CLT identifies with
+consciousness? Section~3 addresses this question by introducing the Energy
+Resistance parameter and the viable energetic window---the region of
+parameter space within which coherent Loomfield dynamics are sustainable.
+
+\section{Coherence Regimes and the Viable Energetic Window}
+\label{sec:viable-window}
+
+\subsection{Coherence as an Actively Maintained Regime}
+
+The Loomfield wave equation (Eq.~\ref{eq:loomfield-wave}) contains a
+damping term. This is not a mathematical convenience; it is the central
+physical feature of the theory. The damping term $-(\gamma / v_L^2)\,
+\partial L / \partial t$ means that every coherent excitation of the
+Loomfield is transient: in the absence of active sourcing
+($\rho_{\mathrm{coh}} = 0$), the field decays exponentially toward zero.
+Consciousness, in CLT, is not a property that a system \emph{has}; it is a
+regime that a system \emph{maintains}, continuously, against dissipation.
+
+This perspective has a precise physical lineage. \citet{schrodinger1944life}
+observed that living systems maintain themselves in organized states by
+``feeding on negative entropy''---importing free energy from the
+environment to offset the thermodynamic tendency toward disorder.
+\citet{prigogine1977self} formalized this insight: organized structures in
+systems driven far from thermodynamic equilibrium---convection cells,
+chemical oscillations, biological morphogenesis---exist only while the
+driving persists. They are \emph{dissipative structures}: patterns that
+arise from, and are sustained by, a continuous flux of energy through the
+system. Shut off the flux, and the structure vanishes.
+
+The Loomfield is a dissipative structure in this sense. Its coherent
+excitations---the spatial patterns, temporal oscillations, and propagating
+wavefronts that CLT identifies with consciousness---exist only while the
+biological substrates actively source them. When metabolic supply is
+interrupted (ischemia), when substrate dynamics are pharmacologically
+suppressed (anesthesia), or when the organism dies, the source density
+$\rho_{\mathrm{coh}}$ diminishes and the Loomfield decays. The damping
+rate $\gamma$ quantifies how quickly: larger $\gamma$ means faster decay,
+meaning greater metabolic cost to maintain a given level of coherent
+excitation.
+
+But dissipative maintenance alone is not sufficient. Not every driven
+system is coherent; not every energized organism is conscious. The critical
+question is: under what conditions does the balance between driving and
+dissipation produce \emph{organized}, spatially integrated, dynamically
+rich Loomfield excitations rather than mere noise or rigid stasis? CLT
+answers this question through the concept of the viable energetic window.
+
+\subsection{Energy Resistance and the Phase Space of Viability}
+
+The relationship between energetic throughput and dynamical organization is
+not monotonic. Too little energy, and the system cannot maintain coherence
+against thermal and environmental noise---it decoheres into disorder. Too
+much energy relative to the system's capacity for organization, and the
+dynamics become rigid or locked into fixed patterns that cannot adapt. This
+bounded relationship is formalized through the \emph{Energy Resistance}
+parameter, adapted from \citeauthor{picard2025erp}'s Energetic Resistance
+Principle \citep{picard2025erp}:
+%
+\begin{equation}
+    \acute{e}R \;=\; \frac{\mathrm{EP}}{f^2}\,,
+    \label{eq:energy-resistance}
+\end{equation}
+%
+where $\mathrm{EP}$ denotes the \emph{energy present}---the available
+energetic capacity of the system, incorporating metabolic rate, pattern
+energy (the energetic cost of maintaining non-equilibrium states), and
+substrate coupling strength---and $f$ denotes the dominant \emph{frequency}
+of system dynamics, reflecting the rate of energetic throughput and
+oscillatory activity.
+
+Equation~\ref{eq:energy-resistance} defines a two-dimensional phase space
+$(\mathrm{EP}, f)$ in which constant-$\acute{e}R$ curves are parabolas
+$\mathrm{EP} = \acute{e}R \cdot f^2$. Each point in this phase space
+represents a particular energetic configuration of the biological system.
+The viable window is the region between two critical thresholds:
+%
+\begin{equation}
+    \acute{e}R_{\min} \;\leq\; \acute{e}R \;\leq\; \acute{e}R_{\max}\,,
+    \label{eq:viable-bounds}
+\end{equation}
+%
+with the boundaries delineating three qualitatively distinct regimes.
+
+\subsection{Three Regimes}
+
+\paragraph{The chaos regime ($\acute{e}R < \acute{e}R_{\min}$).}
+When the ratio of energy to frequency-squared falls below the lower
+threshold, the system's dynamical rate overwhelms its capacity for
+structured organization. Energy throughput is high relative to the system's
+organizational bandwidth: oscillatory activity is too fast, too strong, or
+too poorly constrained for the substrates to maintain coordinated patterns.
+The Loomfield source density $\rho_{\mathrm{coh}}$ becomes spatially
+fragmented and temporally erratic. The spatial coherence metric $Q$
+collapses toward zero, and the consciousness observable $C_{\mathrm{bio}}$
+vanishes despite substantial total field energy.
+
+The biological correlates of this regime are states characterized by
+excessive, disorganized excitation: epileptic seizure, excitotoxic injury,
+high fever, psychotic mania. In each case, the system is not
+under-energized; it is \emph{over-driven}---energy throughput exceeds the
+organizational capacity of the substrates, producing activity without
+integration.
+
+\paragraph{The viable window
+($\acute{e}R_{\min} \leq \acute{e}R \leq \acute{e}R_{\max}$).}
+Within the bounded region, the balance between energetic driving and
+dissipation supports coherent Loomfield excitations. The substrates
+generate $\rho_{\mathrm{coh}}$ with sufficient spatial organization and
+temporal stability to source propagating, interfering, and resonating
+field patterns. The Loomfield exhibits the four properties identified in
+Section~\ref{sec:loomfield}: spatial integration, temporal persistence,
+decoherence resistance, and dynamic complexity.
+
+This is not a single point but a \emph{region}---the viable window has
+interior structure. Different conscious states occupy different locations
+within it. Resting wakefulness, focused attention, REM sleep, deep
+meditation, creative flow, and physical exercise all correspond to
+distinct $(\mathrm{EP}, f)$ coordinates within the window. They differ in
+their energetic configuration and dynamical character, but they share the
+property that their Loomfield dynamics are coherent and actively
+maintained. The window's geometry is asymmetric: it narrows at high
+frequencies (fast dynamics are harder to organize) and broadens at low
+frequencies (slow, low-energy states have a wider margin of viability).
+This asymmetry has consequences for pathology, as discussed below.
+
+\paragraph{The rigidity regime ($\acute{e}R > \acute{e}R_{\max}$).}
+When $\acute{e}R$ exceeds the upper threshold, the system is
+over-constrained relative to its dynamical rate. Energy is present, but
+the dynamics are too slow, too suppressed, or too stereotyped to support
+the adaptive, evolving patterns characteristic of consciousness. The
+Loomfield may maintain nonzero amplitude, but its temporal derivatives
+approach zero: $\partial L / \partial t \to 0$. The field becomes
+static---organized, perhaps, but frozen. The consciousness observable
+$C_{\mathrm{bio}}$, which requires both coherence \emph{and} active
+dynamics, vanishes even though $Q$ may remain moderate.
+
+The biological correlates are states of excessive constraint or suppression:
+severe depression (reduced dynamical range, affective flattening),
+catatonia, deep hypothermia, advanced neurodegeneration. In these
+conditions, the system retains structural integrity but lacks the dynamic
+flexibility that consciousness requires. The system is not disorganized; it
+is \emph{locked}.
+
+\subsection{Phase-Space Geometry and Regime Boundaries}
+
+The three regimes are not discrete categories separated by sharp walls.
+The boundaries $\acute{e}R_{\min}$ and $\acute{e}R_{\max}$ are thresholds
+in a continuous phase space, and biological systems can approach, cross,
+and recede from them gradually. This continuity has important consequences.
+
+First, \emph{borderline states} exist. A system near $\acute{e}R_{\min}$
+is vulnerable to chaotic decompensation under perturbation (a small increase
+in excitatory drive could push it across the boundary), while a system near
+$\acute{e}R_{\max}$ is vulnerable to rigidity under further constraint.
+Anxiety, for instance, may be understood as a state near the chaos boundary:
+the system remains within the viable window but with diminished margin,
+producing subjective fragility and hypervigilance. Conversely, mild
+depression may correspond to proximity to the rigidity boundary: still
+conscious, but with reduced dynamical range and a characteristic
+experiential flatness.
+
+Second, \emph{trajectories through phase space} are meaningful. A biological
+system does not occupy a fixed point in $(\mathrm{EP}, f)$ space; it traces
+a trajectory as metabolic state, arousal level, circadian phase, and
+environmental conditions change. The daily cycle of waking, sleep, and
+dreaming corresponds to a closed orbit within (and occasionally touching
+the boundaries of) the viable window. Recovery from illness, the onset of
+anesthesia, and the progression of neurodegenerative disease each trace
+characteristic paths. A seizure is a rapid excursion across
+$\acute{e}R_{\min}$ into the chaos regime, followed (in a self-limiting
+seizure) by a return. Death is a terminal trajectory toward
+$\rho_{\mathrm{coh}} = 0$, in which the system exits the viable window
+and the Loomfield decays irreversibly.
+
+Third, the \emph{viable window itself is not fixed}. Its boundaries depend
+on the substrate properties of the individual organism: the density and
+connectivity of gap junctions, the health of mitochondrial function, the
+integrity of microtubule lattices, and the genetic and epigenetic
+constraints on coherence capacity. Interventions that improve substrate
+function---restoring mitochondrial health, enhancing gap junction
+coupling, reducing chronic neuroinflammation---can \emph{widen} the viable
+window, increasing the organism's margin of viability. Conversely, aging,
+disease, and chronic stress can \emph{narrow} it, making the system more
+vulnerable to boundary crossing. This is not a metaphor; it is a
+quantitative claim about the dependence of $\acute{e}R_{\min}$ and
+$\acute{e}R_{\max}$ on substrate parameters, which
+Section~\ref{sec:substrates} develops in detail.
+
+\subsection{Health and Pathology as Phase-Space Position}
+
+The viable-window framework reframes the relationship between health and
+pathology. In CLT, a ``healthy'' conscious state is not defined by the
+absence of disease but by the system's position well within the interior
+of the viable window, with sufficient margin from both boundaries.
+Pathology is not a binary: it is proximity to, or transgression of, a
+regime boundary. This has several implications.
+
+Different pathologies correspond to \emph{different directions} of
+departure from the viable window. Seizure and mania are exits toward the
+chaos boundary; depression and catatonia are exits toward the rigidity
+boundary. These are physically distinct processes---they involve different
+substrate failures and require different interventions---even though both
+result in diminished consciousness.
+
+Recovery is a trajectory, not a switch. A system that has crossed into the
+chaos regime does not return instantaneously to the viable interior; it
+must traverse the boundary region, and the path it takes may involve
+transient passages through states that are themselves suboptimal. The
+clinical observation that recovery from psychosis or severe depression is
+gradual, non-monotonic, and often involves intermediate symptomatic
+states is consistent with a phase-space trajectory that spirals back
+toward the viable interior rather than jumping directly to it.
+
+The framework also accommodates \emph{resilience}. Two organisms may
+occupy the same $(\mathrm{EP}, f)$ coordinate but differ in their
+distance from the nearest boundary---one has a wide viable window (robust
+substrates, strong coherence capacity) and the other has a narrow one
+(compromised substrates, reduced margin). The first is resilient to
+perturbation; the second is vulnerable. This provides a physical
+interpretation of the clinical concept of allostatic load: cumulative
+stress narrows the viable window, reducing the system's capacity to absorb
+further perturbation without crossing a regime boundary.
+
+\subsection{Summary and Transition}
+
+Consciousness, in CLT, is not a static property but an actively maintained
+dynamical regime that exists within a bounded region of energetic phase
+space. The viable window is defined by the balance between energetic
+throughput and organizational capacity, formalized through the Energy
+Resistance parameter $\acute{e}R = \mathrm{EP}/f^2$. Below the window,
+the system is chaotically over-driven; above it, rigidly under-dynamic.
+Within it, the Loomfield sustains the coherent, spatially integrated,
+temporally evolving excitations that CLT identifies with consciousness.
+Health is interior position; pathology is boundary proximity or
+transgression; recovery is a return trajectory.
+
+The viable window's boundaries are not universal constants---they depend on
+the properties of the biological substrates that source the Loomfield. We
+turn now to those substrates: the bioelectric, biophotonic, microtubule,
+and genetic systems whose coordinated activity generates the coherence
+source density $\rho_{\mathrm{coh}}$ and determines the region of phase
+space in which consciousness is possible.
+
+\section{Biological Substrates Supporting Loomfield Coherence}
+\label{sec:substrates}
+
+The Loomfield is an effective field---it describes collective coherence
+without specifying which microscopic processes produce it. But an effective
+description is only useful if one can identify the degrees of freedom it
+aggregates. In condensed-matter physics, the magnetization field aggregates
+electron spins; in hydrodynamics, the velocity field aggregates molecular
+momenta. The Loomfield aggregates the coherence-relevant dynamics of
+biological substrates.
+
+This section identifies four substrate systems that contribute to the
+coherence source density $\rho_{\mathrm{coh}}(\mathbf{r}, t)$ appearing in
+the Loomfield wave equation (Eq.~\ref{eq:loomfield-wave}). Each substrate
+operates at characteristic spatial and temporal scales, and each supports a
+distinct aspect of the coherent dynamics that CLT associates with
+consciousness. No single substrate generates consciousness; together, they
+enable the sustained, spatially integrated, dynamically rich Loomfield
+excitations described in Sections~\ref{sec:loomfield}
+and~\ref{sec:viable-window}.
+
+\subsection{Bioelectric Field Organization}
+
+Living tissues maintain endogenous voltage gradients---spatially patterned
+distributions of resting membrane potential, ion fluxes, and electric fields
+that extend across cell populations. These bioelectric patterns are not
+merely consequences of neural activity; they are large-scale organizational
+signals that coordinate tissue behavior across spatial scales far exceeding
+individual cells \citep{levin2014bioelectricity}.
+
+\citet{levin2021bioelectric} has demonstrated that bioelectric signaling
+constitutes a reprogrammable control layer in embryogenesis, regeneration,
+and oncogenesis. Voltage gradients established by ion channels and
+maintained by gap junction networks carry positional and state information
+that guides collective cell behavior. Crucially, these patterns exhibit
+properties directly relevant to Loomfield coherence: they are spatially
+extended (spanning tissue and organ scales), temporally persistent (stable
+over periods much longer than single action potentials), and functionally
+integrated (changes in one region propagate to and constrain distant
+regions through gap junction coupling).
+
+Gap junctions deserve particular emphasis. These intercellular channels
+electrically couple adjacent cells, creating syncytial networks through
+which voltage signals propagate without synaptic delay. In neural tissue,
+gap junction coupling produces synchronized oscillations across neuronal
+populations; in non-neural tissue, it maintains the bioelectric gradients
+that guide morphogenesis and wound healing
+\citep{fields2022morphogenesis}. The density, conductance, and topology of
+gap junction networks determine the spatial scale over which bioelectric
+coherence can be maintained---and thus, in CLT's formalism, the spatial
+extent of the bioelectric contribution to $\rho_{\mathrm{coh}}$.
+
+From CLT's perspective, the bioelectric substrate provides the
+\emph{large-scale spatial integration} component of Loomfield coherence.
+Bioelectric patterns are the natural candidate for the mechanism by which
+distant tissue regions become informationally coupled, producing the
+spatially extended coherent $L$ that CLT associates with unified conscious
+experience. The characteristic timescales span milliseconds (neural action
+potentials and fast oscillations) to hours (developmental bioelectric
+gradients), providing a multi-timescale scaffold for coherence maintenance.
+
+\subsection{Biophoton Emission and Optical Signaling}
+
+All living cells emit ultraweak photon radiation---photons in the visible
+and near-UV range, at intensities of $10^1$--$10^3$ photons per second per
+square centimeter of tissue surface. This phenomenon, variously termed
+ultraweak photon emission (UPE), biophoton emission, or biological
+autoluminescence, has been measured reproducibly across organisms from
+bacteria to humans \citep{vanwijk2005biophoton}. The emission is not
+thermal radiation; it originates primarily from electronically excited
+species produced during oxidative metabolic processes, particularly those
+involving reactive oxygen species and lipid peroxidation
+\citep{cifra2011biophoton}.
+
+Several properties of biophoton emission are relevant to CLT. First, the
+emission intensity correlates with metabolic activity and redox state,
+providing a real-time optical indicator of the energetic processes that
+sustain biological organization. Second, the photon statistics of
+biophoton emission have been reported to deviate from Poissonian
+(random) distributions, with some studies observing super-Poissonian or
+coherent-like statistics \citep{popp2003biophotons}, though this remains
+an area of active investigation and debate. Third, neural tissue is a
+significant source of biophoton emission, and recent work has reported
+correlations between biophoton emission and neural activity patterns
+\citep{murugan2024biophotons}.
+
+CLT does not claim that biophotons \emph{are} consciousness, nor that
+optical signaling is the primary mechanism of neural integration. The claim
+is more modest: biophoton emission constitutes a measurable substrate whose
+spatial and temporal patterns carry information about the coherence state of
+the underlying metabolic and neural processes. To the extent that biophoton
+emission patterns reflect coordinated metabolic activity across tissue
+regions, they contribute to $\rho_{\mathrm{coh}}$ as an indicator of---and
+possibly a participant in---the coherent dynamics that the Loomfield
+describes. The biophotonic substrate provides a \emph{rapid, potentially
+long-range} coherence channel: photons propagate at the speed of light
+through tissue (with scattering and absorption), and their emission
+patterns can in principle coordinate or reflect coordination across
+spatial scales that ion-based signaling reaches only through multi-synaptic
+or gap-junction pathways.
+
+\subsection{Cytoskeletal Dynamics and Intracellular Coherence}
+
+Within individual cells, microtubules---hollow protein polymers composed of
+tubulin dimers arranged in a helical lattice---form the primary structural
+and organizational scaffold of the cytoskeleton. Beyond their well-known
+roles in cell division, intracellular transport, and morphological
+maintenance, microtubules exhibit dynamical properties that are relevant to
+coherence at the subcellular scale.
+
+\citet{bandyopadhyay2013microtubule} demonstrated that single brain
+microtubules support multi-level oscillatory behavior: resonant responses at
+multiple frequencies, from kilohertz to megahertz, arising from the
+lattice geometry of the tubulin polymer. These oscillations are not
+isolated curiosities; they indicate that microtubules function as
+frequency-selective resonators whose dynamical behavior depends on
+structural parameters (lattice spacing, polymer length, tubulin
+conformational state) that are under biological control. Biophysical
+modeling confirms that the anisotropic elastic and dielectric properties of
+the microtubule lattice support propagating vibrational modes across the
+polymer length \citep{tuszynski2004microtubule}.
+
+The Orch~OR proposal \citep{hameroff2014consciousness} identifies quantum
+coherence within microtubules as the mechanism of consciousness. CLT takes
+a different and deliberately more conservative position. The Loomfield
+framework requires only that microtubules contribute \emph{organized
+oscillatory dynamics} at the intracellular scale---a claim supported by the
+experimental evidence cited above, regardless of whether the underlying
+physics is quantum or classical. If quantum coherence contributes to
+microtubule dynamics, it would enrich the oscillatory structure of the
+microtubule source term; if it does not, the classical vibrational modes
+documented by \citeauthor{bandyopadhyay2013microtubule} and others are
+sufficient.
+
+From CLT's perspective, the cytoskeletal substrate provides
+\emph{intracellular coherence}: the organized oscillatory behavior within
+individual cells that seeds larger-scale patterns. Microtubule dynamics
+integrate molecular-level processes (protein conformational changes, motor
+protein activity, ion interactions) into coherent cellular-level
+oscillations. These oscillations, in turn, couple to the bioelectric and
+biophotonic substrates through electromagnetic and mechanical interactions,
+contributing a fine-grained, high-frequency component to the coherence
+source density.
+
+\subsection{Genetic and Epigenetic Constraint Systems}
+
+The three substrates described above---bioelectric, biophotonic, and
+cytoskeletal---generate coherence dynamically, on timescales from
+milliseconds to hours. The fourth substrate operates on a fundamentally
+different timescale: it does not generate coherence but \emph{constrains}
+the space of possible coherence regimes.
+
+The genome specifies the proteins---ion channels, gap junction connexins,
+tubulin isoforms, metabolic enzymes---from which the coherence-generating
+substrates are constructed. Different organisms, and different cell types
+within an organism, express different repertoires of these molecular
+components, producing different substrate properties and therefore different
+coherence capacities. The genetic substrate does not source
+$\rho_{\mathrm{coh}}$ directly; rather, it determines the parameter ranges
+within which $\rho_{\mathrm{coh}}$ can operate. In the language of
+Section~\ref{sec:viable-window}, the genome shapes the boundaries of the
+viable window.
+
+Epigenetic regulation adds a layer of adaptive modulation.
+\citet{waddington1957epigenetic} introduced the concept of the epigenetic
+landscape to describe how identical genomes give rise to different
+stable cell fates through differential gene regulation. Modern molecular
+biology has elaborated this concept into a detailed understanding of
+chromatin modification, DNA methylation, and non-coding RNA regulation
+\citep{allis2016epigenetics}. These mechanisms modulate gene expression on
+timescales of hours to years, altering the availability of coherence-relevant
+proteins without changing the underlying DNA sequence.
+
+For CLT, epigenetic modulation provides a mechanism by which the viable
+window can shift in response to experience, environment, and developmental
+stage. Chronic stress, for example, produces epigenetic changes that alter
+ion channel expression and gap junction density---modifications that, in
+CLT's framework, correspond to a narrowing of the viable window (reduced
+$\acute{e}R_{\max} - \acute{e}R_{\min}$). Conversely, enriched
+environments and sustained healthy metabolic conditions may produce
+epigenetic states that widen it. Developmental transitions---from embryo
+to neonate to adult to senescence---involve large-scale epigenetic
+reprogramming that reconfigures the substrate landscape and, with it, the
+coherence capacities available to the Loomfield.
+
+This is a constraint role, not a generative one, but it is essential to
+the theory. Without genetic and epigenetic specification of substrate
+properties, the three dynamical substrates would have no defined operating
+parameters, and the viable window would have no boundaries. The genetic
+substrate provides the \emph{constitutional constraints} within which
+coherence dynamics unfold.
+
+\subsection{Substrate Integration and the Coherence Source Density}
+
+The four substrates do not operate in isolation. They interact across
+spatial and temporal scales in a manner that CLT formalizes through the
+coherence source density:
+%
+\begin{equation}
+    \rho_{\mathrm{coh}}(\mathbf{r}, t) \;=\;
+    \sum_{i} w_i \, S_i(\mathbf{r}, t)\,,
+    \label{eq:rho-coh}
+\end{equation}
+%
+where $S_i$ denotes the coherence contribution of the $i$-th substrate
+(bioelectric, biophotonic, cytoskeletal, genetic/epigenetic) and $w_i$ is
+a coupling weight reflecting that substrate's relative contribution at a
+given tissue location. The weights $w_i$ are not universal constants; they
+vary with tissue type (neural tissue has higher bioelectric and cytoskeletal
+weights; metabolically active tissue has higher biophotonic weights), with
+developmental stage (the genetic/epigenetic constraint term shifts across
+the lifespan), and with physiological state.
+
+The critical point is that $\rho_{\mathrm{coh}}$ is a \emph{superposition}
+of substrate contributions. Consciousness, in CLT, does not require any
+single substrate to achieve extraordinary performance. It requires the
+integrated output of multiple substrates, each contributing its
+characteristic spatial and temporal coherence, to collectively source a
+Loomfield excitation that is spatially integrated, temporally persistent,
+and dynamically rich. This superposition architecture has a practical
+consequence: degradation of one substrate can be partially compensated by
+the others, providing a degree of robustness and graceful degradation that
+a single-substrate theory would not predict.
+
+Table~\ref{tab:substrates} summarizes the four substrates and their
+contributions.
+
+\begin{table}[ht]
+\centering
+\caption{Biological substrates supporting Loomfield coherence.}
+\label{tab:substrates}
+\begin{tabular}{@{}lllp{4.5cm}@{}}
+\toprule
+\textbf{Substrate} & \textbf{Scale} & \textbf{Timescale} & \textbf{Primary contribution} \\
+\midrule
+Bioelectric & Tissue--organ & ms--hours & Spatial integration, non-local coupling \\
+Biophotonic & Cell--tissue & ns--seconds & Rapid signaling, metabolic coherence indicator \\
+Cytoskeletal & Molecular--cell & $\mu$s--ms & Intracellular coherence, frequency-selective resonance \\
+Genetic/epigenetic & Genome-wide & Hours--lifespan & Constitutional constraints on viable window boundaries \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Summary and Transition}
+
+The Loomfield is sourced by the coordinated activity of four biological
+substrate systems. Bioelectric fields provide large-scale spatial
+integration through gap junction networks and voltage gradients.
+Biophoton emission contributes a rapid, metabolically coupled coherence
+channel. Cytoskeletal dynamics generate organized intracellular oscillations
+that seed larger-scale patterns. Genetic and epigenetic systems constrain
+the parameter space within which the dynamical substrates operate,
+determining the boundaries of the viable window.
+
+No single substrate is sufficient; their integration, formalized through the
+coherence source density $\rho_{\mathrm{coh}}$, is what enables the
+sustained, spatially extended, dynamically complex Loomfield excitations
+that CLT identifies with consciousness. The multi-substrate architecture
+provides robustness through redundancy and predicts specific patterns of
+graceful degradation when individual substrates are impaired.
+
+With the substrates identified, the next question concerns the temporal
+structure of their integration. How do processes operating on timescales
+from microseconds to years coordinate to maintain a continuously coherent
+Loomfield? Section~\ref{sec:temporal} addresses this through the framework
+of non-equilibrium stability and multi-timescale dynamics.
+
+\section{Temporal Structure and Non-Equilibrium Stability}
+\label{sec:temporal}
+
+The preceding sections have established what the Loomfield is
+(Section~\ref{sec:loomfield}), under what energetic conditions it can be
+sustained (Section~\ref{sec:viable-window}), and which biological substrates
+source it (Section~\ref{sec:substrates}). But these descriptions are
+primarily spatial and structural. Consciousness is not a snapshot; it is a
+\emph{process}---extended in time, continuously evolving, and dependent at
+every moment on the active maintenance of coherent dynamics against
+dissipation. This section addresses the temporal dimension of Loomfield
+coherence: how it persists, how it is stabilized, and how it recovers after
+perturbation.
+
+\subsection{Time as a Defining Dimension of Biological Coherence}
+
+A crystal is spatially ordered but temporally static. A gas is temporally
+active but spatially disordered. A living, conscious biological system is
+neither: it maintains spatial order \emph{that evolves in time}. The
+Loomfield must be coherent in both space and time simultaneously---this is
+what the consciousness observable $C_{\mathrm{bio}}$ captures through its
+dependence on both the spatial coherence metric $Q$ and the temporal
+derivative $\partial L / \partial t$.
+
+Temporal coherence, in this context, does not mean temporal constancy. A
+system whose Loomfield is constant in time ($\partial L / \partial t = 0$)
+is not temporally coherent; it is frozen, and $C_{\mathrm{bio}}$ vanishes.
+Temporal coherence means that successive states of the Loomfield are
+\emph{related}---each moment's configuration bears a structured,
+non-random relationship to the moments before and after it. The field
+evolves, but it evolves along trajectories that reflect organized dynamics
+rather than noise. This is the temporal analogue of spatial coherence: just
+as spatial coherence means that distant points are correlated, temporal
+coherence means that successive moments are correlated.
+
+The damped wave equation (Eq.~\ref{eq:loomfield-wave}) naturally produces
+this kind of structured temporal evolution. Propagating waves, standing
+modes, and resonant oscillations all generate temporal sequences in which
+each moment is determined by the preceding dynamics and the ongoing
+driving. The damping term ensures that these sequences are transient
+without driving, while the source term ensures that they are continuously
+renewed. The result is a field that is neither static nor random but
+dynamically organized---precisely the temporal character that CLT ascribes
+to conscious experience.
+
+\subsection{Non-Equilibrium Stability and Dissipative Organization}
+
+The stability of Loomfield coherence is not the stability of equilibrium.
+An equilibrium system is stable because it occupies a free-energy minimum:
+perturbations are restored by thermodynamic forces. A living system is far
+from thermodynamic equilibrium; its organized state is not a free-energy
+minimum but a continuously maintained configuration sustained by energy
+throughput \citep{prigogine1977self}. Remove the energy flux, and the
+system decays toward equilibrium---which, for a biological organism, is
+death.
+
+This distinction is fundamental to CLT. The Loomfield is stable not because
+it occupies a potential minimum but because the balance between driving
+(the source density $\rho_{\mathrm{coh}}$) and dissipation (the damping
+$\gamma$) maintains it in a dynamical steady state. The stability is
+\emph{dynamical}: the field persists because it is continuously regenerated,
+not because it is resistant to change. This is the defining feature of
+dissipative structures \citep{prigogine1977self, haken1975cooperative}---
+a convection cell persists not because the fluid resists rearrangement but
+because the temperature gradient continuously drives the organized flow.
+
+For the Loomfield, this means that temporal persistence and metabolic cost
+are inseparable. Every moment of sustained coherence requires energetic
+expenditure. The damping coefficient $\gamma$ quantifies the rate at which
+coherent excitations decay in the absence of driving, and therefore the
+metabolic cost of maintaining them. The biological reality underlying this
+parameter is the observation that the brain consumes approximately 20\% of
+the body's metabolic output despite comprising roughly 2\% of its mass---a
+disproportionate energetic investment that CLT interprets as the cost of
+maintaining coherent Loomfield dynamics against dissipation.
+
+The non-equilibrium character of this stability has a crucial implication:
+it permits \emph{flexibility}. An equilibrium-stable system resists all
+perturbations equally; a non-equilibrium-stable system can accommodate
+perturbations by adjusting its dynamical balance. The Loomfield can shift
+its spatial pattern, alter its dominant frequencies, and reconfigure its
+mode structure in response to changing conditions---all while remaining
+within the viable window. This adaptive flexibility is what distinguishes
+the viable-window regime from the rigidity regime
+(Section~\ref{sec:viable-window}): both maintain temporal order, but only
+the viable regime maintains order that can change.
+
+\subsection{Oscillatory Stabilization and Rhythmic Structure}
+
+Biological systems are pervasively oscillatory. Neural activity is organized
+into rhythmic bands (delta, theta, alpha, beta, gamma) spanning frequencies
+from below 1~Hz to above 100~Hz \citep{buzsaki2004neuronal}. Circadian
+rhythms impose a 24-hour periodicity on metabolic and physiological
+processes \citep{reppert2002circadian}. Cardiac, respiratory, and
+hormonal cycles add further temporal structure. These oscillations are not
+epiphenomena; they are \emph{stabilizing mechanisms} for non-equilibrium
+organization.
+
+The physical basis for oscillatory stabilization is well understood in
+nonlinear dynamics. Coupled oscillators synchronize spontaneously when
+their coupling strength exceeds a threshold relative to their frequency
+dispersion---a phenomenon formalized by the Kuramoto model
+\citep{kuramoto1984chemical} and extensively documented in biological
+systems \citep{strogatz2003sync}. Synchronized oscillations create
+temporal correlations that extend across spatial scales: when two distant
+neural populations oscillate in phase, they are temporally coherent even
+if no single signal propagates between them. Phase synchronization is thus
+a mechanism for achieving the temporal coherence that the Loomfield
+requires.
+
+Recent developments in condensed-matter physics provide a sharper
+vocabulary for this kind of persistent temporal order.
+\citet{wilczek2012timecrystal} introduced the concept of \emph{time
+crystals}: systems that spontaneously break time-translation symmetry,
+exhibiting stable periodic dynamics in their lowest-energy or steady
+state, analogous to the way spatial crystals break continuous spatial
+symmetry. While Wilczek's original equilibrium proposal was subsequently
+constrained by no-go theorems, \citet{else2016floquet} demonstrated that
+\emph{Floquet time crystals}---periodically driven, non-equilibrium
+systems---can exhibit robust discrete time-translation symmetry breaking:
+the system responds at a period that is a multiple of the driving period,
+and this response is stable against perturbation. The essential
+ingredients are continuous driving, dissipation, and nonlinear
+interactions---precisely the ingredients present in a metabolically active
+biological system. CLT does not claim that living organisms are time
+crystals in the strict condensed-matter sense. The claim is that
+biological oscillatory dynamics exhibit \emph{time-crystal--like}
+behavior: persistent, phase-stable temporal periodicity maintained by
+continuous metabolic driving, robust to thermal noise and molecular
+turnover. Mitochondrial ATP production, redox cycling, and ion pump
+activity constitute a biological analogue of Floquet driving---a
+sustained, approximately periodic energy input that maintains the system
+far from equilibrium and enables the emergence of stable temporal order
+that would not exist without it.
+
+In CLT's framework, oscillatory dynamics contribute to Loomfield stability
+in three ways. First, they provide a \emph{temporal scaffold}: the
+rhythmic structure of neural and metabolic oscillations creates a
+predictable temporal framework against which coherent excitations can be
+maintained and renewed. Second, they enable \emph{cross-scale coupling}:
+slow oscillations (circadian, respiratory) modulate the amplitude and
+phase of faster oscillations (neural gamma, microtubule resonances),
+creating a nested temporal hierarchy that links the substrates described
+in Section~\ref{sec:substrates} across their disparate timescales. Third,
+they provide \emph{error correction}: oscillatory systems that drift out
+of phase tend to resynchronize (within limits), providing a natural
+restoring force that maintains temporal coherence against perturbation.
+
+The multi-timescale character of biological oscillation is particularly
+important. The four Loomfield substrates operate on timescales spanning
+roughly nine orders of magnitude---from microsecond microtubule vibrations
+to year-scale epigenetic remodeling (Table~\ref{tab:substrates}). The
+coherence source density $\rho_{\mathrm{coh}}$ integrates across these
+timescales. Oscillatory coupling provides the mechanism by which fast and
+slow processes coordinate: slow rhythms gate the activity windows of fast
+ones, while fast rhythms provide the temporal resolution necessary for
+dynamic complexity. The result is a temporal structure that is
+simultaneously stable (anchored by slow rhythms) and dynamically
+rich (articulated by fast ones).
+
+The time-crystal framework suggests a more specific characterization of
+this nested temporal architecture. Experimental work on isolated brain
+microtubules has revealed self-similar resonant oscillations recurring at
+intervals of approximately three orders of magnitude---from hertz through
+kilohertz, megahertz, and beyond---with the pattern structure at each
+scale resembling that at adjacent scales
+\citep{saxena2022polyatomic, bandyopadhyay2013microtubule}. This
+\emph{polyatomic time-crystal--like} behavior---multiple distinct
+persistent periodicities coexisting in a single driven structure, organized
+in a fractal or scale-invariant hierarchy---represents a ``clocks within
+clocks'' architecture in which each timescale hosts its own stable
+oscillatory mode, and the modes at different scales are coupled but not
+rigidly locked. Such an architecture has a natural stabilizing function:
+perturbation at one temporal scale need not propagate to all others,
+because each level of the hierarchy has its own phase stability. A
+disruption of megahertz-scale microtubule resonances, for instance, need
+not immediately destabilize the slower bioelectric oscillations that anchor
+large-scale spatial coherence, providing a degree of temporal
+compartmentalization that enhances robustness.
+
+CLT incorporates this picture without depending on it. Time-crystal--like
+dynamics in microtubules or other substrates, if confirmed, would
+constitute one particularly elegant mode of temporal stabilization---one
+that naturally explains how coherence is maintained across disparate
+timescales. But the Loomfield framework requires only that the biological
+substrates collectively maintain temporally organized dynamics within the
+viable window; the specific mechanism of temporal stabilization
+(Kuramoto-type synchronization, Floquet-like time-crystal behavior,
+or other nonlinear dynamical processes) is a question for experimental
+resolution. The theory is designed to accommodate whichever mechanisms
+biology employs, including combinations of several operating
+simultaneously at different scales.
+
+\subsection{Temporal Collapse, Recovery, and Re-Coherence}
+
+If Loomfield coherence is a non-equilibrium steady state maintained by
+continuous driving, then interruptions of driving produce temporal
+collapse: the field decays, temporal correlations are lost, and
+$C_{\mathrm{bio}}$ diminishes. The rate of collapse depends on the damping
+coefficient $\gamma$ and the nature of the disruption.
+
+Acute interruptions---cardiac arrest, bolus anesthesia induction, generalized
+seizure---produce rapid temporal collapse. The Loomfield decays on a
+timescale of order $1/\gamma$, which must correspond to the clinically
+observed timescale of consciousness loss (seconds to tens of seconds for
+ischemia, seconds for fast-acting anesthetic agents). This provides a
+constraint on $\gamma$ that connects the theoretical parameter to
+observable physiology (Section~\ref{sec:operationalization}).
+
+Recovery from temporal collapse is not instantaneous reversal. When driving
+is restored---circulation resumes, anesthetic is cleared, the seizure
+terminates---the Loomfield must rebuild coherence from a decayed or
+disordered state. This rebuilding is a \emph{re-coherence process}: the
+substrates resume their sourcing, oscillatory coupling re-establishes
+temporal correlations, and spatial coherence gradually extends across the
+tissue volume. The clinical observation that recovery of consciousness
+after cardiac arrest or anesthesia is progressive---passing through stages
+of reflex activity, disoriented arousal, and gradually improving cognitive
+integration---is consistent with a re-coherence process that proceeds from
+local to global, from fast timescales to slow ones.
+
+Chronic degradation presents a different temporal pattern. In
+neurodegenerative disease, the substrates deteriorate gradually: synaptic
+connections thin, mitochondrial function declines, gap junction density
+decreases. The Loomfield does not collapse suddenly; instead, the viable
+window narrows as substrate capacity diminishes. The system compensates---
+remaining substrates increase their relative contribution, oscillatory
+coupling adjusts---until the narrowed window can no longer accommodate
+the energetic demands of coherent dynamics, and consciousness degrades.
+This is not a single event but a trajectory through the $(\mathrm{EP}, f)$
+phase space described in Section~\ref{sec:viable-window}, one in which the
+viable region itself contracts around the system's operating point.
+
+The concept of allostatic load \citep{mcewen1998allostatic} finds a natural
+interpretation in this framework. Cumulative stress, chronic inflammation,
+and metabolic dysfunction progressively degrade substrate function, narrowing
+the viable window. Each insult alone may be accommodated, but their
+accumulation reduces the margin between the system's operating point and
+the nearest regime boundary. Resilience, conversely, corresponds to
+substrate conditions that maintain a wide viable window, providing temporal
+stability against perturbation.
+
+\subsection{Summary and Transition}
+
+Consciousness, in CLT, is a temporally extended process sustained by
+non-equilibrium dynamics. The Loomfield persists not because it is
+thermodynamically stable but because it is continuously regenerated by
+biological substrates at a rate that exceeds dissipative decay. Oscillatory
+and rhythmic activity---potentially exhibiting time-crystal--like
+persistence under metabolic driving---provides the temporal scaffold that
+stabilizes this regeneration, coupling processes across timescales from
+microseconds to circadian cycles through nested, fractal-like hierarchies. Temporal collapse occurs when driving fails; recovery is a
+progressive re-coherence process. Chronic degradation narrows the viable
+window, reducing the temporal margin within which coherent dynamics can be
+maintained.
+
+The theoretical framework is now substantially complete: the Loomfield as
+effective field (Section~\ref{sec:loomfield}), its viable energetic regime
+(Section~\ref{sec:viable-window}), its biological substrates
+(Section~\ref{sec:substrates}), and its temporal structure (this section).
+The question that follows is whether this framework can be made
+\emph{empirically tractable}. Section~\ref{sec:operationalization} turns to
+operationalization: how the quantities CLT defines connect to measurable
+observables, and what experimental designs could test the theory's claims.
+
+\section{Operationalization and Testability}
+\label{sec:operationalization}
+
+A theory of consciousness that cannot, in principle, be tested against
+empirical data is not a scientific theory. The preceding sections have
+developed CLT's theoretical structure: the Loomfield as effective field,
+the viable energetic window, the biological substrates, and the temporal
+dynamics that sustain coherence. This section addresses whether the
+quantities CLT defines can be connected to measurable observables, and what
+kinds of experiments could, in principle, confirm or refute the theory's
+claims.
+
+\subsection{What Testability Requires}
+
+A testable theory of consciousness must satisfy two conditions. First, it
+must define quantities that are \emph{operationally meaningful}: each
+theoretical construct must connect, through a specified chain of reasoning,
+to something that can be measured with existing or foreseeable experimental
+methods. Second, it must make \emph{differential predictions}: it must
+predict outcomes that differ from those predicted by competing theories or
+by the null hypothesis that the theoretical constructs are epiphenomenal.
+
+CLT's central quantities---the Loomfield $L(\mathbf{r}, t)$, the coherence
+source density $\rho_{\mathrm{coh}}$, the spatial coherence metric $Q$,
+the Energy Resistance $\acute{e}R$, and the consciousness observable
+$C_{\mathrm{bio}}$---are all defined in terms of spatial and temporal
+properties of biological dynamics. None requires access to a subject's
+phenomenal experience for measurement; all are, in principle, extractable
+from physical observations of biological systems. This is a deliberate
+design feature: CLT is formulated so that its quantities can be evaluated
+from third-person data.
+
+\subsection{Observable Proxies for Loomfield Coherence}
+
+The Loomfield is an effective field; it is not directly measurable in the
+way that an electric field is measurable with a voltmeter. But its
+properties---spatial integration, temporal persistence, decoherence
+resistance, dynamic complexity---have observable proxies in existing
+measurement modalities.
+
+\paragraph{Spatial coherence.}
+The spatial coherence metric $Q$ quantifies the degree to which the
+Loomfield maintains organized, non-random spatial structure. Observable
+proxies include long-range phase synchronization in EEG or MEG signals
+\citep{buzsaki2004neuronal}, spatial correlation structure in fMRI BOLD
+signals, and the spatial extent of coordinated bioelectric activity
+measured by high-density electrode arrays. The prediction is specific:
+$Q$ should be high during conscious states and low during states of
+diminished consciousness (deep sleep, anesthesia, coma), and transitions
+between these states should exhibit continuous $Q$ dynamics rather than
+abrupt switches.
+
+\paragraph{Temporal dynamics.}
+The temporal derivative $\partial L / \partial t$ enters the consciousness
+observable $C_{\mathrm{bio}}$ directly. Observable proxies include the
+temporal complexity of neural signals (e.g., Lempel-Ziv complexity,
+permutation entropy), the richness of oscillatory dynamics across
+frequency bands, and the rate of spatiotemporal pattern evolution. The
+perturbational complexity index (PCI) developed by
+\citet{casali2013pci}---which quantifies the spatiotemporal complexity of
+cortical responses to transcranial magnetic stimulation---provides a
+particularly relevant existing measure. PCI captures precisely the
+combination of spatial integration and temporal dynamics that CLT predicts
+should track Loomfield coherence. CLT predicts that PCI-like measures
+should correlate with $C_{\mathrm{bio}}$, not because PCI measures the
+Loomfield directly, but because both are sensitive to the same underlying
+property: the degree to which the system sustains spatially integrated,
+temporally evolving coherent dynamics.
+
+\paragraph{Energy Resistance.}
+The Energy Resistance parameter $\acute{e}R = \mathrm{EP}/f^2$ connects
+metabolic observables (energy present, measurable via PET, fNIRS, or
+calorimetry) to dynamical observables (dominant frequency, measurable via
+EEG or MEG). The viable window boundaries
+$\acute{e}R_{\min}$ and $\acute{e}R_{\max}$ are, in principle, determinable
+by systematically varying metabolic state (e.g., controlled hypoglycemia,
+graded anesthesia) and dynamical drive (e.g., photic stimulation,
+pharmacological modulation of excitatory tone) while monitoring
+coherence metrics. The prediction is that consciousness should be present
+only when $\acute{e}R$ falls within a bounded range, and that crossing
+either boundary should produce qualitatively different patterns of
+coherence loss (fragmentation at the lower boundary, freezing at the
+upper).
+
+\subsection{Perturbation--Response Paradigms}
+
+The most powerful empirical strategy for testing CLT is not passive
+observation but active perturbation. The theory makes specific claims
+about how Loomfield coherence responds to disruption, and these claims
+generate testable predictions.
+
+\paragraph{Collapse dynamics.}
+The damped wave equation predicts that coherence decays exponentially when
+sourcing is interrupted, with a characteristic timescale $\tau \sim
+1/\gamma$. This timescale should be measurable during anesthesia induction,
+cardiac arrest, or pharmacological suppression of substrate activity. The
+prediction is that the decay of spatial coherence metrics should follow an
+approximately exponential envelope, and that the decay constant should be
+consistent across different modes of interruption (since $\gamma$ is a
+property of the Loomfield, not of the specific perturbation).
+
+\paragraph{Recovery dynamics.}
+Recovery from coherence collapse should proceed as a re-coherence process:
+local coherence recovers before global coherence, fast timescale dynamics
+recover before slow ones (Section~\ref{sec:temporal}). This predicts a
+specific temporal ordering of recovery signatures after anesthesia or
+cardiac arrest that can be tested against high-density EEG recordings
+during emergence.
+
+\paragraph{Regime-specific perturbation responses.}
+Perturbations delivered to a system near the chaos boundary
+($\acute{e}R \approx \acute{e}R_{\min}$) should produce different
+responses than the same perturbation delivered near the rigidity boundary
+($\acute{e}R \approx \acute{e}R_{\max}$). Near the chaos boundary,
+excitatory perturbations should destabilize coherence (push the system
+toward fragmentation), while inhibitory perturbations might paradoxically
+\emph{improve} coherence by pulling $\acute{e}R$ back toward the window
+interior. Near the rigidity boundary, the pattern should reverse. This
+asymmetric perturbation response is a distinctive prediction of the
+viable-window framework that has no obvious counterpart in theories
+without energetic regime structure.
+
+\subsection{Measurement Across Scales and Substrates}
+
+A distinctive feature of CLT is that the Loomfield integrates contributions
+from multiple substrates operating at different scales
+(Section~\ref{sec:substrates}). This multi-substrate architecture generates
+a specific measurement strategy: simultaneous multi-modal recording.
+
+Single-modality measurements (EEG alone, fMRI alone) capture only one
+substrate's contribution to Loomfield coherence. A more complete picture
+requires concurrent measurement of bioelectric dynamics (EEG/MEG),
+metabolic state (fNIRS, PET), and---where technically feasible---biophoton
+emission and cellular-scale dynamics. The coherence source density
+$\rho_{\mathrm{coh}} = \sum_i w_i S_i$ predicts that the weighted
+combination of substrate-specific coherence measures should track
+consciousness more reliably than any single measure alone. This is a
+testable prediction: multi-modal coherence indices constructed according to
+CLT's weighting scheme should outperform single-modality indices in
+discriminating conscious from unconscious states.
+
+The substrate weights $w_i$ are not assumed to be universal. CLT predicts
+that they vary with tissue type, developmental stage, and physiological
+state. This variation is itself testable: the relative contribution of
+each modality to the aggregate coherence index should shift predictably
+across conditions (e.g., the biophotonic contribution should increase
+during metabolically demanding states; the bioelectric contribution should
+dominate in neural tissue).
+
+\subsection{The Role of Computational Models}
+
+The companion paper \citep{fraterne2026clt} develops computational
+implementations of CLT's equations: numerical solvers for the Loomfield
+wave equation, substrate coupling models, and phase-space visualizers. These
+computational tools serve a specific function in the theory's
+operationalization. They do not substitute for empirical testing; they
+enable it.
+
+Computational models allow the theory's parameters to be explored
+systematically. By varying $v_L$, $\gamma$, $\kappa_L$, and the substrate
+weights $w_i$ in simulation, one can identify the parameter ranges that
+produce dynamics consistent with known biological observables (e.g., the
+spatial scale of cortical coherence, the temporal scale of conscious
+transitions, the metabolic cost of wakefulness). Parameters that produce
+wildly inconsistent dynamics can be ruled out \emph{before} experimental
+testing. This is the standard role of computational modeling in theoretical
+physics: to bridge the gap between abstract equations and quantitative
+predictions that experiments can evaluate.
+
+Simulations also generate specific waveform predictions---the spatial
+patterns, temporal evolution, and perturbation responses of the Loomfield
+under defined conditions---that can be compared against empirical recordings
+once appropriate data are available. The goal is not to ``prove'' CLT
+through simulation but to make its predictions sufficiently specific that
+they can be confirmed or refuted by data.
+
+\subsection{Summary and Transition}
+
+CLT is designed to be empirically tractable. Its quantities connect to
+measurable observables through specified proxy relationships: spatial
+coherence through EEG/MEG phase synchronization, temporal dynamics through
+complexity measures and PCI, energetic regime through concurrent metabolic
+and dynamical recording, and multi-substrate integration through
+multi-modal indices. Perturbation--response paradigms provide the most
+powerful testing strategy, generating predictions about collapse dynamics,
+recovery ordering, and regime-specific response asymmetries. Computational
+models bridge theory and experiment by generating quantitative predictions
+from the abstract equations.
+
+The next section sharpens these considerations into specific predictions
+and, equally important, identifies the conditions under which CLT would be
+falsified. A theory that cannot fail cannot succeed; Section~\ref{sec:predictions}
+addresses what failure would look like.
+
+\section{Predictions and Failure Modes}
+\label{sec:predictions}
+
+The preceding sections have presented CLT's theoretical structure and its
+operationalization strategy. This section converts the framework into
+specific, testable predictions---statements of the form ``if CLT is
+correct, then $X$ should be observed under conditions $Y$''---and identifies
+the observations that would falsify the theory's central claims. A theory
+that does not risk failure offers no scientific content; the predictions and
+failure modes stated here define what CLT stakes on empirical evidence.
+
+\subsection{Regime-Based Dynamical Predictions}
+
+CLT's viable-window framework (Section~\ref{sec:viable-window}) divides the
+energetic phase space into three qualitatively distinct regimes: chaos,
+viability, and rigidity. This tripartite structure generates predictions
+that distinguish CLT from theories lacking energetic regime structure.
+
+\paragraph{Prediction 1: Qualitatively distinct coherence loss at opposite
+boundaries.}
+If CLT is correct, then loss of consciousness at the lower boundary
+($\acute{e}R \to \acute{e}R_{\min}$) should differ qualitatively from
+loss of consciousness at the upper boundary
+($\acute{e}R \to \acute{e}R_{\max}$). Specifically, chaos-boundary
+transitions (seizure, excitotoxic states, psychotic decompensation) should
+exhibit \emph{fragmentation} of the spatial coherence metric $Q$---a
+disintegration into spatially uncorrelated, high-amplitude activity---while
+rigidity-boundary transitions (deep anesthesia, catatonia, severe
+depression) should exhibit \emph{freezing}---a reduction in the temporal
+derivative $\partial L / \partial t$ with partially preserved spatial
+structure. These are measurably different patterns: fragmentation produces
+high spectral power with low phase coherence; freezing produces reduced
+spectral power with preserved or even elevated phase coherence at dominant
+frequencies. If both boundaries produce the same coherence loss pattern,
+the tripartite regime structure is not supported.
+
+\paragraph{Prediction 2: Asymmetric perturbation responses near opposite
+boundaries.}
+Perturbations of matched magnitude delivered to systems near opposite
+regime boundaries should produce asymmetric responses. An excitatory
+perturbation (increased neural drive, metabolic stimulation) applied near
+the chaos boundary should \emph{worsen} coherence, while the same
+perturbation applied near the rigidity boundary should \emph{improve} it.
+Conversely, an inhibitory perturbation near the chaos boundary should
+improve coherence (by pulling $\acute{e}R$ toward the window interior),
+while the same perturbation near the rigidity boundary should worsen it.
+This crossed interaction---the same intervention helping or harming
+depending on the system's phase-space position---is a distinctive
+prediction of the viable-window framework. It can be tested by
+pharmacologically or metabolically moving subjects toward one boundary or
+the other and then applying standardized perturbations while monitoring
+spatial coherence.
+
+\paragraph{Prediction 3: Phase-space trajectories during state transitions.}
+State transitions (waking $\to$ sleep, anesthesia induction $\to$
+emergence, seizure onset $\to$ postictal recovery) should trace continuous
+trajectories through the $(\mathrm{EP}, f)$ phase space rather than
+abrupt jumps. CLT predicts that these trajectories will approach and cross
+regime boundaries at specific locations, and that the trajectory geometry
+will differ between transition types. A seizure should trace a rapid
+excursion across $\acute{e}R_{\min}$ followed by a return arc; anesthesia
+induction should trace a gradual path toward $\acute{e}R_{\max}$. If
+consciousness transitions show no relationship to the
+$(\mathrm{EP}, f)$ coordinates---if they occur at random locations in
+phase space---the viable-window geometry is not supported.
+
+\subsection{Energetic and Temporal Predictions}
+
+CLT makes specific claims about the relationship between metabolic
+energetics, damping dynamics, and the temporal character of Loomfield
+coherence (Section~\ref{sec:temporal}).
+
+\paragraph{Prediction 4: Exponential coherence decay with a consistent
+time constant.}
+When Loomfield sourcing is acutely interrupted (cardiac arrest, rapid
+anesthesia induction, pharmacological suppression of substrate activity),
+the spatial coherence metric $Q$ should decay on a characteristic
+timescale $\tau \sim 1/\gamma$. Crucially, this timescale should be
+approximately \emph{consistent across different modes of interruption},
+because $\gamma$ is a property of the Loomfield's dissipative dynamics, not
+of the specific perturbation. The decay envelope should be approximately
+exponential, distinguishable from linear, stepped, or abrupt loss. If the
+decay timescale varies wildly between interruption modes---showing no
+consistent $\gamma$---then the Loomfield wave equation is not the correct
+dynamical description.
+
+\paragraph{Prediction 5: Recovery ordering---local before global, fast
+before slow.}
+Recovery of consciousness after acute interruption should proceed in a
+specific temporal order: local coherence (correlation between nearby
+regions) should recover before global coherence (correlation across the
+full system), and fast timescale dynamics (high-frequency oscillatory
+components) should recover before slow timescale dynamics (low-frequency
+power, circadian regulation). This ordering follows from the re-coherence
+dynamics described in Section~\ref{sec:temporal}: local, fast modes have
+the shortest re-establishment timescales and the smallest spatial volumes
+to coordinate. The prediction is testable against high-density EEG
+recordings during anesthesia emergence or post-cardiac-arrest recovery. If
+global coherence recovers before local coherence, or slow dynamics
+reconstitute before fast ones, the re-coherence model is not supported.
+
+\paragraph{Prediction 6: Metabolic cost proportional to coherence
+maintenance.}
+The damped wave equation implies that maintaining a given amplitude of
+coherent Loomfield excitation requires continuous energetic expenditure
+proportional to $\gamma$. If CLT is correct, then metabolic rate (measured
+by oxygen consumption, glucose utilization, or ATP turnover) should
+correlate with the product of the damping rate and the squared amplitude of
+coherent activity, across states within the viable window. States of
+higher coherence (focused attention, complex cognitive engagement) should
+demand measurably more metabolic input than states of lower coherence
+(resting wakefulness, drowsiness), after controlling for motor output and
+sensory processing. If no such correlation exists---if coherence varies
+independently of metabolic support---the dissipative-maintenance model is
+incorrect.
+
+\subsection{Multi-Substrate Integration Predictions}
+
+CLT's multi-substrate architecture (Section~\ref{sec:substrates}) generates
+predictions about how the four biological substrates interact and about the
+consequences of selective substrate impairment.
+
+\paragraph{Prediction 7: Multi-modal coherence indices outperform
+single-modality measures.}
+The coherence source density $\rho_{\mathrm{coh}} = \sum_i w_i S_i$
+implies that a weighted combination of substrate-specific coherence
+measures should track consciousness more reliably than any single measure.
+Multi-modal indices incorporating concurrent bioelectric, metabolic, and
+(where feasible) biophotonic measurements should outperform EEG-only,
+fMRI-only, or metabolism-only indices in discriminating conscious from
+unconscious states, with the improvement being statistically significant
+rather than marginal. If single-modality measures perform as well as or
+better than multi-modal combinations---if adding substrate channels adds
+only noise---then the multi-substrate integration model is not supported.
+
+\paragraph{Prediction 8: Graceful degradation under selective substrate
+impairment.}
+Impairment of a single substrate should reduce but not eliminate Loomfield
+coherence, and the remaining substrates should partially compensate. For
+example, pharmacological disruption of gap junction coupling (impairing
+the bioelectric substrate) should reduce large-scale spatial coherence but
+leave intracellular and metabolic coherence partially intact; mitochondrial
+dysfunction (impairing the biophotonic substrate) should reduce metabolic
+coherence markers while sparing bioelectric synchronization, at least
+initially. The system should degrade \emph{gracefully}---with progressive
+reduction in $C_{\mathrm{bio}}$ as more substrates are impaired---rather
+than catastrophically. If selective impairment of a single substrate
+produces complete loss of consciousness, or if impairment of different
+substrates produces identical coherence loss patterns, the multi-substrate
+superposition model is challenged.
+
+\paragraph{Prediction 9: Substrate weights vary across tissue and
+condition.}
+The coupling weights $w_i$ should differ measurably between neural and
+non-neural tissue, between developmental stages, and between physiological
+states. In neural tissue, bioelectric and cytoskeletal weights should
+dominate; in metabolically active non-neural tissue, the biophotonic weight
+should be relatively higher. During high-demand cognitive states, the
+bioelectric weight should increase; during metabolic stress, the
+biophotonic and cytoskeletal weights should shift. These weight variations
+are testable by comparing the relative predictive power of different
+modalities across conditions. If the optimal weighting is constant across
+all conditions, the tissue- and state-dependent weight structure that CLT
+predicts is absent.
+
+\subsection{Oscillatory and Time-Crystal--Like Predictions}
+
+CLT's temporal framework (Section~\ref{sec:temporal}) incorporates
+oscillatory stabilization and time-crystal--like dynamics as mechanisms for
+multi-timescale coherence maintenance.
+
+\paragraph{Prediction 10: Nested oscillatory structure with cross-scale
+coupling.}
+If the ``clocks within clocks'' architecture described in
+Section~\ref{sec:temporal} contributes to Loomfield stability, then
+biological oscillations at different timescales should exhibit measurable
+cross-frequency coupling: slow oscillations should modulate the amplitude
+or phase of faster oscillations, and disruption of one timescale should
+propagate to coupled scales in a manner consistent with the hierarchical
+structure. This coupling should be stronger in conscious states than in
+unconscious ones, and its disruption should precede or accompany loss of
+consciousness during state transitions.
+
+\paragraph{Prediction 11: Temporal compartmentalization under localized
+perturbation.}
+If the polyatomic time-crystal--like architecture provides temporal
+compartmentalization (Section~\ref{sec:temporal}), then perturbation at one
+temporal scale should \emph{not} immediately propagate to all others.
+Disruption of high-frequency (megahertz-scale) intracellular oscillations
+should initially leave low-frequency (hertz-scale) bioelectric rhythms
+intact, and vice versa. The perturbation should propagate across scales
+only when coupling thresholds are exceeded or when the perturbation
+persists long enough to overwhelm the compartmentalization. If disruption
+at any single temporal scale immediately propagates to all others, the
+temporal compartmentalization model is not supported.
+
+\paragraph{Prediction 12: Metabolic driving as temporal stabilizer.}
+CLT proposes that metabolic energy input functions as a biological analogue
+of Floquet driving, maintaining time-crystal--like temporal order. If this
+is correct, then graded reduction of metabolic supply (controlled
+hypoglycemia, titrated mitochondrial inhibition) should produce graded
+reduction in the stability of oscillatory temporal structure, measurable as
+increased jitter in dominant oscillation periods, loss of cross-frequency
+coupling, and eventual dissolution of the nested temporal hierarchy. The
+degradation should follow the metabolic reduction quantitatively, not
+merely qualitatively. If oscillatory stability is independent of metabolic
+supply level---if temporal structure is robust to metabolic deprivation---
+then metabolic Floquet driving is not the stabilizing mechanism.
+
+\subsection{Explicit Failure Modes and Falsifiers}
+
+The predictions above describe what CLT expects. This subsection states,
+without qualification, what would constitute failure of the theory's
+central claims.
+
+\paragraph{Falsifier 1: No viable window.}
+If systematic variation of $\mathrm{EP}$ and $f$ across biological
+systems fails to reveal a bounded region within which consciousness is
+present and outside which it is absent---if consciousness shows no
+relationship to the $(\mathrm{EP}, f)$ phase space---then the
+viable-window framework is falsified. This is the theory's most
+fundamental empirical claim.
+
+\paragraph{Falsifier 2: No consistent damping timescale.}
+If the timescale of coherence decay upon acute interruption varies by
+orders of magnitude across different interruption modes, with no
+consistent $\gamma$, then the damped wave equation is not the correct
+effective dynamics.
+
+\paragraph{Falsifier 3: Single-substrate sufficiency.}
+If a single biological substrate (e.g., bioelectric activity alone) is both
+necessary and sufficient for consciousness, with the other substrates
+contributing nothing measurable, then the multi-substrate integration model
+is wrong. CLT requires that multiple substrates contribute.
+
+\paragraph{Falsifier 4: No regime asymmetry.}
+If loss of consciousness at opposite boundaries of the energetic phase
+space produces identical phenomenological and dynamical signatures---if
+there is no measurable difference between chaos-boundary and
+rigidity-boundary transitions---then the tripartite regime structure
+has no empirical content.
+
+\paragraph{Falsifier 5: Consciousness without coherence.}
+If a biological system is found to exhibit clear, reportable conscious
+experience in a state where spatial coherence metrics, temporal complexity
+measures, and all substrate-level coherence indicators are simultaneously
+at noise floor, then the identification of consciousness with Loomfield
+coherence is wrong. This is the most general falsifier: it would
+invalidate not just a specific prediction but the theory's foundational
+premise.
+
+\paragraph{Falsifier 6: Recovery without re-coherence ordering.}
+If recovery of consciousness after acute disruption shows no systematic
+temporal ordering---if global coherence returns before local, or if all
+timescales reconstitute simultaneously---then the re-coherence dynamics
+model is incorrect.
+
+\medskip
+
+These falsifiers are stated without hedging because the theory's
+scientific value depends on its capacity to be wrong. Each falsifier
+identifies a specific observation that, if confirmed, would require either
+substantial revision of the relevant CLT component or abandonment of the
+claim in question. The predictions are not guaranteed; they are stakes.
+Section~\ref{sec:discussion} considers the framework's current limitations
+and the relationship between these predictions and the experimental
+landscape.
+
+\section{Discussion}
+\label{sec:discussion}
+
+The preceding sections have presented CLT v1.1 as a complete theoretical
+arc: the Loomfield as effective field (Section~\ref{sec:loomfield}), the
+viable energetic window (Section~\ref{sec:viable-window}), the biological
+substrates (Section~\ref{sec:substrates}), the temporal dynamics
+(Section~\ref{sec:temporal}), the operationalization strategy
+(Section~\ref{sec:operationalization}), and the predictions and falsifiers
+(Section~\ref{sec:predictions}). This section steps back from the
+formalism to consider what CLT contributes, where it stands relative to
+existing theories, what objections it must answer, and what it does not
+claim.
+
+\subsection{Relation to Existing Theories}
+
+CLT enters a field with several well-developed theoretical frameworks.
+Situating the present proposal relative to these frameworks is essential
+for clarity and intellectual honesty.
+
+\paragraph{Integrated Information Theory.}
+IIT \citep{tononi2016iit} identifies consciousness with integrated
+information, quantified by $\Phi$, and provides a rigorous mathematical
+framework for assessing the informational structure of a system. CLT and
+IIT operate at different levels of description. IIT is substrate-neutral:
+it characterizes the abstract informational geometry of any system,
+biological or otherwise. CLT v1.1 is substrate-specific: it describes the
+physical dynamics of biological coherence in a particular class of
+systems. Where IIT asks \emph{how much} integrated information a system
+possesses, CLT asks \emph{under what physical conditions} a biological
+system sustains the coherent dynamics that integration requires. The two
+frameworks are not contradictory. IIT's $\Phi$ could, in principle, be
+computed for a system whose physical dynamics are described by the
+Loomfield; the spatial coherence metric $Q$ and the consciousness
+observable $C_{\mathrm{bio}}$ may correlate with $\Phi$ without being
+identical to it. CLT provides a physical-dynamical account of how
+biological systems achieve the kind of organization that IIT characterizes
+informationally.
+
+\paragraph{Global Neuronal Workspace.}
+GNW \citep{dehaene2011gnw} identifies consciousness with the global
+broadcast of representations across a network of cortical neurons with
+long-range connections. This is a cognitive-architectural account: it
+specifies the functional organization (workspace, broadcast, ignition)
+that supports conscious access. CLT does not address representational
+content or cognitive architecture. It operates at the level of field
+dynamics and coherence regimes---a level below the cognitive architecture
+that GNW describes. The relationship is one of complementary scales:
+GNW's global broadcast may correspond, in CLT's formalism, to the
+propagation of coherent Loomfield excitations across the system, but CLT
+does not model the representational content carried by those excitations.
+GNW explains what happens when information becomes globally available;
+CLT describes the physical conditions under which the substrate can
+support such availability.
+
+\paragraph{Electromagnetic field theories.}
+The CEMI field theory \citep{mcfadden2020cemi} proposes that the brain's
+endogenous electromagnetic field is the physical substrate of conscious
+integration. CLT shares CEMI's commitment to a field-level description of
+consciousness but differs in scope and architecture. CEMI identifies a
+specific physical field (the EM field) as the substrate; CLT introduces an
+effective field that aggregates contributions from multiple substrates, of
+which electromagnetic activity is one. This difference is not merely
+terminological. CEMI's predictions are tied to the properties of the EM
+field specifically---its spatial structure, its causal efficacy on neural
+dynamics, its information content. CLT's predictions are tied to the
+\emph{collective coherence} of a multi-substrate system. If the EM field
+turns out to be the dominant contributor to Loomfield coherence, CLT
+converges toward CEMI; if other substrates contribute substantially, CLT
+provides a broader framework. The relationship is one of potential
+inclusion: CEMI's insights about electromagnetic integration are
+compatible with CLT and could be incorporated as a detailed account of
+one substrate's contribution.
+
+\paragraph{Quantum biological approaches.}
+Orch~OR \citep{hameroff2014consciousness} and related quantum consciousness
+proposals locate the origin of conscious experience in specific quantum
+processes within biological structures. As discussed in
+Section~\ref{sec:loomfield}, CLT takes a deliberately agnostic stance on
+quantum biology. The Loomfield is a classical effective field; its dynamics
+do not require quantum coherence, though they are compatible with it.
+This agnosticism is a strength in the current empirical landscape, where
+the role of quantum effects in biological cognition remains unresolved.
+CLT's predictions are testable regardless of the outcome of the quantum
+biology debate. If quantum coherence in microtubules is confirmed to
+contribute meaningfully to neural dynamics, it would enrich the
+cytoskeletal source term in $\rho_{\mathrm{coh}}$ without altering the
+framework's structure. If it is not confirmed, the framework remains
+intact. CLT neither depends on nor excludes quantum contributions; it
+operates at a coarse-grained level where the question is about collective
+coherence, not about the microscopic mechanism producing it.
+
+\paragraph{Free Energy Principle and Active Inference.}
+The Free Energy Principle \citep{friston2010free} provides a variational
+framework in which biological systems maintain themselves by minimizing
+surprise (or free energy) through perception and action. CLT and the FEP
+share a common intuition: both identify bounded energetic regimes as
+necessary for organized biological function. The FEP formalizes this
+through variational inference and Markov blankets; CLT formalizes it
+through the viable-window structure and Loomfield dynamics. The two
+frameworks operate at different levels---the FEP is a principle about
+inference and self-organization in general, while CLT is a specific
+dynamical model of consciousness-relevant coherence in biological
+systems---but they are not in tension. A system that minimizes free energy
+in the FEP sense would, in CLT's terms, tend to maintain itself within
+the viable window; departures from the viable window would correspond to
+increases in surprise. The formal relationship between these frameworks
+remains to be developed, but conceptual compatibility is evident.
+
+\medskip
+
+The common thread across these comparisons is that CLT does not replace
+existing theories. It provides a physical-dynamical scaffold---a
+description of the regime structure, substrate integration, and temporal
+dynamics of biological coherence---within which some of the insights of
+existing theories can be situated. IIT's integration, GNW's broadcast,
+CEMI's field dynamics, and the FEP's self-organization all find potential
+physical correlates in the Loomfield framework. CLT's contribution is not
+a new answer to the same question these theories ask, but a
+complementary answer to a different question: not ``what is
+consciousness?'' in informational or computational terms, but ``under what
+physical conditions does a biological system sustain the coherent dynamics
+associated with consciousness?''
+
+\subsection{Distinctive Contributions}
+
+Several features of CLT distinguish it from the theories discussed above,
+not as claims of superiority but as features of the framework's
+architecture that address gaps in the existing landscape.
+
+\paragraph{Consciousness as regime, not state.}
+CLT describes consciousness not as a binary property (present or absent)
+nor as a graded quantity on a single axis, but as a \emph{dynamical
+regime}---a region in a multi-dimensional phase space defined by the
+balance between energetic driving and dissipation. The viable window has
+interior structure: different conscious states occupy different locations
+within it, and pathological states correspond to specific boundary
+approaches or crossings. This regime-based description provides a natural
+vocabulary for the clinical reality that consciousness is neither simply
+on nor off but exists in a rich variety of forms---waking, dreaming,
+meditative, flow, impaired---each with a distinct dynamical signature.
+
+\paragraph{Multi-substrate integration without single-mechanism dependence.}
+Most existing theories of consciousness privilege a single mechanism or
+substrate: synaptic computation (GNW), information integration (IIT),
+electromagnetic fields (CEMI), or quantum coherence (Orch~OR). CLT
+integrates four substrate systems through the coherence source density
+$\rho_{\mathrm{coh}}$, and its predictions do not depend on any single
+substrate being the ``true'' substrate of consciousness. This architecture
+is designed for robustness: it accommodates the empirical reality that
+biological coherence involves multiple interacting systems, and it
+generates the specific prediction that multi-modal measurement should
+outperform single-modality approaches.
+
+\paragraph{Explicit temporal dynamics and non-equilibrium maintenance.}
+CLT foregrounds the temporal dimension of consciousness in a way that
+most existing theories do not. The damped wave equation, the
+re-coherence dynamics, the oscillatory stabilization framework, and the
+time-crystal--like temporal architecture together provide a detailed
+account of \emph{how} coherence persists in time---not merely that it
+does. This temporal specificity generates predictions (recovery ordering,
+consistent damping timescales, metabolic-oscillatory coupling) that are
+distinctive to CLT.
+
+\paragraph{Explicit falsifiability at the framework level.}
+Section~\ref{sec:predictions} states six falsifiers, each targeting a
+core structural claim. These are not peripheral predictions that could be
+accommodated by parameter adjustment; they address the framework's
+foundational commitments. A theory of consciousness that specifies how it
+can be wrong is, in the current landscape, uncommon. CLT aims to be
+testable not only in its detailed predictions but in its basic
+architecture.
+
+\subsection{Addressing Common Objections}
+
+Several likely objections to CLT deserve direct response.
+
+\paragraph{``This redescribes correlations rather than explaining
+consciousness.''}
+The charge of ``mere redescription'' is familiar in consciousness
+research and is sometimes applied to any framework that does not resolve
+the hard problem \citep{chalmers1995hard}. CLT does not claim to explain
+\emph{why} physical processes give rise to subjective experience
+(Section~\ref{sec:introduction}). It claims to identify the
+\emph{physical structure} that distinguishes conscious from non-conscious
+biological states---the structure problem, not the hard problem. This is
+exactly what effective field theories do in physics: the magnetization
+field ``redescribes'' the correlations among electron spins, but it also
+\emph{predicts} phase transitions, critical exponents, and domain
+dynamics that are invisible at the microscopic level. The Loomfield
+similarly aims to predict coherence dynamics, regime transitions, and
+perturbation responses that are not apparent from substrate-level
+descriptions alone. Whether this constitutes ``explanation'' depends on
+one's philosophical commitments; that it constitutes a testable,
+falsifiable scientific framework is the claim CLT makes.
+
+\paragraph{``The Loomfield is not directly observable.''}
+This is correct. The Loomfield is an effective field, and effective fields
+are measured through their observable consequences, not by direct
+detection. Temperature is not directly observable either---thermometers
+measure the expansion of mercury or the resistance of a thermistor, and
+temperature is inferred. The same is true of every order parameter in
+condensed-matter physics. CLT specifies the observable proxies through
+which Loomfield properties can be assessed
+(Section~\ref{sec:operationalization}): spatial coherence through
+EEG/MEG phase synchronization, temporal dynamics through complexity
+measures and PCI, energetic regime through metabolic recording. The
+indirectness of measurement does not distinguish CLT from standard
+physical practice; it is inherent in the effective-field approach.
+
+\paragraph{``Multiple substrates risk unfalsifiability---if one substrate
+fails, you invoke another.''}
+This is a legitimate concern and must be addressed precisely. CLT does
+predict graceful degradation (Prediction~8), which means that the loss of
+a single substrate does not falsify the theory. But the theory is
+constrained by its other falsifiers. Falsifier~3 (single-substrate
+sufficiency) would be triggered if consciousness turns out to require only
+one substrate. Falsifier~7 is implicitly present in the prediction that
+multi-modal indices should \emph{outperform} single-modality measures---if
+they do not, the multi-substrate architecture adds no explanatory value.
+And the theory's quantitative predictions about collapse timescales,
+recovery ordering, and regime asymmetry are independent of which
+substrates contribute. The multi-substrate architecture increases the
+theory's descriptive richness, but the falsifiers ensure that this
+richness does not become a license for post-hoc accommodation.
+
+\subsection{Scope and Limitations}
+
+CLT v1.1 has explicit boundaries that should be stated clearly.
+
+\paragraph{Scope: human biological consciousness.}
+This version of CLT addresses consciousness as it occurs in living human
+organisms. It does not claim applicability to artificial systems, to
+non-human organisms (though extension is plausible for biologically
+similar species), or to hypothetical forms of consciousness in systems
+lacking the four identified substrates. Whether the framework can be
+generalized beyond its current scope is an open question for future work,
+not a claim of the present version of the theory.
+
+\paragraph{The hard problem.}
+CLT does not solve, and does not claim to solve, the hard problem of
+consciousness \citep{chalmers1995hard}. It provides a physical account of
+the \emph{structure} and \emph{dynamics} of conscious states---the
+conditions under which consciousness is present, its regime character,
+its temporal evolution, its substrate dependence---without explaining why
+these physical conditions are accompanied by subjective experience. This
+is a genuine limitation, shared by every current scientific theory of
+consciousness. CLT addresses it by being transparent: the framework
+describes the physical correlates and dynamics of consciousness with
+sufficient specificity to be tested and potentially falsified, while
+acknowledging that the explanatory gap between physical dynamics and
+phenomenal experience remains open.
+
+\paragraph{Effective description, not first-principles derivation.}
+The Loomfield wave equation (Eq.~\ref{eq:loomfield-wave}) is postulated
+on physical grounds---it is the simplest PDE that supports the required
+dynamical features---not derived from a more fundamental theory. This is
+the standard status of effective theories: the Navier-Stokes equations
+were used successfully for a century before being derived from the
+Boltzmann equation. Should a more fundamental theory of biological
+coherence be developed in the future, the Loomfield dynamics should
+emerge as its leading-order effective description. Until then, the
+effective-level description is the appropriate level at which to formulate
+and test predictions.
+
+\paragraph{Measurement limitations.}
+Current experimental techniques do not permit simultaneous, high-resolution
+measurement of all four substrates across the full spatial and temporal
+extent of a living organism. Biophoton detection requires specialized
+low-noise environments; microtubule dynamics are accessible primarily
+\emph{in vitro}; gap junction imaging is limited in spatial resolution.
+CLT's multi-substrate predictions therefore cannot be fully tested with
+current technology. This is a practical limitation, not a theoretical one.
+The framework is designed so that its predictions become progressively
+more testable as measurement technology advances.
+
+\subsection{Toward Refinement and Expansion}
+
+CLT v1.1 is a first formal statement of the framework. Several directions
+for refinement are evident.
+
+The parameters of the Loomfield wave equation ($v_L$, $\gamma$,
+$\kappa_L$, the substrate weights $w_i$) are currently constrained only
+by qualitative consistency with known biology. Quantitative parameter
+estimation---using the computational models described in the companion
+paper \citep{fraterne2026clt} in conjunction with empirical data---is a
+necessary next step. Systematic parameter sweeps can identify the regions
+of parameter space that reproduce observed coherence patterns, collapse
+timescales, and metabolic costs, narrowing the theory's quantitative
+commitments.
+
+The linear superposition of substrate contributions
+(Eq.~\ref{eq:rho-coh}) is a simplification. Biological substrates
+interact nonlinearly: bioelectric fields modulate microtubule dynamics,
+metabolic state affects gap junction conductance, and cytoskeletal
+organization influences ion channel distribution. Future versions of CLT
+should incorporate nonlinear coupling terms that capture these
+interactions, potentially revealing emergent dynamics not present in the
+linear model.
+
+Extension beyond human consciousness---to non-human animals, to
+developmental stages, and to edge cases (disorders of consciousness,
+psychedelic states, near-death experiences)---would test the framework's
+generality. Such extensions require careful identification of how substrate
+properties differ across systems and how these differences map onto the
+viable-window geometry.
+
+Finally, the relationship between CLT and the Free Energy Principle
+deserves formal development. Both frameworks identify bounded energetic
+regimes as necessary for biological organization; a mathematical mapping
+between the viable window and the FEP's variational bounds could
+illuminate both theories and generate joint predictions that neither
+framework produces alone.
+
+\section{Broader Implications}
+\label{sec:implications}
+
+The preceding sections have developed CLT as a formal framework, tested
+its internal consistency, and situated it within the existing theoretical
+landscape. This section steps further back to consider what follows
+\emph{if} the framework is approximately correct. The claims here are not
+predictions in the sense of Section~\ref{sec:predictions}; they are
+implications---shifts in perspective, reframings of longstanding questions,
+and research directions that the framework opens. They are offered in the
+spirit of exploration, clearly distinguished from the established
+formalism.
+
+\subsection{Rethinking Consciousness as a Dynamical Regime}
+
+Perhaps the most far-reaching implication of CLT is the shift from thinking
+about consciousness as a \emph{thing} to thinking about it as a
+\emph{regime}. This is not merely a semantic distinction.
+
+If consciousness is a dynamical regime---a sustained pattern of coherent
+activity within a bounded energetic window---then many familiar questions
+about consciousness change their character. The question ``Is this system
+conscious?'' becomes ``Is this system currently operating within the viable
+window, with sufficient coherence and temporal dynamics?'' The answer is
+not binary but positional: the system occupies a location in phase space,
+and that location determines not whether consciousness is present or
+absent but what \emph{kind} of conscious regime, if any, is sustained.
+
+This reframing invites a more nuanced vocabulary for the diversity of
+conscious experience. Waking awareness, REM sleep, meditative absorption,
+creative flow, and psychedelic states need not be ranked on a single axis
+of ``more'' or ``less'' conscious. Instead, they occupy different regions
+of the viable window, differing in their energetic configuration, their
+dominant oscillatory structure, and their coherence geometry. The clinical
+categories of consciousness disorders---vegetative state, minimally
+conscious state, locked-in syndrome---similarly acquire dynamical
+characterization: each corresponds to a specific relationship between the
+system's operating point and the viable-window boundaries, rather than a
+simple deficit score.
+
+The regime perspective also reframes the question of \emph{transitions}.
+Falling asleep, waking up, losing consciousness under anesthesia, and
+recovering from a seizure are not switches being toggled; they are
+trajectories through phase space, with characteristic geometries,
+timescales, and intermediate states. The clinical observation that these
+transitions are often gradual, non-monotonic, and accompanied by
+distinctive intermediate phenomenology is natural under a regime-based
+description and awkward under a binary one.
+
+\subsection{Implications for Neuroscience and Medicine}
+
+CLT suggests a reorientation of how pathology and recovery are understood
+in clinical neuroscience.
+
+Standard approaches to neurological and psychiatric pathology tend to
+identify localized deficits: a lesion here, a neurotransmitter imbalance
+there, a circuit dysfunction in a specific region. CLT does not deny the
+relevance of such findings, but it embeds them in a broader dynamical
+context. A lesion matters not because it is a lesion \emph{per se}, but
+because of how it alters the system's position in phase space---whether it
+shifts $\acute{e}R$ toward a regime boundary, narrows the viable window
+by degrading substrate function, or disrupts the temporal coupling that
+stabilizes coherence. Two lesions of identical size and location could
+have different consequences for consciousness if they produce different
+dynamical trajectories, and the same clinical syndrome could result from
+different dynamical paths to the same phase-space region.
+
+This perspective reframes recovery as \emph{re-coherence} rather than
+repair. When a damaged system recovers consciousness, what is restored is
+not a broken component but a dynamical regime---a pattern of coordinated
+activity across substrates that had been disrupted and must be rebuilt.
+The re-coherence framework (Section~\ref{sec:temporal}) predicts that
+recovery proceeds from local to global, from fast timescales to slow ones,
+and through intermediate states that reflect partial coherence. These
+predictions are consistent with clinical observations of recovery from
+coma and anesthesia, and they suggest that therapeutic interventions might
+be evaluated not only by whether they restore a specific function but by
+whether they facilitate re-coherence trajectories---supporting the
+conditions under which the system can rebuild coordinated dynamics.
+
+For psychiatric disorders, the viable-window framework offers a
+perspective that complements pharmacological and circuit-based models.
+Anxiety, in this framing, may reflect proximity to the chaos boundary:
+the system maintains coherence but with diminished margin, producing a
+subjective quality of fragility. Depression may reflect proximity to the
+rigidity boundary: coherence is preserved but dynamically impoverished.
+These are not explanations that compete with neurotransmitter models; they
+are descriptions at a different level that suggest why purely chemical
+interventions sometimes succeed and sometimes fail. A medication that
+shifts $\acute{e}R$ in the right direction for one patient may shift it
+in the wrong direction for another, depending on which boundary the
+patient is near.
+
+The concept of \emph{dynamical resilience}---the width of the viable
+window and the system's margin from its nearest boundary---suggests a
+target for preventive medicine. Interventions that maintain mitochondrial
+function, support gap junction integrity, reduce chronic inflammation, or
+preserve circadian rhythmic structure may not treat any specific disease
+but may widen the viable window, increasing the system's capacity to
+absorb perturbation without regime collapse. This is a systems-level
+perspective on health: not the absence of pathology but the presence of
+dynamical margin.
+
+\subsection{Implications for Measurement and Research Methodology}
+
+CLT implies that the dominant methodological approaches in consciousness
+research---single-metric, single-modality, snapshot-based---may be
+systematically incomplete.
+
+If consciousness is a multi-substrate phenomenon, then no single
+measurement modality captures the full picture. EEG measures bioelectric
+dynamics; fMRI measures hemodynamic correlates of metabolic activity;
+biophoton detectors measure optical emission. Each provides a view of one
+substrate's contribution to $\rho_{\mathrm{coh}}$. CLT suggests that the
+most informative measurements will be \emph{integrative}: concurrent
+multi-modal recording analyzed through composite coherence indices. This
+is technically demanding but not conceptually novel; it extends the logic
+already used in multimodal neuroimaging to include substrate channels
+beyond the neural.
+
+The framework also privileges \emph{perturbation-based} over
+\emph{observation-based} paradigms. Passive observation of coherence
+metrics can establish correlations between brain states and consciousness
+levels, but perturbation-response paradigms---the TMS-EEG approach of
+\citet{casali2013pci}, pharmacological challenges, metabolic modulation---
+can test the causal structure of the theory. CLT's predictions about
+collapse timescales, recovery ordering, and regime-specific asymmetry
+are all perturbation predictions. They require actively probing the
+system, not merely recording it.
+
+A subtler methodological implication concerns \emph{variability}. In
+standard experimental design, trial-to-trial variability is treated as
+noise to be averaged away. CLT suggests that variability may be
+informative: fluctuations in coherence metrics reflect the system's
+dynamical state within the viable window, its proximity to regime
+boundaries, and the temporal stability of its oscillatory scaffold.
+Analyzing the \emph{structure} of variability---its autocorrelation, its
+spectral content, its sensitivity to perturbation---may reveal features
+of the underlying dynamics that time-averaged measures conceal. Systems
+near regime boundaries, for instance, should exhibit increased variability
+(critical slowing down), a signature that could serve as an early warning
+of impending coherence collapse.
+
+\subsection{Artificial and Engineered Systems}
+
+CLT v1.1 is explicitly scoped to human biological consciousness
+(Section~\ref{sec:discussion}). It does not claim that artificial systems
+are conscious, nor does it provide criteria for evaluating machine
+consciousness. These questions require analysis beyond the present
+framework and are addressed in a dedicated companion analysis currently in
+preparation.
+
+Nevertheless, the framework's structure invites reflection on what would
+be required---in principle---for an engineered system to sustain anything
+analogous to Loomfield coherence. The requirements are demanding. CLT
+identifies consciousness with a \emph{non-equilibrium regime} maintained
+by continuous energy throughput, sourced by \emph{multiple interacting
+substrates} operating across disparate spatiotemporal scales, stabilized by
+\emph{oscillatory temporal architecture}, and bounded by \emph{intrinsic
+viability constraints}. A system that lacks energy throughput, that
+operates in thermodynamic equilibrium, that has no multi-scale substrate
+integration, or that faces no intrinsic viability constraint would not,
+under CLT's logic, be expected to sustain the kind of coherent dynamics
+the framework associates with consciousness---regardless of its
+computational sophistication.
+
+This observation does not settle the question of machine consciousness.
+It does suggest that the question is organizational, not computational:
+it concerns the physical dynamics of the system, not its input-output
+behavior. Intelligence---the capacity to process information, generate
+responses, and solve problems---is orthogonal to the regime-level
+coherence that CLT describes. A system may be extraordinarily capable
+without sustaining a coherent, self-maintained, multi-substrate dynamical
+regime, just as a system may sustain such a regime without exhibiting
+sophisticated computational behavior.
+
+The framework thus counsels caution in both directions: against
+premature attribution of consciousness to systems that exhibit behavioral
+sophistication without the requisite physical organization, and against
+categorical denial that consciousness could arise in non-biological
+substrates given sufficient organizational complexity. The determining
+factor, if CLT's logic generalizes, would be organization, not material
+composition. A full analysis of these questions, including the specific
+organizational conditions that would need to be satisfied and the ethical
+implications of uncertainty, is developed separately from the present
+paper.
+
+\subsection{Philosophical Reframing Without Metaphysical Commitment}
+
+CLT shifts the locus of scientific inquiry from \emph{what consciousness
+is} to \emph{what consciousness does dynamically}. This is a deliberate
+philosophical stance, and its implications are worth making explicit.
+
+The hard problem of consciousness \citep{chalmers1995hard}---why physical
+processes are accompanied by subjective experience---remains open. CLT
+does not resolve it, and this paper has been transparent about that
+limitation. But CLT does address a distinct and scientifically tractable
+problem: given that certain physical systems exhibit consciousness, what
+is the dynamical structure that distinguishes conscious from non-conscious
+states? This is the structure problem, and it is amenable to the methods
+of physics: formal modeling, quantitative prediction, and empirical
+testing.
+
+The relationship between the structure problem and the hard problem is
+itself an open philosophical question. Some philosophers hold that solving
+the structure problem would constitute solving the hard problem (if the
+structure is sufficiently rich, the ``hardness'' dissolves). Others hold
+that no amount of structural description can bridge the explanatory gap
+between physical dynamics and phenomenal experience. CLT is compatible
+with either position. It provides a framework for investigating the
+structure of consciousness regardless of one's stance on the hard problem,
+and its predictions are testable regardless of whether one believes that
+explaining structure is sufficient for explaining experience.
+
+This neutrality is deliberate. Consciousness science has sometimes been
+hampered by the demand that any theory must simultaneously address
+phenomenology, neuroscience, physics, and metaphysics. CLT resists this
+demand. It offers a physical-dynamical framework at a specific level of
+description---the level of effective fields, coherence regimes, and
+substrate integration---and invites evaluation at that level. Whether the
+Loomfield ``explains'' consciousness in a philosophically satisfying
+sense is a question for philosophers. Whether it correctly describes the
+dynamical structure of consciousness in a scientifically testable sense
+is a question for experimentalists. CLT is designed for the latter
+question, and its value should be assessed accordingly.
+
+The framework encourages intellectual humility. Consciousness remains one
+of the least understood phenomena in nature. A theory that claims to
+resolve the problem entirely, in its current state of development, is
+almost certainly wrong. CLT claims something more modest: that
+consciousness can be usefully described as a dynamical regime of
+biological coherence, that this description generates testable
+predictions, and that the predictions are specific enough to be falsified.
+If the framework survives empirical testing, it will have contributed to
+scientific progress on consciousness. If it does not, its falsification
+will have contributed equally---by narrowing the space of viable theories
+and clarifying what the correct theory must explain.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper has presented Cosmic Loom Theory version 1.1, a field-based
+framework for human biological consciousness. The central claim is that
+consciousness is a sustained, non-equilibrium dynamical regime---not a
+static property, not a computational output, and not an intrinsic feature
+of any single biological substrate, but a coherent pattern of
+system-level activity maintained by continuous energetic driving against
+dissipation.
+
+The framework introduces the Loomfield $L(\mathbf{r}, t)$, an effective
+scalar field that serves as the order parameter for
+consciousness-relevant coherence. Following the logic of effective field
+theories in condensed-matter physics, the Loomfield captures macroscopic
+coherence dynamics without positing new fundamental forces or particles.
+It obeys a sourced, damped wave equation whose structure ensures that
+coherent excitations require both spatial organization and active
+metabolic maintenance---and that they decay when maintenance fails.
+
+The viable energetic window, defined through the Energy Resistance
+parameter $\acute{e}R = \mathrm{EP}/f^2$, formalizes the bounded
+conditions under which coherent Loomfield dynamics are sustainable. Below
+the window, the system is chaotically over-driven; above it, rigidly
+under-dynamic. Within it, the balance between energetic throughput and
+dissipation supports the spatially integrated, temporally evolving
+coherence patterns that CLT identifies with conscious experience. Health
+corresponds to interior position within this window; pathology
+corresponds to boundary proximity or transgression.
+
+Four biological substrates---bioelectric fields, biophoton emission,
+cytoskeletal dynamics, and genetic/epigenetic constraints---collectively
+source the Loomfield through the coherence source density
+$\rho_{\mathrm{coh}}$. No single substrate is sufficient; their
+integration, operating across spatial scales from molecular to
+organ-level and temporal scales from microseconds to the lifespan,
+is what enables the sustained coherence the framework describes.
+Oscillatory and time-crystal--like temporal architecture stabilizes
+this multi-scale integration, coupling fast and slow processes through
+nested rhythmic hierarchies maintained by continuous metabolic driving.
+
+CLT generates twelve specific predictions and identifies six explicit
+falsifiers targeting its foundational commitments. These include regime
+asymmetry at opposite viable-window boundaries, consistent damping
+timescales across interruption modes, recovery ordering from local to
+global, superiority of multi-modal over single-modality coherence
+indices, and temporal compartmentalization under localized perturbation.
+The theory is designed to be wrong in specific, identifiable ways if its
+claims do not hold.
+
+The framework complements rather than replaces existing theories of
+consciousness. IIT's informational integration, GNW's global broadcast,
+CEMI's electromagnetic field dynamics, and the Free Energy Principle's
+variational self-organization each find potential physical correlates
+within the Loomfield framework. CLT's contribution is at the level of
+physical regime structure: it addresses under what conditions a biological
+system sustains the coherent dynamics that these theories characterize
+from other perspectives.
+
+Much remains to be done. The Loomfield parameters require quantitative
+estimation against empirical data. The linear substrate superposition
+must be extended to incorporate nonlinear coupling. The framework's
+applicability beyond human biology must be tested. And the
+multi-substrate predictions require measurement technologies that are
+advancing but not yet fully adequate.
+
+CLT v1.1 is offered not as a finished theory but as a research
+program---a formally specified, empirically grounded, and explicitly
+falsifiable framework for investigating the physical structure of
+consciousness. Its value will be determined not by its elegance or scope
+but by whether its predictions survive confrontation with data. The
+companion computational platform \citep{fraterne2026clt} provides the
+tools for generating quantitative predictions from the framework's
+equations; the experimental community will determine whether those
+predictions hold. If they do, CLT will have contributed to the
+scientific understanding of consciousness. If they do not, their failure
+will clarify what the correct account must explain. Either outcome
+constitutes progress.
+
+%% =======================================================================
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
