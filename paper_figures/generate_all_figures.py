@@ -291,21 +291,21 @@ def fig_04_er_pathology_zones():
         valid = ep_line <= 10
         ax.plot(freq[valid], ep_line[valid], color=color, linewidth=2, alpha=0.6)
 
-    # Plot pathology zones as ellipses
+    # Plot pathology zones as ellipses (subdued so trajectories read clearly)
     for name, zone in PATHOLOGY_ZONES.items():
         ellipse = Ellipse(
             (zone['freq_center'], zone['ep_center']),
             width=zone['freq_spread'] * 2,
             height=zone['ep_spread'] * 2,
-            facecolor=zone['color'], alpha=0.3,
-            edgecolor=zone['color'], linewidth=2
+            facecolor=zone['color'], alpha=0.18,
+            edgecolor=zone['color'], linewidth=1.5, linestyle='--'
         )
         ax.add_patch(ellipse)
         ax.text(zone['freq_center'], zone['ep_center'], zone['label'],
-                fontsize=8, fontweight='bold', ha='center', va='center',
-                color='black',
-                bbox=dict(boxstyle='round,pad=0.15', facecolor='white',
-                          alpha=0.8, edgecolor=zone['color']))
+                fontsize=7, fontweight='bold', ha='center', va='center',
+                color='#555555',
+                bbox=dict(boxstyle='round,pad=0.12', facecolor='white',
+                          alpha=0.75, edgecolor=zone['color'], linewidth=0.8))
 
     # Reference: healthy resting state
     healthy = BIOLOGICAL_STATES.get('resting_awake', {})
@@ -315,6 +315,53 @@ def fig_04_er_pathology_zones():
         ax.annotate('Healthy\nBaseline', (healthy['freq'], healthy['ep']),
                     xytext=(0.3, 0.3), textcoords='offset fontsize',
                     fontsize=8, fontweight='bold', color='green')
+
+    # Three representative clinical trajectories (from interactive visualizer)
+    # Kept to three for clarity: one rigidity decompensation, one chaos
+    # decompensation, one recovery path.
+    clinical_trajectories = []
+
+    # 1. Depression onset: gradual decline toward rigidity boundary
+    t = np.linspace(0, 1, 60)
+    ep_dep = 3.0 - 1.8 * t + 0.3 * np.sin(6 * t)
+    freq_dep = 1.5 - 1.0 * t + 0.2 * np.sin(8 * t)
+    clinical_trajectories.append((freq_dep, ep_dep, 'Depression Onset', '#4a5568'))
+
+    # 2. Manic episode: energy and frequency spike toward chaos boundary
+    t2 = np.linspace(0, 1, 50)
+    ep_man = 2.5 + 4.0 * t2 * (1 + 0.2 * np.sin(15 * t2))
+    freq_man = 1.5 + 2.5 * t2
+    clinical_trajectories.append((freq_man, ep_man, 'Manic Episode', '#ed64a6'))
+
+    # 3. Therapeutic recovery: spiraling return to viable window
+    t4 = np.linspace(0, 1, 80)
+    ep_ther = 2.5 + 1.0 * np.exp(-3 * t4) * np.cos(8 * t4)
+    freq_ther = 3.5 - 2.0 * t4 + 0.5 * np.exp(-2 * t4) * np.sin(6 * t4)
+    clinical_trajectories.append((freq_ther, ep_ther, 'Therapeutic Recovery', '#48bb78'))
+
+    for fx, ey, label, color in clinical_trajectories:
+        mask = (fx >= 0) & (fx <= 5) & (ey >= 0) & (ey <= 10)
+        fx_c, ey_c = fx[mask], ey[mask]
+        if len(fx_c) < 3:
+            continue
+        ax.plot(fx_c, ey_c, '-', color=color, linewidth=2.5, alpha=0.9,
+                label=label, zorder=4)
+        # Start marker (circle) and end marker (square)
+        ax.scatter(fx_c[0], ey_c[0], s=45, c=color, marker='o',
+                   edgecolors='white', linewidths=1.0, zorder=6)
+        ax.scatter(fx_c[-1], ey_c[-1], s=55, c=color, marker='s',
+                   edgecolors='white', linewidths=1.0, zorder=6)
+        # Midpoint direction arrow
+        mid = len(fx_c) // 2
+        if mid > 0 and mid < len(fx_c) - 1:
+            dx = fx_c[mid+1] - fx_c[mid-1]
+            dy = ey_c[mid+1] - ey_c[mid-1]
+            ax.annotate('', xy=(fx_c[mid] + dx*0.15, ey_c[mid] + dy*0.15),
+                        xytext=(fx_c[mid], ey_c[mid]),
+                        arrowprops=dict(arrowstyle='->', color=color, lw=2.5),
+                        zorder=5)
+
+    ax.legend(loc='upper left', fontsize=7.5, framealpha=0.9)
 
     ax.set_xlabel('Frequency $f$ (normalized)', fontsize=11)
     ax.set_ylabel('Energy Present $EP$ (normalized)', fontsize=11)

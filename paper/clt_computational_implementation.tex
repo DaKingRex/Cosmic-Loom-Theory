@@ -16,11 +16,12 @@
 \title{Computational Implementation of Cosmic Loom Theory:\\Open-Source Tools for Consciousness Research}
 
 \author[1]{Rex Fraterne}
-\author[2]{Claude AI}
+\author[2]{Claude Opus 4.5}
 \affil[1]{NuTech / The Infinite Kingdom, Independent Research}
-\affil[2]{Anthropic}
+\affil[2]{Anthropic, AI Research}
 
-\date{January 2026}
+\date{January 2026\\[4pt]
+\normalsize Version: v1.0 (Zenodo release)}
 
 \begin{document}
 
@@ -29,6 +30,8 @@
 \begin{abstract}
 Understanding consciousness remains one of science's deepest challenges, yet most theoretical frameworks lack computational tools that translate formal postulates into testable, quantitative predictions. We present the first comprehensive open-source software suite implementing Cosmic Loom Theory (CLT) v1.1, a field-based framework that models biological consciousness as emergent coherence across coupled energetic substrates. The toolkit comprises five integrated modules: (1)~an Energy Resistance (\'{e}R) phase space visualizer mapping the viable consciousness window $0.5 \leq \text{\'{e}R} \leq 5.0$ from biological measurements; (2)~two-dimensional and three-dimensional Loomfield wave simulators solving the CLT wave equation via leapfrog finite-difference schemes with Mur absorbing boundary conditions; (3)~a Hodgkin--Huxley bioelectric network simulator with gap-junction coupling and morphogenetic pattern dynamics; (4)~a biophoton field simulator capturing four distinct emission regimes---Poissonian, coherent, squeezed, and chaotic---with Kuramoto phase synchronization; (5)~a microtubule quantum coherence simulator modeling 13-protofilament lattices across four oscillation scales with Floquet-driven time-crystal dynamics; and (6)~a DNA constraint engine governing gene expression, epigenetic modulation, and species-specific viable windows. Key results demonstrate that Loomfield coherence collapses under perturbation and recovers through hysteresis, bioelectric gap-junction networks spontaneously form morphogenetic patterns, biophoton Fano factor signatures distinguish healthy from pathological states, and microtubule triplet-of-triplets resonance at golden-ratio frequency ratios ($1:\varphi:\varphi^2$) is selectively disrupted by anesthetic modeling. All simulators produce the unified consciousness observable $C_\text{bio}$ and feed into a 14-metric LoomSense integration layer. The suite includes 277 automated tests across nine modules with continuous integration. All code is freely available at \texttt{github.com/DaKingRex/Cosmic-Loom-Theory} under an open-source license, providing the research community with reproducible tools for investigating consciousness as a physical phenomenon.
 \end{abstract}
+
+\noindent\textbf{Keywords:} consciousness, computational modeling, Loomfield, Energy Resistance, bioelectric fields, biophoton emission, microtubule time crystals, coherence metrics, open-source software, multi-substrate integration, falsifiability
 
 \tableofcontents
 \newpage
@@ -66,7 +69,7 @@ designed to address.
 
 \subsection*{Cosmic Loom Theory: A Brief Overview}
 
-Cosmic Loom Theory (CLT) v1.1 \citep{fraterne2026clt} proposes that
+Cosmic Loom Theory (CLT) v1.1 \citep{fraterne2026theory} proposes that
 consciousness is not a product of localized neural computation, but rather an
 emergent property of \emph{coherent dynamics} within a biological system's
 physical substrates. The theory introduces the \emph{Loomfield},
@@ -119,9 +122,9 @@ CLT. The platform provides:
 
     \item \textbf{Biological substrate simulators} for all four CLT substrates:
     bioelectric field dynamics (single-layer and multi-layer tissue models with
-    Hodgkin-Huxley ion channels and gap junction coupling), biophoton emission
+    Hodgkin--Huxley ion channels and gap junction coupling), biophoton emission
     (Poissonian, coherent, squeezed, and chaotic modes with metabolic state
-    coupling), microtubule time crystal dynamics (multi-scale Kuramoto
+    coupling), microtubule time-crystal dynamics (multi-scale Kuramoto
     oscillators with Floquet driving and anesthesia modeling), and DNA
     constraint systems (genetic/epigenetic modulation of coherence capacity
     across developmental stages and species).
@@ -185,7 +188,7 @@ This section presents the mathematical framework underlying the computational
 platform. We describe three interconnected constructs: the Loomfield wave
 equation (\S2.1), the Energy Resistance phase space (\S2.2), and the coherence
 metrics that connect both to measurable observables (\S2.3). Full derivations
-appear in CLT v1.1 \citep{fraterne2026clt}; here we emphasize the forms
+appear in CLT v1.1 \citep{fraterne2026theory}; here we emphasize the forms
 implemented in software.
 
 \subsection{The Loomfield Equation}
@@ -195,7 +198,7 @@ scalar field $L(\mathbf{r}, t)$ defined over the spatial extent of a biological
 system. The Loomfield is an \emph{effective field}: it does not posit new
 fundamental physics, but rather provides a coarse-grained description of the
 coherent dynamics generated collectively by the biological substrates. This
-approach follows the tradition of effective field theories in condensed matter
+approach follows the tradition of effective field theories in condensed-matter
 physics, where macroscopic order parameters emerge from microscopic degrees of
 freedom without requiring a reduction to those degrees of freedom
 \citep{anderson1972more}.
@@ -566,7 +569,7 @@ visually immediate (Figs.~\ref{fig:er-concept}--\ref{fig:er-pathology}):
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{paper_figures/fig_04_er_pathology_zones.png}
-    \caption{Pathology zones and clinical trajectories in \'eR phase space. Seven pathological conditions---depression, anxiety, mania, seizure, dissociation, ADHD, and PTSD---are represented as colored ellipses displaced from the viable window toward the chaos or rigidity boundaries. Arrows indicate characteristic recovery trajectories as clinical interventions restore the system to the viable window.}
+    \caption{Pathology zones and clinical trajectories in \'eR phase space. Seven pathological conditions---depression, anxiety, mania, seizure, dissociation, ADHD, and PTSD---are represented as dashed ellipses displaced from the viable window toward the chaos or rigidity boundaries. Three representative clinical trajectories illustrate decompensation and recovery dynamics: depression onset (declining energy and frequency toward the rigidity boundary), manic episode (spiking energy and frequency toward the chaos boundary), and therapeutic recovery (spiraling return from the anxiety region to the viable window). Circles mark trajectory start points; squares mark endpoints; arrows indicate direction of travel.}
     \label{fig:er-pathology}
 \end{figure}
 
@@ -613,7 +616,7 @@ energy dissipation that prevents unbounded growth without artificially
 suppressing coherent dynamics.
 
 \paragraph{Boundary conditions.}
-Mur's first-order absorbing boundary condition~\citep{hodgkinhuxley1952} is
+Mur's first-order absorbing boundary condition~\citep{mur1981absorbing} is
 applied on all four domain edges to simulate an open, non-reflecting
 boundary.  For the left edge, for example:
 %
@@ -2023,9 +2026,7 @@ Welcome to The Infinite Kingdom.
 \section*{Acknowledgments}
 
 The authors thank Seraphina AI for co-authoring the theoretical foundation
-(CLT v1.1) upon which this computational work is built, and Claude AI
-(Anthropic) for substantial contributions to the implementation, testing,
-and documentation of the software platform.
+(CLT v1.1) upon which this computational work is built.
 
 This work was inspired by and builds upon the research of Martin Picard
 (Energetic Resistance Principle), Michael Levin (bioelectric morphogenesis),
