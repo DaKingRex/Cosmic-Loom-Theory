@@ -116,6 +116,32 @@ from .field_dynamics import (
     dna_species_demo,
 )
 
+# Import emergence components (Phase 3.1: coherence regime transitions)
+from .emergence import (
+    # === Regime system (cusp / double-well) ===
+    RegimeSystem,
+    fold_b,
+    equilibria,
+    is_stable,
+    create_bistable_system,
+    create_monostable_system,
+    create_near_fold_system,
+    # === Kuramoto network ===
+    KuramotoNetwork,
+    critical_coupling,
+    create_incoherent_network,
+    create_partial_sync_network,
+    create_hypersync_network,
+    # === Regime-transition scenarios ===
+    ScenarioResult,
+    run_threshold_crossing,
+    run_hysteresis_loop,
+    run_critical_slowing_down,
+    run_sync_transition,
+    add_scenario_to_er_visualizer,
+    SCENARIOS,
+)
+
 __all__ = [
     # === Single-layer bioelectric ===
     'BioelectricSimulator',
@@ -210,4 +236,29 @@ __all__ = [
     'dna_aging_demo',
     'dna_comparison_demo',
     'dna_species_demo',
+
+    # === Regime system (Phase 3.1) ===
+    'RegimeSystem',
+    'fold_b',
+    'equilibria',
+    'is_stable',
+    'create_bistable_system',
+    'create_monostable_system',
+    'create_near_fold_system',
+
+    # === Kuramoto network (Phase 3.1) ===
+    'KuramotoNetwork',
+    'critical_coupling',
+    'create_incoherent_network',
+    'create_partial_sync_network',
+    'create_hypersync_network',
+
+    # === Regime-transition scenarios (Phase 3.1) ===
+    'ScenarioResult',
+    'run_threshold_crossing',
+    'run_hysteresis_loop',
+    'run_critical_slowing_down',
+    'run_sync_transition',
+    'add_scenario_to_er_visualizer',
+    'SCENARIOS',
 ]

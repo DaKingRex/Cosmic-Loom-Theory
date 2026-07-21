@@ -8,12 +8,12 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 |-------|--------|-------------|
 | **Phase 1** | ✅ Complete | Core CLT Physics - éR visualizer, 2D/3D Loomfield simulators, CI/CD, docs |
 | **Phase 2** | ✅ Complete | Biological Substrate Models - bioelectric, biophoton, microtubule, DNA |
-| **Phase 3** | 🔄 Current | Pathology & Healing Dynamics |
+| **Phase 3** | 🔄 Current | Pathology & Healing Dynamics (3.1 complete) |
 | **Phase 4** | ⏳ Planned | LoomSense Integration |
 | **Phase 5** | ⏳ Planned | Extensions & Scaling |
 | **Phase 6** | 🔄 Partial | Publication & Dissemination (docs infrastructure complete) |
 
-**Test Coverage**: 277 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, and DNA constraints.
+**Test Coverage**: 358 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, DNA constraints, shared coherence metrics, and regime-transition dynamics.
 
 ---
 
@@ -177,11 +177,32 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 
 **Goal**: Model CLT's account of pathology as boundary collapse and healing as re-coupling.
 
-### 3.1 Coherence Regime Transitions
-- [ ] Chaos threshold crossing dynamics
-- [ ] Rigidity transition signatures
-- [ ] Hysteresis in regime transitions
-- [ ] Critical slowing down detection
+### 3.1 Coherence Regime Transitions ✓ COMPLETE
+- [x] **Shared coherence metrics** (`analysis/metrics/`) — canonical, reusable observables
+  - éR = EP/f², dynamic `ViableWindow` (chaos/viable/rigidity classification)
+  - Kuramoto order parameter, Lempel–Ziv complexity, spectral entropy
+  - Critical-slowing-down indicators (rolling autocorrelation, variance, Kendall-τ trend)
+- [x] **RegimeSystem** — cusp/double-well stochastic order-parameter primitive
+  - [x] Chaos/rigidity threshold crossing dynamics (saddle-node fold)
+  - [x] Hysteresis in regime transitions (induction vs. release thresholds; neural-inertia analogue)
+  - [x] Critical slowing down near the fold (rising autocorrelation + variance)
+- [x] **KuramotoNetwork** — clean coupled-oscillator primitive
+  - Desync → partial (chimera-like) → hypersync arc across coupling strength
+  - Regime mapping: incoherent = chaos, partial = viable, locked = rigidity
+- [x] **Regime-transition scenarios** (`emergence/regime_transitions.py`) — threshold crossing,
+  hysteresis loop, critical slowing down, sync transition; bridge to the éR phase-space visualizer
+- [x] **Interactive visualizers** (matplotlib real-time, design emerges from content):
+  - `RegimeVisualizer` — a state "ball" rolling in a live, reshaping double-well potential
+    (drive/bistability/noise sliders, presets, click-to-kick); live éR/regime, x(t), and CSD panels
+  - `KuramotoSyncVisualizer` — phase ensemble on the unit circle tightening with coupling K
+    (desync → partial → hypersync); live éR/regime and R(t)
+  - both keep a `create_static_figure` companion for the paper
+- [x] Grounded in published signatures (edge-of-criticality, CSD, anesthesia hysteresis); see
+  `docs/theory/phase3_empirical_grounding.md`
+
+> The dynamic viable window is the mechanism Phase 3 operates on: pathology (3.2)
+> contracts/shifts it, healing (3.3) widens/restores it. 3.2 and 3.3 build as
+> scenarios on the 3.1 engine.
 
 ### 3.2 Pathology Simulations
 - [ ] Seizure as hyper-synchronization (rigidity)

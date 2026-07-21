@@ -6,6 +6,7 @@ Available visualizers:
 - EnergyResistanceVisualizer: éR = EP/f² phase space with viable window
 - LoomfieldVisualizer: Real-time 2D Loomfield wave propagation
 - LoomfieldVisualizer3D: 3D volumetric Loomfield visualization (plotly)
+- RegimeVisualizer: Phase 3.1 coherence regime transitions dashboard
 """
 
 from .energy_resistance import (
@@ -29,6 +30,16 @@ from .loomfield_wave import (
     LoomfieldSimulator,
     LoomfieldVisualizer,
     demo as loomfield_demo
+)
+
+from .regime_transitions import (
+    RegimeVisualizer,
+    demo as regime_transitions_demo,
+)
+
+from .kuramoto_sync import (
+    KuramotoSyncVisualizer,
+    demo as kuramoto_sync_demo,
 )
 
 from .loomfield_3d import (
@@ -71,6 +82,11 @@ __all__ = [
     'LoomfieldSimulator',
     'LoomfieldVisualizer',
     'loomfield_demo',
+    # Regime transitions (Phase 3.1)
+    'RegimeVisualizer',
+    'regime_transitions_demo',
+    'KuramotoSyncVisualizer',
+    'kuramoto_sync_demo',
     # Loomfield 3D
     'LoomfieldSimulator3D',
     'LoomfieldVisualizer3D',

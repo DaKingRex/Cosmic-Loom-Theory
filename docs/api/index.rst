@@ -78,6 +78,59 @@ Preset Functions
 
 .. autofunction:: visualizations.interactive.loomfield_3d.create_healing_preset
 
+Phase 3.1: Coherence Regime Transitions
+---------------------------------------
+
+Shared coherence metrics (``analysis/metrics``) and the regime-transition engine
+(``simulations/emergence``).
+
+Shared Metrics
+~~~~~~~~~~~~~~~
+
+.. autofunction:: analysis.metrics.coherence.calculate_er
+
+.. autoclass:: analysis.metrics.coherence.ViableWindow
+   :members:
+
+.. autofunction:: analysis.metrics.coherence.kuramoto_order
+
+.. autofunction:: analysis.metrics.complexity.lz_complexity
+
+.. autofunction:: analysis.metrics.complexity.spectral_entropy
+
+.. autofunction:: analysis.metrics.csd.csd_indicators
+
+.. autofunction:: analysis.metrics.csd.kendall_tau_trend
+
+Regime Primitives
+~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: simulations.emergence.regime_system.RegimeSystem
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: simulations.emergence.kuramoto_network.KuramotoNetwork
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Scenarios and Visualizer
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: simulations.emergence.regime_transitions.run_threshold_crossing
+
+.. autofunction:: simulations.emergence.regime_transitions.run_hysteresis_loop
+
+.. autofunction:: simulations.emergence.regime_transitions.run_critical_slowing_down
+
+.. autofunction:: simulations.emergence.regime_transitions.run_sync_transition
+
+.. autoclass:: visualizations.interactive.regime_transitions.RegimeVisualizer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module Reference
 ----------------
 

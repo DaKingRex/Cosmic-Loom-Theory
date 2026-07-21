@@ -61,6 +61,8 @@ jobs:
           python -c "from visualizations.interactive import EnergyResistanceVisualizer; print('EnergyResistanceVisualizer OK')"
           python -c "from visualizations.interactive import LoomfieldSimulator; print('LoomfieldSimulator OK')"
           python -c "from visualizations.interactive import LoomfieldSimulator3D; print('LoomfieldSimulator3D OK')"
+          python -c "from analysis.metrics import calculate_er, ViableWindow, lz_complexity, csd_indicators; print('CLT metrics OK')"
+          python -c "from simulations.emergence import RegimeSystem, KuramotoNetwork, run_hysteresis_loop; print('Phase 3.1 regime transitions OK')"
 
   docs:
     runs-on: ubuntu-latest
