@@ -42,6 +42,7 @@ from simulations.emergence.kuramoto_network import (  # noqa: E402
     KuramotoNetwork, critical_coupling, DEFAULT_GAMMA,
 )
 from simulations.emergence.regime_transitions import run_sync_transition  # noqa: E402
+from simulations.emergence.pathology import seizure  # noqa: E402
 
 _BG = "#1a1a2e"
 _AX = "#16213e"
@@ -65,6 +66,13 @@ class KuramotoSyncVisualizer:
         self.steps_per_frame = steps_per_frame
         self.running = True
         self.r_trace = deque([self.net.order_parameter()], maxlen=_HISTORY)
+
+        # Scenario playback (pathology time-courses targeting the Kuramoto engine).
+        self.scenarios = {"Seizure": seizure}
+        self.selected_scenario = "Seizure"
+        self.active_tc = None
+        self.scenario_frame = 0
+
         self.fig = None
         self.anim = None
 
@@ -102,6 +110,9 @@ class KuramotoSyncVisualizer:
             arrowprops=dict(arrowstyle="-|>", color=_C_ACCENT, lw=2.5))
         self.r_label = ax.text(0, -1.32, "", ha="center", color="white",
                                fontsize=11, fontweight="bold")
+        self.status_txt = ax.text(0.98, 0.98, "", transform=ax.transAxes,
+                                  ha="right", va="top", color=_C_ACCENT,
+                                  fontsize=10, fontweight="bold")
         ax.set_title("Phase ensemble on the unit circle", color="white",
                      fontsize=11, fontweight="bold")
         ax.set_xlim(-1.35, 1.35)
@@ -110,21 +121,32 @@ class KuramotoSyncVisualizer:
         ax.set_xticks([])
         ax.set_yticks([])
 
+    def _draw_er_window(self):
+        """(Re)draw the viable-window bands from the network's current window."""
+        for art in getattr(self, "_er_artists", []):
+            art.remove()
+        w = self.net.window
+        ax = self.ax_er
+        self._er_artists = [
+            ax.axhspan(0.0, w.er_min, color=_C_COLLAPSE, alpha=0.12),
+            ax.axhspan(w.er_min, w.er_max, color=_C_HEALTHY, alpha=0.12),
+            ax.axhspan(w.er_max, 20.0, color=_C_ACCENT, alpha=0.12),
+            ax.axhline(w.er_min, color=_C_COLLAPSE, ls="--", lw=1),
+            ax.axhline(w.er_max, color=_C_ACCENT, ls="--", lw=1),
+        ]
+        self._last_window = (w.er_min, w.er_max)
+
     def _init_er(self):
         ax = self.ax_er
-        ax.axhspan(0.0, self.net.window.er_min, color=_C_COLLAPSE, alpha=0.12)
-        ax.axhspan(self.net.window.er_min, self.net.window.er_max,
-                   color=_C_HEALTHY, alpha=0.12)
-        ax.axhspan(self.net.window.er_max, 20.0, color=_C_ACCENT, alpha=0.12)
-        ax.axhline(self.net.window.er_min, color=_C_COLLAPSE, ls="--", lw=1)
-        ax.axhline(self.net.window.er_max, color=_C_ACCENT, ls="--", lw=1)
+        self._er_artists = []
+        self._draw_er_window()
         (self.er_star,) = ax.plot([0.5], [1.0], "*", color="white", markersize=18,
                                   markeredgecolor="black", zorder=5)
         self.regime_txt = ax.text(0.5, 0.92, "", transform=ax.transAxes,
                                   ha="center", color="white", fontsize=11,
                                   fontweight="bold")
-        ax.set_title("éR phase position + regime", color="white",
-                     fontsize=11, fontweight="bold")
+        ax.set_title("éR phase position + regime (window moves with scenario)",
+                     color="white", fontsize=10, fontweight="bold")
         ax.set_ylabel("éR = EP / f²", color="white")
         ax.set_xticks([])
         ax.set_ylim(0, 12)
@@ -160,17 +182,32 @@ class KuramotoSyncVisualizer:
         # Mark the critical coupling on the K slider.
         self.s_k.ax.axvline(kc, color=_C_HEALTHY, lw=1.5, alpha=0.8)
 
+        self.fig.text(0.055, 0.635, "PRESETS", color="white", fontsize=8, fontweight="bold")
         self.radio = RadioButtons(
-            mk_ax([0.05, 0.44, 0.17, 0.15]),
+            mk_ax([0.05, 0.49, 0.17, 0.13]),
             ("Incoherent", "Partial", "Hypersync"), active=1)
         for lbl in self.radio.labels:
             lbl.set_color("white")
             lbl.set_fontsize(9)
         self.radio.on_clicked(self._on_preset)
 
-        self.btn_play = Button(mk_ax([0.05, 0.32, 0.08, 0.045]), "Pause",
+        self.fig.text(0.055, 0.445, "SCENARIO", color=_C_ACCENT, fontsize=8, fontweight="bold")
+        self.scenario_radio = RadioButtons(
+            mk_ax([0.05, 0.37, 0.17, 0.06]),
+            tuple(self.scenarios.keys()), active=0)
+        for lbl in self.scenario_radio.labels:
+            lbl.set_color("white")
+            lbl.set_fontsize(9)
+        self.scenario_radio.on_clicked(self._on_scenario)
+
+        self.btn_run = Button(mk_ax([0.05, 0.30, 0.17, 0.045]), "▶ Run scenario",
+                              color="#1f6f54", hovercolor="#2a8f6e")
+        self.btn_run.label.set_color("white")
+        self.btn_run.on_clicked(self._on_run)
+
+        self.btn_play = Button(mk_ax([0.05, 0.24, 0.08, 0.045]), "Pause",
                                color="#2d3748", hovercolor="#3d4758")
-        self.btn_reset = Button(mk_ax([0.14, 0.32, 0.08, 0.045]), "Reset",
+        self.btn_reset = Button(mk_ax([0.14, 0.24, 0.08, 0.045]), "Reset",
                                 color="#2d3748", hovercolor="#3d4758")
         self.btn_play.label.set_color("white")
         self.btn_reset.label.set_color("white")
@@ -202,7 +239,24 @@ class KuramotoSyncVisualizer:
         self.running = not self.running
         self.btn_play.label.set_text("Start" if not self.running else "Pause")
 
+    def _on_scenario(self, label):
+        self.selected_scenario = label
+
+    def _on_run(self, _event):
+        """Load the selected pathology time-course, warm up, and start playing it."""
+        tc = self.scenarios[self.selected_scenario]()
+        self.active_tc = tc
+        self.scenario_frame = 0
+        tc.apply(self.net, 0.0)
+        self.net.reset()                 # re-randomize phases at the start coupling
+        self.net.step(1200)              # warm up to the partial-sync steady state
+        self.running = True
+        self.r_trace.clear()
+        self.r_trace.append(self.net.order_parameter())
+
     def _on_reset(self, _event):
+        self.active_tc = None
+        self.status_txt.set_text("")
         self.net.reset()
         self.r_trace.clear()
         self.r_trace.append(self.net.order_parameter())
@@ -210,7 +264,17 @@ class KuramotoSyncVisualizer:
     # ---- animation ----------------------------------------------------------
 
     def _update(self, _frame):
-        if self.running:
+        if self.active_tc is not None:
+            tc = self.active_tc
+            p = self.scenario_frame / max(tc.frames - 1, 1)
+            tc.apply(self.net, p)
+            self.status_txt.set_text(f"▶ {tc.name}  ({int(p * 100)}%)")
+            self.net.step(tc.steps_per_frame)
+            self.scenario_frame += 1
+            if self.scenario_frame >= tc.frames:
+                self.active_tc = None
+                self.status_txt.set_text(f"{tc.name}: complete")
+        elif self.running:
             self.net.step(self.steps_per_frame)
         phases = self.net.phases
         self.dots.set_data(np.cos(phases), np.sin(phases))
@@ -223,6 +287,9 @@ class KuramotoSyncVisualizer:
         self.r_label.set_text(f"R = {r:.3f}")
 
         er = self.net.map_to_er_space()
+        window_now = (self.net.window.er_min, self.net.window.er_max)
+        if window_now != self._last_window:
+            self._draw_er_window()
         self.er_star.set_data([0.5], [min(er["energy_resistance"], 11.8)])
         self.er_star.set_color(_REGIME_COLORS.get(er["regime"], "white"))
         self.regime_txt.set_text(er["regime"].upper())

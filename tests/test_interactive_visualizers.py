@@ -36,6 +36,20 @@ class TestRegimeVisualizerInteractive:
         assert viz.sim.x < 0, "ball should fall into the collapsed well"
         assert viz.sim.map_to_er_space()["regime"] == "chaos"
 
+    def test_scenario_playback_moves_window(self):
+        from visualizations.interactive.regime_transitions import RegimeVisualizer
+        viz = RegimeVisualizer(seed=1)
+        viz._build()
+        w0 = viz.sim.window.er_max - viz.sim.window.er_min
+        viz._on_scenario("Depression")
+        viz._on_run(None)
+        tc = viz.active_tc
+        for _ in range(tc.frames):
+            viz._update(0)
+        assert viz.sim.x < 0                                      # tipped into collapse
+        assert (viz.sim.window.er_max - viz.sim.window.er_min) < w0  # window contracted
+        assert viz.active_tc is None                             # scenario finished
+
     def test_click_to_kick(self):
         from visualizations.interactive.regime_transitions import RegimeVisualizer
         viz = RegimeVisualizer(seed=1)
@@ -88,6 +102,20 @@ class TestKuramotoVisualizerInteractive:
             viz._update(0)
         assert viz.net.order_parameter() > 0.9
         assert viz.net.map_to_er_space()["regime"] == "rigidity"
+
+    def test_seizure_scenario_playback(self):
+        from visualizations.interactive.kuramoto_sync import KuramotoSyncVisualizer
+        viz = KuramotoSyncVisualizer(seed=1)
+        viz._build()
+        viz._on_scenario("Seizure")
+        viz._on_run(None)
+        tc = viz.active_tc
+        peak = 0.0
+        for _ in range(tc.frames):
+            viz._update(0)
+            peak = max(peak, viz.net.order_parameter())
+        assert peak > 0.95                    # reached hypersynchrony
+        assert viz.active_tc is None          # scenario finished
 
     def test_partial_preset_is_viable(self):
         from visualizations.interactive.kuramoto_sync import KuramotoSyncVisualizer

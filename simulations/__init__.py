@@ -140,6 +140,14 @@ from .emergence import (
     run_sync_transition,
     add_scenario_to_er_visualizer,
     SCENARIOS,
+    # === Scenario time-course driver + pathologies (Phase 3.2) ===
+    TimeCourse,
+    make_engine,
+    run_time_course,
+    depression,
+    anesthesia,
+    seizure,
+    PATHOLOGIES,
 )
 
 __all__ = [
@@ -261,4 +269,13 @@ __all__ = [
     'run_sync_transition',
     'add_scenario_to_er_visualizer',
     'SCENARIOS',
+
+    # === Scenario time-course driver + pathologies (Phase 3.2) ===
+    'TimeCourse',
+    'make_engine',
+    'run_time_course',
+    'depression',
+    'anesthesia',
+    'seizure',
+    'PATHOLOGIES',
 ]

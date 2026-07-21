@@ -48,6 +48,7 @@ from simulations.emergence.regime_transitions import (  # noqa: E402
     run_critical_slowing_down,
     run_threshold_crossing,
 )
+from simulations.emergence.pathology import depression, anesthesia  # noqa: E402
 
 # Palette (dark theme, consistent with the interactive family).
 _BG = "#1a1a2e"
@@ -72,6 +73,12 @@ class RegimeVisualizer:
         self.sim = RegimeSystem(a=a, b=b, sigma=sigma, seed=seed)
         self.steps_per_frame = steps_per_frame
         self.running = True
+
+        # Scenario playback state (pathology time-courses that target the regime engine).
+        self.scenarios = {"Depression": depression, "Anesthesia": anesthesia}
+        self.selected_scenario = "Depression"
+        self.active_tc = None
+        self.scenario_frame = 0
 
         # Scrolling buffers.
         self.x_trace = deque([self.sim.x], maxlen=_HISTORY)
@@ -122,6 +129,9 @@ class RegimeVisualizer:
                                markeredgecolor="black", zorder=5)
         self.fold_txt = ax.text(0.03, 0.95, "", transform=ax.transAxes,
                                 color="white", fontsize=9, va="top")
+        self.status_txt = ax.text(0.98, 0.96, "", transform=ax.transAxes,
+                                  ha="right", va="top", color=_C_ACCENT, fontsize=10,
+                                  fontweight="bold")
         ax.set_title("Potential landscape + state ball  (click to kick)",
                      color="white", fontsize=11, fontweight="bold")
         ax.set_xlabel("order parameter x", color="white")
@@ -129,22 +139,32 @@ class RegimeVisualizer:
         ax.set_xlim(-1.9, 1.9)
         ax.grid(alpha=0.15)
 
+    def _draw_er_window(self):
+        """(Re)draw the viable-window bands from the engine's current window."""
+        for art in getattr(self, "_er_artists", []):
+            art.remove()
+        w = self.sim.window
+        ax = self.ax_er
+        self._er_artists = [
+            ax.axhspan(0.0, w.er_min, color=_C_COLLAPSE, alpha=0.12),
+            ax.axhspan(w.er_min, w.er_max, color=_C_HEALTHY, alpha=0.12),
+            ax.axhspan(w.er_max, 20.0, color=_C_ACCENT, alpha=0.12),
+            ax.axhline(w.er_min, color=_C_COLLAPSE, ls="--", lw=1),
+            ax.axhline(w.er_max, color=_C_ACCENT, ls="--", lw=1),
+        ]
+        self._last_window = (w.er_min, w.er_max)
+
     def _init_er(self):
         ax = self.ax_er
-        # Viable-window bands in éR space, drawn as horizontal regions vs. a dummy x.
-        ax.axhspan(0.0, self.sim.window.er_min, color=_C_COLLAPSE, alpha=0.12)
-        ax.axhspan(self.sim.window.er_min, self.sim.window.er_max,
-                   color=_C_HEALTHY, alpha=0.12)
-        ax.axhspan(self.sim.window.er_max, 20.0, color=_C_ACCENT, alpha=0.12)
-        ax.axhline(self.sim.window.er_min, color=_C_COLLAPSE, ls="--", lw=1)
-        ax.axhline(self.sim.window.er_max, color=_C_ACCENT, ls="--", lw=1)
+        self._er_artists = []
+        self._draw_er_window()   # movable viable-window bands
         (self.er_star,) = ax.plot([0.5], [1.0], "*", color=_C_BALL, markersize=18,
                                   markeredgecolor="black", zorder=5)
         self.regime_txt = ax.text(0.5, 0.92, "", transform=ax.transAxes,
                                   ha="center", color="white", fontsize=11,
                                   fontweight="bold")
-        ax.set_title("éR phase position + regime", color="white",
-                     fontsize=11, fontweight="bold")
+        ax.set_title("éR phase position + regime (window moves with scenario)",
+                     color="white", fontsize=10, fontweight="bold")
         ax.set_ylabel("éR = EP / f²", color="white")
         ax.set_xticks([])
         ax.set_ylim(0, 12)
@@ -180,11 +200,11 @@ class RegimeVisualizer:
             a = self.fig.add_axes(rect, facecolor="#2d3748")
             return a
 
-        self.s_b = Slider(mk_ax([0.06, 0.72, 0.17, 0.03]), "drive b",
+        self.s_b = Slider(mk_ax([0.06, 0.80, 0.17, 0.025]), "drive b",
                           0.0, 0.6, valinit=self.sim.b, color=_C_COLLAPSE)
-        self.s_a = Slider(mk_ax([0.06, 0.66, 0.17, 0.03]), "bistab. a",
+        self.s_a = Slider(mk_ax([0.06, 0.75, 0.17, 0.025]), "bistab. a",
                           -1.0, 2.0, valinit=self.sim.a, color=_C_DRIVE)
-        self.s_sig = Slider(mk_ax([0.06, 0.60, 0.17, 0.03]), "noise σ",
+        self.s_sig = Slider(mk_ax([0.06, 0.70, 0.17, 0.025]), "noise σ",
                             0.0, 0.4, valinit=self.sim.sigma, color=_C_ACCENT)
         for s in (self.s_b, self.s_a, self.s_sig):
             s.label.set_color("white")
@@ -193,17 +213,34 @@ class RegimeVisualizer:
         self.s_a.on_changed(self._on_a)
         self.s_sig.on_changed(self._on_sigma)
 
+        # Physics presets.
+        self.fig.text(0.065, 0.635, "PRESETS", color="white", fontsize=8, fontweight="bold")
         self.radio = RadioButtons(
-            mk_ax([0.06, 0.40, 0.17, 0.15]),
+            mk_ax([0.06, 0.49, 0.17, 0.13]),
             ("Bistable", "Near-fold", "Monostable"), active=0)
         for lbl in self.radio.labels:
             lbl.set_color("white")
             lbl.set_fontsize(9)
         self.radio.on_clicked(self._on_preset)
 
-        self.btn_play = Button(mk_ax([0.06, 0.30, 0.08, 0.045]), "Pause",
+        # Pathology scenarios (played by the Run button).
+        self.fig.text(0.065, 0.435, "SCENARIO", color=_C_ACCENT, fontsize=8, fontweight="bold")
+        self.scenario_radio = RadioButtons(
+            mk_ax([0.06, 0.34, 0.17, 0.09]),
+            tuple(self.scenarios.keys()), active=0)
+        for lbl in self.scenario_radio.labels:
+            lbl.set_color("white")
+            lbl.set_fontsize(9)
+        self.scenario_radio.on_clicked(self._on_scenario)
+
+        self.btn_run = Button(mk_ax([0.06, 0.27, 0.17, 0.045]), "▶ Run scenario",
+                              color="#1f6f54", hovercolor="#2a8f6e")
+        self.btn_run.label.set_color("white")
+        self.btn_run.on_clicked(self._on_run)
+
+        self.btn_play = Button(mk_ax([0.06, 0.21, 0.08, 0.045]), "Pause",
                                color="#2d3748", hovercolor="#3d4758")
-        self.btn_reset = Button(mk_ax([0.15, 0.30, 0.08, 0.045]), "Reset",
+        self.btn_reset = Button(mk_ax([0.15, 0.21, 0.08, 0.045]), "Reset",
                                 color="#2d3748", hovercolor="#3d4758")
         self.btn_play.label.set_color("white")
         self.btn_reset.label.set_color("white")
@@ -249,7 +286,25 @@ class RegimeVisualizer:
         self.running = not self.running
         self.btn_play.label.set_text("Start" if not self.running else "Pause")
 
+    def _on_scenario(self, label):
+        self.selected_scenario = label
+
+    def _on_run(self, _event):
+        """Load the selected pathology time-course and start playing it."""
+        tc = self.scenarios[self.selected_scenario]()
+        self.active_tc = tc
+        self.scenario_frame = 0
+        tc.apply(self.sim, 0.0)                       # seat control params + window at start
+        self.sim.x = float(np.sqrt(self.sim.a)) if self.sim.a > 0 else 0.0
+        self.sim.time = 0.0
+        self.sim.x_history = [self.sim.x]
+        self.running = True
+        self._reset_traces()
+        self._refresh_potential_curve()
+
     def _on_reset(self, _event):
+        self.active_tc = None
+        self.status_txt.set_text("")
         self.sim.reset()
         self._reset_traces()
 
@@ -279,7 +334,19 @@ class RegimeVisualizer:
         return var, ac1
 
     def _update(self, _frame):
-        if self.running:
+        if self.active_tc is not None:
+            # Play the scripted scenario: apply its control + window, then step.
+            tc = self.active_tc
+            p = self.scenario_frame / max(tc.frames - 1, 1)
+            tc.apply(self.sim, p)
+            self._refresh_potential_curve()
+            self.status_txt.set_text(f"▶ {tc.name}  ({int(p * 100)}%)")
+            self.sim.step(tc.steps_per_frame)
+            self.scenario_frame += 1
+            if self.scenario_frame >= tc.frames:
+                self.active_tc = None
+                self.status_txt.set_text(f"{tc.name}: complete")
+        elif self.running:
             self.sim.step(self.steps_per_frame)
         x = self.sim.x
         self.x_trace.append(x)
@@ -290,8 +357,11 @@ class RegimeVisualizer:
         # Hero: ball on the potential.
         self.ball.set_data([x], [self._potential(x)])
 
-        # éR panel.
+        # éR panel — redraw the movable viable-window bands if the window changed.
         er = self.sim.map_to_er_space()
+        window_now = (self.sim.window.er_min, self.sim.window.er_max)
+        if window_now != self._last_window:
+            self._draw_er_window()
         self.er_star.set_data([0.5], [min(er["energy_resistance"], 11.8)])
         self.er_star.set_color(_REGIME_COLORS.get(er["regime"], _C_BALL))
         self.regime_txt.set_text(er["regime"].upper())

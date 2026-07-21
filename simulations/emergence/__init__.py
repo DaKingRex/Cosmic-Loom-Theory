@@ -56,6 +56,18 @@ from .regime_transitions import (
     SCENARIOS,
     demo as regime_transitions_demo,
 )
+from .scenario import (
+    TimeCourse,
+    smoothstep,
+    make_engine,
+    run_time_course,
+)
+from .pathology import (
+    depression,
+    anesthesia,
+    seizure,
+    PATHOLOGIES,
+)
 
 __all__ = [
     # regime_system
@@ -90,4 +102,14 @@ __all__ = [
     'add_scenario_to_er_visualizer',
     'SCENARIOS',
     'regime_transitions_demo',
+    # scenario time-course driver (Phase 3.2/3.3)
+    'TimeCourse',
+    'smoothstep',
+    'make_engine',
+    'run_time_course',
+    # pathology scenarios (Phase 3.2)
+    'depression',
+    'anesthesia',
+    'seizure',
+    'PATHOLOGIES',
 ]

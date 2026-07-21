@@ -13,7 +13,7 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 | **Phase 5** | ⏳ Planned | Extensions & Scaling |
 | **Phase 6** | 🔄 Partial | Publication & Dissemination (docs infrastructure complete) |
 
-**Test Coverage**: 358 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, DNA constraints, shared coherence metrics, and regime-transition dynamics.
+**Test Coverage**: 378 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, DNA constraints, shared coherence metrics, regime-transition dynamics, and pathology scenario time-courses.
 
 ---
 
@@ -204,11 +204,17 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 > contracts/shifts it, healing (3.3) widens/restores it. 3.2 and 3.3 build as
 > scenarios on the 3.1 engine.
 
-### 3.2 Pathology Simulations
-- [ ] Seizure as hyper-synchronization (rigidity)
-- [ ] Depression as coherence fragmentation
-- [ ] Anesthesia as global decoupling
-- [ ] Neurodegenerative coherence decay
+### 3.2 Pathology Simulations 🔄 (flagship set complete)
+- [x] **Scenario time-course driver** (`emergence/scenario.py`) — a `TimeCourse` schedules
+  engine control params + a moving `window(p)` over normalized progress; both engines and
+  both visualizers "play" it. Pathology **contracts** the viable window as it plays.
+- [x] **Seizure** — Kuramoto onset desynchronization → runaway hypersynchrony → recovery
+  (not a static rigidity point; the flexible near-critical regime is lost dynamically)
+- [x] **Depression** — gradual drive to the collapsed well; critical slowing down precedes the tip
+- [x] **Anesthesia** — induction to unconsciousness with **hysteretic emergence** (neural inertia)
+- [x] Both visualizers gained a **Scenario selector + "Run" button** that plays a scenario
+  live with the viable window contracting in the éR panel
+- [ ] Neurodegenerative coherence decay (Kuramoto coupling decay — next)
 
 ### 3.3 Healing & Re-coupling
 - [ ] Meditation as coherence enhancement
