@@ -6,7 +6,7 @@ re-implemented per substrate module. This is the single source of truth for:
 
 - Energy Resistance:   éR = EP / f²   (CLT v1.1 §7, ERP)
 - Regime classification against a (dynamic) viable window
-- Kuramoto order parameter R = |mean(e^{iθ})|  (spatial/phase coherence)
+- Kuramoto order parameter R = abs(mean(e^{iθ}))  (spatial/phase coherence)
 
 Key concepts:
 - The **viable window** [er_min, er_max] separates the chaos regime (éR too low,
@@ -146,7 +146,7 @@ def classify_regime(er: float, window: ViableWindow = BASELINE_WINDOW) -> str:
 
 def kuramoto_order(phases: np.ndarray) -> float:
     """
-    Kuramoto order parameter R = |mean(e^{iθ})| ∈ [0, 1].
+    Kuramoto order parameter R = abs(mean(e^{iθ})) ∈ [0, 1].
 
     R = 0 for fully incoherent (uniformly distributed) phases; R = 1 for
     perfect phase locking. The canonical CLT phase-synchrony observable.

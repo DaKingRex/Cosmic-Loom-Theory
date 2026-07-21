@@ -11,7 +11,7 @@ provides a sync-based view of the coherence regimes:
 - Moderate K (just above K_c)  → partial synchronization  → **viable window**
 - Very high K                  → near-complete phase lock → **rigidity**
 
-The order parameter R = |mean(e^{iθ})| is the shared CLT phase-coherence metric.
+The order parameter R = abs(mean(e^{iθ})) is the shared CLT phase-coherence metric.
 Ramping K reproduces the seizure-like arc: desynchronization → partial (chimera-
 like) sync → hypersynchrony. Kept dependency-free so the microtubule simulator can
 later be refactored onto it (Phase 1/2 retrofit).
@@ -170,7 +170,7 @@ class KuramotoNetwork:
     # ---- readouts -----------------------------------------------------------
 
     def order_parameter(self) -> float:
-        """Kuramoto order parameter R = |mean(e^{iθ})| ∈ [0, 1]."""
+        """Kuramoto order parameter R = abs(mean(e^{iθ})) ∈ [0, 1]."""
         return kuramoto_order(self.phases)
 
     def map_to_er_space(self) -> Dict[str, float]:

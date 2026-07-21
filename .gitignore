@@ -50,3 +50,4 @@ output/
 
 # Documentation build
 docs/_build/
+.venv/

@@ -226,7 +226,7 @@ class RegimeSystem:
 
     def relaxation_time(self) -> float:
         """
-        Local relaxation timescale 1/|U''(x*)| at the nearest stable equilibrium.
+        Local relaxation timescale 1/abs(U''(x*)) at the nearest stable equilibrium.
         Diverges near the fold — the mechanistic basis of critical slowing down.
         """
         eqs = [x for x in equilibria(self.a, self.b) if is_stable(x, self.a)]

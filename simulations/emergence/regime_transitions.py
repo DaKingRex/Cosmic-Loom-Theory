@@ -30,8 +30,10 @@ from typing import Callable, Dict, Optional
 
 import numpy as np
 
-# np.trapezoid replaces the deprecated np.trapz in newer numpy.
-_trapezoid = getattr(np, "trapezoid", np.trapz)
+# np.trapezoid replaces (and, in numpy >= 2.1, fully removes) the old np.trapz.
+# Guard with hasattr so we never touch np.trapz on numpy that lacks it — a plain
+# getattr(np, "trapezoid", np.trapz) would eval np.trapz eagerly and crash.
+_trapezoid = np.trapezoid if hasattr(np, "trapezoid") else np.trapz
 
 # Allow direct execution (python simulations/emergence/regime_transitions.py) by
 # ensuring the project root is importable for the shared analysis.metrics package.
