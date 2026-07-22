@@ -49,6 +49,9 @@ from simulations.emergence.regime_transitions import (  # noqa: E402
     run_threshold_crossing,
 )
 from simulations.emergence.pathology import depression, anesthesia  # noqa: E402
+from simulations.emergence.healing import (  # noqa: E402
+    psychedelics, sleep_wake, therapy,
+)
 
 # Palette (dark theme, consistent with the interactive family).
 _BG = "#1a1a2e"
@@ -74,8 +77,13 @@ class RegimeVisualizer:
         self.steps_per_frame = steps_per_frame
         self.running = True
 
-        # Scenario playback state (pathology time-courses that target the regime engine).
-        self.scenarios = {"Depression": depression, "Anesthesia": anesthesia}
+        # Scenario playback: pathology (window contracts) + healing (window widens)
+        # time-courses that target the regime engine.
+        self.scenarios = {
+            "Depression": depression, "Anesthesia": anesthesia,
+            "Psychedelics": psychedelics, "Sleep/Wake": sleep_wake, "Therapy": therapy,
+        }
+        self._healing_scenarios = {"Psychedelics", "Sleep/Wake", "Therapy"}
         self.selected_scenario = "Depression"
         self.active_tc = None
         self.scenario_frame = 0
@@ -200,11 +208,11 @@ class RegimeVisualizer:
             a = self.fig.add_axes(rect, facecolor="#2d3748")
             return a
 
-        self.s_b = Slider(mk_ax([0.06, 0.80, 0.17, 0.025]), "drive b",
+        self.s_b = Slider(mk_ax([0.06, 0.82, 0.17, 0.022]), "drive b",
                           0.0, 0.6, valinit=self.sim.b, color=_C_COLLAPSE)
-        self.s_a = Slider(mk_ax([0.06, 0.75, 0.17, 0.025]), "bistab. a",
+        self.s_a = Slider(mk_ax([0.06, 0.775, 0.17, 0.022]), "bistab. a",
                           -1.0, 2.0, valinit=self.sim.a, color=_C_DRIVE)
-        self.s_sig = Slider(mk_ax([0.06, 0.70, 0.17, 0.025]), "noise σ",
+        self.s_sig = Slider(mk_ax([0.06, 0.73, 0.17, 0.022]), "noise σ",
                             0.0, 0.4, valinit=self.sim.sigma, color=_C_ACCENT)
         for s in (self.s_b, self.s_a, self.s_sig):
             s.label.set_color("white")
@@ -214,33 +222,35 @@ class RegimeVisualizer:
         self.s_sig.on_changed(self._on_sigma)
 
         # Physics presets.
-        self.fig.text(0.065, 0.635, "PRESETS", color="white", fontsize=8, fontweight="bold")
+        self.fig.text(0.065, 0.685, "PRESETS", color="white", fontsize=8, fontweight="bold")
         self.radio = RadioButtons(
-            mk_ax([0.06, 0.49, 0.17, 0.13]),
+            mk_ax([0.06, 0.565, 0.17, 0.105]),
             ("Bistable", "Near-fold", "Monostable"), active=0)
         for lbl in self.radio.labels:
             lbl.set_color("white")
             lbl.set_fontsize(9)
         self.radio.on_clicked(self._on_preset)
 
-        # Pathology scenarios (played by the Run button).
-        self.fig.text(0.065, 0.435, "SCENARIO", color=_C_ACCENT, fontsize=8, fontweight="bold")
+        # Scenarios (played by the Run button): pathology labels red, healing teal.
+        self.fig.text(0.065, 0.525, "SCENARIO  (red=pathology, teal=healing)",
+                      color=_C_ACCENT, fontsize=7, fontweight="bold")
         self.scenario_radio = RadioButtons(
-            mk_ax([0.06, 0.34, 0.17, 0.09]),
+            mk_ax([0.06, 0.30, 0.17, 0.205]),
             tuple(self.scenarios.keys()), active=0)
         for lbl in self.scenario_radio.labels:
-            lbl.set_color("white")
+            healing = lbl.get_text() in self._healing_scenarios
+            lbl.set_color(_C_HEALTHY if healing else _C_COLLAPSE)
             lbl.set_fontsize(9)
         self.scenario_radio.on_clicked(self._on_scenario)
 
-        self.btn_run = Button(mk_ax([0.06, 0.27, 0.17, 0.045]), "▶ Run scenario",
+        self.btn_run = Button(mk_ax([0.06, 0.245, 0.17, 0.04]), "▶ Run scenario",
                               color="#1f6f54", hovercolor="#2a8f6e")
         self.btn_run.label.set_color("white")
         self.btn_run.on_clicked(self._on_run)
 
-        self.btn_play = Button(mk_ax([0.06, 0.21, 0.08, 0.045]), "Pause",
+        self.btn_play = Button(mk_ax([0.06, 0.195, 0.08, 0.04]), "Pause",
                                color="#2d3748", hovercolor="#3d4758")
-        self.btn_reset = Button(mk_ax([0.15, 0.21, 0.08, 0.045]), "Reset",
+        self.btn_reset = Button(mk_ax([0.15, 0.195, 0.08, 0.04]), "Reset",
                                 color="#2d3748", hovercolor="#3d4758")
         self.btn_play.label.set_color("white")
         self.btn_reset.label.set_color("white")

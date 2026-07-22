@@ -8,12 +8,12 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 |-------|--------|-------------|
 | **Phase 1** | ✅ Complete | Core CLT Physics - éR visualizer, 2D/3D Loomfield simulators, CI/CD, docs |
 | **Phase 2** | ✅ Complete | Biological Substrate Models - bioelectric, biophoton, microtubule, DNA |
-| **Phase 3** | 🔄 Current | Pathology & Healing Dynamics (3.1 complete) |
+| **Phase 3** | 🔄 Current | Pathology & Healing Dynamics (3.1–3.3 complete) |
 | **Phase 4** | ⏳ Planned | LoomSense Integration |
 | **Phase 5** | ⏳ Planned | Extensions & Scaling |
 | **Phase 6** | 🔄 Partial | Publication & Dissemination (docs infrastructure complete) |
 
-**Test Coverage**: 378 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, DNA constraints, shared coherence metrics, regime-transition dynamics, and pathology scenario time-courses.
+**Test Coverage**: 389 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, DNA constraints, shared coherence metrics, regime-transition dynamics, and pathology & healing scenario time-courses.
 
 ---
 
@@ -204,7 +204,7 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 > contracts/shifts it, healing (3.3) widens/restores it. 3.2 and 3.3 build as
 > scenarios on the 3.1 engine.
 
-### 3.2 Pathology Simulations 🔄 (flagship set complete)
+### 3.2 Pathology Simulations ✅ Complete
 - [x] **Scenario time-course driver** (`emergence/scenario.py`) — a `TimeCourse` schedules
   engine control params + a moving `window(p)` over normalized progress; both engines and
   both visualizers "play" it. Pathology **contracts** the viable window as it plays.
@@ -212,15 +212,23 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
   (not a static rigidity point; the flexible near-critical regime is lost dynamically)
 - [x] **Depression** — gradual drive to the collapsed well; critical slowing down precedes the tip
 - [x] **Anesthesia** — induction to unconsciousness with **hysteretic emergence** (neural inertia)
+- [x] **Neurodegeneration** — Kuramoto coupling decay below criticality → falling coherence and
+  a contracting integrated domain (slow, irreversible — no recovery)
 - [x] Both visualizers gained a **Scenario selector + "Run" button** that plays a scenario
   live with the viable window contracting in the éR panel
-- [ ] Neurodegenerative coherence decay (Kuramoto coupling decay — next)
 
-### 3.3 Healing & Re-coupling
-- [ ] Meditation as coherence enhancement
-- [ ] Psychedelic state modeling (boundary dissolution)
-- [ ] Sleep/wake cycle coherence dynamics
-- [ ] Therapeutic intervention modeling
+### 3.3 Healing & Re-coupling ✅ Complete
+- [x] **Healing scenarios** (`emergence/healing.py`) — the mirror of pathology on the same
+  driver: the window **widens** (re-coupling, restored capacity) as each plays. Scenario
+  labels are color-coded in both visualizers (red = pathology, teal = healing).
+- [x] **Meditation** — self-induced gamma coherence that builds over time yet stays flexible
+  (inside a widening window, not rigid hypersynchrony)
+- [x] **Psychedelics** — raised signal diversity/entropy with softened, expanded boundaries
+  (toward the chaos edge of a widened window)
+- [x] **Sleep/wake** — slow, reversible cyclic traversal wake → deep sleep → wake
+  (the healthy cycle always returns, unlike a pathological tip)
+- [x] **Therapeutic intervention** — injury → intervention → recovery to a *deeper, more
+  resilient attractor* than the pre-injury baseline (a widened window, not the old one)
 
 ---
 

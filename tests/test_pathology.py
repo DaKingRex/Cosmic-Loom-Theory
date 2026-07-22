@@ -107,12 +107,31 @@ class TestSeizure:
             assert "rigidity" in set(r["regime"])       # entered the rigidity regime
 
 
+class TestNeurodegeneration:
+    """Progressive coupling decay → falling coherence + contracting domain."""
+
+    def test_coherence_decays_and_window_contracts(self):
+        from simulations.emergence.scenario import run_time_course
+        from simulations.emergence.pathology import neurodegeneration
+        for seed in (0, 1, 7):
+            r = run_time_course(neurodegeneration(), seed=seed)
+            R = r["order"]
+            assert R[0] > 0.35                   # starts partially synchronized (viable)
+            assert R[-1] < 0.35                  # decays toward incoherence
+            assert R[0] > R[-1] + 0.2            # monotone-ish decline, no recovery
+            w0 = r["er_max"][0] - r["er_min"][0]
+            w1 = r["er_max"][-1] - r["er_min"][-1]
+            assert w1 < w0                        # coherence domain contracted
+            assert r["regime"][-1] == "chaos"     # ends outside the (contracted) window
+
+
 class TestRegistry:
     """The PATHOLOGIES registry."""
 
     def test_keys_and_callables(self):
         from simulations.emergence.pathology import PATHOLOGIES
-        assert set(PATHOLOGIES.keys()) == {"depression", "anesthesia", "seizure"}
+        assert set(PATHOLOGIES.keys()) == {
+            "depression", "anesthesia", "seizure", "neurodegeneration"}
         assert all(callable(fn) for fn in PATHOLOGIES.values())
 
     def test_targets(self):
@@ -120,3 +139,4 @@ class TestRegistry:
         assert PATHOLOGIES["depression"]().target == "regime"
         assert PATHOLOGIES["anesthesia"]().target == "regime"
         assert PATHOLOGIES["seizure"]().target == "kuramoto"
+        assert PATHOLOGIES["neurodegeneration"]().target == "kuramoto"

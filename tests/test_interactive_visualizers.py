@@ -50,6 +50,20 @@ class TestRegimeVisualizerInteractive:
         assert (viz.sim.window.er_max - viz.sim.window.er_min) < w0  # window contracted
         assert viz.active_tc is None                             # scenario finished
 
+    def test_healing_scenario_widens_window(self):
+        from visualizations.interactive.regime_transitions import RegimeVisualizer
+        viz = RegimeVisualizer(seed=1)
+        viz._build()
+        w0 = viz.sim.window.er_max - viz.sim.window.er_min
+        viz._on_scenario("Therapy")           # healing time-course on the regime engine
+        viz._on_run(None)
+        tc = viz.active_tc
+        for _ in range(tc.frames):
+            viz._update(0)
+        assert viz.sim.x > 1.0                                       # recovered to a deep well
+        assert (viz.sim.window.er_max - viz.sim.window.er_min) > w0  # window widened
+        assert viz.active_tc is None                                 # scenario finished
+
     def test_click_to_kick(self):
         from visualizations.interactive.regime_transitions import RegimeVisualizer
         viz = RegimeVisualizer(seed=1)
@@ -116,6 +130,34 @@ class TestKuramotoVisualizerInteractive:
             peak = max(peak, viz.net.order_parameter())
         assert peak > 0.95                    # reached hypersynchrony
         assert viz.active_tc is None          # scenario finished
+
+    def test_meditation_scenario_widens_window(self):
+        from visualizations.interactive.kuramoto_sync import KuramotoSyncVisualizer
+        viz = KuramotoSyncVisualizer(seed=1)
+        viz._build()
+        w0 = viz.net.window.er_max - viz.net.window.er_min
+        viz._on_scenario("Meditation")        # healing time-course on the Kuramoto engine
+        viz._on_run(None)
+        tc = viz.active_tc
+        for _ in range(tc.frames):
+            viz._update(0)
+        assert viz.net.order_parameter() > 0.85                     # built strong coherence
+        assert viz.net.map_to_er_space()["regime"] == "viable"      # still flexible
+        assert (viz.net.window.er_max - viz.net.window.er_min) > w0  # window widened
+        assert viz.active_tc is None
+
+    def test_neurodegeneration_scenario_playback(self):
+        from visualizations.interactive.kuramoto_sync import KuramotoSyncVisualizer
+        viz = KuramotoSyncVisualizer(seed=1)
+        viz._build()
+        viz._on_scenario("Neurodegeneration")
+        viz._on_run(None)
+        tc = viz.active_tc
+        r0 = viz.net.order_parameter()
+        for _ in range(tc.frames):
+            viz._update(0)
+        assert viz.net.order_parameter() < r0 - 0.2   # coherence decayed
+        assert viz.active_tc is None
 
     def test_partial_preset_is_viable(self):
         from visualizations.interactive.kuramoto_sync import KuramotoSyncVisualizer

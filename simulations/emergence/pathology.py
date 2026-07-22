@@ -5,9 +5,10 @@ Each pathology is a scripted `TimeCourse` (see scenario.py) that drives one of t
 two engines out of the viable window along its empirically-grounded trajectory, while
 the viable window *contracts* (boundary collapse, CLT §7.7). Flagship set:
 
-- depression   (regime)   — gradual slide into a collapsed mood state; CSD precedes it.
-- anesthesia   (regime)   — induction to unconsciousness with hysteretic emergence.
-- seizure      (kuramoto) — onset desynchronization → runaway hypersynchrony → relax.
+- depression        (regime)   — gradual slide into a collapsed mood state; CSD precedes it.
+- anesthesia        (regime)   — induction to unconsciousness with hysteretic emergence.
+- seizure           (kuramoto) — onset desync → runaway hypersynchrony → relax.
+- neurodegeneration (kuramoto) — slow coupling decay → long-range decoherence.
 
 See docs/theory/phase3_empirical_grounding.md for the signatures these reproduce.
 """
@@ -142,9 +143,34 @@ def seizure() -> TimeCourse:
         frames=260, control=control, window=window, steps_per_frame=3)
 
 
-# Registry of flagship pathologies.
+# =============================================================================
+# NEURODEGENERATION (kuramoto) — progressive coupling decay → contracting domain
+# =============================================================================
+
+def neurodegeneration() -> TimeCourse:
+    """Slow, irreversible decay of coupling and long-range coherence."""
+    def control(p):
+        # Coupling decays from the partial-sync baseline down below the critical
+        # coupling: the network loses its integrated, partially-synchronized regime
+        # (the falling EEG/MEG coherence seen in neurodegeneration).
+        return {"coupling": _KC * (1.3 - 1.0 * smoothstep(p)), "noise": 0.05}
+
+    def window(p):
+        return BASELINE_WINDOW.scaled(1.0 - 0.5 * smoothstep(p))
+
+    return TimeCourse(
+        name="neurodegeneration", target="kuramoto",
+        description="Progressive coupling decay and long-range decoherence.",
+        signature=("Slow, monotonic loss of network coherence and connectivity "
+                   "(falling EEG/MEG coherence); the integrated coherence domain "
+                   "contracts as coupling decays below criticality — no recovery."),
+        frames=260, control=control, window=window, steps_per_frame=4)
+
+
+# Registry of pathologies (flagship set + neurodegeneration).
 PATHOLOGIES = {
     "depression": depression,
     "anesthesia": anesthesia,
     "seizure": seizure,
+    "neurodegeneration": neurodegeneration,
 }

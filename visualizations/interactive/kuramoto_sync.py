@@ -42,7 +42,8 @@ from simulations.emergence.kuramoto_network import (  # noqa: E402
     KuramotoNetwork, critical_coupling, DEFAULT_GAMMA,
 )
 from simulations.emergence.regime_transitions import run_sync_transition  # noqa: E402
-from simulations.emergence.pathology import seizure  # noqa: E402
+from simulations.emergence.pathology import seizure, neurodegeneration  # noqa: E402
+from simulations.emergence.healing import meditation  # noqa: E402
 
 _BG = "#1a1a2e"
 _AX = "#16213e"
@@ -67,8 +68,13 @@ class KuramotoSyncVisualizer:
         self.running = True
         self.r_trace = deque([self.net.order_parameter()], maxlen=_HISTORY)
 
-        # Scenario playback (pathology time-courses targeting the Kuramoto engine).
-        self.scenarios = {"Seizure": seizure}
+        # Scenario playback: pathology (window contracts) + healing (window widens)
+        # time-courses targeting the Kuramoto engine.
+        self.scenarios = {
+            "Seizure": seizure, "Neurodegeneration": neurodegeneration,
+            "Meditation": meditation,
+        }
+        self._healing_scenarios = {"Meditation"}
         self.selected_scenario = "Seizure"
         self.active_tc = None
         self.scenario_frame = 0
@@ -191,23 +197,25 @@ class KuramotoSyncVisualizer:
             lbl.set_fontsize(9)
         self.radio.on_clicked(self._on_preset)
 
-        self.fig.text(0.055, 0.445, "SCENARIO", color=_C_ACCENT, fontsize=8, fontweight="bold")
+        self.fig.text(0.055, 0.455, "SCENARIO  (red=pathology, teal=healing)",
+                      color=_C_ACCENT, fontsize=7, fontweight="bold")
         self.scenario_radio = RadioButtons(
-            mk_ax([0.05, 0.37, 0.17, 0.06]),
+            mk_ax([0.05, 0.31, 0.17, 0.12]),
             tuple(self.scenarios.keys()), active=0)
         for lbl in self.scenario_radio.labels:
-            lbl.set_color("white")
+            healing = lbl.get_text() in self._healing_scenarios
+            lbl.set_color(_C_HEALTHY if healing else _C_COLLAPSE)
             lbl.set_fontsize(9)
         self.scenario_radio.on_clicked(self._on_scenario)
 
-        self.btn_run = Button(mk_ax([0.05, 0.30, 0.17, 0.045]), "▶ Run scenario",
+        self.btn_run = Button(mk_ax([0.05, 0.255, 0.17, 0.04]), "▶ Run scenario",
                               color="#1f6f54", hovercolor="#2a8f6e")
         self.btn_run.label.set_color("white")
         self.btn_run.on_clicked(self._on_run)
 
-        self.btn_play = Button(mk_ax([0.05, 0.24, 0.08, 0.045]), "Pause",
+        self.btn_play = Button(mk_ax([0.05, 0.205, 0.08, 0.04]), "Pause",
                                color="#2d3748", hovercolor="#3d4758")
-        self.btn_reset = Button(mk_ax([0.14, 0.24, 0.08, 0.045]), "Reset",
+        self.btn_reset = Button(mk_ax([0.14, 0.205, 0.08, 0.04]), "Reset",
                                 color="#2d3748", hovercolor="#3d4758")
         self.btn_play.label.set_color("white")
         self.btn_reset.label.set_color("white")

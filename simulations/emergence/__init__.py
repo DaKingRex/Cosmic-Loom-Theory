@@ -66,7 +66,15 @@ from .pathology import (
     depression,
     anesthesia,
     seizure,
+    neurodegeneration,
     PATHOLOGIES,
+)
+from .healing import (
+    meditation,
+    psychedelics,
+    sleep_wake,
+    therapy,
+    HEALING,
 )
 
 __all__ = [
@@ -111,5 +119,12 @@ __all__ = [
     'depression',
     'anesthesia',
     'seizure',
+    'neurodegeneration',
     'PATHOLOGIES',
+    # healing scenarios (Phase 3.3)
+    'meditation',
+    'psychedelics',
+    'sleep_wake',
+    'therapy',
+    'HEALING',
 ]
