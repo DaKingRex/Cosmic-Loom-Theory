@@ -38,32 +38,37 @@ def _binarize(signal: np.ndarray, method: str) -> np.ndarray:
 
 def _lz76(sequence: np.ndarray) -> int:
     """
-    Raw Lempel-Ziv (1976) complexity: the number of distinct substrings
-    encountered when scanning the binary sequence left to right.
+    Raw Lempel-Ziv (1976) complexity c(n): the number of distinct patterns
+    produced by the Kaspar-Schuster parsing of the binary sequence.
+
+    Reference: Kaspar & Schuster, Phys. Rev. A 36, 842 (1987). Validated against
+    the textbook string '0001101001000101' → c = 6.
     """
-    n = sequence.size
-    if n == 0:
-        return 0
-    # Work with a Python string for fast substring membership.
-    s = "".join(str(int(b)) for b in sequence)
-    i, complexity, prefix_len, match_len = 0, 1, 1, 1
-    while prefix_len + match_len <= n:
-        if s[i:i + match_len] == s[prefix_len:prefix_len + match_len]:
-            match_len += 1
+    n = int(np.asarray(sequence).size)
+    if n < 2:
+        return n
+    # Bytes give O(1) integer element access in the tight parsing loop.
+    s = np.asarray(sequence, dtype=np.uint8).tobytes()
+    i, k, ell, c, k_max = 0, 1, 1, 1, 1
+    while True:
+        if s[i + k - 1] == s[ell + k - 1]:
+            k += 1
+            if ell + k > n:          # reached the end mid-match — count the last pattern
+                c += 1
+                break
         else:
-            if match_len > 1:
-                i += 1
-                if i == prefix_len:
-                    complexity += 1
-                    prefix_len += match_len
-                    i, match_len = 0, 1
+            if k > k_max:
+                k_max = k
+            i += 1
+            if i == ell:             # no earlier copy found — a new pattern is produced
+                c += 1
+                ell += k_max
+                if ell + 1 > n:
+                    break
+                i, k, k_max = 0, 1, 1
             else:
-                complexity += 1
-                prefix_len += 1
-                i, match_len = 0, 1
-    if match_len != 1:
-        complexity += 1
-    return complexity
+                k = 1
+    return c
 
 
 def lz_complexity(signal: Union[np.ndarray, list], binarize: str = "median") -> float:

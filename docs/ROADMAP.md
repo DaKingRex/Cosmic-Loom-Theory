@@ -8,12 +8,13 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 |-------|--------|-------------|
 | **Phase 1** | ✅ Complete | Core CLT Physics - éR visualizer, 2D/3D Loomfield simulators, CI/CD, docs |
 | **Phase 2** | ✅ Complete | Biological Substrate Models - bioelectric, biophoton, microtubule, DNA |
-| **Phase 3** | 🔄 Current | Pathology & Healing Dynamics (3.1–3.3 complete) |
-| **Phase 4** | ⏳ Planned | LoomSense Integration |
+| **Phase 3** | ✅ Complete | Pathology & Healing Dynamics (3.1–3.3) |
+| **Phase 4** | 🔄 Current | Theoretical Bridging & Open-Data Validation |
 | **Phase 5** | ⏳ Planned | Extensions & Scaling |
 | **Phase 6** | 🔄 Partial | Publication & Dissemination (docs infrastructure complete) |
+| **Phase 7** | ⏳ Planned | LoomSense Integration (deferred; developed by NuTech) |
 
-**Test Coverage**: 389 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, DNA constraints, shared coherence metrics, regime-transition dynamics, and pathology & healing scenario time-courses.
+**Test Coverage**: 411 passing tests across éR calculations, Loomfield simulators, bioelectric modules, multi-layer tissue coupling, morphogenetic fields, biophoton emission, microtubule time crystals, DNA constraints, shared coherence metrics, regime-transition dynamics, pathology & healing scenario time-courses, and the open-EEG analysis pipeline (observables, loader, harness).
 
 ---
 
@@ -173,7 +174,7 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 
 ---
 
-## Phase 3: Pathology & Healing Dynamics (Current)
+## Phase 3: Pathology & Healing Dynamics ✓ COMPLETE
 
 **Goal**: Model CLT's account of pathology as boundary collapse and healing as re-coupling.
 
@@ -232,27 +233,44 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 
 ---
 
-## Phase 4: LoomSense Integration
+## Phase 4: Theoretical Bridging & Open-Data Validation 🔄 CURRENT
 
-**Goal**: Connect computational predictions to the LoomSense experimental platform.
+**Goal**: Bridge CLT to established consciousness frameworks and validate its *already-
+published* predictions against public data — the credibility groundwork that precedes,
+and does not depend on, the LoomSense measurement platform (now Phase 6).
 
-### 4.1 Measurement Strategy
-- [ ] Map simulation outputs to LoomSense observables
-- [ ] Define coherence proxy calculations
-- [ ] Prediction → measurement validation framework
-- [ ] Sensor fusion for multi-substrate monitoring
+> **Why the pivot**: CLT v1.1 deliberately defined its observables in terms of public,
+> established proxies (EEG/MEG phase synchrony, Lempel–Ziv/permutation entropy, PCI,
+> éR = EP/f²; see the paper's §Operationalization). That makes the theory testable *now*,
+> against open datasets, with no lab and no dependency on proprietary LoomSense IP. Three
+> deliverables, built interleaved: **(A)** a framework-bridging paper, **(B)** a repo
+> capability to compute CLT observables from real EEG, **(C)** a preregistered open-data
+> validation paper. IP note: LoomSense would be a *better/direct* instrument for the same
+> public quantities — the open work never touches proprietary methods.
 
-### 4.2 Real-Time Analysis Pipeline
-- [ ] Streaming data coherence metrics
-- [ ] éR estimation from physiological signals
-- [ ] Anomaly detection (pathology signatures)
-- [ ] Feedback for closed-loop studies
+### 4.1 Deliverable B — open-EEG analysis capability (`analysis/eeg/`) 🔄
+- [x] **Observable core** — éR-from-EEG proxy, complexity, phase coherence (reuses `analysis/metrics`)
+- [x] **Loader** — EDF/BrainVision/BIDS ingestion via `mne` (lazy import so CI stays light)
+- [x] **Analysis harness** — anti-aliased resampling, per-subject viable-window calibration
+  from the awake baseline, and the **regime-occupancy trajectory**
+- [x] First real-data signal (Chennu 2016 propofol, calibration subject): rigidity-regime
+  occupancy tracks sedation depth — deepest state ~7× baseline, rebounding at recovery
+  (CLT Prediction 1 / P3), reproduced on real EEG
+- [ ] Settle LZc surrogate-normalization to reproduce the complexity collapse (needs a faster LZ)
+- [ ] CSD-trend + hysteresis harness for continuous induction/emergence data (C-3 dataset)
 
-### 4.3 Calibration & Validation
-- [ ] Baseline coherence profiling
-- [ ] State-change detection sensitivity
-- [ ] Cross-individual normalization
-- [ ] Reproducibility studies
+### 4.2 Deliverable A — framework-bridging paper
+- [ ] Add the **criticality / edge-of-chaos** bridge (CLT's strongest anchor — the viable window *is* edge-of-chaos)
+- [ ] Deepen the **microtubule-substrate / Orch OR** bridge (credit the substrate + its anesthesia
+  predictions; explicitly decline the objective-reduction mechanism)
+- [ ] Consolidate **FEP + Active Inference + predictive processing**; foreground the unifying
+  "CLT as the common dynamical substrate" thesis
+
+### 4.3 Deliverable C — open-data validation (preregistered)
+- [ ] **C-1 consistency**: propofol depth on a held-out set (reproduce the complexity/rigidity trajectory)
+- [ ] **C-2 distinctive**: opposite-boundary test — propofol (rigidity) vs ketamine (chaos); Prediction 1 / Falsifier 4
+- [ ] **C-3 premium**: hysteresis / neural inertia on continuous induction+emergence data
+- [ ] **OSF preregistration**: calibrate on Chennu, freeze the pipeline, register, then confirm on the held-out set
 
 ---
 
@@ -299,6 +317,35 @@ This document outlines the development roadmap for the Cosmic Loom Theory comput
 
 ---
 
+## Phase 7: LoomSense Integration (Deferred)
+
+**Goal**: Connect computational predictions to the LoomSense experimental platform.
+
+> Deferred to after Phases 4–5. LoomSense is developed by NuTech (not yet founded) and
+> involves proprietary IP kept out of this open-source repository. The open éR proxies
+> validated in Phase 4 give LoomSense a *better/direct* instrument for the same public
+> quantities; this repo stays firewalled from the proprietary measurement methods.
+
+### 7.1 Measurement Strategy
+- [ ] Map simulation outputs to LoomSense observables
+- [ ] Define coherence proxy calculations
+- [ ] Prediction → measurement validation framework
+- [ ] Sensor fusion for multi-substrate monitoring
+
+### 7.2 Real-Time Analysis Pipeline
+- [ ] Streaming data coherence metrics
+- [ ] éR estimation from physiological signals
+- [ ] Anomaly detection (pathology signatures)
+- [ ] Feedback for closed-loop studies
+
+### 7.3 Calibration & Validation
+- [ ] Baseline coherence profiling
+- [ ] State-change detection sensitivity
+- [ ] Cross-individual normalization
+- [ ] Reproducibility studies
+
+---
+
 ## Contributing
 
 We welcome contributions aligned with the CLT framework:
@@ -315,7 +362,7 @@ See the main README for guidelines.
 All development should be consistent with:
 - **CLT v1.1**: Human biological consciousness framework
 - **CLT v2.0**: Planetary-scale extensions
-- **LoomSense specs**: Experimental measurement platform
 - **Machines/AI document**: Non-biological coherence
 
-These documents are in `docs/theory/`.
+These documents are in `docs/theory/`. (LoomSense specifications are proprietary and are
+intentionally kept out of this open-source repository.)

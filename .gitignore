@@ -44,6 +44,18 @@ data/raw/*.json
 data/processed/*.csv
 data/processed/*.json
 
+# Downloaded open EEG/neuro datasets — fetch locally, never commit the binaries
+data/raw/**/
+*.eeg
+*.vhdr
+*.vmrk
+*.set
+*.fdt
+*.edf
+*.bdf
+*.fif
+*.fif.gz
+
 # Generated outputs
 *.log
 output/

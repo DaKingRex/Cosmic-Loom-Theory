@@ -1,6 +1,6 @@
 # Cosmic Loom Theory (CLT)
 
-[![Tests](https://img.shields.io/badge/tests-277%20passing-brightgreen)](tests/)
+[![Tests](https://img.shields.io/badge/tests-411%20passing-brightgreen)](tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
@@ -39,9 +39,10 @@ Cosmic-Loom-Theory/
 │   └── interactive/      # éR phase space, Loomfield waves
 ├── analysis/              # Data analysis tools
 │   ├── metrics/          # Q, C_bio, éR calculations
+│   ├── eeg/              # Open-EEG ingestion + CLT observables (Phase 4 validation)
 │   └── statistics/       # Statistical frameworks
 ├── models/                # Biological substrate models
-└── tests/                 # Validation and unit tests (277 tests)
+└── tests/                 # Validation and unit tests (411 tests)
 ```
 
 ## Getting Started
@@ -172,15 +173,19 @@ print(f"Viable window area: {er['viable_window']['window_area']:.3f}")
 - **Microtubule time crystals**: Multi-scale oscillations, triplet resonance
 - **DNA constraints**: Genetic/epigenetic modulation of viable windows
 
-### Phase 3: Pathology & Healing (Current)
-- Coherence regime transitions
-- Seizure/depression/anesthesia modeling
-- Healing as re-coupling dynamics
+### Phase 3: Pathology & Healing ✓ Complete
+- Coherence regime transitions (cusp + Kuramoto engines on shared metrics)
+- Pathology scenarios: seizure, depression, anesthesia, neurodegeneration (viable window contracts)
+- Healing scenarios: meditation, psychedelics, sleep/wake, therapy (viable window widens)
 
-### Phase 4+: Extensions
-- Artificial system coherence
-- Collective consciousness regimes
-- Planetary-scale dynamics
+### Phase 4: Theoretical Bridging & Open-Data Validation (Current)
+- Bridge CLT to established frameworks (criticality/edge-of-chaos, GNW, IIT, FEP, microtubule/Orch OR)
+- `analysis/eeg/` — compute CLT observables (éR proxy, complexity, coherence, regime occupancy) from open EEG
+- Preregistered validation against public anesthesia datasets (propofol → rigidity, ketamine → chaos)
+
+### Phase 5+: Extensions, Scaling & Measurement
+- Artificial system coherence; collective and planetary-scale dynamics
+- LoomSense measurement-platform integration (deferred; developed by NuTech)
 
 ## Theoretical Foundation
 
